@@ -9,15 +9,15 @@
 	* redo
 		* new canvas
 		* redo step
-		* back end of painting state
+		* back to end of painting state
 * painting state:
 	* color dropper
-	* color racks
+	* color rakes
 	* go to modeling state
 * modeling state
-	* rack
-		* different racks
+	* rake
+		* different rakes
 			* strait movement
 			* oscillating movement
-		* custom rack (expert)
+		* custom rake (expert)
 	* export
