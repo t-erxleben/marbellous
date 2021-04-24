@@ -1,0 +1,127 @@
+.page {
+	width: 80vw;
+	height: 80vw;
+	/* 100/56.25 = 1.778 */
+	background: pink;
+	max-height: 80vh;
+	max-width: 80vh;
+	/* 16/9 = 1.778 */
+	margin: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	vertical-align: middle;
+}
+
+.hide {
+	display: none;
+}
+
+menu label img {
+	width: 32px;
+	height: 32px;
+	padding: 10px 10px 10px 10px
+}
+
+menu {
+	display: inline flow-root;
+	list-style: none;
+	margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.menu {
+	vertical-align: middle;
+}
+
+.menu > li {
+	position: relative;
+	z-index: 3;
+	display: block;
+}
+
+menu label {
+	position: inherit;
+	z-index: inherit;
+}
+
+menu img {
+	position: inherit;
+	z-index: inherit;
+}
+
+menu menu label {
+	opacity: 0.5;
+}
+/*menu menu {
+	display: none;
+}*/
+
+/*
+menu input[type="radio"]:checked + label + menu {
+	display: inline;
+	padding: 0;
+}
+*/
+
+menu label {
+  display: inline flow-root;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	background: red;
+	position: relative;
+}
+
+
+menu menu > li {
+	display: inline;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	z-index: 2;
+	transition: left 0.5s, top 0.5s, opacity 0.5s;
+}
+
+menu menu menu > li {
+	z-index: 1;
+}
+
+
+menu input[type="radio"] {
+    display:none;
+}
+
+menu input:checked ~ label {
+	border: 2px solid;
+	opacity: 1;
+}
+
+menu input:checked ~ menu > li:nth-child(1) {
+	top: 45;
+	left: 45;
+	opacity: 1;
+}
+
+
+menu input:checked ~ menu > li:nth-child(2) {
+	top: -45;
+	left: 45;
+	opacity: 1;
+}
+

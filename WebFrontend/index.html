@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="Timm,Denny,Julian" >
+		<meta name="description" content="A marebling tool">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="stylesheet.css">
+		<script src="actions.js"></script>
+		<title>Marbeling</title>
+	</head>
+	<body>
+		<menu class="menu">
+			<li><input type="radio" id="color-picker" name="menu">
+				<label for="color-picker">
+					<img src="icons/palette-solid.svg" alt="color picker">
+				</label>
+			</li>
+
+			<li><input type="radio" id="color-dropper" name="menu">
+				<label for="color-dropper">
+					<img src="icons/eye-dropper-solid.svg" alt="color-dropper">
+				</label>
+			</li>
+
+			<li><input type="radio" id="reverse" name="menu">
+				<label for="reverse">
+					<img src="icons/eye-dropper-solid.svg" alt="color-dropper">
+				</label>
+				<menu>
+					<li><input type="radio" id="go-to-start" name="reverse">
+					<label for="go-to-start">
+						<img src="icons/palette-solid.svg" alt="#1">
+					</label>
+					<menu>
+						<li><input type="radio" id="132" name="subsub">
+						<label for="132">
+							<img src="icons/palette-solid.svg" alt="#1">
+						</label></li>
+
+						<li><input type="radio" id="back-one-step" name="subsub">
+						<label for="back-one-step">
+							<img src="icons/palette-solid.svg" alt="#1">
+						</label></li>
+					</menu>
+					</li>
+
+					<li><input type="radio" id="go-back-one-step" name="reverse">
+					<label for="go-back-one-step">
+						<img src="icons/palette-solid.svg" alt="#1">
+					</label></li>
+				</menu>
+			</li>
+		</menu>
+		<canvas class="page">
+
+	</body>
+</html>
