@@ -96,6 +96,23 @@ document.addEventListener("click", function(evnt){
 		}
 	}
 });
+function hideMenu() {
+	const submenu = active['menu'];
+	if(submenu) {
+		const subsubmenu = active[submenu.id];
+		if (subsubmenu) {
+			var subsub = subsubmenu;
+			do{
+				subsub = active[subsub.id];
+			} while(subsub);
+			if(subsub === undefined) {
+				if(!subsubmenu.classList.contains('hide')) {
+					submenu.parentNode.querySelectorAll('li').forEach(function(li){li.classList.add('hide')});
+				}
+			}
+		}
+	}
+}
 
 document.addEventListener("DOMContentLoaded", function(){
 	document.querySelectorAll('menu input[type="radio"]').forEach(function(rad){
@@ -105,27 +122,57 @@ document.addEventListener("DOMContentLoaded", function(){
 			active[rad.attributes.name.nodeValue] = null;
 		}
 	});
-	document.getElementById('overlay').addEventListener("click", function(){
-		const submenu = active['menu'];
-		if(submenu) {
-			const subsubmenu = active[submenu.id];
-			if (subsubmenu) {
-				var subsub = subsubmenu;
-				do{
-					subsub = active[subsub.id];
-				} while(subsub);
-				if(subsub === undefined) {
-					if(!subsubmenu.classList.contains('hide')) {
-						submenu.parentNode.querySelectorAll('li').forEach(function(li){li.classList.add('hide')});
-					}
-				}
-			}
-		}
+	tool.overlay = document.getElementById('overlay');
+	tool.overlay.addEventListener("click", function(evnt){
+		hideMenu();
+		tool.click(evnt);
 	});
+	tool.overlay.addEventListener("mousemove", tool.over);
+	tool.overlay.addEventListener("mouseup", tool.up);
+
 	states.forEach(function(s){
 		switchState(s, null);
 	});
 	switchState(null, state);
+	clicktool.img = document.getElementById("scream");
 });
 
 
+function drawline(start, end) {
+
+}
+var clicktool = {
+	draw: function(canvas, x,y) {
+		canvas.drawImage(clicktool.img, x - 25, y - 25, 50, 50);
+	} 
+};
+var drawtool = {
+	onmove: drawline
+}
+var tool = {
+	start: null,
+	overlay: null,
+	tool: clicktool,
+	translate: function(pos) {
+		const rect = tool.overlay.getBoundingClientRect(),
+			scale = {x: tool.overlay.width / rect.width, y: tool.overlay.height / rect.height};
+		return { x: pos.x * scale.x, y : pos.y * scale.y};
+	},
+	click: function(evnt) {
+		tool.start = {x: evnt.offsetX, y: evnt.offsetY};
+	},
+	over: function(evnt) {
+		if (!tool.ctx) {
+			tool.ctx = tool.overlay.getContext("2d");
+		}
+		if(tool.ctx) {
+			tool.ctx.clearRect(0,0,tool.overlay.width, tool.overlay.height);
+			const p = tool.translate({x:evnt.offsetX, y:evnt.offsetY});
+			tool.tool.draw(tool.ctx, p.x, p.y);
+		}
+	},
+	up: function(evnt) {
+		tool.start = null;
+		// tool.overlay.drawImage()
+	},
+};
