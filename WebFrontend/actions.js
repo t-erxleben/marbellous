@@ -37,7 +37,6 @@ function switchState(_old, _new) {
 					if (next.classList.contains(s)) { hit = true; }
 				});
 			}
-			console.log(hit, next);
 		}while(hit);
 		nodes[_old].push({node: e, par: e.parentNode, next});
 	});
@@ -79,12 +78,19 @@ document.addEventListener("click", function(evnt){
 	{
 		switch(el.id) {
 			case 'switch-state':
-				console.log('switch');
-				const img = el.parentNode.querySelector('img');
+				const label = el.parentNode.querySelector('label');
+				const img = label.querySelector('img');
 				const oldState = state;
 				switch(state) {
-					case 'draw': state = 'rake'; img.src = 'icons/image-regular.svg'; break;
-					case 'rake': state = 'draw'; img.src = 'icons/arrow-right-solid.svg'; break;
+					case 'draw':
+						state = 'rake';
+						img.src = 'icons/image-regular.svg';
+						label.title = 'Go to state before first rake strike.';
+						break;
+					case 'rake':
+						state = 'draw';
+						label.title = 'Start rakeing.'; // TODO: fix spelling
+						img.src = 'icons/arrow-right-solid.svg'; break;
 				}
 				switchState(oldState, state);
 		}
@@ -93,7 +99,11 @@ document.addEventListener("click", function(evnt){
 
 document.addEventListener("DOMContentLoaded", function(){
 	document.querySelectorAll('menu input[type="radio"]').forEach(function(rad){
-		active[rad.attributes.name.nodeValue] = null;
+		if (rad.checked) {
+			active[rad.attributes.name.nodeValue] = rad;
+		} else if(active[rad.attributes.name.nodeValue] === undefined) {
+			active[rad.attributes.name.nodeValue] = null;
+		}
 	});
 	document.getElementById('overlay').addEventListener("click", function(){
 		const submenu = active['menu'];
@@ -117,3 +127,5 @@ document.addEventListener("DOMContentLoaded", function(){
 	});
 	switchState(null, state);
 });
+
+

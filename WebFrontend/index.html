@@ -15,7 +15,7 @@
 					<img src="icons/palette-solid.svg" alt="color picker">
 				</label>
 				<menu>
-					<li><input type="radio" id="color-1" name="color-picker">
+					<li><input type="radio" id="color-1" name="color-picker" checked>
 						<label style="background: green" for="color-1" title="change to color 1">
 							<img src="icons/empty.svg" alt="color-1">
 						</label>
@@ -33,6 +33,47 @@
 				</menu>
 			</li>
 
+			<li class="rake state"><input type="radio" id="rake-form" name="menu">
+				<label for="rake-form" title="Select placement of spikes in rake.">
+					<img src="icons/regular-rake-solid.svg" alt="rake form">
+				</label>
+				<menu>
+					<li><input type="radio" id="rake-form-displaced" name="rake-form" checked>
+						<label for="rake-form-displaced" title="Rake in a >regular< pattern.">
+							<img src="icons/regular-rake-solid.svg" alt="displaced">
+						</label>
+					</li>
+					<li><input type="radio" id="rake-form-square" name="rake-form">
+						<label for="rake-form-square" title="Square grid rake.">
+							<img src="icons/square-rake-solid.svg" alt="grid">
+						</label>
+					</li>
+					<li><input type="radio" id="rake-form-custom" name="rake-form">
+						<label for="rake-form-custom" title="Customized rake.">
+							<img src="icons/question-solid.svg" alt="custom">
+						</label>
+					</li>
+				</menu>
+			</li>
+
+			<li class="rake state"><input type="radio" id="rake-movement" name="menu">
+				<label for="rake-movement" title="select movement for rake">
+					<img src="icons/movement.svg">
+				</label>
+				<menu>
+					<li><input type="radio" id="rake-movement-linear" name="rake-movement" checked>
+						<label for="rake-movement-linear" title="Move rake straigth">
+							<img src="icons/straight.svg">
+						</label>
+					</li>
+					<li><input type="radio" id="rake-movement-wave" name="rake-movement">
+						<label for="rake-movement-wave" title="Move rake in wave like facion.">
+							<img src="icons/wave.svg">
+						</label>
+					</li>
+				</menu>
+			</li>
+
 			<li class="draw state"><input type="radio" id="color-dropper" name="menu">
 				<label for="color-dropper" title="Create color blobs at position when applied. Hold for larger drops">
 					<img src="icons/eye-dropper-solid.svg" alt="color dropper">
@@ -44,7 +85,7 @@
 					<img src="icons/regular-rake-solid.svg" alt="color rake">
 				</label>
 				<menu>
-					<li><input type="radio" id="color-rake-displaced" name="color-rake">
+					<li><input type="radio" id="color-rake-displaced" name="color-rake" checked>
 						<label for="color-rake-displaced" title="Apply color in a >regular< pattern.">
 							<img src="icons/regular-rake-solid.svg" alt="displaced">
 						</label>
@@ -79,7 +120,7 @@
 						</label>
 					</li>
 					<li><input type="button" id="switch-state" name="history">
-						<label for="switch-state" title="Go to state before first rake strike.">
+						<label for="switch-state" title="Start rakeing!">
 							<img src="icons/arrow-right-solid.svg">
 						</label>
 					</li>
