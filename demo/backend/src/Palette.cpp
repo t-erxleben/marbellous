@@ -1,12 +1,12 @@
 #include <Palette.hpp>
 
-size_t Palette::add(Color col)
+size_t const Palette::add(Color const col)
 {
     colors.push_back(col);
     return colors.size() - 1;
 }
 
-Color& Palette::operator[](size_t index)
+Color& Palette::operator[](size_t const index)
 {
     return colors.at(index);
 }
