@@ -23,3 +23,14 @@ cc_library(
     includes = ["include/"],
     deps = [":color", ":palette"],
 )
+
+cc_binary(
+    name = "marbellous-c",
+    srcs = ["src/main.cpp"],
+    includes = ["include/"],
+)
+
+wasm_cc_binary(
+    name = "marbellous",
+    cc_target = ":marbellous-c",
+)
