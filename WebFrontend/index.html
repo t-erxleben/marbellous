@@ -33,13 +33,13 @@
 				</menu>
 			</li>
 
-			<li class="paint-state"><input type="radio" id="color-dropper" name="menu">
+			<li class="draw state"><input type="radio" id="color-dropper" name="menu">
 				<label for="color-dropper" title="Create color blobs at position when applied. Hold for larger drops">
 					<img src="icons/eye-dropper-solid.svg" alt="color dropper">
 				</label>
 			</li>
 
-			<li class="paint-state"><input type="radio" id="color-rake" name="menu">
+			<li class="draw state"><input type="radio" id="color-rake" name="menu">
 				<label for="color-rake" title="Apply color in regulare pattern. Hold for larger drops.">
 					<img src="icons/regular-rake-solid.svg" alt="color rake">
 				</label>
@@ -62,7 +62,7 @@
 				</menu>
 			</li>
 
-			<li class="paint-state"><input type="radio" id="color-sprinkler" name="menu">
+			<li class="draw state"><input type="radio" id="color-sprinkler" name="menu">
 				<label for="color-sprinkler" title="Apply color in random pattern. Hold for more drops.">
 					<img src="icons/sparkle-solid.svg" alt="color sprinkler">
 				</label>
@@ -78,9 +78,9 @@
 							<img src="icons/chalkboard-solid.svg" alt="clear canvas">
 						</label>
 					</li>
-					<li class="rake-state"><input type="button" id="to-color" name="history">
-						<label for="to-color" title="Go to state before first rake strike.">
-							<img src="icons/image-regular.svg">
+					<li><input type="button" id="switch-state" name="history">
+						<label for="switch-state" title="Go to state before first rake strike.">
+							<img src="icons/arrow-right-solid.svg">
 						</label>
 					</li>
 					<li><input type="button" id="back" name="history">
