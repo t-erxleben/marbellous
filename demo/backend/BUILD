@@ -21,5 +21,5 @@ cc_library(
     srcs = ["src/Options.cpp"],
     hdrs = ["include/Options.hpp"],
     includes = ["include/"],
-    deps = [":color", ":palette],
+    deps = [":color", ":palette"],
 )
