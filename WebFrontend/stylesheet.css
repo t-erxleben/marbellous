@@ -14,10 +14,6 @@
 	vertical-align: middle;
 }
 
-.hide {
-	display: none;
-}
-
 menu label img {
 	width: 32px;
 	height: 32px;
@@ -28,6 +24,7 @@ menu {
 	display: inline flow-root;
 	list-style: none;
 	margin: 0;
+	padding: 0;
 }
 
 html, body {
@@ -52,6 +49,7 @@ body {
 	position: relative;
 	z-index: 3;
 	display: block;
+	margin: 0
 }
 
 menu label {
@@ -65,18 +63,17 @@ menu img {
 }
 
 menu menu label {
-	opacity: 0.5;
+	opacity: 0.7;
 }
-/*menu menu {
-	display: none;
-}*/
 
-/*
-menu input[type="radio"]:checked + label + menu {
-	display: inline;
-	padding: 0;
+menu menu input[type="button"] ~ label {
+	opacity: 1;
 }
-*/
+
+menu menu input[type="button"] ~ label:hover {
+	border: 2px solid;
+}
+
 
 menu label {
   display: inline flow-root;
@@ -94,34 +91,55 @@ menu menu > li {
 	top: 0;
 	left: 0;
 	opacity: 0;
-	z-index: 2;
 	transition: left 0.5s, top 0.5s, opacity 0.5s;
 }
 
+/* TODO: testen! */
+menu menu > li {
+	z-index: 2;
+}
 menu menu menu > li {
 	z-index: 1;
 }
-
 
 menu input[type="radio"] {
     display:none;
 }
 
-menu input:checked ~ label {
+menu input[type="button"] {
+	display: none;
+}
+
+menu input:checked ~ label,
+menu input ~ label:hover {
 	border: 2px solid;
 	opacity: 1;
 }
 
-menu input:checked ~ menu > li:nth-child(1) {
-	top: 45;
-	left: 45;
+menu input:checked ~ menu > li:first-child:nth-last-child(2):not(.hide) {
+	top: -35;
+	left: 55;
+	opacity: 1;
+}
+menu input:checked ~ menu > li:first-child:nth-last-child(2) ~ li:nth-child(2):not(.hide) {
+	top: 35;
+	left: 55;
 	opacity: 1;
 }
 
-
-menu input:checked ~ menu > li:nth-child(2) {
-	top: -45;
-	left: 45;
+menu input:checked ~ menu > li:first-child:nth-last-child(3):not(.hide) {
+	top: -55;
+	left: 55;
+	opacity: 1;
+}
+menu input:checked ~ menu > li:first-child:nth-last-child(3):not(.hide) ~ li:nth-child(2):not(.hide){
+	top: 0;
+	left: 75;
+	opacity: 1;
+}
+menu input:checked ~ menu > li:first-child:nth-last-child(3) ~ li:nth-child(3):not(.hide) {
+	top: 55;
+	left: 55;
 	opacity: 1;
 }
 

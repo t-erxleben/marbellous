@@ -11,47 +11,88 @@
 	<body>
 		<menu class="menu">
 			<li><input type="radio" id="color-picker" name="menu">
-				<label for="color-picker">
+				<label for="color-picker" title="select a color to apply">
 					<img src="icons/palette-solid.svg" alt="color picker">
 				</label>
-			</li>
-
-			<li><input type="radio" id="color-dropper" name="menu">
-				<label for="color-dropper">
-					<img src="icons/eye-dropper-solid.svg" alt="color-dropper">
-				</label>
-			</li>
-
-			<li><input type="radio" id="reverse" name="menu">
-				<label for="reverse">
-					<img src="icons/eye-dropper-solid.svg" alt="color-dropper">
-				</label>
 				<menu>
-					<li><input type="radio" id="go-to-start" name="reverse">
-					<label for="go-to-start">
-						<img src="icons/palette-solid.svg" alt="#1">
-					</label>
-					<menu>
-						<li><input type="radio" id="132" name="subsub">
-						<label for="132">
-							<img src="icons/palette-solid.svg" alt="#1">
-						</label></li>
-
-						<li><input type="radio" id="back-one-step" name="subsub">
-						<label for="back-one-step">
-							<img src="icons/palette-solid.svg" alt="#1">
-						</label></li>
-					</menu>
+					<li><input type="radio" id="color-1" name="color-picker">
+						<label style="background: green" for="color-1" title="change to color 1">
+							<img src="icons/empty.svg" alt="color-1">
+						</label>
 					</li>
-
-					<li><input type="radio" id="go-back-one-step" name="reverse">
-					<label for="go-back-one-step">
-						<img src="icons/palette-solid.svg" alt="#1">
-					</label></li>
+					<li><input type="radio" id="color-2" name="color-picker">
+						<label style="background: yellow" for="color-2" title="change to color 2">
+							<img src="icons/empty.svg" alt="color-2">
+						</label>
+					</li>
+					<li><input type="radio" id="color-3" name="color-picker">
+						<label style="background: red" for="color-3" title="change to color 3">
+							<img src="icons/empty.svg" alt="color-3">
+						</label>
+					</li>
 				</menu>
 			</li>
+
+			<li class="paint-state"><input type="radio" id="color-dropper" name="menu">
+				<label for="color-dropper" title="Create color blobs at position when applied. Hold for larger drops">
+					<img src="icons/eye-dropper-solid.svg" alt="color dropper">
+				</label>
+			</li>
+
+			<li class="paint-state"><input type="radio" id="color-rake" name="menu">
+				<label for="color-rake" title="Apply color in regulare pattern. Hold for larger drops.">
+					<img src="icons/regular-rake-solid.svg" alt="color rake">
+				</label>
+				<menu>
+					<li><input type="radio" id="color-rake-displaced" name="color-rake">
+						<label for="color-rake-displaced" title="Apply color in a >regular< pattern.">
+							<img src="icons/regular-rake-solid.svg" alt="displaced">
+						</label>
+					</li>
+					<li><input type="radio" id="color-rake-square" name="color-rake">
+						<label for="color-rake-square" title="Apply color in grid like pattern.">
+							<img src="icons/square-rake-solid.svg" alt="grid">
+						</label>
+					</li>
+					<li><input type="radio" id="color-rake-custom" name="color-rake">
+						<label for="color-rake-custom" title="Customized color rake.">
+							<img src="icons/question-solid.svg" alt="custom">
+						</label>
+					</li>
+				</menu>
+			</li>
+
+			<li class="paint-state"><input type="radio" id="color-sprinkler" name="menu">
+				<label for="color-sprinkler" title="Apply color in random pattern. Hold for more drops.">
+					<img src="icons/sparkle-solid.svg" alt="color sprinkler">
+				</label>
+			</li>
+
+			<li><input type="radio" id="history" name="menu">
+				<label for="history" title="Go for and back in different steps.">
+					<img src="icons/exchange-alt-solid.svg" alt="history">
+				</label>
+				<menu>
+					<li><input type="button" id="clear" name="history">
+						<label for="clear" title="Clear canvas">
+							<img src="icons/chalkboard-solid.svg" alt="clear canvas">
+						</label>
+					</li>
+					<li class="rake-state"><input type="button" id="to-color" name="history">
+						<label for="to-color" title="Go to state before first rake strike.">
+							<img src="icons/image-regular.svg">
+						</label>
+					</li>
+					<li><input type="button" id="back" name="history">
+						<label for="back" title="reverse last step">
+							<img src="icons/undo-solid.svg" alt="undo">
+						</label>
+					</li>
+				</menu>
+			</li>
+
 		</menu>
-		<canvas class="page">
+		<canvas class="page" id="overlay">
 
 	</body>
 </html>
