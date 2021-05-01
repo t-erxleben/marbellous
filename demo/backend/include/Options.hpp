@@ -15,9 +15,12 @@ class Options
         Color bgColor{0xFFFFFF};
 
     public:
-        // singleton should neither be copied nor assigned
+        // singleton should neither be copied nor assigned, moved etc.
         Options(Options const &) = delete;
         void operator=(Options const &) = delete;
+        Options& operator=(Options&&) = delete;
+        Options(Options&&) = delete;
+
         // access instance
         Options * const getInstance();
 
