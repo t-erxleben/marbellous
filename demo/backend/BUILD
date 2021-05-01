@@ -15,3 +15,11 @@ cc_library(
     includes = ["include/"],
     deps = [":color"],
 )
+
+cc_library(
+    name = "options",
+    srcs = ["src/Options.cpp"],
+    hdrs = ["include/Options.hpp"],
+    includes = ["include/"],
+    deps = [":color", ":palette"],
+)
