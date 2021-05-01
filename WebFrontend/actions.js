@@ -52,31 +52,11 @@ function switchState(_old, _new) {
 }
 
 
-
-document.addEventListener("click", function(evnt){
-	var el = evnt.target;
-	// hide submenu if element is double clicked, show it again when clicked again or first selected
-	if (el.tagName == 'INPUT'
-		&& el.attributes.type
-		&& el.attributes.type.nodeValue == 'radio')
-	{
-		const menu = getTopSubmenu(el);
-		if (active[el.attributes.name.nodeValue] == el) {
-			if (menu) {
-				menu.querySelectorAll('li').forEach(function(li){li.classList.toggle('hide')});
-			}
-		} else {
-			active[el.attributes.name.nodeValue] = el;
-			if (menu) {
-				menu.querySelectorAll('li').forEach(function(li){li.classList.remove('hide')});
-			}
-		}
-	}
-	else if (el.tagName == 'INPUT'
-		&& el.attributes.type
-		&& el.attributes.type.nodeValue == 'button')
-	{
+function handleClick(el) {
 		switch(el.id) {
+			case 'color-dropper':
+				tool.tool = dropper;
+				break;
 			case 'switch-state':
 				const label = el.parentNode.querySelector('label');
 				const img = label.querySelector('img');
@@ -94,6 +74,34 @@ document.addEventListener("click", function(evnt){
 				}
 				switchState(oldState, state);
 		}
+}
+
+
+document.addEventListener("click", function(evnt){
+	var el = evnt.target;
+	// hide submenu if element is double clicked, show it again when clicked again or first selected
+	if (el.tagName == 'INPUT'
+		&& el.attributes.type
+		&& el.attributes.type.nodeValue == 'radio')
+	{
+		handleClick(el);
+		const menu = getTopSubmenu(el);
+		if (active[el.attributes.name.nodeValue] == el) {
+			if (menu) {
+				menu.querySelectorAll('li').forEach(function(li){li.classList.toggle('hide')});
+			}
+		} else {
+			active[el.attributes.name.nodeValue] = el;
+			if (menu) {
+				menu.querySelectorAll('li').forEach(function(li){li.classList.remove('hide')});
+			}
+		}
+	}
+	else if (el.tagName == 'INPUT'
+		&& el.attributes.type
+		&& el.attributes.type.nodeValue == 'button')
+	{
+		handleClick(el);
 	}
 });
 function hideMenu() {
@@ -129,37 +137,54 @@ document.addEventListener("DOMContentLoaded", function(){
 	});
 	tool.overlay.addEventListener("mousemove", tool.over);
 	tool.overlay.addEventListener("mouseup", tool.up);
+	tool.overlay.addEventListener("mousedown", tool.down);
 
 	states.forEach(function(s){
 		switchState(s, null);
 	});
 	switchState(null, state);
-	clicktool.img = document.getElementById("scream");
+	dropper.img = document.getElementById('img-color-dropper');
 });
 
 
-function drawline(start, end) {
-
+function drawline(ctx, start, end) {
+	ctx.beginPath();
+	ctx.moveTo(start.x, start.y);
+	ctx.lineTo(end.x,end.y);
+	ctx.stroke();
 }
-var clicktool = {
+var dropper = {
 	draw: function(canvas, x,y) {
-		canvas.drawImage(clicktool.img, x - 25, y - 25, 50, 50);
-	} 
+		const size = tool.translate({x: 30, y: 30});
+		canvas.drawImage(dropper.img,x,y-size.y,size.x,size.y);
+	}
 };
-var drawtool = {
-	onmove: drawline
-}
+function draw_rak(ctx, x, y, w, h) {}
+
+var rak_dropper = {
+	draw: draw_rak,
+};
+var line = {
+	draw: draw_rak,
+	onmove: drawline,
+};
 var tool = {
 	start: null,
 	overlay: null,
-	tool: clicktool,
+	tool: dropper,
+	scale: function() {
+
+		const rect = tool.overlay.getBoundingClientRect();
+		return {x: tool.overlay.width / rect.width, y: tool.overlay.height / rect.height};
+	},
 	translate: function(pos) {
-		const rect = tool.overlay.getBoundingClientRect(),
-			scale = {x: tool.overlay.width / rect.width, y: tool.overlay.height / rect.height};
+		const scale = tool.scale();
 		return { x: pos.x * scale.x, y : pos.y * scale.y};
 	},
 	click: function(evnt) {
-		tool.start = {x: evnt.offsetX, y: evnt.offsetY};
+	},
+	down: function(evnt) {
+		tool.start = tool.translate({x: evnt.offsetX, y: evnt.offsetY});
 	},
 	over: function(evnt) {
 		if (!tool.ctx) {
@@ -168,7 +193,12 @@ var tool = {
 		if(tool.ctx) {
 			tool.ctx.clearRect(0,0,tool.overlay.width, tool.overlay.height);
 			const p = tool.translate({x:evnt.offsetX, y:evnt.offsetY});
-			tool.tool.draw(tool.ctx, p.x, p.y);
+			if(tool.tool.draw) {
+				tool.tool.draw(tool.ctx, p.x, p.y, tool.overlay.width, tool.overlay.height);
+			}
+			if(tool.start !== null && tool.tool.onemove) {
+				tool.tool.onmove(tool.ctx, tool.start, p);
+			}
 		}
 	},
 	up: function(evnt) {
