@@ -30,7 +30,7 @@ menu label img {
 }
 
 menu {
-	display: inline flow-root;
+	display: inline-block;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -85,7 +85,7 @@ menu menu input[type="button"] ~ label:hover {
 
 
 menu label {
-  display: inline flow-root;
+	display: inline-block;
 	border-radius: 50%;
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
