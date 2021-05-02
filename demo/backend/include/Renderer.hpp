@@ -21,7 +21,7 @@ private:
 
 public:
     Renderer(std::string canvasID);
-    void drawTriangleFan(std::vector<std::tuple<double,double>> points, Color col);
+    void drawTriangleFan(GLfloat* points, size_t pointCount, Color col);
 
 
 };

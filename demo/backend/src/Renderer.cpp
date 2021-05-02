@@ -17,6 +17,7 @@ void Renderer::setupContext(std::string canvasID) {
     attrs.antialias = 1;
     attrs.majorVersion = 2;
     attrs.minorVersion = 0;
+    attrs.preserveDrawingBuffer = 1;
 
     context = emscripten_webgl_create_context(canvasID.c_str(), &attrs);
     emscripten_webgl_make_context_current(context);
@@ -24,10 +25,10 @@ void Renderer::setupContext(std::string canvasID) {
 
 void Renderer::setupShaderProgram() {
     const char *const vertex_source = 
-        "Placeholder";
+        "attribute vec2 position; void main(){gl_Position = position;}\n";
     
     const char *const fragment_source =
-        "Placeholder";
+        "precision mediump float; uniform vec3 color; void main(){gl_FragColor = vec4(color, 1.0));}\n";
 
     GLint fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragment_source);
     GLint vertexShader = compileShader(GL_VERTEX_SHADER, vertex_source);
@@ -76,4 +77,29 @@ GLuint Renderer::compileShader (GLenum type, std::string source) {
     return shader;
 }
 
-void Renderer::drawTriangleFan(std::vector<std::tuple<double,double>> points, Color col) {}
+void Renderer::drawTriangleFan(GLfloat* points, size_t pointCount, Color col)
+{
+    // activate shader and lookup uniforms
+    glUseProgram(shaderProgram);
+    GLint positionLoc = glGetAttribLocation(shaderProgram, "position");
+    GLint colorLoc = glGetUniformLocation(shaderProgram, "color");
+
+    // load triangle data
+    GLuint vertexObject;
+    glGenBuffers(1, &vertexObject);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexObject);
+    glBufferData(GL_ARRAY_BUFFER, pointCount * sizeof(GLfloat), points, GL_STATIC_DRAW);
+
+    // Set the viewport
+    glViewport(0, 0, 720, 720);
+
+    glVertexAttribPointer(positionLoc, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0); 
+
+    GLfloat r = (float)std::get<0>(col.getRGB()) / 255.0;
+    GLfloat g = (float)std::get<1>(col.getRGB()) / 255.0;
+    GLfloat b = (float)std::get<2>(col.getRGB()) / 255.0;
+
+    glUniform3f(colorLoc, r, g, b);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, pointCount/2);
+}
