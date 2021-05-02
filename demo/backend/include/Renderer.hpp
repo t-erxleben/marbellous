@@ -2,7 +2,10 @@
 
 #include <string>
 #include <vector>
+#include <emscripten.h>
+#include <emscripten/html5.h>
 #include <GLES2/gl2.h>
+#include <EGL/egl.h>
 
 #include "Color.hpp"
 
@@ -10,8 +13,9 @@ class Renderer
 {
 private:
     GLint shaderProgram;
+    EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context;
 
-    GLuint compileShader(std::string shader);
+    GLuint compileShader(GLenum type, std::string shader);
     void setupContext(std::string canvasID);
     void setupShaderProgram();
 

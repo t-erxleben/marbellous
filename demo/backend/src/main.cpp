@@ -1,6 +1,7 @@
 #include <emscripten.h>
 #include <cstdio>
 
+#include "Renderer.hpp"
 /*------------------------------------------
 Interface to front end:
 --------------------------------------------*/
@@ -14,5 +15,8 @@ void EMSCRIPTEN_KEEPALIVE dropColor(double const x, double const y, double const
 int main()
 {
     // TODO: Init WebGL object and stuff
+
+    Renderer re{"test string for compilation purposes"};
+
     return 0;
 }
