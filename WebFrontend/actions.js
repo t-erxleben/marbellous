@@ -285,7 +285,6 @@ var rake = {
 			rake.canvas.width = 32;
 			rake.canvas.height = 32;
 			rake.ctx = rake.canvas.getContext('2d');
-			document.body.appendChild(rake.canvas);
 		}
 	},
 	setPattern: function(ctx) {
