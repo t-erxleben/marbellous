@@ -24,10 +24,19 @@ cc_library(
     deps = [":color", ":palette"],
 )
 
+cc_library(
+    name = "renderer",
+    srcs = ["src/Renderer.cpp"],
+    hdrs = ["include/Renderer.hpp"],
+    includes = ["include/"],
+    deps = [":color"],
+)
+
 cc_binary(
     name = "marbellous-c",
     srcs = ["src/main.cpp"],
     includes = ["include/"],
+    deps = [":color", ":renderer"],
 )
 
 wasm_cc_binary(
