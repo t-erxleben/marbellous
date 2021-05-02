@@ -15,10 +15,11 @@ void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r,
 {
     if (setupDone)
     {
-        printf("Color drop at (%f, %f) with radius = %f and color #%X", x, y, r, color);
+        printf("Color drop at (%f, %f) with radius = %f and color #%X\n", x, y, r, color);
 
         //points on circle, vertex count is arbitrary hard coded for now
         int count = (int)500*r;
+        printf("%i\n", count);
 
         // generate vertex list for triangle fan
         GLfloat* vert = new GLfloat[2*count];
@@ -42,11 +43,13 @@ void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r,
     }
 }
 
-int main()
+int EMSCRIPTEN_KEEPALIVE main()
 {
     // setup
-    re = new Renderer{"canvas ID place holder"};
+    re = new Renderer{"#myCanvas"};
     setupDone = true;
+
+    //dropColor(0, 0, 1, 500);
 
     // keep WASM module alive
     EM_ASM(Module['noExitRuntime'] = true);

@@ -25,10 +25,10 @@ void Renderer::setupContext(std::string canvasID) {
 
 void Renderer::setupShaderProgram() {
     const char *const vertex_source = 
-        "attribute vec2 position; void main(){gl_Position = position;}\n";
+        "attribute vec2 position; void main(){gl_Position = vec4(position, 0.0, 1.0);}\n";
     
     const char *const fragment_source =
-        "precision mediump float; uniform vec3 color; void main(){gl_FragColor = vec4(color, 1.0));}\n";
+        "precision mediump float; uniform vec3 color; void main(){gl_FragColor = vec4(color, 1.0);}\n";
 
     GLint fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragment_source);
     GLint vertexShader = compileShader(GL_VERTEX_SHADER, vertex_source);
@@ -88,7 +88,7 @@ void Renderer::drawTriangleFan(GLfloat* points, size_t pointCount, Color col)
     GLuint vertexObject;
     glGenBuffers(1, &vertexObject);
     glBindBuffer(GL_ARRAY_BUFFER, vertexObject);
-    glBufferData(GL_ARRAY_BUFFER, pointCount * sizeof(GLfloat), points, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, pointCount *2* sizeof(GLfloat), (void*)points, GL_STATIC_DRAW);
 
     // Set the viewport
     glViewport(0, 0, 720, 720);
