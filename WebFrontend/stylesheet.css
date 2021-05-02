@@ -54,11 +54,11 @@ body {
 	vertical-align: middle;
 }
 
-.menu > li {
+menu > li {
 	position: relative;
 	z-index: 3;
 	display: block;
-	margin: 0
+	padding: 1em 0 0 1em;
 }
 
 menu label {
