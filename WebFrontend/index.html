@@ -1,0 +1,120 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="Timm,Denny,Julian" >
+		<meta name="description" content="A marebling tool">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="stylesheet.css">
+		<script src="actions.js"></script>
+		<title>Marbeling</title>
+	</head>
+	<body>
+		<menu class="menu">
+			<li><input type="radio" id="color-picker" name="menu">
+				<label for="color-picker" title="select a color to apply">
+					<img src="icons/palette-solid.svg" alt="color picker">
+				</label>
+				<menu>
+					<li><input type="radio" id="color-1" name="color-picker" checked>
+						<label style="background: green" for="color-1" title="change to color 1">
+							<img src="icons/empty.svg" alt="color-1">
+						</label>
+					</li>
+					<li><input type="radio" id="color-2" name="color-picker">
+						<label style="background: yellow" for="color-2" title="change to color 2">
+							<img src="icons/empty.svg" alt="color-2">
+						</label>
+					</li>
+					<li><input type="radio" id="color-3" name="color-picker">
+						<label style="background: red" for="color-3" title="change to color 3">
+							<img src="icons/empty.svg" alt="color-3">
+						</label>
+					</li>
+				</menu>
+			</li>
+
+			<li class="rake state"><input type="radio" id="rake-movement" name="menu">
+				<label for="rake-movement" title="select movement for rake">
+					<img src="icons/movement.svg">
+				</label>
+				<menu>
+					<li><input type="radio" id="rake-movement-linear" name="rake-movement" checked>
+						<label for="rake-movement-linear" title="Move rake straigth">
+							<img src="icons/straight.svg">
+						</label>
+					</li>
+					<li><input type="radio" id="rake-movement-wave" name="rake-movement">
+						<label for="rake-movement-wave" title="Move rake in wave like facion.">
+							<img src="icons/wave.svg">
+						</label>
+					</li>
+				</menu>
+			</li>
+
+			<li class="draw state"><input type="radio" id="color-dropper" name="menu" checked>
+				<label for="color-dropper" title="Create color blobs at position when applied. Hold for larger drops">
+					<img src="icons/eye-dropper-solid.svg" alt="color dropper">
+				</label>
+			</li>
+
+			<li class="draw state"><input type="radio" id="color-rake" name="menu">
+				<label for="color-rake" title="Apply color in regulare pattern. Hold for larger drops.">
+					<img src="icons/regular-rake-solid.svg" alt="color rake">
+				</label>
+				<menu>
+					<li><input type="radio" id="color-rake-displaced" name="color-rake" checked>
+						<label for="color-rake-displaced" title="Apply color in a >regular< pattern.">
+							<img src="icons/regular-rake-solid.svg" alt="displaced">
+						</label>
+					</li>
+					<li><input type="radio" id="color-rake-square" name="color-rake">
+						<label for="color-rake-square" title="Apply color in grid like pattern.">
+							<img src="icons/square-rake-solid.svg" alt="grid">
+						</label>
+					</li>
+					<li><input type="radio" id="color-rake-custom" name="color-rake">
+						<label for="color-rake-custom" title="Customized color rake.">
+							<img src="icons/question-solid.svg" alt="custom">
+						</label>
+					</li>
+				</menu>
+			</li>
+
+			<li class="draw state"><input type="radio" id="color-sprinkler" name="menu">
+				<label for="color-sprinkler" title="Apply color in random pattern. Hold for more drops.">
+					<img src="icons/sparkle-solid.svg" alt="color sprinkler">
+				</label>
+			</li>
+
+			<li><input type="radio" id="history" name="menu">
+				<label for="history" title="Go for and back in different steps.">
+					<img src="icons/exchange-alt-solid.svg" alt="history">
+				</label>
+				<menu>
+					<li><input type="button" id="clear" name="history">
+						<label for="clear" title="Clear canvas">
+							<img src="icons/chalkboard-solid.svg" alt="clear canvas">
+						</label>
+					</li>
+					<li><input type="button" id="switch-state" name="history">
+						<label for="switch-state" title="Start rakeing!">
+							<img src="icons/arrow-right-solid.svg">
+						</label>
+					</li>
+					<li><input type="button" id="back" name="history">
+						<label for="back" title="reverse last step">
+							<img src="icons/undo-solid.svg" alt="undo">
+						</label>
+					</li>
+				</menu>
+			</li>
+
+		</menu>
+		<div class="page">
+			<canvas width="720" height="720" id="image" style="background: #f7e9ce;"></canvas>
+			<canvas width="720" height="720" id="overlay"></canvas>
+		</div>
+		<img style="display: none" id="img-color-dropper" width="32" height="32" src="icons/eye-dropper-solid.png">
+		<img style="display: none" id="img-color-sparkle" width="32" height="32" src="icons/sparkle-solid.png">
+	</body>
+</html>
