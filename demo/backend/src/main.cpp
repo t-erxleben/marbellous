@@ -11,6 +11,7 @@ bool setupDone = false;
 Renderer* re;
 
 // draw a circle at point (x,y) (should be normed to [0,1]^2) with radius r in the given color
+extern "C" {
 void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color)
 {
     if (setupDone)
@@ -44,13 +45,12 @@ void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r,
 int EMSCRIPTEN_KEEPALIVE main()
 {
     // setup
-    re = new Renderer{"#myCanvas"};
+    re = new Renderer("#image");
     setupDone = true;
-
-    dropColor(0, 0, 0.33, 0x0);
-    dropColor(0, 0.5, 0.25, 0x00010b);
 
     // keep WASM module alive
     EM_ASM(Module['noExitRuntime'] = true);
     return 0;
+}
+
 }
