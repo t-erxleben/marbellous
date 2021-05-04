@@ -532,8 +532,7 @@ var tool = {
 			tool.clear();
 			const p = tool.translate({x:evnt.offsetX, y:evnt.offsetY});
 			if(tool.start !== null && tool.tool[state].onemove) {
-				// const [s,e] = snap(tool.start, p);
-				const [s,e] = [tool.start, p];
+				const [s,e] = snap(tool.start, p);
 				tool.tool[state].onemove(tool.ctx, s,e , tool.overlay.width, tool.overlay.height);
 			} else if (tool.tool[state].draw) {
 				tool.tool[state].draw(tool.ctx, p.x, p.y, tool.overlay.width, tool.overlay.height);
