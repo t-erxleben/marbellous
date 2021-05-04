@@ -21,6 +21,8 @@ void Renderer::setupContext(std::string canvasID) {
 
     context = emscripten_webgl_create_context(canvasID.c_str(), &attrs);
     emscripten_webgl_make_context_current(context);
+	glClearColor(0xF7 / 255.f, 0xE9 / 255.f, 0xCE / 255.f, 1.f);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Renderer::setupShaderProgram() {
