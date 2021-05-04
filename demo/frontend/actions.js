@@ -218,6 +218,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	tool.overlay.addEventListener("mouseup", tool.up);
 	tool.overlay.addEventListener("mousedown", tool.down);
 	tool.overlay.addEventListener("mouseleave", tool.clear);
+	tool.overlay.addEventListener("contextmenu", function(e){e.preventDefault();});
 
 	states.forEach(function(s){
 		switchState(s, null);
