@@ -447,8 +447,8 @@ var rake = {
 		rake.init();
 		const r = 5;
 		const size = {x: r, y: r};
-		rake.canvas.width = size.x * 2;
-		rake.canvas.height = size.y * 4 + rake.config.of;
+		rake.canvas.width = size.x * 4 + rake.config.of;
+		rake.canvas.height = size.y * 2;
 		rake.ctx.setTransform(1,0,0,1,0,0);
 		rake.ctx.beginPath();
 		rake.ctx.ellipse(size.x, size.y,size.x,size.y,0, 2 * Math.PI, false);
@@ -459,25 +459,31 @@ var rake = {
 	},
 	onemove: function(ctx, start, end, w, h) {
 
+		rake.setPattern(ctx);
 		const a = {y: -end.x + start.x, x: end.y - start.y};
 		const r = rake.setPattern(ctx);
 		const rot = Math.atan2(a.y,a.x);
 		const {leftBound, rightBound} = rake.lrBound(start, {x: start.x + a.x, y: start.y + a.y}, w, h)
+		const len = Math.sqrt((leftBound.x - rightBound.x)**2 + (leftBound.y - rightBound.y)**2);
+		const startBound = a.x > 0 || (a.x === 0 && a.y > 0) ? leftBound : rightBound;
 
+		const offset = -Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2) % (20 + rake.config.of);
+		ctx.lineWidth = 2*r;
 		ctx.beginPath();
-		ctx.moveTo(leftBound.x, leftBound.y);
-		ctx.lineTo(rightBound.x, rightBound.y);
-		ctx.lineWidth = r*2;
-		ctx.translate(0,0);
-		ctx.rotate(rot + Math.PI/2);
+		ctx.translate(startBound.x, startBound.y);
+		ctx.rotate(rot);
+		ctx.translate(-r - offset,-r);
+		ctx.moveTo(0 + offset,r);
+		ctx.lineTo(len + offset,r)
 		ctx.stroke();
+
 		ctx.setTransform(1,0,0,1,0,0);
 
 		ctx.strokeStyle = 'black';
 		rake.config.line(ctx, start,end, w, h);
 	}
 };
-// snap line parallel to axis
+// snap line parallel to axisa
 function snap(start,end) {
 	const a = {x: end.x - start.x, y: end.y - start.y};
 	if(Math.abs(a.x) > Math.abs(a.y)) {
@@ -526,7 +532,8 @@ var tool = {
 			tool.clear();
 			const p = tool.translate({x:evnt.offsetX, y:evnt.offsetY});
 			if(tool.start !== null && tool.tool[state].onemove) {
-				const [s,e] = snap(tool.start, p);
+				// const [s,e] = snap(tool.start, p);
+				const [s,e] = [tool.start, p];
 				tool.tool[state].onemove(tool.ctx, s,e , tool.overlay.width, tool.overlay.height);
 			} else if (tool.tool[state].draw) {
 				tool.tool[state].draw(tool.ctx, p.x, p.y, tool.overlay.width, tool.overlay.height);
