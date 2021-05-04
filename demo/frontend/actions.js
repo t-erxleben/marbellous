@@ -374,7 +374,7 @@ var rake = {
 	lrBound: function(start, end , w, h) {
 		const v = {x: end.x - start.x, y: end.y - start.y};
 		const m = v.y / v.x;
-		if(m === Infinity) {
+		if(Math.abs(m) === Infinity) {
 			const leftBound = {x: start.x, y: 0};
 			const rightBound = {x: start.x, y: h};
 			return { leftBound, rightBound};
@@ -457,15 +457,15 @@ var rake = {
 		return size.x;
 	},
 	onemove: function(ctx, start, end, w, h) {
+
 		const a = {y: -end.x + start.x, x: end.y - start.y};
 		const r = rake.setPattern(ctx);
 		const rot = Math.atan2(a.y,a.x);
-		const f = a.x < a.y ? w / a.x : h / a.y;
-		const p = a.x < a.y ? start.x / a.x : start.y / a.y;
+		const {leftBound, rightBound} = rake.lrBound(start, {x: start.x + a.x, y: start.y + a.y}, w, h)
 
 		ctx.beginPath();
-		ctx.moveTo(start.x - a.x * p, start.y - a.y * p);
-		ctx.lineTo(start.x + a.x * (f-p), start.y + a.y *(f-p));
+		ctx.moveTo(leftBound.x, leftBound.y);
+		ctx.lineTo(rightBound.x, rightBound.y);
 		ctx.lineWidth = r*2;
 		ctx.translate(0,0);
 		ctx.rotate(rot + Math.PI/2);
@@ -473,9 +473,19 @@ var rake = {
 		ctx.setTransform(1,0,0,1,0,0);
 
 		ctx.strokeStyle = 'black';
-		rake.config.line(ctx, start, end, w, h);
+		rake.config.line(ctx, start,end, w, h);
 	}
 };
+// snap line parallel to axis
+function snap(start,end) {
+	const a = {x: end.x - start.x, y: end.y - start.y};
+	if(Math.abs(a.x) > Math.abs(a.y)) {
+		a.y = 0;
+	} else {
+		a.x = 0;
+	}
+	return [start, {x: start.x + a.x, y: start.y + a.y}];
+}
 
 var tool = {
 	start: null,
@@ -515,7 +525,8 @@ var tool = {
 			tool.clear();
 			const p = tool.translate({x:evnt.offsetX, y:evnt.offsetY});
 			if(tool.start !== null && tool.tool[state].onemove) {
-				tool.tool[state].onemove(tool.ctx, tool.start, p, tool.overlay.width, tool.overlay.height);
+				const [s,e] = snap(tool.start, p);
+				tool.tool[state].onemove(tool.ctx, s,e , tool.overlay.width, tool.overlay.height);
 			} else if (tool.tool[state].draw) {
 				tool.tool[state].draw(tool.ctx, p.x, p.y, tool.overlay.width, tool.overlay.height);
 			}
