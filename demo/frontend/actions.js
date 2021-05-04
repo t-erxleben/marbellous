@@ -2,6 +2,15 @@ var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
 var nodes = {};
+var backend = {};
+var color = 0x228B22;
+var Module = {
+	onRuntimeInitialized: function() {
+		backend.dropColor = Module.cwrap('dropColor',
+			'void',
+			['number','number','number','number']);
+	}
+};
 
 function getTopSubmenu(label) {
 	var el = label;
@@ -54,6 +63,15 @@ function switchState(_old, _new) {
 
 function handleClick(el) {
 		switch(el.id) {
+			case 'color-1':
+				color = 0x228B22;
+				break;
+			case 'color-2':
+				color = 0xFFD700;
+				break;
+			case 'color-3':
+				color = 0xDC143C;
+				break;
 			case 'color-dropper':
 				tool.tool[state] = dropper;
 				break;
@@ -190,13 +208,38 @@ function drawline(ctx, start, end) {
 	ctx.moveTo(start.x, start.y);
 	ctx.lineTo(end.x,end.y);
 	ctx.stroke();
-}
+};
 
 var dropper = {
+	circle: null,
+	active: false,
+	speed: 0.0002,
+	time: null,
 	draw: function(canvas, x,y) {
 		const size = tool.translate({x: 32, y: 32});
 		canvas.drawImage(dropper.img,x,y-size.y,size.x,size.y);
+	},
+	drop: function(time) {
+			if (dropper.active) {
+				if (!dropper.time) {
+					dropper.time = time;
+				}
+				const r = (time - dropper.time) * dropper.speed;
+				const arg = dropper.circle;
+				backend.dropColor(arg.x, arg.y, r, arg.color);
+				window.requestAnimationFrame(dropper.drop);
+			}
+		},
+	down: function(x,y,w,h) {
+		dropper.circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0, color};
+		dropper.active = true;
+		window.requestAnimationFrame(dropper.drop);
+	},
+	up: function() {
+		dropper.active = false;
+		dropper.time = null;
 	}
+
 };
 
 var sparkle_dropper = {
@@ -348,6 +391,10 @@ var tool = {
 	},
 	down: function(evnt) {
 		tool.start = tool.translate({x: evnt.offsetX, y: evnt.offsetY});
+		if (tool.tool[state].down) {
+			tool.tool[state].down(tool.start.x, tool.start.y,
+				tool.overlay.width, tool.overlay.height);
+		}
 	},
 	over: function(evnt) {
 		if (!tool.ctx) {
@@ -366,6 +413,9 @@ var tool = {
 	},
 	up: function(evnt) {
 		tool.start = null;
+		if(tool.tool[state].up) {
+			tool.tool[state].up();
+		}
 		// tool.overlay.drawImage()
 	},
 };

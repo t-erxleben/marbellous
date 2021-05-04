@@ -98,10 +98,11 @@ void Renderer::drawTriangleFan(GLfloat* points, size_t pointCount, Color col)
 
     auto rgb = col.getRGB();
 
-    GLfloat r = static_cast<float>(std::get<0>(rgb));
-    GLfloat g = static_cast<float>(std::get<1>(rgb));
-    GLfloat b = static_cast<float>(std::get<2>(rgb));
+    GLfloat r = static_cast<float>(std::get<0>(rgb)) / 255.f;
+    GLfloat g = static_cast<float>(std::get<1>(rgb)) / 255.f;
+    GLfloat b = static_cast<float>(std::get<2>(rgb)) / 255.f;
 
     glUniform3f(colorLoc, r, g, b);
+
     glDrawArrays(GL_TRIANGLE_FAN, 0, pointCount);
 }
