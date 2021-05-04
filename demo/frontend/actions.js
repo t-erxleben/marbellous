@@ -140,7 +140,7 @@ function handleClick(el) {
 				switch(state) {
 					case 'draw':
 						state = 'rake';
-						img.src = 'icons/image-regular.svg';
+						img.src = 'icons/fast-backward-solid.svg';
 						label.title = 'Go to state before first rake strike.';
 						break;
 					case 'rake':
