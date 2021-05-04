@@ -275,6 +275,44 @@ var sparkle_dropper = {
 	}
 };
 
+// based on: https://gist.github.com/jwir3/d797037d2e1bf78a9b04838d73436197
+function drawArrow(context, from, to, radius) {
+	var x_center = to.x;
+	var y_center = to.y;
+
+	var angle;
+	var x;
+	var y;
+
+	context.beginPath();
+	context.moveTo(from.x, from.y);
+	context.lineTo(to.x,to.y);
+	context.stroke();
+	context.beginPath();
+
+	angle = Math.atan2(to.y - from.y, to.x - from.x)
+	x = radius * Math.cos(angle) + x_center;
+	y = radius * Math.sin(angle) + y_center;
+
+	context.moveTo(x, y);
+
+	angle += (1.0/3.0) * (2 * Math.PI)
+	x = radius * Math.cos(angle) + x_center;
+	y = radius * Math.sin(angle) + y_center;
+
+	context.lineTo(x, y);
+
+	angle += (1.0/3.0) * (2 * Math.PI)
+	x = radius *Math.cos(angle) + x_center;
+	y = radius *Math.sin(angle) + y_center;
+
+	context.lineTo(x, y);
+
+	context.closePath();
+
+	context.fill();
+}
+
 var rake_dropper = {
 	canvas: undefined,
 	ctx: undefined,
@@ -323,30 +361,79 @@ var rake_dropper = {
 };
 
 var rake = {
-	straight: function(ctx, start, end) {
-		ctx.beginPath();
-		ctx.moveTo(start.x,start.y);
-		ctx.lineTo(end.x, end.y);
-		ctx.stroke();
+	borderPoint: function(a, m, w, h, x) {
+		const y = a + m * x;
+		if(y < 0) {
+			return {y: 0, x: (0-a)/m};
+		} else if (y >= h) {
+			return {y: h, x: (h-a)/m};
+		} else {
+			return {y, x};
+		}
 	},
-	curve: function(ctx, start, end) {
-		const a = {x: end.x - start.x, y: end.y - start.y};
-		const len = Math.sqrt(a.x*a.x + a.y*a.y);
-		const up = {x: -a.y / len, y: a.x / len};
+	lrBound: function(start, end , w, h) {
+		const v = {x: end.x - start.x, y: end.y - start.y};
+		const m = v.y / v.x;
+		if(m === Infinity) {
+			const leftBound = {x: start.x, y: 0};
+			const rightBound = {x: start.x, y: h};
+			return { leftBound, rightBound};
+		}
+		const a = start.y - m * start.x;
+
+		const leftBound = rake.borderPoint(a, m,w,h, 0);
+		const rightBound = rake.borderPoint(a, m, w, h, w);
+		return { leftBound, rightBound};
+	},
+	straight: function(ctx, start, end, w, h) {
+		const {leftBound, rightBound} = rake.lrBound(start, end, w, h);
+
+		ctx.lineWidth = 0.5;
 		ctx.beginPath();
-		ctx.moveTo(start.x, start.y);
-		var x = start.x;
-		var y = start.y;
+		ctx.moveTo(leftBound.x, leftBound.y);
+		ctx.lineTo(rightBound.x, rightBound.y);
+		ctx.stroke();
+
+		ctx.lineWidth = 2;
+		drawArrow(ctx, start, end, 10);
+	},
+	curve: function(ctx, start, end, w, h) {
+		const {leftBound, rightBound} = rake.lrBound(start, end, w, h);
+		var a;
+		var startBound;
+		if (end.x - start.x > 0 || (end.x === start.x && start.y < end.y)) {
+			a = {x: rightBound.x - leftBound.x, y: rightBound.y - leftBound.y};
+			startBound = leftBound;
+		} else {
+			a = {x: leftBound.x - rightBound.x, y: leftBound.y - rightBound.y};
+			startBound = rightBound;
+		}
+		const len = Math.sqrt(a.x*a.x + a.y*a.y);
+		const phaseOff = Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2);
+		const up = {x: -a.y / len, y: a.x / len};
+
+		ctx.lineWidth = 0.5;
+		ctx.beginPath();
 		const step = 20;
-		for(i = step; i < len; i += step) {
-			const mag = Math.sin(i / rake.config.periode * Math.PI) * rake.config.magnitude;
+		{
+			const i = - rake.config.periode / 4 - step;
+			const mag = Math.sin((i-phaseOff) / rake.config.periode * Math.PI) * rake.config.magnitude;
+			const x = startBound.x + i / len * a.x;
+			const y = startBound.y + i / len * a.y;
+			ctx.moveTo(x + up.x * mag, y + up.y * mag);
+		}
+		for(i = -rake.config.periode/4; i <= len + rake.config.periode / 4 + step; i += step) {
+			const x = startBound.x + i / len * a.x;
+			const y = startBound.y + i / len * a.y;
+			const mag = Math.sin((i-phaseOff) / rake.config.periode * Math.PI) * rake.config.magnitude;
 			ctx.lineTo(x + up.x * mag ,y + up.y * mag);
-			x = start.x + i / len * a.x;
-			y = start.y + i / len * a.y;
 		}
 		ctx.stroke();
+
+		ctx.lineWidth = 2;
+		drawArrow(ctx, start, end, 10);
 	},
-	config: {of: 5, line: function(a,b,c) {rake.straight(a,b,c);}},
+	config: {of: 5, line: function(a,b,c,d,e) {rake.straight(a,b,c,d,e);}},
 	init: function() {
 		if (! rake.canvas && ! rake.ctx) {
 			rake.canvas = document.createElement('canvas');
@@ -385,9 +472,8 @@ var rake = {
 		ctx.stroke();
 		ctx.setTransform(1,0,0,1,0,0);
 
-		ctx.lineWidth = 2;
 		ctx.strokeStyle = 'black';
-		rake.config.line(ctx, start, end);
+		rake.config.line(ctx, start, end, w, h);
 	}
 };
 
