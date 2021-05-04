@@ -295,9 +295,9 @@ var rake_dropper = {
 		rake_dropper.init();
 
 		const r = 5;
-		const size = tool.translate({x: r, y: r});
-		const pattern_size = tool.translate({x: rake_dropper.config.w * 2, y: rake_dropper.config.h});
-		const pattern_offset = tool.translate({x: rake_dropper.config.w, y: rake_dropper.config.of});
+		const size = {x: r, y: r};
+		const pattern_size = {x: rake_dropper.config.w * 2, y: rake_dropper.config.h};
+		const pattern_offset = {x: rake_dropper.config.w, y: rake_dropper.config.of};
 
 		rake_dropper.canvas.width = pattern_size.x;
 		rake_dropper.canvas.height = pattern_size.y;
@@ -358,7 +358,7 @@ var rake = {
 	setPattern: function(ctx) {
 		rake.init();
 		const r = 5;
-		const size = tool.translate({x: r, y: r});
+		const size = {x: r, y: r};
 		rake.canvas.width = size.x * 2;
 		rake.canvas.height = size.y * 4 + rake.config.of;
 		rake.ctx.setTransform(1,0,0,1,0,0);
