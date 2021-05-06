@@ -396,6 +396,7 @@ var rake = {
 		ctx.stroke();
 
 		ctx.lineWidth = 2;
+		ctx.strokeStyle = 'black';
 		drawArrow(ctx, start, end, 10);
 	},
 	curve: function(ctx, start, end, w, h) {
