@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	tool.overlay.addEventListener("mousemove", tool.over);
 	tool.overlay.addEventListener("mouseup", tool.up);
 	tool.overlay.addEventListener("mousedown", tool.down);
-	tool.overlay.addEventListener("mouseleave", tool.clear);
+	tool.overlay.addEventListener("mouseleave", tool.leave);
 	tool.overlay.addEventListener("contextmenu", function(e){e.preventDefault();});
 
 	states.forEach(function(s){
@@ -501,6 +501,12 @@ var tool = {
 	tool: {
 		draw: dropper,
 		rake: rake,
+	},
+	leave: function() {
+		tool.clear();
+		if(tool.tool[state].up) {
+			tool.tool[state].up();
+		}
 	},
 	clear: function() {
 		if(tool.ctx) {
