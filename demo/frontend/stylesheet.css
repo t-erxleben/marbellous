@@ -59,16 +59,28 @@ menu > li {
 	z-index: 3;
 	display: block;
 	padding: 1em 0 0 1em;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
 }
 
 menu label {
 	position: inherit;
 	z-index: inherit;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
 }
 
 menu img {
 	position: inherit;
 	z-index: inherit;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
 }
 
 menu menu label {
