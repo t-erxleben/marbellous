@@ -11,7 +11,8 @@ class Options
 
 
         // private data members
-        Palette activePalette{};
+        std::vector<Palette> Palettes;
+        size_t activePalette; // index inside Palettes vector
         Color bgColor{0xFFFFFF};
 
     public:
@@ -24,8 +25,12 @@ class Options
         // access instance
         static Options * const getInstance();
 
-        void setPalette(Palette const & newPalette);
-        Palette* getPalette();
+        // handling Palettes
+        void addPalette(Palette const & newPalette);
+        Palette* getActivePalette();
+        int setActivePalette(size_t);
+
+        // handling BG color
         void setBGColor(Color const & col);
         Color* getBGColor();
 
