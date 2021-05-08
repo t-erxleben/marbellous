@@ -26,9 +26,9 @@ class Options
         static Options * const getInstance();
 
         // handling Palettes
-        void addPalette(Palette const & newPalette);
+        size_t addPalette(Palette const & newPalette);
         Palette* getActivePalette();
-        int setActivePalette(size_t);
+        int setActivePalette(size_t id);
 
         // handling BG color
         void setBGColor(Color const & col);

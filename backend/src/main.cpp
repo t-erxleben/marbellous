@@ -41,9 +41,10 @@ int EMSCRIPTEN_KEEPALIVE addPalette()
     if (!setupDone)
     {
         fprintf(stderr, "Backend is not initialized yet!");
-        return;
+        return 0;
     }
     // TODO
+    return 0;
 }
 
 int EMSCRIPTEN_KEEPALIVE setActivePalette(int const id)
@@ -51,9 +52,10 @@ int EMSCRIPTEN_KEEPALIVE setActivePalette(int const id)
     if (!setupDone)
     {
         fprintf(stderr, "Backend is not initialized yet!");
-        return;
+        return 0;
     }
     // TODO
+    return 0;
 }
 
 int EMSCRIPTEN_KEEPALIVE setPaletteColors(unsigned int const c0, unsigned int const c1, unsigned int const c2, unsigned int const c3)
@@ -61,9 +63,10 @@ int EMSCRIPTEN_KEEPALIVE setPaletteColors(unsigned int const c0, unsigned int co
     if (!setupDone)
     {
         fprintf(stderr, "Backend is not initialized yet!");
-        return;
+        return 0;
     }
     // TODO
+    return 0;
 }
 
 void EMSCRIPTEN_KEEPALIVE setSinglePaletteColor(size_t const colorNumber, unsigned int const color)

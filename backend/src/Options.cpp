@@ -9,14 +9,26 @@ Options* const Options::getInstance()
     return instance;
 }
 
-void Options::setPalette(Palette const & newPalette)
+size_t Options::addPalette(Palette const & newPalette)
 {
-    activePalette = newPalette;
+    Palettes.push_back(newPalette);
+    return Palettes.size() - 1;
 }
 
-Palette* Options::getPalette()
+Palette* Options::getActivePalette()
 {
-    return &activePalette;
+    return &Palettes[activePalette];
+}
+
+int Options::setActivePalette(size_t id)
+{
+    if(id >= Palettes.size())
+    {
+        return -1;
+    }
+    activePalette = id;
+    return 0;
+    
 }
 
 void Options::setBGColor(Color const & col)
