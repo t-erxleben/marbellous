@@ -6,5 +6,5 @@
 class WGLSceneRenderer: private WGLRenderer
 {
     public:
-        void drawScene(Scene const scene);
+        void drawScene(Scene const & scene);
 };

@@ -18,7 +18,9 @@ class Polygon
 
         static Polygon createCirlce(Point mid, float radius);
 
-        // TODO some interface to get all information for drawing
+        // Return tuple of vertex indizes and interleaved vertex data (position + color index)
+        // intended to be used for glDrawElements
+        std::tuple<std::vector<uint32_t> const, size_t, void const *> getDrawInfo();
 
         // displace polygon (e.g. new drop is close)
         // arguments not known yet
