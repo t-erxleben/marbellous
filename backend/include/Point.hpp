@@ -2,7 +2,7 @@
 
 #include <GLES2/gl2.h>
 
-class Point
+class __attribute__((packed)) Point
 {
     public:
 

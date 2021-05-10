@@ -3,6 +3,7 @@
 #include <forward_list>
 
 #include "Point.hpp"
+#include "WGLVertex.hpp"
 
 class Polygon
 {
@@ -16,11 +17,16 @@ class Polygon
     
     public:
 
-        static Polygon createCirlce(Point mid, float radius);
+        
+        static Polygon createCircle(Point mid, float radius);
 
-        // Return tuple of vertex indizes and interleaved vertex data (position + color index)
+        // return the number of vertices
+        size_t getVertCount();
+
+        // Fill vectors with infos needed for drawing
+        // &vec[0] should give the base pointer for the buffer
         // intended to be used for glDrawElements
-        std::tuple<std::vector<uint32_t> const, size_t, void const *> getDrawInfo();
+        void getDrawInfo(std::vector<GLuint>& indices, std::vector<WGLVertex>& vertices);
 
         // displace polygon (e.g. new drop is close)
         // arguments not known yet
