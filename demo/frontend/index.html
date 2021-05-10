@@ -7,15 +7,15 @@
 		<link rel="stylesheet" href="stylesheet.css">
 		<script src="actions.js"></script>
 		<script src="Marbellous.js"></script>
-		<title>Marbeling</title>
+		<title>Marbellous</title>
 	</head>
 	<body>
-		<menu class="menu">
+	<div style="height:100%"><menu class="menu">
 			<li><input type="radio" id="color-picker" name="menu">
 				<label for="color-picker" title="select a color to apply">
 					<img src="icons/palette-solid.svg" alt="color picker">
-				</label>
-				<menu>
+				</label><!-- romves whitespaces
+				--><menu>
 					<li><input type="radio" id="color-1" name="color-picker" checked>
 						<label style="background: #228B22" for="color-1" title="change to color 1">
 							<img src="icons/empty.svg" alt="color-1">
@@ -61,8 +61,8 @@
 			<li class="draw state"><input type="radio" id="color-rake" name="menu">
 				<label for="color-rake" title="Apply color in regulare pattern. Hold for larger drops.">
 					<img src="icons/regular-rake-solid.svg" alt="color rake">
-				</label>
-				<menu>
+				</label><!-- removes whitespace
+				--><menu>
 					<li><input type="radio" id="color-rake-displaced" name="color-rake" checked>
 						<label for="color-rake-displaced" title="Apply color in a >regular< pattern.">
 							<img src="icons/regular-rake-solid.svg" alt="displaced">
@@ -90,8 +90,8 @@
 			<li><input type="radio" id="history" name="menu">
 				<label for="history" title="Go for and back in different steps.">
 					<img src="icons/exchange-alt-solid.svg" alt="history">
-				</label>
-				<menu>
+				</label><!-- removes whitespace
+				--><menu>
 					<li><input type="button" id="clear" name="history">
 						<label for="clear" title="Clear canvas">
 							<img src="icons/chalkboard-solid.svg" alt="clear canvas">
@@ -109,12 +109,17 @@
 					</li>
 				</menu>
 			</li>
+			<li><input type="button" id="download">
+				<label for="download" title="Download current canvas state as image">
+					<img src="icons/file-download-solid.svg" alt="download">
+				</label>
+			</li>
 
-		</menu>
-		<div class="page">
+		</menu><!-- removes whitespace
+			--><div style="display:inline-block"><h1 style="text-align:center">Marbellous</h1><div class="page">
 			<canvas width="720" height="720" id="image" style="background: #f7e9ce;"></canvas>
 			<canvas width="720" height="720" id="overlay"></canvas>
-		</div>
+		</div></div></div>
 		<img style="display: none" id="img-color-dropper" width="32" height="32" src="icons/eye-dropper-solid.png">
 		<img style="display: none" id="img-color-sparkle" width="32" height="32" src="icons/sparkle-solid.png">
 	</body>

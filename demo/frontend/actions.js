@@ -60,9 +60,31 @@ function switchState(_old, _new) {
 
 }
 
+function downloadCanvas() {
+	let canvasImage = tool.image.toDataURL('image/png');
+
+	// this can be used to download any image from webpage to local disk
+	let xhr = new XMLHttpRequest();
+	xhr.responseType = 'blob';
+	xhr.onload = function () {
+		let a = document.createElement('a');
+		a.href = window.URL.createObjectURL(xhr.response);
+		a.download = 'image_name.png';
+		a.style.display = 'none';
+		document.body.appendChild(a);
+		a.click();
+		a.remove()
+	};
+	xhr.open('GET', canvasImage); // This is to download the canvas Image
+	xhr.send();
+}
+
 
 function handleClick(el) {
 		switch(el.id) {
+			case 'download':
+				downloadCanvas();
+				break;
 			case 'color-1':
 				color = 0x228B22;
 				break;
@@ -118,7 +140,7 @@ function handleClick(el) {
 				switch(state) {
 					case 'draw':
 						state = 'rake';
-						img.src = 'icons/image-regular.svg';
+						img.src = 'icons/fast-backward-solid.svg';
 						label.title = 'Go to state before first rake strike.';
 						break;
 					case 'rake':
@@ -184,6 +206,9 @@ document.addEventListener("DOMContentLoaded", function(){
 			active[rad.attributes.name.nodeValue] = null;
 		}
 	});
+	{
+		tool.image = document.getElementById('image');
+	}
 	tool.overlay = document.getElementById('overlay');
 	tool.overlay.addEventListener("mousedown", function(evnt){
 		hideMenu();
@@ -192,7 +217,8 @@ document.addEventListener("DOMContentLoaded", function(){
 	tool.overlay.addEventListener("mousemove", tool.over);
 	tool.overlay.addEventListener("mouseup", tool.up);
 	tool.overlay.addEventListener("mousedown", tool.down);
-	tool.overlay.addEventListener("mouseleave", tool.clear);
+	tool.overlay.addEventListener("mouseleave", tool.leave);
+	tool.overlay.addEventListener("contextmenu", function(e){e.preventDefault();});
 
 	states.forEach(function(s){
 		switchState(s, null);
@@ -250,6 +276,44 @@ var sparkle_dropper = {
 	}
 };
 
+// based on: https://gist.github.com/jwir3/d797037d2e1bf78a9b04838d73436197
+function drawArrow(context, from, to, radius) {
+	var x_center = to.x;
+	var y_center = to.y;
+
+	var angle;
+	var x;
+	var y;
+
+	context.beginPath();
+	context.moveTo(from.x, from.y);
+	context.lineTo(to.x,to.y);
+	context.stroke();
+	context.beginPath();
+
+	angle = Math.atan2(to.y - from.y, to.x - from.x)
+	x = radius * Math.cos(angle) + x_center;
+	y = radius * Math.sin(angle) + y_center;
+
+	context.moveTo(x, y);
+
+	angle += (1.0/3.0) * (2 * Math.PI)
+	x = radius * Math.cos(angle) + x_center;
+	y = radius * Math.sin(angle) + y_center;
+
+	context.lineTo(x, y);
+
+	angle += (1.0/3.0) * (2 * Math.PI)
+	x = radius *Math.cos(angle) + x_center;
+	y = radius *Math.sin(angle) + y_center;
+
+	context.lineTo(x, y);
+
+	context.closePath();
+
+	context.fill();
+}
+
 var rake_dropper = {
 	canvas: undefined,
 	ctx: undefined,
@@ -270,9 +334,9 @@ var rake_dropper = {
 		rake_dropper.init();
 
 		const r = 5;
-		const size = tool.translate({x: r, y: r});
-		const pattern_size = tool.translate({x: rake_dropper.config.w * 2, y: rake_dropper.config.h});
-		const pattern_offset = tool.translate({x: rake_dropper.config.w, y: rake_dropper.config.of});
+		const size = {x: r, y: r};
+		const pattern_size = {x: rake_dropper.config.w * 2, y: rake_dropper.config.h};
+		const pattern_offset = {x: rake_dropper.config.w, y: rake_dropper.config.of};
 
 		rake_dropper.canvas.width = pattern_size.x;
 		rake_dropper.canvas.height = pattern_size.y;
@@ -298,30 +362,81 @@ var rake_dropper = {
 };
 
 var rake = {
-	straight: function(ctx, start, end) {
-		ctx.beginPath();
-		ctx.moveTo(start.x,start.y);
-		ctx.lineTo(end.x, end.y);
-		ctx.stroke();
+	borderPoint: function(a, m, w, h, x) {
+		const y = a + m * x;
+		if(y < 0) {
+			return {y: 0, x: (0-a)/m};
+		} else if (y >= h) {
+			return {y: h, x: (h-a)/m};
+		} else {
+			return {y, x};
+		}
 	},
-	curve: function(ctx, start, end) {
-		const a = {x: end.x - start.x, y: end.y - start.y};
-		const len = Math.sqrt(a.x*a.x + a.y*a.y);
-		const up = {x: -a.y / len, y: a.x / len};
+	lrBound: function(start, end , w, h) {
+		const v = {x: end.x - start.x, y: end.y - start.y};
+		const m = v.y / v.x;
+		if(Math.abs(m) === Infinity) {
+			const leftBound = {x: start.x, y: 0};
+			const rightBound = {x: start.x, y: h};
+			return { leftBound, rightBound};
+		}
+		const a = start.y - m * start.x;
+
+		const leftBound = rake.borderPoint(a, m,w,h, 0);
+		const rightBound = rake.borderPoint(a, m, w, h, w);
+		return { leftBound, rightBound};
+	},
+	straight: function(ctx, start, end, w, h) {
+		const {leftBound, rightBound} = rake.lrBound(start, end, w, h);
+
+		ctx.lineWidth = 0.5;
 		ctx.beginPath();
-		ctx.moveTo(start.x, start.y);
-		var x = start.x;
-		var y = start.y;
+		ctx.moveTo(leftBound.x, leftBound.y);
+		ctx.lineTo(rightBound.x, rightBound.y);
+		ctx.stroke();
+
+		ctx.lineWidth = 2;
+		ctx.strokeStyle = 'black';
+		ctx.fillStyle = 'black';
+		drawArrow(ctx, start, end, 10);
+	},
+	curve: function(ctx, start, end, w, h) {
+		const {leftBound, rightBound} = rake.lrBound(start, end, w, h);
+		var a;
+		var startBound;
+		if (end.x - start.x > 0 || (end.x === start.x && start.y < end.y)) {
+			a = {x: rightBound.x - leftBound.x, y: rightBound.y - leftBound.y};
+			startBound = leftBound;
+		} else {
+			a = {x: leftBound.x - rightBound.x, y: leftBound.y - rightBound.y};
+			startBound = rightBound;
+		}
+		const len = Math.sqrt(a.x*a.x + a.y*a.y);
+		const phaseOff = Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2);
+		const up = {x: -a.y / len, y: a.x / len};
+
+		ctx.lineWidth = 0.5;
+		ctx.beginPath();
 		const step = 20;
-		for(i = step; i < len; i += step) {
-			const mag = Math.sin(i / rake.config.periode * Math.PI) * rake.config.magnitude;
+		{
+			const i = - rake.config.periode / 4 - step;
+			const mag = Math.sin((i-phaseOff) / rake.config.periode * Math.PI) * rake.config.magnitude;
+			const x = startBound.x + i / len * a.x;
+			const y = startBound.y + i / len * a.y;
+			ctx.moveTo(x + up.x * mag, y + up.y * mag);
+		}
+		for(i = -rake.config.periode/4; i <= len + rake.config.periode / 4 + step; i += step) {
+			const x = startBound.x + i / len * a.x;
+			const y = startBound.y + i / len * a.y;
+			const mag = Math.sin((i-phaseOff) / rake.config.periode * Math.PI) * rake.config.magnitude;
 			ctx.lineTo(x + up.x * mag ,y + up.y * mag);
-			x = start.x + i / len * a.x;
-			y = start.y + i / len * a.y;
 		}
 		ctx.stroke();
+
+		ctx.lineWidth = 2;
+		drawArrow(ctx, start, end, 10);
 	},
-	config: {of: 5, line: function(a,b,c) {rake.straight(a,b,c);}},
+	config: {of: 5, line: function(a,b,c,d,e) {rake.straight(a,b,c,d,e);}},
 	init: function() {
 		if (! rake.canvas && ! rake.ctx) {
 			rake.canvas = document.createElement('canvas');
@@ -333,9 +448,9 @@ var rake = {
 	setPattern: function(ctx) {
 		rake.init();
 		const r = 5;
-		const size = tool.translate({x: r, y: r});
-		rake.canvas.width = size.x * 2;
-		rake.canvas.height = size.y * 4 + rake.config.of;
+		const size = {x: r, y: r};
+		rake.canvas.width = size.x * 4 + rake.config.of;
+		rake.canvas.height = size.y * 2;
 		rake.ctx.setTransform(1,0,0,1,0,0);
 		rake.ctx.beginPath();
 		rake.ctx.ellipse(size.x, size.y,size.x,size.y,0, 2 * Math.PI, false);
@@ -345,26 +460,41 @@ var rake = {
 		return size.x;
 	},
 	onemove: function(ctx, start, end, w, h) {
+
+		rake.setPattern(ctx);
 		const a = {y: -end.x + start.x, x: end.y - start.y};
 		const r = rake.setPattern(ctx);
 		const rot = Math.atan2(a.y,a.x);
-		const f = a.x < a.y ? w / a.x : h / a.y;
-		const p = a.x < a.y ? start.x / a.x : start.y / a.y;
+		const {leftBound, rightBound} = rake.lrBound(start, {x: start.x + a.x, y: start.y + a.y}, w, h)
+		const len = Math.sqrt((leftBound.x - rightBound.x)**2 + (leftBound.y - rightBound.y)**2);
+		const startBound = a.x > 0 || (a.x === 0 && a.y > 0) ? leftBound : rightBound;
 
+		const offset = -Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2) % (20 + rake.config.of);
+		ctx.lineWidth = 2*r;
 		ctx.beginPath();
-		ctx.moveTo(start.x - a.x * p, start.y - a.y * p);
-		ctx.lineTo(start.x + a.x * (f-p), start.y + a.y *(f-p));
-		ctx.lineWidth = r*2;
-		ctx.translate(0,0);
-		ctx.rotate(rot + Math.PI/2);
+		ctx.translate(startBound.x, startBound.y);
+		ctx.rotate(rot);
+		ctx.translate(-r - offset,-r);
+		ctx.moveTo(0 + offset,r);
+		ctx.lineTo(len + offset,r)
 		ctx.stroke();
+
 		ctx.setTransform(1,0,0,1,0,0);
 
-		ctx.lineWidth = 2;
 		ctx.strokeStyle = 'black';
-		rake.config.line(ctx, start, end);
+		rake.config.line(ctx, start,end, w, h);
 	}
 };
+// snap line parallel to axisa
+function snap(start,end) {
+	const a = {x: end.x - start.x, y: end.y - start.y};
+	if(Math.abs(a.x) > Math.abs(a.y)) {
+		a.y = 0;
+	} else {
+		a.x = 0;
+	}
+	return [start, {x: start.x + a.x, y: start.y + a.y}];
+}
 
 var tool = {
 	start: null,
@@ -372,6 +502,12 @@ var tool = {
 	tool: {
 		draw: dropper,
 		rake: rake,
+	},
+	leave: function() {
+		tool.clear();
+		if(tool.tool[state].up) {
+			tool.tool[state].up();
+		}
 	},
 	clear: function() {
 		if(tool.ctx) {
@@ -404,7 +540,8 @@ var tool = {
 			tool.clear();
 			const p = tool.translate({x:evnt.offsetX, y:evnt.offsetY});
 			if(tool.start !== null && tool.tool[state].onemove) {
-				tool.tool[state].onemove(tool.ctx, tool.start, p, tool.overlay.width, tool.overlay.height);
+				const [s,e] = snap(tool.start, p);
+				tool.tool[state].onemove(tool.ctx, s,e , tool.overlay.width, tool.overlay.height);
 			} else if (tool.tool[state].draw) {
 				tool.tool[state].draw(tool.ctx, p.x, p.y, tool.overlay.width, tool.overlay.height);
 			}

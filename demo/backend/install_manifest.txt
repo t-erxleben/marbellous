@@ -2,6 +2,8 @@
 /home/runner/work/marbellous/marbellous/demo/backend/page/Marbellous.wasm
 /home/runner/work/marbellous/marbellous/demo/backend/page//icons/straight.svg
 /home/runner/work/marbellous/marbellous/demo/backend/page//icons/image-regular.svg
+/home/runner/work/marbellous/marbellous/demo/backend/page//icons/file-download-solid.svg
+/home/runner/work/marbellous/marbellous/demo/backend/page//icons/fast-backward-solid.svg
 /home/runner/work/marbellous/marbellous/demo/backend/page//icons/palette-solid.svg
 /home/runner/work/marbellous/marbellous/demo/backend/page//icons/wave.svg
 /home/runner/work/marbellous/marbellous/demo/backend/page//icons/chalkboard-solid.svg
