@@ -158,7 +158,8 @@ document.addEventListener("click", function(evnt){
 	// hide submenu if element is double clicked, show it again when clicked again or first selected
 	if (el.tagName == 'INPUT'
 		&& el.attributes.type
-		&& el.attributes.type.nodeValue == 'radio')
+		&& el.attributes.type.nodeValue == 'radio'
+		&& !el.parentNode.parentNode.classList.contains('sidebar'))
 	{
 		handleClick(el);
 		const menu = getTopSubmenu(el);
@@ -202,6 +203,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	document.querySelectorAll('menu input[type="radio"]').forEach(function(rad){
 		if (rad.checked) {
 			active[rad.attributes.name.nodeValue] = rad;
+			handleClick(rad);
 		} else if(active[rad.attributes.name.nodeValue] === undefined) {
 			active[rad.attributes.name.nodeValue] = null;
 		}
@@ -226,6 +228,10 @@ document.addEventListener("DOMContentLoaded", function(){
 	switchState(null, state);
 	dropper.img = document.getElementById('img-color-dropper');
 	sparkle_dropper.img = document.getElementById('img-color-sparkle');
+
+	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
+		div.style.maxHeight = div.scrollHeight;
+	});
 });
 
 
