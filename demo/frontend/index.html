@@ -67,11 +67,51 @@
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-rake"/>
 				<label for="sidebar-rake">Rake</label>
+				<div><table>
+					<tr>
+						<td><label
+							for="sidebar-rake-offset"
+							title="space between nails in rake">
+								offset:
+							</label>‰</td>
+						<td><input
+								id="sidebar-rake-offset"
+								type="number" autocomplete="on"
+								size="5" min="0" max="1000" step="10" value="150">
+						</td>	
+					</tr>
+					</table></div>
 		</li>
 		<!-- pallet -->
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-pallet"/>
 				<label for="sidebar-pallet">Pallet</label>
+				<div>
+					<table>
+						<tr>
+							<td><label for="sidebar-pallet-active-pallet" title="select current pallet">active:</label></td>
+							<td><select name="active-pallet" id="sidebar-pallet-active-pallet">
+									<option value="pallet-1">default</option>
+									<option value="pallet-2">light</option>
+									<option value="pallet-3">funky</option>
+								</select></td>
+						</tr><tr>
+							<td>Colors:</td>
+						</tr><tr class ="sub-row">
+							<td><label for="sidebar-pallet-color-1">A:</label></td>
+							<td><input id="sidebar-pallet-color-1" type="color"
+								value="#228B22"></td>
+						</tr><tr class="sub-row">
+							<td><label for="sidebar-pallet-color-2">B:</label></td>
+							<td><input id="sidebar-pallet-color-2" type="color"
+								value="#FFD700"></td>
+						</tr><tr class="sub-row">
+							<td><label for="sidebar-pallet-color-3">C:</label></td>
+							<td><input id="sidebar-pallet-color-3" type="color"
+								value="#DC143C"></td>
+						</tr>
+					</table>
+				</div>
 
 		</li>
 	</menu>
@@ -83,17 +123,17 @@
 				</label><!-- romves whitespaces
 				--><menu>
 					<li><input type="radio" id="color-1" name="color-picker" checked>
-						<label style="background: #228B22" for="color-1" title="change to color 1">
+						<label for="color-1" title="change to color 1">
 							<img src="icons/empty.svg" alt="color-1">
 						</label>
 					</li>
 					<li><input type="radio" id="color-2" name="color-picker">
-						<label style="background: #FFD700" for="color-2" title="change to color 2">
+						<label for="color-2" title="change to color 2">
 							<img src="icons/empty.svg" alt="color-2">
 						</label>
 					</li>
 					<li><input type="radio" id="color-3" name="color-picker">
-						<label style="background: #DC143C" for="color-3" title="change to color 3">
+						<label for="color-3" title="change to color 3">
 							<img src="icons/empty.svg" alt="color-3">
 						</label>
 					</li>

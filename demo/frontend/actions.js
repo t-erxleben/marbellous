@@ -5,6 +5,7 @@ var state = 'draw';
 var nodes = {};
 var backend = {};
 var color = 0x228B22;
+var pallets = {}
 var Module = {
 	onRuntimeInitialized: function() {
 		backend.dropColor = Module.cwrap('dropColor',
@@ -17,6 +18,12 @@ function intersectRect(r1, r2) {
            r2.right < r1.left || 
            r2.top > r1.bottom ||
            r2.bottom < r1.top);
+}
+function updatePallet() {
+	const {A, B, C} = pallets[pallets.active];
+	pallets.nodes.A.style.background = A;
+	pallets.nodes.B.style.background = B;
+	pallets.nodes.C.style.background = C;
 }
 var sidebar = {
 	rake_dropper: {},
@@ -103,13 +110,13 @@ function handleClick(el) {
 				downloadCanvas();
 				break;
 			case 'color-1':
-				color = 0x228B22;
+				color = 'A';
 				break;
 			case 'color-2':
-				color = 0xFFD700;
+				color = 'B';
 				break;
 			case 'color-3':
-				color = 0xDC143C;
+				color = 'C';
 				break;
 			case 'color-dropper':
 				tool.tool[state] = dropper;
@@ -264,6 +271,56 @@ document.addEventListener("DOMContentLoaded", function(){
 	}
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
+
+	{const el = document.getElementById('sidebar-pallet-active-pallet');
+	pallets.active = el.value;
+	el.addEventListener("change", (ev)=>{pallets.active = el.value
+		if(pallets[pallets.active] === undefined) {
+			pallets[pallets.active] = {A: "black", B: "black", C: "black"};
+		}
+		const {A, B, C} = pallets[pallets.active];
+		pallets.inputs.A.value = A;
+		pallets.inputs.B.value = B;
+		pallets.inputs.C.value = C;
+		updatePallet();
+	});
+	if(pallets[pallets.active] === undefined) {
+		pallets[pallets.active] = {A: "black", B: "black", C: "black"};
+	}
+	pallets.inputs = {};
+	}
+	{const el = document.getElementById('sidebar-pallet-color-1');
+	pallets[pallets.active]['A'] = el.value;
+	el.addEventListener("change", (ev)=>{pallets[pallets.active]['A'] = el.value;
+		updatePallet();});
+	pallets.inputs.A = el;
+	}
+	{const el = document.getElementById('sidebar-pallet-color-2');
+	pallets[pallets.active]['B'] = el.value;
+	el.addEventListener("change", (ev)=>{pallets[pallets.active]['B'] = el.value;
+		updatePallet();});
+	pallets.inputs.B = el;
+	}
+	{const el = document.getElementById('sidebar-pallet-color-3');
+	pallets[pallets.active]['C'] = el.value;
+	el.addEventListener("change", (ev)=>{pallets[pallets.active]['C'] = el.value;
+		updatePallet();});
+	pallets.inputs.C = el;
+	}
+	pallets.nodes = {
+		A: document.getElementById('color-1').labels[0],
+		B: document.getElementById('color-2').labels[0],
+		C: document.getElementById('color-3').labels[0],
+	};
+	updatePallet();
+
+	{const el = document.getElementById('sidebar-rake-offset');
+		rake.config.of = int(el.value);
+		el.addEventListener('change', (ev)=>{
+			rake.config.of = int(el.value);
+		});
+		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}
 });
 
 
@@ -295,7 +352,8 @@ var dropper = {
 			}
 		},
 	down: function(x,y,w,h) {
-		dropper.circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0, color};
+		const clCode = int("0x" + pallets[pallets.active][color].substr(1));
+		dropper.circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0, color: clCode };
 		dropper.active = true;
 		window.requestAnimationFrame(dropper.drop);
 	},
@@ -504,7 +562,8 @@ var rake = {
 			rake.init();
 			const r = 5;
 			this.size = {x: r, y: r};
-			rake.canvas.width = this.size.x * 4 + rake.config.of;
+			const of = ctx.canvas.width * this.of / 1000;
+			rake.canvas.width = this.size.x * 2 + of;
 			rake.canvas.height = this.size.y * 2;
 			rake.ctx.setTransform(1,0,0,1,0,0);
 			rake.ctx.beginPath();
@@ -525,7 +584,7 @@ var rake = {
 		const len = Math.sqrt((leftBound.x - rightBound.x)**2 + (leftBound.y - rightBound.y)**2);
 		const startBound = a.x > 0 || (a.x === 0 && a.y > 0) ? leftBound : rightBound;
 
-		const offset = -Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2) % (20 + rake.config.of);
+		const offset = -Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2) % rake.canvas.width;
 		ctx.lineWidth = 2*r;
 		ctx.beginPath();
 		ctx.translate(startBound.x, startBound.y);

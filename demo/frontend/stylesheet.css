@@ -1,3 +1,7 @@
+tr.sub-row > td{
+	padding-left: 30px;
+}
+
 .page {
 	display: inline-block;
 	position: relative;
@@ -69,7 +73,7 @@ menu.sidebar > li > label {
 }
 menu.sidebar > li > div {
 	overflow: hidden;
-	transition: max-height 0.8s ease-out;
+	transition: max-height 0.4s ease-out;
 }
 
 menu.sidebar > li > input:not(:checked) + label + div {
