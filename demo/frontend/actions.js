@@ -12,9 +12,21 @@ var Module = {
 			['number','number','number','number']);
 	}
 };
-
+function intersectRect(r1, r2) {
+  return !(r2.left > r1.right || 
+           r2.right < r1.left || 
+           r2.top > r1.bottom ||
+           r2.bottom < r1.top);
+}
 var sidebar = {
 	rake_dropper: {},
+	lost_focus: function(){
+		const r1 = sidebar.menu.getBoundingClientRect();
+		const r2 = tool.overlay.getBoundingClientRect();
+		if(intersectRect(r1,r2)) {
+			sidebar.btn.checked = false;
+		}
+	}
 };
 
 function getTopSubmenu(label) {
@@ -214,6 +226,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	tool.overlay = document.getElementById('overlay');
 	tool.overlay.addEventListener("mousedown", function(evnt){
 		hideMenu();
+		sidebar.lost_focus();
 		tool.click(evnt);
 	});
 	tool.overlay.addEventListener("mousemove", tool.over);
@@ -233,15 +246,24 @@ document.addEventListener("DOMContentLoaded", function(){
 		div.style.maxHeight = div.scrollHeight;
 	});
 
-	var el = document.getElementById('sidebar-rake-dropper-width')
+	{
+	const el = document.getElementById('sidebar-rake-dropper-width')
 	sidebar.rake_dropper.w = int(el.value);
 	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.w = int(ev.target.value)});
-	var el = document.getElementById('sidebar-rake-dropper-height')
+	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}{
+	const el = document.getElementById('sidebar-rake-dropper-height')
 	sidebar.rake_dropper.h = int(el.value);
 	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.h = int(ev.target.value)});
-	var el = document.getElementById('sidebar-rake-dropper-offset')
+	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}
+	{const el = document.getElementById('sidebar-rake-dropper-offset')
 	sidebar.rake_dropper.of = int(el.value);
 	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.of = int(ev.target.value)});
+	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}
+	sidebar.btn = document.getElementById('sidebar-btn');
+	sidebar.menu = document.querySelector('menu.sidebar');
 });
 
 
