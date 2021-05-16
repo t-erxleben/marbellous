@@ -140,6 +140,8 @@ function handleClick(el) {
 				break;
 			case 'color-rake-custom':
 				rake_dropper.config = sidebar.rake_dropper;
+				sidebar.btn.checked = true;
+				sidebar.options.rake_dropper.checked = true
 				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
@@ -184,12 +186,16 @@ document.addEventListener("click", function(evnt){
 		const menu = getTopSubmenu(el);
 		if (active[el.attributes.name.nodeValue] == el) {
 			if (menu) {
-				menu.querySelectorAll('li').forEach(function(li){li.classList.toggle('hide')});
+				menu.querySelectorAll('li').forEach(function(li){
+					li.classList.toggle('hide')});
 			}
 		} else {
 			active[el.attributes.name.nodeValue] = el;
 			if (menu) {
 				menu.querySelectorAll('li').forEach(function(li){li.classList.remove('hide')});
+				if(menu.attributes.option) {
+					sidebar.options[menu.attributes.option.value].checked = true;
+				}
 			}
 		}
 	}
@@ -252,7 +258,11 @@ document.addEventListener("DOMContentLoaded", function(){
 	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
 		div.style.maxHeight = div.scrollHeight;
 	});
-
+	sidebar.options = {
+		rake_dropper: document.getElementById('sidebar-rake-dropper'),
+		rake: document.getElementById('sidebar-rake'),
+		pallet: document.getElementById('sidebar-pallet'),
+	};
 	{
 	const el = document.getElementById('sidebar-rake-dropper-width')
 	sidebar.rake_dropper.w = int(el.value);
