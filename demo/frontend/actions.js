@@ -1,3 +1,4 @@
+const int = parseInt;
 var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
@@ -10,6 +11,10 @@ var Module = {
 			'void',
 			['number','number','number','number']);
 	}
+};
+
+var sidebar = {
+	rake_dropper: {},
 };
 
 function getTopSubmenu(label) {
@@ -102,25 +107,20 @@ function handleClick(el) {
 				break;
 			case 'color-rake-displaced':
 				rake_dropper.config = {
-					w: 30,
-					h: 30,
-					of: 15,
+					w: 150,
+					h: 150,
+					of: 75,
 				};
 				break;
 			case 'color-rake-square':
 				rake_dropper.config = {
-					w: 30,
-					h: 30,
+					w: 150,
+					h: 150,
 					of: 0,
 				};
 				break;
 			case 'color-rake-custom':
-				rake_dropper.config = {
-					w: 30,
-					h: 15,
-					of: 0,
-				};
-				console.warn('No custom input implemented!');
+				rake_dropper.config = sidebar.rake_dropper;
 				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
@@ -232,6 +232,16 @@ document.addEventListener("DOMContentLoaded", function(){
 	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
 		div.style.maxHeight = div.scrollHeight;
 	});
+
+	var el = document.getElementById('sidebar-rake-dropper-width')
+	sidebar.rake_dropper.w = int(el.value);
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.w = int(ev.target.value)});
+	var el = document.getElementById('sidebar-rake-dropper-height')
+	sidebar.rake_dropper.h = int(el.value);
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.h = int(ev.target.value)});
+	var el = document.getElementById('sidebar-rake-dropper-offset')
+	sidebar.rake_dropper.of = int(el.value);
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.of = int(ev.target.value)});
 });
 
 
@@ -337,26 +347,41 @@ var rake_dropper = {
 		}
 	},
 	setPattern: function(ctx) {
-		rake_dropper.init();
+		if(this.config_last === undefined) { this.config_last = {}; }
+		var diffs = false;
+		Object.keys(rake_dropper.config).forEach(function(key){
+			if (rake_dropper.config_last[key] !== rake_dropper.config[key]) {
+				diffs = true;
+				rake_dropper.config_last[key] = rake_dropper.config[key];
+			}
+		});
+		
+		if (diffs) {
+			rake_dropper.init();
 
-		const r = 5;
-		const size = {x: r, y: r};
-		const pattern_size = {x: rake_dropper.config.w * 2, y: rake_dropper.config.h};
-		const pattern_offset = {x: rake_dropper.config.w, y: rake_dropper.config.of};
+			const w = ctx.canvas.width * this.config.w / 1000;
+			const h = ctx.canvas.height * this.config.h / 1000;
+			const of =(ctx.canvas.height * this.config.of / 1000) % h;
+			const r = 5;
+			this.size = {x: r, y: r};
+			this.pattern_size = {x: w * 2, y: h};
+			console.log(h,of,this.pattern_size);
+			const pattern_offset = {x: w, y: of};
 
-		rake_dropper.canvas.width = pattern_size.x;
-		rake_dropper.canvas.height = pattern_size.y;
-		rake_dropper.ctx.beginPath();
-		rake_dropper.ctx.ellipse(size.x, size.y,size.x,size.y,0, 2 * Math.PI, false);
-		rake_dropper.ctx.moveTo(size.x+pattern_offset.x + size.x, size.y+pattern_offset.y);
-		rake_dropper.ctx.ellipse(size.x +pattern_offset.x,size.y+pattern_offset.y,size.x,size.y,0, 2 * Math.PI, false);
-		rake_dropper.ctx.stroke();
-		const pattern = ctx.createPattern(rake_dropper.canvas, 'repeat');
-		ctx.fillStyle = pattern;
-		return {size, pattern_size};
+			rake_dropper.canvas.width = this.pattern_size.x;
+			rake_dropper.canvas.height = this.pattern_size.y;
+			rake_dropper.ctx.beginPath();
+			rake_dropper.ctx.ellipse(this.size.x, this.size.y,this.size.x,this.size.y,0, 2 * Math.PI, false);
+			rake_dropper.ctx.moveTo(this.size.x+pattern_offset.x + this.size.x, this.size.y+pattern_offset.y);
+			rake_dropper.ctx.ellipse(this.size.x +pattern_offset.x,this.size.y+pattern_offset.y,this.size.x,this.size.y,0, 2 * Math.PI, false);
+			rake_dropper.ctx.stroke();
+			this.pattern = ctx.createPattern(rake_dropper.canvas, 'repeat');
+		}
+
+		ctx.fillStyle = this.pattern;
+		return {size: this.size, pattern_size: this.pattern_size};
 	},
 	draw: function(ctx, x, y, w, h) {
-		// TODO: only call when changed
 		const {size, pattern_size} = rake_dropper.setPattern(ctx);
 
 		x = x % pattern_size.x;
@@ -452,18 +477,21 @@ var rake = {
 		}
 	},
 	setPattern: function(ctx) {
-		rake.init();
-		const r = 5;
-		const size = {x: r, y: r};
-		rake.canvas.width = size.x * 4 + rake.config.of;
-		rake.canvas.height = size.y * 2;
-		rake.ctx.setTransform(1,0,0,1,0,0);
-		rake.ctx.beginPath();
-		rake.ctx.ellipse(size.x, size.y,size.x,size.y,0, 2 * Math.PI, false);
-		rake.ctx.stroke();
-		const pattern = ctx.createPattern(rake.canvas, 'repeat');
-		ctx.strokeStyle = pattern;
-		return size.x;
+		if(this.of !== rake.config.of) {
+			this.of = rake.config.of;
+			rake.init();
+			const r = 5;
+			this.size = {x: r, y: r};
+			rake.canvas.width = this.size.x * 4 + rake.config.of;
+			rake.canvas.height = this.size.y * 2;
+			rake.ctx.setTransform(1,0,0,1,0,0);
+			rake.ctx.beginPath();
+			rake.ctx.ellipse(this.size.x, this.size.y,this.size.x,this.size.y,0, 2 * Math.PI, false);
+			rake.ctx.stroke();
+			this.pattern = ctx.createPattern(rake.canvas, 'repeat');
+		}
+		ctx.strokeStyle = this.pattern;
+		return this.size.x;
 	},
 	onemove: function(ctx, start, end, w, h) {
 
