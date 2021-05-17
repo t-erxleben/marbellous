@@ -1,3 +1,7 @@
+tr.sub-row > td{
+	padding-left: 30px;
+}
+
 .page {
 	display: inline-block;
 	position: relative;
@@ -23,13 +27,82 @@
 	height: 100%;
 }
 
-menu label img {
-	width: 32px;
-	height: 32px;
-	padding: 10px 10px 10px 10px
+input.sidebar {
+	display: none;
 }
 
-menu {
+label.sidebar {
+	overflow-x: hidden;
+	position: fixed;
+	right: 16px;
+	top: 50%;
+	z-index: 2;
+	transform-origin: center center;
+	transform: rotate(180deg);
+	transition: 0.5s;
+}
+input.sidebar:checked + label {
+	transform: rotate(0);
+	right: 208px; /*250 - 32(w) - 10 (p)*/
+}
+menu.sidebar {
+	list-style: none;
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	background-color: #BBB;
+	overflow-x: hidden;
+	padding-top: 60px;
+	padding-left: 0;
+	transition: 0.5s;
+	margin: 0;
+}
+menu.sidebar > li {
+	padding-left: 45px;
+	margin-bottom: 20px;
+	width: max-content;
+}
+menu.sidebar > li > input:checked + label {
+	color: red;
+}
+menu.sidebar > li > label {
+	font-size: 24px;
+}
+menu.sidebar > li > div {
+	overflow: hidden;
+	transition: max-height 0.4s ease-out;
+}
+
+menu.sidebar > li > input:not(:checked) + label + div {
+	max-height: 0!important;
+}
+
+input.sidebar:checked + label.sidebar + menu.sidebar {
+	width: 250px;
+}
+
+menu.sidebar input {
+	background: inherit;
+}
+
+@media screen and (max-height: 450px) {
+	/* TODO: handle small devices? */
+}
+/* merege with .menu radio? */
+.sidebar input[type="radio"] {
+	display: none;
+}
+
+label > img {
+	width: 32px;
+	height: 32px;
+	padding: 10px 10px 10px 10px;
+}
+
+.menu {
 	display: inline-block;
 	list-style: none;
 	margin: 0;
@@ -54,7 +127,7 @@ body {
 	vertical-align: middle;
 }
 
-menu > li {
+.menu > li, .menu menu > li {
 	position: relative;
 	z-index: 3;
 	display: block;
@@ -65,7 +138,7 @@ menu > li {
 	user-select: none;          /* Likely future */ 
 }
 
-menu label {
+.menu label {
 	position: inherit;
 	z-index: inherit;
 	-webkit-user-select: none;  /* Chrome all / Safari all */
@@ -74,7 +147,7 @@ menu label {
 	user-select: none;          /* Likely future */ 
 }
 
-menu img {
+.menu img {
 	position: inherit;
 	z-index: inherit;
 	-webkit-user-select: none;  /* Chrome all / Safari all */
@@ -83,20 +156,20 @@ menu img {
 	user-select: none;          /* Likely future */ 
 }
 
-menu menu label {
+.menu menu label {
 	opacity: 0.7;
 }
 
-menu menu input[type="button"] ~ label {
+.menu menu input[type="button"] ~ label {
 	opacity: 1;
 }
 
-menu menu input[type="button"] ~ label:hover {
+.menu menu input[type="button"] ~ label:hover {
 	border: 2px solid;
 }
 
 
-menu label {
+.menu label {
 	display: inline-block;
 	border-radius: 50%;
 	-moz-border-radius: 50%;
@@ -106,7 +179,7 @@ menu label {
 }
 
 
-menu menu > li {
+.menu menu > li {
 	display: inline;
 	position: absolute;
 	top: 0;
@@ -115,50 +188,49 @@ menu menu > li {
 	transition: left 0.5s, top 0.5s, opacity 0.5s;
 }
 
-/* TODO: testen! */
-menu menu > li {
+.menu menu > li {
 	z-index: 2;
 }
-menu menu menu > li {
+.menu menu menu > li {
 	z-index: 1;
 }
 
-menu input[type="radio"] {
+.menu input[type="radio"] {
     display:none;
 }
 
-menu input[type="button"] {
+.menu input[type="button"] {
 	display: none;
 }
 
-menu input:checked ~ label,
-menu input ~ label:hover {
+.menu input:checked ~ label,
+.menu input ~ label:hover {
 	border: 2px solid;
 	opacity: 1;
 }
 
-menu input:checked ~ menu > li:first-child:nth-last-child(2):not(.hide) {
+.menu input:checked ~ menu > li:first-child:nth-last-child(2):not(.hide) {
 	top: -35;
 	left: 55;
 	opacity: 1;
 }
-menu input:checked ~ menu > li:first-child:nth-last-child(2) ~ li:nth-child(2):not(.hide) {
+.menu input:checked ~ menu > li:first-child:nth-last-child(2) ~ li:nth-child(2):not(.hide) {
 	top: 35;
 	left: 55;
 	opacity: 1;
 }
 
-menu input:checked ~ menu > li:first-child:nth-last-child(3):not(.hide) {
+.menu input:checked ~ menu > li:first-child:nth-last-child(3):not(.hide) {
 	top: -55;
 	left: 55;
 	opacity: 1;
 }
-menu input:checked ~ menu > li:first-child:nth-last-child(3):not(.hide) ~ li:nth-child(2):not(.hide){
+.menu input:checked ~ menu > li:first-child:nth-last-child(3):not(.hide) ~ li:nth-child(2):not(.hide){
 	top: 0;
 	left: 75;
 	opacity: 1;
 }
-menu input:checked ~ menu > li:first-child:nth-last-child(3) ~ li:nth-child(3):not(.hide) {
+.menu input:checked ~ menu > li:first-child:nth-last-child(3) ~ li:nth-child(3):not(.hide) {
 	top: 55;
 	left: 55;
 	opacity: 1;

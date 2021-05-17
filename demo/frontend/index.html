@@ -10,24 +10,130 @@
 		<title>Marbellous</title>
 	</head>
 	<body>
+	<input id="sidebar-btn" type="checkbox" class="sidebar">
+	<label for="sidebar-btn" class="sidebar">
+		<img src="icons/arrow-right-solid.svg" title="">
+	</label>
+	<menu class="sidebar">
+		<!-- help menu -->
+		<li>
+				<input type="radio" name="sidebar" id="sidebar-help"/>
+				<label for="sidebar-help">Help</label>
+				<div>
+					Bla bla helpful
+				</div>
+		</li>
+		<!-- rake dropper menu -->
+		<li>
+				<input type="radio" name="sidebar" id="sidebar-rake-dropper" checked/>
+				<label for="sidebar-rake-dropper">Rake-Dropper</label>
+				<div>
+			<table>
+				<tr>
+					<td><label
+							for="sidebar-rake-dropper-width"
+							title="Horizontal space between to rake columns."
+							>dx:</label></td>
+					<td><input id="sidebar-rake-dropper-width"
+						type="number" autocomplete="on"
+						size="5" min="0" max="1000" step="10" value="100"
+						title="Horizontal space between to rake columns.">‰</td>
+				</tr>
+				<tr>
+					<td><label
+							for="sidebar-rake-dropper-height"
+							title="Vertical space between to rake rows."
+							>dy:</label></td>
+					<td><input
+						id="sidebar-rake-dropper-height"
+						type="number" autocomplete="on"
+						size="5" min="0" max="1000" step="10" value="100"
+						title="Vertical space between to rake rows.">‰</td>
+				</tr>
+				<tr>
+					<td><label
+							for="sidebar-rake-dropper-offset"
+							title="Vertical Offset between every first and second column."
+							>offset:</label></td>
+					<td><input
+						id="sidebar-rake-dropper-offset"
+						type="number" autocomplete="on"
+						size="5" min="0" max="1000" step="10" value="25"
+						title="Vertical Offset between every first and second column.">‰</td>
+				</tr>
+			</table></div>
+		</li>
+		<!-- rake -->
+		<li>
+				<input type="radio" name="sidebar" id="sidebar-rake"/>
+				<label for="sidebar-rake">Rake</label>
+				<div><table>
+					<tr>
+						<td><label
+							for="sidebar-rake-offset"
+							title="space between nails in rake">
+								offset:
+							</label>‰</td>
+						<td><input
+								id="sidebar-rake-offset"
+								type="number" autocomplete="on"
+								size="5" min="0" max="1000" step="10" value="150">
+						</td>	
+					</tr>
+					</table></div>
+		</li>
+		<!-- pallet -->
+		<li>
+				<input type="radio" name="sidebar" id="sidebar-pallet"/>
+				<label for="sidebar-pallet">Pallet</label>
+				<div>
+					<table>
+						<tr>
+							<td><label for="sidebar-pallet-active-pallet" title="select current pallet">active:</label></td>
+							<td><select name="active-pallet" id="sidebar-pallet-active-pallet">
+									<option value="pallet-1">default</option>
+									<option value="pallet-2">light</option>
+									<option value="pallet-3">funky</option>
+								</select></td>
+						</tr><tr>
+							<td>Colors:</td>
+						</tr><tr class ="sub-row">
+							<td><label for="sidebar-pallet-color-1">A:</label></td>
+							<td><input id="sidebar-pallet-color-1" type="color"
+								value="#228B22"></td>
+						</tr><tr class="sub-row">
+							<td><label for="sidebar-pallet-color-2">B:</label></td>
+							<td><input id="sidebar-pallet-color-2" type="color"
+								value="#FFD700"></td>
+						</tr><tr class="sub-row">
+							<td><label for="sidebar-pallet-color-3">C:</label></td>
+							<td><input id="sidebar-pallet-color-3" type="color"
+								value="#DC143C"></td>
+						</tr>
+					</table>
+				</div>
+
+		</li>
+	</menu>
+	</menu>
 	<div style="height:100%"><menu class="menu">
 			<li><input type="radio" id="color-picker" name="menu">
 				<label for="color-picker" title="select a color to apply">
 					<img src="icons/palette-solid.svg" alt="color picker">
 				</label><!-- romves whitespaces
-				--><menu>
+				--><menu option="pallet">
 					<li><input type="radio" id="color-1" name="color-picker" checked>
-						<label style="background: #228B22" for="color-1" title="change to color 1">
+						<label for="color-1" title="change to color 1">
 							<img src="icons/empty.svg" alt="color-1">
 						</label>
 					</li>
 					<li><input type="radio" id="color-2" name="color-picker">
-						<label style="background: #FFD700" for="color-2" title="change to color 2">
+						<label for="color-2" title="change to color 2">
 							<img src="icons/empty.svg" alt="color-2">
 						</label>
 					</li>
 					<li><input type="radio" id="color-3" name="color-picker">
-						<label style="background: #DC143C" for="color-3" title="change to color 3">
+						<label for="color-3" title="change to color 3">
 							<img src="icons/empty.svg" alt="color-3">
 						</label>
 					</li>
@@ -38,7 +144,7 @@
 				<label for="rake-movement" title="select movement for rake">
 					<img src="icons/movement.svg">
 				</label>
-				<menu>
+				<menu option="rake">
 					<li><input type="radio" id="rake-movement-linear" name="rake-movement" checked>
 						<label for="rake-movement-linear" title="Move rake straigth">
 							<img src="icons/straight.svg">
@@ -62,7 +168,7 @@
 				<label for="color-rake" title="Apply color in regulare pattern. Hold for larger drops.">
 					<img src="icons/regular-rake-solid.svg" alt="color rake">
 				</label><!-- removes whitespace
-				--><menu>
+				--><menu option="rake_dropper">
 					<li><input type="radio" id="color-rake-displaced" name="color-rake" checked>
 						<label for="color-rake-displaced" title="Apply color in a >regular< pattern.">
 							<img src="icons/regular-rake-solid.svg" alt="displaced">
