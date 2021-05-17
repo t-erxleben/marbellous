@@ -1,14 +1,38 @@
+const int = parseInt;
 var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
 var nodes = {};
 var backend = {};
 var color = 0x228B22;
+var pallets = {}
 var Module = {
 	onRuntimeInitialized: function() {
 		backend.dropColor = Module.cwrap('dropColor',
 			'void',
 			['number','number','number','number']);
+	}
+};
+function intersectRect(r1, r2) {
+  return !(r2.left > r1.right || 
+           r2.right < r1.left || 
+           r2.top > r1.bottom ||
+           r2.bottom < r1.top);
+}
+function updatePallet() {
+	const {A, B, C} = pallets[pallets.active];
+	pallets.nodes.A.style.background = A;
+	pallets.nodes.B.style.background = B;
+	pallets.nodes.C.style.background = C;
+}
+var sidebar = {
+	rake_dropper: {},
+	lost_focus: function(){
+		const r1 = sidebar.menu.getBoundingClientRect();
+		const r2 = tool.overlay.getBoundingClientRect();
+		if(intersectRect(r1,r2)) {
+			sidebar.btn.checked = false;
+		}
 	}
 };
 
@@ -86,13 +110,13 @@ function handleClick(el) {
 				downloadCanvas();
 				break;
 			case 'color-1':
-				color = 0x228B22;
+				color = 'A';
 				break;
 			case 'color-2':
-				color = 0xFFD700;
+				color = 'B';
 				break;
 			case 'color-3':
-				color = 0xDC143C;
+				color = 'C';
 				break;
 			case 'color-dropper':
 				tool.tool[state] = dropper;
@@ -102,25 +126,22 @@ function handleClick(el) {
 				break;
 			case 'color-rake-displaced':
 				rake_dropper.config = {
-					w: 30,
-					h: 30,
-					of: 15,
+					w: 150,
+					h: 150,
+					of: 75,
 				};
 				break;
 			case 'color-rake-square':
 				rake_dropper.config = {
-					w: 30,
-					h: 30,
+					w: 150,
+					h: 150,
 					of: 0,
 				};
 				break;
 			case 'color-rake-custom':
-				rake_dropper.config = {
-					w: 30,
-					h: 15,
-					of: 0,
-				};
-				console.warn('No custom input implemented!');
+				rake_dropper.config = sidebar.rake_dropper;
+				sidebar.btn.checked = true;
+				sidebar.options.rake_dropper.checked = true
 				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
@@ -158,18 +179,23 @@ document.addEventListener("click", function(evnt){
 	// hide submenu if element is double clicked, show it again when clicked again or first selected
 	if (el.tagName == 'INPUT'
 		&& el.attributes.type
-		&& el.attributes.type.nodeValue == 'radio')
+		&& el.attributes.type.nodeValue == 'radio'
+		&& !el.parentNode.parentNode.classList.contains('sidebar'))
 	{
 		handleClick(el);
 		const menu = getTopSubmenu(el);
 		if (active[el.attributes.name.nodeValue] == el) {
 			if (menu) {
-				menu.querySelectorAll('li').forEach(function(li){li.classList.toggle('hide')});
+				menu.querySelectorAll('li').forEach(function(li){
+					li.classList.toggle('hide')});
 			}
 		} else {
 			active[el.attributes.name.nodeValue] = el;
 			if (menu) {
 				menu.querySelectorAll('li').forEach(function(li){li.classList.remove('hide')});
+				if(menu.attributes.option) {
+					sidebar.options[menu.attributes.option.value].checked = true;
+				}
 			}
 		}
 	}
@@ -202,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	document.querySelectorAll('menu input[type="radio"]').forEach(function(rad){
 		if (rad.checked) {
 			active[rad.attributes.name.nodeValue] = rad;
+			handleClick(rad);
 		} else if(active[rad.attributes.name.nodeValue] === undefined) {
 			active[rad.attributes.name.nodeValue] = null;
 		}
@@ -212,6 +239,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	tool.overlay = document.getElementById('overlay');
 	tool.overlay.addEventListener("mousedown", function(evnt){
 		hideMenu();
+		sidebar.lost_focus();
 		tool.click(evnt);
 	});
 	tool.overlay.addEventListener("mousemove", tool.over);
@@ -226,6 +254,83 @@ document.addEventListener("DOMContentLoaded", function(){
 	switchState(null, state);
 	dropper.img = document.getElementById('img-color-dropper');
 	sparkle_dropper.img = document.getElementById('img-color-sparkle');
+
+	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
+		div.style.maxHeight = div.scrollHeight;
+	});
+	sidebar.options = {
+		rake_dropper: document.getElementById('sidebar-rake-dropper'),
+		rake: document.getElementById('sidebar-rake'),
+		pallet: document.getElementById('sidebar-pallet'),
+	};
+	{
+	const el = document.getElementById('sidebar-rake-dropper-width')
+	sidebar.rake_dropper.w = int(el.value);
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.w = int(ev.target.value)});
+	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}{
+	const el = document.getElementById('sidebar-rake-dropper-height')
+	sidebar.rake_dropper.h = int(el.value);
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.h = int(ev.target.value)});
+	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}
+	{const el = document.getElementById('sidebar-rake-dropper-offset')
+	sidebar.rake_dropper.of = int(el.value);
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.of = int(ev.target.value)});
+	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}
+	sidebar.btn = document.getElementById('sidebar-btn');
+	sidebar.menu = document.querySelector('menu.sidebar');
+
+	{const el = document.getElementById('sidebar-pallet-active-pallet');
+	pallets.active = el.value;
+	el.addEventListener("change", (ev)=>{pallets.active = el.value
+		if(pallets[pallets.active] === undefined) {
+			pallets[pallets.active] = {A: "black", B: "black", C: "black"};
+		}
+		const {A, B, C} = pallets[pallets.active];
+		pallets.inputs.A.value = A;
+		pallets.inputs.B.value = B;
+		pallets.inputs.C.value = C;
+		updatePallet();
+	});
+	if(pallets[pallets.active] === undefined) {
+		pallets[pallets.active] = {A: "black", B: "black", C: "black"};
+	}
+	pallets.inputs = {};
+	}
+	{const el = document.getElementById('sidebar-pallet-color-1');
+	pallets[pallets.active]['A'] = el.value;
+	el.addEventListener("change", (ev)=>{pallets[pallets.active]['A'] = el.value;
+		updatePallet();});
+	pallets.inputs.A = el;
+	}
+	{const el = document.getElementById('sidebar-pallet-color-2');
+	pallets[pallets.active]['B'] = el.value;
+	el.addEventListener("change", (ev)=>{pallets[pallets.active]['B'] = el.value;
+		updatePallet();});
+	pallets.inputs.B = el;
+	}
+	{const el = document.getElementById('sidebar-pallet-color-3');
+	pallets[pallets.active]['C'] = el.value;
+	el.addEventListener("change", (ev)=>{pallets[pallets.active]['C'] = el.value;
+		updatePallet();});
+	pallets.inputs.C = el;
+	}
+	pallets.nodes = {
+		A: document.getElementById('color-1').labels[0],
+		B: document.getElementById('color-2').labels[0],
+		C: document.getElementById('color-3').labels[0],
+	};
+	updatePallet();
+
+	{const el = document.getElementById('sidebar-rake-offset');
+		rake.config.of = int(el.value);
+		el.addEventListener('change', (ev)=>{
+			rake.config.of = int(el.value);
+		});
+		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}
 });
 
 
@@ -257,7 +362,8 @@ var dropper = {
 			}
 		},
 	down: function(x,y,w,h) {
-		dropper.circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0, color};
+		const clCode = int("0x" + pallets[pallets.active][color].substr(1));
+		dropper.circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0, color: clCode };
 		dropper.active = true;
 		window.requestAnimationFrame(dropper.drop);
 	},
@@ -331,26 +437,41 @@ var rake_dropper = {
 		}
 	},
 	setPattern: function(ctx) {
-		rake_dropper.init();
+		if(this.config_last === undefined) { this.config_last = {}; }
+		var diffs = false;
+		Object.keys(rake_dropper.config).forEach(function(key){
+			if (rake_dropper.config_last[key] !== rake_dropper.config[key]) {
+				diffs = true;
+				rake_dropper.config_last[key] = rake_dropper.config[key];
+			}
+		});
+		
+		if (diffs) {
+			rake_dropper.init();
 
-		const r = 5;
-		const size = {x: r, y: r};
-		const pattern_size = {x: rake_dropper.config.w * 2, y: rake_dropper.config.h};
-		const pattern_offset = {x: rake_dropper.config.w, y: rake_dropper.config.of};
+			const w = ctx.canvas.width * this.config.w / 1000;
+			const h = ctx.canvas.height * this.config.h / 1000;
+			const of =(ctx.canvas.height * this.config.of / 1000) % h;
+			const r = 5;
+			this.size = {x: r, y: r};
+			this.pattern_size = {x: w * 2, y: h};
+			console.log(h,of,this.pattern_size);
+			const pattern_offset = {x: w, y: of};
 
-		rake_dropper.canvas.width = pattern_size.x;
-		rake_dropper.canvas.height = pattern_size.y;
-		rake_dropper.ctx.beginPath();
-		rake_dropper.ctx.ellipse(size.x, size.y,size.x,size.y,0, 2 * Math.PI, false);
-		rake_dropper.ctx.moveTo(size.x+pattern_offset.x + size.x, size.y+pattern_offset.y);
-		rake_dropper.ctx.ellipse(size.x +pattern_offset.x,size.y+pattern_offset.y,size.x,size.y,0, 2 * Math.PI, false);
-		rake_dropper.ctx.stroke();
-		const pattern = ctx.createPattern(rake_dropper.canvas, 'repeat');
-		ctx.fillStyle = pattern;
-		return {size, pattern_size};
+			rake_dropper.canvas.width = this.pattern_size.x;
+			rake_dropper.canvas.height = this.pattern_size.y;
+			rake_dropper.ctx.beginPath();
+			rake_dropper.ctx.ellipse(this.size.x, this.size.y,this.size.x,this.size.y,0, 2 * Math.PI, false);
+			rake_dropper.ctx.moveTo(this.size.x+pattern_offset.x + this.size.x, this.size.y+pattern_offset.y);
+			rake_dropper.ctx.ellipse(this.size.x +pattern_offset.x,this.size.y+pattern_offset.y,this.size.x,this.size.y,0, 2 * Math.PI, false);
+			rake_dropper.ctx.stroke();
+			this.pattern = ctx.createPattern(rake_dropper.canvas, 'repeat');
+		}
+
+		ctx.fillStyle = this.pattern;
+		return {size: this.size, pattern_size: this.pattern_size};
 	},
 	draw: function(ctx, x, y, w, h) {
-		// TODO: only call when changed
 		const {size, pattern_size} = rake_dropper.setPattern(ctx);
 
 		x = x % pattern_size.x;
@@ -446,18 +567,22 @@ var rake = {
 		}
 	},
 	setPattern: function(ctx) {
-		rake.init();
-		const r = 5;
-		const size = {x: r, y: r};
-		rake.canvas.width = size.x * 4 + rake.config.of;
-		rake.canvas.height = size.y * 2;
-		rake.ctx.setTransform(1,0,0,1,0,0);
-		rake.ctx.beginPath();
-		rake.ctx.ellipse(size.x, size.y,size.x,size.y,0, 2 * Math.PI, false);
-		rake.ctx.stroke();
-		const pattern = ctx.createPattern(rake.canvas, 'repeat');
-		ctx.strokeStyle = pattern;
-		return size.x;
+		if(this.of !== rake.config.of) {
+			this.of = rake.config.of;
+			rake.init();
+			const r = 5;
+			this.size = {x: r, y: r};
+			const of = ctx.canvas.width * this.of / 1000;
+			rake.canvas.width = this.size.x * 2 + of;
+			rake.canvas.height = this.size.y * 2;
+			rake.ctx.setTransform(1,0,0,1,0,0);
+			rake.ctx.beginPath();
+			rake.ctx.ellipse(this.size.x, this.size.y,this.size.x,this.size.y,0, 2 * Math.PI, false);
+			rake.ctx.stroke();
+			this.pattern = ctx.createPattern(rake.canvas, 'repeat');
+		}
+		ctx.strokeStyle = this.pattern;
+		return this.size.x;
 	},
 	onemove: function(ctx, start, end, w, h) {
 
@@ -469,7 +594,7 @@ var rake = {
 		const len = Math.sqrt((leftBound.x - rightBound.x)**2 + (leftBound.y - rightBound.y)**2);
 		const startBound = a.x > 0 || (a.x === 0 && a.y > 0) ? leftBound : rightBound;
 
-		const offset = -Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2) % (20 + rake.config.of);
+		const offset = -Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2) % rake.canvas.width;
 		ctx.lineWidth = 2*r;
 		ctx.beginPath();
 		ctx.translate(startBound.x, startBound.y);
