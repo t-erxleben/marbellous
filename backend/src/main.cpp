@@ -87,6 +87,17 @@ void EMSCRIPTEN_KEEPALIVE setBGColor(unsigned int const color)
     } 
 }
 
+void EMSCRIPTEN_KEEPALIVE setCanvasSize(size_t x, size_t y)
+{
+    if (!setupDone)
+    {
+        fprintf(stderr, "Backend is not initialized yet!");
+        return;
+    } 
+}
+
+
+
 
 
 /*------------------------------------------
