@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 # set the project name
 project(Marbellous)
 
-include_directories(include/)
+include_directories(include/ include/earcut/include/mapbox/)
 
 file(GLOB SOURCES src/*.cpp)
 
