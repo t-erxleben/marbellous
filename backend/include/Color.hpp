@@ -9,10 +9,16 @@ private:
 
 public:
 
-    // default will return black
+    /** Construct black.
+    */  
     Color();
 
-    // construct by giving values for color channels
+    /** Construct color by RGB values.
+     * @param r Red channel
+     * @param g Green channel
+     * @param b Blue channel
+     * @return Color Object
+    */
     Color(uint8_t const r, uint8_t const g, uint8_t const b);
 
     // construct from color code

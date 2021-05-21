@@ -1,34 +1,79 @@
 #pragma once
 
-#include <forward_list>
+#include <vector>
 
 #include "Point.hpp"
 #include "WGLVertex.hpp"
+#include "Options.hpp"
+#include "earcut.hpp"
 
+/**
+ * Represent polygons in 2D as a list of vertices in counter-clockwise order.
+ */
 class Polygon
 {
-    private:
+private:
+    std::vector<Point> vertices; ///<List representation of the polygon.
 
-        std::forward_list<Point> vertices;
-        
-        // Index of color inside a palette
-        // exchanging palette can be used to try different color combinations without reassigning color to each polygon
-        size_t colorIndex;
-    
-    public:
+    GLushort colorIndex; ///< Index of a color inside a palette. Exchanging the active palette will change the drawing color.
 
-        
-        static Polygon createCircle(Point mid, float radius);
+    /** Compute the number of vertices needed for a "circle" to appear smooth.
+     * Canvas size is loaded from the options.
+     * 
+     * Math explanation: 
+     * The distance between two vertices should be close to the distance between two pixels
+     * The canvas is defined within [-1,1], meaning that its length is 2 
+     * 
+     * It follows that (circumference/count) (the length of the arc between two vertices, 
+     * for short distances approx. a line), should be equal to 2/canvaslengthpx
+     * (which computes the distance between pixels in [-1,1] canvas space)
+     * -> circumference/count = 2/canvaslengthpx
+     *
+     * now that we have a value for (circumference/count) as well as the radius, we can calculate: count = circumf / (circumf/count)
+     * with cirumf = 2 * pi * radius
+     * we get count = (2*pi*radius)/(2/canvaslengthpx)
+     * we can then simplify it by canceling the 2s
+     * -> count = (pi*radius)/(1/canvaslengthpx)
+     * and then we notice we divide by 1/canvaslengthpx which is the same as multiplying, thus we arrive at
+     * -> count = pi*radius*canvaslengthpx
+     * 
+     * @param radius Radius of the circle.
+     * @return Number of vertices.
+     * @attention If we decide to support non square canvasses this needs to be changed as well.
+    */
+    static size_t circleVertCount(float radius);
 
-        // return the number of vertices
-        size_t getVertCount();
+public:
+    /** Create a circle.
+     * @param mid Middle point of the circle.
+     * @param radius Radius of the circle.
+     * @return Circle as a polygon object.
+    */
+    static Polygon createCircle(Point mid, float radius);
 
-        // Fill vectors with infos needed for drawing
-        // &vec[0] should give the base pointer for the buffer
-        // intended to be used for glDrawElements
-        void getDrawInfo(std::vector<GLuint>& indices, std::vector<WGLVertex>& vertices);
+    /**
+     * @return Number of vertices of a polygon.
+    */
+    size_t getVertCount();
 
-        // displace polygon (e.g. new drop is close)
-        // arguments not known yet
-        void displace();
+    /** Fill vectors with infos needed for drawing. 
+     * Intended to be used for glDrawElements(). Therefore 3 consecutive indices define one triangle to be drawn
+     * and refer to vertices inside the vertices vector.
+     * @param indices Vector to be filled with triangle information.
+     * @param vertices Vector to be filled with vertices.
+     * @attention Winding order is clockwise so face culling in WGL needs to be disabled. 
+     * This is no performance limitation as each triangle should be rendered in any case anyway.
+    */
+    void getDrawInfo(std::vector<GLuint> &indices, std::vector<WGLVertex> &vertices);
+
+    /** Displace a polygon as a result of a new circle appearing.
+     * @param mid Middle point of the new circle causing displacement.
+     * @param radius Radius of the new circle causing displacement.
+    */
+    void displace(Point mid, float radius);
+
+    /** Scale the polygon.
+     * @param scale Scaling factor
+    */
+    void scale(float factor);
 };

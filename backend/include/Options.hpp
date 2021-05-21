@@ -1,28 +1,32 @@
 #pragma once
 
+#include <utility>
+
 #include "Palette.hpp"
+
+using CanvasSize = std::pair<size_t, size_t>;
 
 class Options
 {
     private:
-        // realize singleton pattern
-        static Options* instance;
         Options();
 
-
-        // private data members
-        std::vector<Palette> Palettes;
-        size_t activePalette; // index inside Palettes vector
-        Color bgColor{0xFFFFFF};
+        static Options* instance; ///< Single options instance.
+        std::vector<Palette> Palettes; ///< All saved palettes.
+        size_t activePalette; ///< Index of currently active palette inside palettes vector.
+        Color bgColor{0xFFFFFF}; ///< Background color.
+        CanvasSize canvasSize; ///< Canvas size in pixels.
 
     public:
-        // singleton should neither be copied nor assigned, moved etc.
         Options(Options const &) = delete;
         void operator=(Options const &) = delete;
         Options& operator=(Options&&) = delete;
         Options(Options&&) = delete;
 
-        // access instance
+        /** Return single options instance.
+         * If there is no existing instance it will be constructed.
+         * @return Options
+        */
         static Options * const getInstance();
 
         // handling Palettes
@@ -33,6 +37,10 @@ class Options
         // handling BG color
         void setBGColor(Color const & col);
         Color* getBGColor();
+
+        // canvas size
+        void setCanvasSize(size_t x, size_t y);
+        CanvasSize getCanvasSize();
 
 
 };

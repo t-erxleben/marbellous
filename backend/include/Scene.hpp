@@ -6,22 +6,49 @@
 
 class Scene
 {
-    private:
+private:
+    std::vector<Polygon> polygons; ///<Internal vector to store all polygons
 
-        std::vector<Polygon> polygons;
+public:
+    /** Internal vector saving the references to the polygons
+     * @param pol Polygon that will be added to the scene
+     * @return Index of the saved polygon in the scene
+    */
+    int addPolygon(Polygon const &pol)
+    {
+        polygons.push_back(pol);
+        return polygons.size() - 1;
+    }
 
-    public:
+    /** Get or set the polygon at index, might throw std::out_of_range
+     * @param index Index of the polygon you want to access
+     * @return Reference to the requested polygon
+    */
+    Polygon &operator[](size_t const index)
+    {
+        return polygons.at(index);
+    }
 
-        int addPolygon(Polygon const & pol);
+    /**
+     * @return Number of polygons in the scene
+    */
+    size_t getPolygonCount()
+    {
+        return polygons.size();
+    }
 
-        // get or set the ploygon at index
-        // might throw std::out_of_range
-        Polygon& operator[](size_t const index);
-
-        // return number of polygons inside the scene
-        size_t getPolygonCount();
-        
-        // just give vector iterators to enable for each loop for scenes
-        std::vector<Polygon>::iterator begin();
-        std::vector<Polygon>::iterator end();
+    /**
+     * @return Begin iterator over the polygons in the scene
+    */
+    std::vector<Polygon>::iterator begin()
+    {
+        return polygons.begin();
+    }
+    /**
+     * @return End iterator over the polygons in the scene
+    */
+    std::vector<Polygon>::iterator end()
+    {
+        return polygons.end();
+    }
 };
