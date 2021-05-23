@@ -40,15 +40,3 @@ Color* Options::getBGColor()
 {
     return &bgColor;
 }
-
-void Options::setCanvasSize(size_t x, size_t y)
-{
-    canvasSize.first = x;
-    canvasSize.second = y;
-}
-
-
-CanvasSize Options::getCanvasSize()
-{
-    return canvasSize;
-}

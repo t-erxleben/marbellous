@@ -4,6 +4,9 @@
 #include <math.h>
 #include <earcut.hpp>
 
+/**
+ * Contains a point in 2D (GLfloat).
+ */
 class __attribute__((packed)) Point
 {
 public:
@@ -29,7 +32,7 @@ public:
 };
 
 
-// Add speacialed template function to use our custom point in the earcutting lib
+// Add specialized template function to use our custom point in the earcutting lib
 namespace mapbox {
 namespace util {
 

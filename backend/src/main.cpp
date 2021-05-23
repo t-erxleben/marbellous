@@ -96,6 +96,10 @@ void EMSCRIPTEN_KEEPALIVE setCanvasSize(size_t x, size_t y)
     } 
 }
 
+// part of interface to front end
+// may be used to init context at actual canvas
+void initWGLContext(char* canvasID);
+
 
 
 

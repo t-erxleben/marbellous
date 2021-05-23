@@ -4,8 +4,6 @@
 
 #include "Palette.hpp"
 
-using CanvasSize = std::pair<size_t, size_t>;
-
 class Options
 {
     private:
@@ -15,7 +13,7 @@ class Options
         std::vector<Palette> Palettes; ///< All saved palettes.
         size_t activePalette; ///< Index of currently active palette inside palettes vector.
         Color bgColor{0xFFFFFF}; ///< Background color.
-        CanvasSize canvasSize; ///< Canvas size in pixels.
+
 
     public:
         Options(Options const &) = delete;
@@ -37,10 +35,4 @@ class Options
         // handling BG color
         void setBGColor(Color const & col);
         Color* getBGColor();
-
-        // canvas size
-        void setCanvasSize(size_t x, size_t y);
-        CanvasSize getCanvasSize();
-
-
 };

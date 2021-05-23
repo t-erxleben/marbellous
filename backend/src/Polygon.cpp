@@ -1,29 +1,24 @@
 #include "Polygon.hpp"
 
-Polygon Polygon::createCircle(Point mid, float radius)
+Polygon::Polygon(Point mid, float radius)
 {
-    Polygon p{};
-    size_t count = circleVertCount(radius);
-
-    for (int i = 0; i < count + 1; ++i)
-    {
-        float angle = (float)i / (float)count * 2 * M_PI;
-        p.vertices.push_back(Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y));
-    }
-    return p;
+    makeCircle(mid, radius);
 }
 
-size_t Polygon::getVertCount()
+Polygon::Polygon() : vertices{}, isCircle{true}
+{}
+
+size_t Polygon::getVertCount() const
 {
     return vertices.size();
 }
 
-void Polygon::getDrawInfo(std::vector<GLuint> &indices, std::vector<WGLVertex> &vertices)
+void Polygon::getDrawInfo(std::vector<GLuint> &indices, std::vector<WGLVertex> &vertices) const
 {
     // following polylines in the vector would be interpreted as holes
     std::vector<std::vector<Point>> poly = {this->vertices};
     indices = mapbox::earcut<GLuint>(poly);
-    for(auto p: this->vertices)
+    for (auto p : this->vertices)
     {
         vertices.push_back(WGLVertex{p, this->colorIndex});
     }
@@ -31,20 +26,26 @@ void Polygon::getDrawInfo(std::vector<GLuint> &indices, std::vector<WGLVertex> &
 
 size_t Polygon::circleVertCount(float radius)
 {
-    auto opt = Options::getInstance();
+    auto opt = WGLContext::getContext();
     auto csize = opt->getCanvasSize();
     size_t squareCanvasSize = csize.first;
-    return (size_t)(M_PI * radius * squareCanvasSize);//todo: make cast beautiful
-
+    return (size_t)(M_PI * radius * squareCanvasSize); //todo: make cast beautiful
 }
 
-void displace(Point mid, float radius)
+void Polygon::displace(Point mid, float radius)
 {
+    isCircle = false;
     // TODO
 }
 
-void scale(float factor)
+void Polygon::makeCircle(Point mid, float radius)
 {
-    // todo
-    // idea: set a private scaling member and apply at getDrawInfo for perfomance
+    size_t count = circleVertCount(radius);
+    vertices.reserve(count);
+
+    for (int i = 0; i < count + 1; ++i)
+    {
+        float angle = (float)i / (float)count * 2 * M_PI;
+        vertices.push_back(Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y));
+    }
 }

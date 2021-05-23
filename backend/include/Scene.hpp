@@ -4,6 +4,9 @@
 
 #include "Polygon.hpp"
 
+/**
+ * Contains a vector of polygons and is iterable.
+ */
 class Scene
 {
 private:
@@ -32,7 +35,7 @@ public:
     /**
      * @return Number of polygons in the scene
     */
-    size_t getPolygonCount()
+    size_t getPolygonCount() const
     {
         return polygons.size();
     }
@@ -44,10 +47,27 @@ public:
     {
         return polygons.begin();
     }
+
+    /**
+     * @return Begin const_iterator over the polygons in the scene
+    */
+    std::vector<Polygon>::const_iterator begin() const
+    {
+        return polygons.begin();
+    }
+
     /**
      * @return End iterator over the polygons in the scene
     */
     std::vector<Polygon>::iterator end()
+    {
+        return polygons.end();
+    }
+
+    /**
+     * @return End const_iterator over the polygons in the scene
+    */
+    std::vector<Polygon>::const_iterator end() const
     {
         return polygons.end();
     }

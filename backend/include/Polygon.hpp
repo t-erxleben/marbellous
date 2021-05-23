@@ -4,7 +4,7 @@
 
 #include "Point.hpp"
 #include "WGLVertex.hpp"
-#include "Options.hpp"
+#include "WGLContext.hpp"
 #include "earcut.hpp"
 
 /**
@@ -16,6 +16,8 @@ private:
     std::vector<Point> vertices; ///<List representation of the polygon.
 
     GLushort colorIndex; ///< Index of a color inside a palette. Exchanging the active palette will change the drawing color.
+    
+    bool isCircle;
 
     /** Compute the number of vertices needed for a "circle" to appear smooth.
      * Canvas size is loaded from the options.
@@ -42,19 +44,23 @@ private:
      * @attention If we decide to support non square canvasses this needs to be changed as well.
     */
     static size_t circleVertCount(float radius);
+    
 
 public:
+    /** Create an empty Polygon.
+    */
+    Polygon();
+
     /** Create a circle.
      * @param mid Middle point of the circle.
      * @param radius Radius of the circle.
-     * @return Circle as a polygon object.
     */
-    static Polygon createCircle(Point mid, float radius);
+    Polygon(Point mid, float radius);
 
     /**
      * @return Number of vertices of a polygon.
     */
-    size_t getVertCount();
+    size_t getVertCount() const;
 
     /** Fill vectors with infos needed for drawing. 
      * Intended to be used for glDrawElements(). Therefore 3 consecutive indices define one triangle to be drawn
@@ -64,7 +70,7 @@ public:
      * @attention Winding order is clockwise so face culling in WGL needs to be disabled. 
      * This is no performance limitation as each triangle should be rendered in any case anyway.
     */
-    void getDrawInfo(std::vector<GLuint> &indices, std::vector<WGLVertex> &vertices);
+    void getDrawInfo(std::vector<GLuint> &indices, std::vector<WGLVertex> &vertices) const;
 
     /** Displace a polygon as a result of a new circle appearing.
      * @param mid Middle point of the new circle causing displacement.
@@ -72,8 +78,11 @@ public:
     */
     void displace(Point mid, float radius);
 
-    /** Scale the polygon.
-     * @param scale Scaling factor
+    /** Redraw Polygon as a new circle.
+     * This is intended to be used for making the circle larger.
+     * @param mid Middle point of the circle.
+     * @param radius Radius of the circle.
+     * @attention Will throw an error if used on a polygon that is no longer a circle.
     */
-    void scale(float factor);
+    void makeCircle(Point mid, float radius);
 };

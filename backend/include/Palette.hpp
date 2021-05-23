@@ -4,6 +4,9 @@
 
 #include "Color.hpp"
 
+/**
+ * Contains a vector of colors.
+ */
 class Palette
 {
 private:

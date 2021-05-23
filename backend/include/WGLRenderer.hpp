@@ -2,17 +2,12 @@
 
 #include <string>
 #include <GLES2/gl2.h>
+#include <EGL/egl.h>
 
 class WGLRenderer
 {
-    private:
-        GLint shaderProgram;
-
-        GLuint compileShader(GLenum const type, std::string const shader) const;
-        void setupShaderProgram();
-
-    public:
-        WGLRenderer();
-        void setActive() const;
-
+public:
+    GLint shaderProgram;
+    GLuint compileShader(GLenum const type, std::string const shader) const;
+    void setupShaderProgram(std::string vert, std::string frag);
 };
