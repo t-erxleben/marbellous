@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GLES2/gl2.h>
+#include <GLES3/gl3.h>
 #include <math.h>
 #include <earcut.hpp>
 

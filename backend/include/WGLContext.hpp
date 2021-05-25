@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <emscripten/html5.h>
-#include <GLES2/gl2.h>
+#include <GLES3/gl3.h>
 
 #include "Options.hpp"
 
@@ -13,8 +13,6 @@ class WGLContext
 {
 
     private:
-        // realize singleton pattern
-        static WGLContext* instance;
         WGLContext(std::string canvasID, size_t x, size_t y);
 
         // part of interface to front end
@@ -26,6 +24,8 @@ class WGLContext
         EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context;
 
     public:
+        // realize singleton pattern
+        static WGLContext* instance;//belongs to private
         // Context object without actual context would be quite useless
         WGLContext() = delete;
         // Context should neither be copied nor assigned, moved etc.

@@ -1,14 +1,12 @@
 #include "Options.hpp"
+#include <cstdio>
 
 Options::Options(){}
 
 Options* const Options::getInstance()
 {
-    if(!instance)
-    {
-        instance = new Options{};
-    }
-    return instance;
+    static Options instance;
+    return &instance;
 }
 
 size_t Options::addPalette(Palette const & newPalette)

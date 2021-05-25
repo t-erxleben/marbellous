@@ -12,12 +12,12 @@ Interface to front end:
 --------------------------------------------*/
 
 bool setupDone = false;
-WGLSceneRenderer sceneRenderer{};
-Scene scene{};
+WGLSceneRenderer *sceneRenderer;
+Scene *scene;
 
 void _initWGLContext(char* canvasID, size_t x, size_t y)
 {
-    WGLContext::instance = new WGLContext{canvasID, x, y};
+    WGLContext::instance = new WGLContext(canvasID, x, y);
 }
 
 
@@ -121,9 +121,8 @@ void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r,
         fprintf(stderr, "Backend is not initialized yet!");
         return;
     } 
-    Scene s{};
-    s.addPolygon(Polygon{Point{x,y}, r, 0});
-    sceneRenderer.drawScene(s);
+    scene->addPolygon(Polygon{Point{x,y}, r, 0});
+    sceneRenderer->drawScene(*scene);
 }
 
 
@@ -137,11 +136,16 @@ int EMSCRIPTEN_KEEPALIVE main()
     // setup
     char id[] = "#image";
     initWGLContext(id, 720, 720);
+    printf("after context\n");
     auto opt = Options::getInstance();
     Palette p{};
     opt->setActivePalette(opt->addPalette(p));
-    opt->getActivePalette()->add(Color{0});
-    
+    opt->getActivePalette()->add(Color{0x33CC33});
+    opt->getActivePalette()->add(Color{0x0000CC});
+    opt->getActivePalette()->add(Color{0xFFFF00});
+    opt->getActivePalette()->add(Color{0xFF0000});
+    sceneRenderer = new WGLSceneRenderer{};
+    scene = new Scene{};
     setupDone = true;
 
     // keep WASM module alive

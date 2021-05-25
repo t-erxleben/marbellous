@@ -8,8 +8,6 @@ class Options
 {
     private:
         Options();
-
-        static Options* instance; ///< Single options instance.
         std::vector<Palette> Palettes; ///< All saved palettes.
         size_t activePalette; ///< Index of currently active palette inside palettes vector.
         Color bgColor{0xFFFFFF}; ///< Background color.
