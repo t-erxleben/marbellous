@@ -1,5 +1,7 @@
 #include "Options.hpp"
 
+Options::Options(){}
+
 Options* const Options::getInstance()
 {
     if(!instance)

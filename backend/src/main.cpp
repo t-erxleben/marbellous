@@ -2,12 +2,23 @@
 #include <cstdio>
 #include <cmath>
 
+#include "WGLContext.hpp"
+#include "WGLSceneRenderer.hpp"
+#include "Scene.hpp"
+#include "Options.hpp"
 
 /*------------------------------------------
 Interface to front end:
 --------------------------------------------*/
 
 bool setupDone = false;
+WGLSceneRenderer sceneRenderer{};
+Scene scene{};
+
+void _initWGLContext(char* canvasID, size_t x, size_t y)
+{
+    WGLContext::instance = new WGLContext{canvasID, x, y};
+}
 
 
 extern "C" {
@@ -98,9 +109,22 @@ void EMSCRIPTEN_KEEPALIVE setCanvasSize(size_t x, size_t y)
 
 // part of interface to front end
 // may be used to init context at actual canvas
-void initWGLContext(char* canvasID);
+void initWGLContext(char* canvasID, size_t x, size_t y)
+{
+    _initWGLContext(canvasID, x, y);
+}
 
-
+void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color)
+{
+    if (!setupDone)
+    {
+        fprintf(stderr, "Backend is not initialized yet!");
+        return;
+    } 
+    Scene s{};
+    s.addPolygon(Polygon{Point{x,y}, r, 0});
+    sceneRenderer.drawScene(s);
+}
 
 
 
@@ -111,6 +135,13 @@ Init stuff:
 int EMSCRIPTEN_KEEPALIVE main()
 {
     // setup
+    char id[] = "#image";
+    initWGLContext(id, 720, 720);
+    auto opt = Options::getInstance();
+    Palette p{};
+    opt->setActivePalette(opt->addPalette(p));
+    opt->getActivePalette()->add(Color{0});
+    
     setupDone = true;
 
     // keep WASM module alive

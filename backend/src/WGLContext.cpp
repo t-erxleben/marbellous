@@ -3,6 +3,7 @@
 WGLContext::WGLContext(std::string canvasID, size_t x, size_t y): canvasSize{x,y}
 {
     emscripten_set_canvas_element_size(canvasID.c_str(), x, y);
+    glViewport(0,0, x, y);
     EmscriptenWebGLContextAttributes attrs;
     emscripten_webgl_init_context_attributes(&attrs);
 

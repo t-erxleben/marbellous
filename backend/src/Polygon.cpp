@@ -1,6 +1,6 @@
 #include "Polygon.hpp"
 
-Polygon::Polygon(Point mid, float radius)
+Polygon::Polygon(Point mid, float radius, GLushort colorIndex): colorIndex{colorIndex}
 {
     makeCircle(mid, radius);
 }

@@ -19,7 +19,7 @@ class WGLContext
 
         // part of interface to front end
         // may be used to init context at actual canvas
-        friend void initWGLContext(char* canvasID);
+        friend void _initWGLContext(char* canvasID, size_t x, size_t y);
 
         CanvasSize canvasSize; ///< Canvas size in pixels.
 

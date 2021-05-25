@@ -55,7 +55,7 @@ public:
      * @param mid Middle point of the circle.
      * @param radius Radius of the circle.
     */
-    Polygon(Point mid, float radius);
+    Polygon(Point mid, float radius, GLushort colorIndex);
 
     /**
      * @return Number of vertices of a polygon.
