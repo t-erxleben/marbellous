@@ -13,14 +13,14 @@ size_t Polygon::getVertCount() const
     return vertices.size();
 }
 
-void Polygon::getDrawInfo(std::vector<GLuint> &indices, std::vector<WGLVertex> &vertices) const
+void Polygon::getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *vertices) const
 {
     // following polylines in the vector would be interpreted as holes
     std::vector<std::vector<Point>> poly = {this->vertices};
-    indices = mapbox::earcut<GLuint>(poly);
+    *indices = mapbox::earcut<GLuint>(poly);
     for (auto p : this->vertices)
     {
-        vertices.push_back(WGLVertex{p, this->colorIndex});
+        vertices->push_back(WGLVertex{p, this->colorIndex});
     }
 }
 

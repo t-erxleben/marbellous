@@ -9,7 +9,7 @@
 class WGLSceneRenderer: private WGLRenderer
 {
     private:
-        void constructBuffers(void** indices, void** vert, Scene const & scene);
+        void constructBuffers(void** indices, void** vertices, Scene const & scene);
 
         std::string const vertex_source{"attribute vec2 position; void main(){gl_Position = vec4(position, 0.0, 1.0);}\n"};
     

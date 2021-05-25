@@ -11,6 +11,7 @@ class Scene
 {
 private:
     std::vector<Polygon> polygons; ///<Internal vector to store all polygons
+    size_t vertCount;
 
 public:
     /** Internal vector saving the references to the polygons
@@ -28,6 +29,15 @@ public:
      * @return Reference to the requested polygon
     */
     Polygon &operator[](size_t const index)
+    {
+        return polygons.at(index);
+    }
+
+    /** Get the polygon at index, might throw std::out_of_range
+     * @param index Index of the polygon you want to read
+     * @return Reference to the requested polygon
+    */
+    Polygon const & operator[](size_t const index) const
     {
         return polygons.at(index);
     }

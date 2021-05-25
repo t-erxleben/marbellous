@@ -70,7 +70,7 @@ public:
      * @attention Winding order is clockwise so face culling in WGL needs to be disabled. 
      * This is no performance limitation as each triangle should be rendered in any case anyway.
     */
-    void getDrawInfo(std::vector<GLuint> &indices, std::vector<WGLVertex> &vertices) const;
+    void getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *vertices) const;
 
     /** Displace a polygon as a result of a new circle appearing.
      * @param mid Middle point of the new circle causing displacement.

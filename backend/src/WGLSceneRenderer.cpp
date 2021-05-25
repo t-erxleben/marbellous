@@ -5,34 +5,41 @@ WGLSceneRenderer::WGLSceneRenderer()
     setupShaderProgram(vertex_source, fragment_source);
 }
 
-void WGLSceneRenderer::constructBuffers(void **indices, void **vert, Scene const &scene)
+void WGLSceneRenderer::constructBuffers(void **indices, void **vertices, Scene const &scene)
 {
-    std::vector<GLuint> i_vec{};
-    size_t v_size = 0;
-    // todo: maybe save total vertex count in scene to avoid this loop
-    for (Polygon const p : scene)
+    std::vector<std::vector<WGLVertex>*> all_vertices{scene.getPolygonCount()};
+    std::vector<std::vector<GLuint>*> all_indices{scene.getPolygonCount()};
+
+    size_t v_count = 0;
+    size_t i_count = 0;
+
+    for(int i = 0; i < scene.getPolygonCount(); ++i)
     {
-        v_size += p.getVertCount() * sizeof(WGLVertex);
-    }
-    *vert = malloc(v_size);
-
-    char *v_pos = (char *)*vert;
-    for (Polygon const p : scene)
-    {
-        std::vector<GLuint> i_loc_vec{};
-        std::vector<WGLVertex> v_vec{};
-        p.getDrawInfo(i_loc_vec, v_vec);
-        i_vec.insert(i_vec.end(), i_loc_vec.begin(), i_loc_vec.end());
-
-        // cpy memory
-        memcpy(v_pos, v_vec.data(), v_vec.size() * sizeof(WGLVertex));
-
-        // advance pos
-        v_pos += v_vec.size() * sizeof(WGLVertex);
+        scene[i].getDrawInfo(all_indices[i], all_vertices[i]);
+        v_count+=all_vertices[i]->size();
+        i_count+=all_indices[i]->size();
     }
 
-    *indices = malloc(i_vec.size() * sizeof(GLuint));
-    memcpy(*indices, i_vec.data(), i_vec.size() * sizeof(GLuint));
+    *indices = malloc(i_count * sizeof(GLuint));
+    *vertices = malloc(v_count * sizeof(WGLVertex));
+
+    size_t pos = 0;
+
+    for(auto i : all_indices)
+    {
+        // Translate indices into index space of all triangles for all polygons
+        for(auto entry: *i) entry += pos;
+        memcpy((GLuint*)*indices + pos, i->data(), i->size() * sizeof(GLuint));
+        pos += i->size();
+    }
+
+    pos = 0;
+
+    for(auto v : all_vertices)
+    {
+        memcpy((GLuint*)*vertices + pos, v->data(), v->size() * sizeof(WGLVertex));
+        pos += v->size();
+    }
 }
 
 void WGLSceneRenderer::setActive()
