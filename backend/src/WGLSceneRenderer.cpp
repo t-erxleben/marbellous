@@ -61,24 +61,11 @@ void WGLSceneRenderer::constructBuffers(void **indices, void **vertices, Scene c
         for(auto& entry: i) entry += offset;
         
         memcpy(static_cast<WGLVertex*>(*vertices) + offset, v.data(), v.size() * sizeof(WGLVertex));
-        // printf("vertex: ");for(auto var : v) { printf("%lu ", var.pos);} printf("\n");
         offset += v.size();
-        printf("offset += %d\n", v.size());
 
         memcpy(static_cast<GLuint*>(*indices) + pos, i.data(), i.size() * sizeof(GLuint));
         pos += i.size();
     }
-
-    //debug
-    for(GLuint* i = (GLuint*)*indices; i < ((GLuint*)*indices)+ i_count; ++i)
-    {
-        printf("yet another index %i\n", *i);
-    }
-    for(WGLVertex* v = (WGLVertex*)*vertices; v < ((WGLVertex*)*vertices)+ v_count; ++v)
-    {
-        printf("yet another vertex: x: %f y:%f c:%i\n", v->p.x, v->p.y, v->color);
-    }
-
 }
 
 void WGLSceneRenderer::setActive()

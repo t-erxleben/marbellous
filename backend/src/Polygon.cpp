@@ -31,7 +31,12 @@ size_t Polygon::circleVertCount(float radius)
     auto opt = WGLContext::getContext();
     auto csize = opt->getCanvasSize();
     size_t squareCanvasSize = csize.first;
-    return (size_t)(M_PI * radius * squareCanvasSize); //todo: make cast beautiful
+
+    size_t vert_count = static_cast<size_t>(M_PI * radius * squareCanvasSize);
+    if (vert_count > 200) {
+        vert_count = vert_count/10;
+    }
+    return vert_count;
 }
 
 void Polygon::displace(Point mid, float radius)
@@ -45,12 +50,10 @@ void Polygon::makeCircle(Point mid, float radius)
     size_t count = circleVertCount(radius);
     vertices.reserve(count);
 
-    int temp = 5;
-    for (int i = 0; i < temp; ++i)
+    for (int i = 0; i < count; ++i)
     {
         // float angle = (float)i / (float)count * 2 * M_PI;
-        float angle = (float)i / (float)temp * 2 * M_PI;
-        printf("x: %f, y: %f\n",radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y);
+        float angle = (float)i / (float)count * 2 * M_PI;
         vertices.push_back(Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y));
     }
 }

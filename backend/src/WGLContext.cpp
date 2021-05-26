@@ -4,7 +4,6 @@ WGLContext* WGLContext::instance = nullptr;
 
 WGLContext::WGLContext(std::string canvasID, size_t x, size_t y): canvasSize{x,y}
 {
-    printf("called constructor of context\n");
     emscripten_set_canvas_element_size(canvasID.c_str(), x, y);
     EmscriptenWebGLContextAttributes attrs;
     emscripten_webgl_init_context_attributes(&attrs);

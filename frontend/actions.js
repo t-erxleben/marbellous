@@ -346,6 +346,7 @@ var dropper = {
 	active: false,
 	speed: 0.0002,
 	time: null,
+	lastdrop: null,
 	draw: function(canvas, x,y) {
 		const size = tool.translate({x: 32, y: 32});
 		canvas.drawImage(dropper.img,x,y-size.y,size.x,size.y);
@@ -354,10 +355,14 @@ var dropper = {
 			if (dropper.active) {
 				if (!dropper.time) {
 					dropper.time = time;
+					dropper.lastdrop = time;
 				}
-				const r = (time - dropper.time) * dropper.speed;
-				const arg = dropper.circle;
-				backend.dropColor(arg.x, arg.y, r, arg.color);
+				if (time - dropper.lastdrop > 0.05) {
+					dropper.lastdrop = time;
+					const r = (time - dropper.time) * dropper.speed;
+					const arg = dropper.circle;
+					backend.dropColor(arg.x, arg.y, r, arg.color);
+				}
 				window.requestAnimationFrame(dropper.drop);
 			}
 		},
