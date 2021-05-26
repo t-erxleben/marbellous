@@ -14,11 +14,13 @@ WGLSceneRenderer::WGLSceneRenderer()
 
     // define attribs for vao
     // define position
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLuint), 0);
-    glEnableVertexAttribArray(0);
+    GLint pos = glGetAttribLocation(shaderProgram, "position");
+    GLint col = glGetAttribLocation(shaderProgram, "colorCode");
+    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), 0);
+    glEnableVertexAttribArray(pos);
     // define color
-    glVertexAttribIPointer(1, 1, GL_UNSIGNED_INT, 2*sizeof(GLfloat), (void*) (2*sizeof(GLfloat)));
-    glEnableVertexAttribArray(1);
+    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), (void*) (2*sizeof(GLfloat)));
+    glEnableVertexAttribArray(col);
 
     // lookup uniform location
     color0Loc = glGetUniformLocation(shaderProgram, "c0");
@@ -49,22 +51,34 @@ void WGLSceneRenderer::constructBuffers(void **indices, void **vertices, Scene c
     *vertices = malloc(vertices_size);
 
     size_t pos = 0;
-
-    for(auto i : all_indices)
+    size_t offset = 0;
+    for(int itr = 0; itr < scene.getPolygonCount(); ++itr)
     {
         // Translate indices into index space of all triangles for all polygons
-        for(auto entry: i) entry += pos;
-        memcpy((GLuint*)*indices + pos, i.data(), i.size() * sizeof(GLuint));
+        auto& i = all_indices[itr];
+        auto& v = all_vertices[itr];
+
+        for(auto& entry: i) entry += offset;
+        
+        memcpy(static_cast<WGLVertex*>(*vertices) + offset, v.data(), v.size() * sizeof(WGLVertex));
+        // printf("vertex: ");for(auto var : v) { printf("%lu ", var.pos);} printf("\n");
+        offset += v.size();
+        printf("offset += %d\n", v.size());
+
+        memcpy(static_cast<GLuint*>(*indices) + pos, i.data(), i.size() * sizeof(GLuint));
         pos += i.size();
     }
 
-    pos = 0;
-
-    for(auto v : all_vertices)
+    //debug
+    for(GLuint* i = (GLuint*)*indices; i < ((GLuint*)*indices)+ i_count; ++i)
     {
-        memcpy((GLuint*)*vertices + pos, v.data(), v.size() * sizeof(WGLVertex));
-        pos += v.size();
+        printf("yet another index %i\n", *i);
     }
+    for(WGLVertex* v = (WGLVertex*)*vertices; v < ((WGLVertex*)*vertices)+ v_count; ++v)
+    {
+        printf("yet another vertex: x: %f y:%f c:%i\n", v->p.x, v->p.y, v->color);
+    }
+
 }
 
 void WGLSceneRenderer::setActive()
@@ -101,4 +115,7 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
     glClear(GL_COLOR_BUFFER_BIT);
     // opengl es only supports GL_UNSIGNED_SHORT????!
     glDrawElements(GL_TRIANGLES, i_size/sizeof(GLuint), GL_UNSIGNED_INT, 0);
+
+    free(indices);
+    free(vertices);
 }

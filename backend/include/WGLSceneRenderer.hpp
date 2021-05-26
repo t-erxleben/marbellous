@@ -11,10 +11,42 @@ class WGLSceneRenderer: private WGLRenderer
     private:
         void constructBuffers(void** indices, void** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
 
-        std::string const vertex_source{"#version 300 es\nin vec2 position; in uint colorCode; flat out uint colID; void main(){gl_Position = vec4(position, 0.0, 1.0); colID = colorCode;}\n"};
+        std::string const vertex_source{
+            R"==(#version 300 es
+                in vec2 position;
+                in uint colorCode;
+                flat out uint colID;
+                void main(){
+                    gl_Position = vec4(position, 0.0, 1.0);
+                    colID = colorCode;
+                }
+            )=="};
     
         // todo
-        std::string const fragment_source{"#version 300 es\nprecision mediump float;\nflat in uint colID;\nuniform vec3 c0;\nuniform vec3 c1;\nuniform vec3 c2;\nuniform vec3 c3;\nout vec4 fFragment;\nvoid colorMap(in uint cc, out vec4 color) {\n    switch(cc) {\n        case 0u:\n            color = vec4(c0, 1.0f);\n            break;\n        case 1u:\n            color = vec4(c1, 1.0f);\n            break;\n        case 2u:\n            color = vec4(c2, 1.0f);\n            break;\n        case 3u:\n            color = vec4(c3, 1.0f);\n            break;\n        default:\n            color = vec4(0.0f, 0.0f, 0.0f, 1.0f);\n    }\n}\nvoid main() {\n    vec4 color = vec4(0.0, 0.0, 0.0, 0.0);\n    colorMap(colID, color);\n    fFragment = color;\n}\n"};
+        std::string const fragment_source{
+            R"==(#version 300 es
+                precision mediump float;
+                flat in uint colID;
+                uniform vec3 c0;
+                uniform vec3 c1;
+                uniform vec3 c2;
+                uniform vec3 c3;
+                out vec4 fFragment;
+                void colorMap(in uint cc, out vec4 color) {
+                    switch(cc) {
+                        case 0u: color = vec4(c0, 1.0f); break;
+                        case 1u: color = vec4(c1, 1.0f); break;
+                        case 2u: color = vec4(c2, 1.0f); break;
+                        case 3u: color = vec4(c3, 1.0f); break;
+                        default: color = vec4(1.0f, 0.0f, 0.5f, 1.0f);
+                    }
+                }
+                void main() {
+                    vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
+                    colorMap(colID, color);
+                    fFragment = color;
+                }
+            )=="};
 
         GLuint vao;
         GLuint ebo;

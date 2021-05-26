@@ -121,8 +121,11 @@ void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r,
         fprintf(stderr, "Backend is not initialized yet!");
         return;
     } 
-    scene->addPolygon(Polygon{Point{x,y}, r, 0});
-    sceneRenderer->drawScene(*scene);
+    if(r > 0.01) // TODO: replace with eps
+    {
+        scene->addPolygon(Polygon{Point{x,y}, r, 0});
+        sceneRenderer->drawScene(*scene);
+    }
 }
 
 
@@ -135,17 +138,26 @@ int EMSCRIPTEN_KEEPALIVE main()
 {
     // setup
     char id[] = "#image";
-    initWGLContext(id, 720, 720);
-    printf("after context\n");
     auto opt = Options::getInstance();
     Palette p{};
+    opt->setBGColor(Color{0xf7e9ce});
     opt->setActivePalette(opt->addPalette(p));
     opt->getActivePalette()->add(Color{0x33CC33});
     opt->getActivePalette()->add(Color{0x0000CC});
     opt->getActivePalette()->add(Color{0xFFFF00});
     opt->getActivePalette()->add(Color{0xFF0000});
+    initWGLContext(id, 720, 720);
+
     sceneRenderer = new WGLSceneRenderer{};
     scene = new Scene{};
+
+    // Test
+    int pol = scene->addPolygon(Polygon{Point{0,0}, 0.5, 0});
+    sceneRenderer->drawScene(*scene);
+    //auto (*scene)[pol].
+    //for()
+    //
+
     setupDone = true;
 
     // keep WASM module alive
