@@ -35,6 +35,23 @@ int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float const r, un
     return 0;
 }
 
+char* EMSCRIPTEN_KEEPALIVE getImage()
+{
+	constexpr char prefix[] = "P6\n720\n720\n255\n";
+	constexpr int prefix_len = sizeof(prefix) - 1;
+	static std::vector<char> data(720*720*4 + prefix_len + 1);
+	data[0] = prefix_len;
+	memcpy(data.data()+1, prefix, prefix_len);
+	sceneRenderer->drawToBuffer(*scene, data.data()+prefix_len+1, static_cast<int>(data.size()-prefix_len-1));
+	char* ptr = data.data() + prefix_len + 1;
+	for(int i = 0; i < 720*720; ++i) {
+		ptr[3*i] = ptr[4*i];
+		ptr[3*i+1] = ptr[4*i + 1];
+		ptr[3*i+2] = ptr[4*i + 2];
+	}
+	return data.data();
+}
+
 // resize drop of given ID (return val of addDrop(...))
 // influence of resizeVal is not defined yet
 void EMSCRIPTEN_KEEPALIVE resizeDrop(size_t const dropID, float const resizeVal)

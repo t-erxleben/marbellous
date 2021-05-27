@@ -85,22 +85,19 @@ function switchState(_old, _new) {
 }
 
 function downloadCanvas() {
-	let canvasImage = tool.image.toDataURL('image/png');
-
-	// this can be used to download any image from webpage to local disk
-	let xhr = new XMLHttpRequest();
-	xhr.responseType = 'blob';
-	xhr.onload = function () {
-		let a = document.createElement('a');
-		a.href = window.URL.createObjectURL(xhr.response);
-		a.download = 'image_name.png';
-		a.style.display = 'none';
-		document.body.appendChild(a);
-		a.click();
-		a.remove()
-	};
-	xhr.open('GET', canvasImage); // This is to download the canvas Image
-	xhr.send();
+	const ptr = Module.ccall("getImage", "number", [], []);	
+	const len = Module.HEAPU8[ptr] + 720*720*3 + 40;
+	const data = Module.HEAPU8.slice(ptr+1, ptr+len);
+	const blob = new Blob([data], {type: 'image/ppm'});
+	if(!this.a) {
+		this.a = document.createElement('a');
+		document.body.appendChild(this.a);
+		this.a.style.display = 'none';
+	}
+	const url = window.URL.createObjectURL(blob);
+	this.a.href = url;
+	this.a.download = "marebllous-image.ppm";
+	this.a.click();
 }
 
 

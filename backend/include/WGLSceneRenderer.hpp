@@ -55,9 +55,14 @@ class WGLSceneRenderer: private WGLRenderer
         GLint color1Loc;
         GLint color2Loc;
         GLint color3Loc;
+
+		GLuint frameBuffer;
+		GLuint frameTexture;
+
         
     public:
         WGLSceneRenderer();
+		void drawToBuffer(const Scene& scene, char* data, int len);
         void drawScene(Scene const & scene);
         void setActive();
 };

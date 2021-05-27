@@ -8,10 +8,10 @@ WGLContext::WGLContext(std::string canvasID, size_t x, size_t y): canvasSize{x,y
     EmscriptenWebGLContextAttributes attrs;
     emscripten_webgl_init_context_attributes(&attrs);
 
-    attrs.explicitSwapControl = 0;
-    attrs.depth = 1;
-    attrs.stencil = 1;
-    attrs.antialias = 1;
+    attrs.explicitSwapControl = 0; 	// browser decide when to swap -> higher performance
+    attrs.depth = 0; 				// we don't have a depth
+    attrs.stencil = 0; 				// we don't want this either
+    attrs.antialias = 0;			// we wan't to calculate high quality images, so no need for this
     attrs.majorVersion = 2;
     attrs.minorVersion = 0;
 

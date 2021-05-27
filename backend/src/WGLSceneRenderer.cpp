@@ -27,6 +27,23 @@ WGLSceneRenderer::WGLSceneRenderer()
     color1Loc = glGetUniformLocation(shaderProgram, "c1");
     color2Loc = glGetUniformLocation(shaderProgram, "c2");
     color3Loc = glGetUniformLocation(shaderProgram, "c3");
+
+	glGenFramebuffers(1, &frameBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+	glGenTextures(1, &frameTexture);
+	glBindTexture(GL_TEXTURE_2D, frameTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameTexture, 0);
+	GLenum drawBuffers[1] = {GL_COLOR_ATTACHMENT0};
+	glDrawBuffers(1, drawBuffers);
+	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		fprintf(stderr, "failed to create framebuffer!");
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void WGLSceneRenderer::constructBuffers(void **indices, void **vertices, Scene const &scene, size_t & indices_size, size_t & vertices_size)
@@ -72,6 +89,18 @@ void WGLSceneRenderer::setActive()
 {
     glUseProgram(shaderProgram);
     glBindBuffer(GL_ARRAY_BUFFER, vao);
+
+    // Set the viewport
+    glViewport(0, 0, 720, 720);
+}
+
+void WGLSceneRenderer::drawToBuffer(const Scene& scene, char* data, int len) {
+	assert(len == 720*720*4);
+	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+	glViewport(0,0,720,720);
+	drawScene(scene);
+	glReadPixels(0, 0, 720, 720, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void WGLSceneRenderer::drawScene(Scene const &scene)
