@@ -236,3 +236,9 @@ body {
 	opacity: 1;
 }
 
+p.notice {
+	color: gray;
+	text-align: center;
+	width: 100%;
+	margin: 50 auto;
+}
