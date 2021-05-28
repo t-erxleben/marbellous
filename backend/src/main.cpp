@@ -33,10 +33,10 @@ extern "C"
         _initWGLContext(canvasID, x, y);
     }
 
-    int EMSCRIPTEN_KEEPALIVE addPalette()
+    int EMSCRIPTEN_KEEPALIVE addPalette(size_t num_colors)
     {
         checkSetup(-1);
-        return Options::getInstance()->addPalette(Palette{});
+        return Options::getInstance()->addPalette(Palette{num_colors});
     }
 
     int EMSCRIPTEN_KEEPALIVE setActivePalette(int const id)
@@ -45,16 +45,30 @@ extern "C"
         return Options::getInstance()->setActivePalette(id);
     }
 
-    int EMSCRIPTEN_KEEPALIVE setSinglePaletteColor(size_t const colorNumber, unsigned int const color)
+    int EMSCRIPTEN_KEEPALIVE setColorAt(size_t const colorNumber, unsigned int const color)
     {
         checkSetup(-1);
-        // TODO
+        Palette* p = Options::getInstance()->getActivePalette();
+
+        if(p->getSize() < colorNumber) return -1;
+        (*p)[colorNumber] = Color{color};
+        return 0;        
     }
 
     int EMSCRIPTEN_KEEPALIVE setPaletteColors(unsigned int const c0, unsigned int const c1, unsigned int const c2, unsigned int const c3)
     {
         checkSetup(-1);
-        //TODO
+
+        Palette* p = Options::getInstance()->getActivePalette();
+        
+        // add missing colors
+        int num_colors_missing = p->getSize()-4;
+        for(int i = 0; i < num_colors_missing; ++i) p->add(Color{});
+
+        setColorAt(0, c0);
+        setColorAt(1, c1);
+        setColorAt(2, c2);
+        setColorAt(3, c3);
         return 0;
     }
 
