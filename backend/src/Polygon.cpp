@@ -1,6 +1,6 @@
 #include "Polygon.hpp"
 
-Polygon::Polygon(Point mid, float radius, GLushort colorIndex): colorIndex{colorIndex}, isCircle{true}
+Polygon::Polygon(Point mid, float radius, GLuint colorIndex): colorIndex{colorIndex}, isCircle{true}
 {
     makeCircle(mid, radius);
 }
@@ -22,7 +22,7 @@ void Polygon::getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *
 
     for (auto& p : this->vertices)
     {
-        vertices->push_back(WGLVertex{p, (GLuint)this->colorIndex});
+        vertices->push_back(WGLVertex{p, this->colorIndex});
     }
 }
 

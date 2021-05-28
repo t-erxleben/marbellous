@@ -15,7 +15,7 @@ class Polygon
 private:
     std::vector<Point> vertices; ///<List representation of the polygon.
 
-    GLushort colorIndex; ///< Index of a color inside a palette. Exchanging the active palette will change the drawing color.
+    GLuint colorIndex; ///< Index of a color inside a palette. Exchanging the active palette will change the drawing color.
     
     bool isCircle;
 
@@ -55,7 +55,7 @@ public:
      * @param mid Middle point of the circle.
      * @param radius Radius of the circle.
     */
-    Polygon(Point mid, float radius, GLushort colorIndex);
+    Polygon(Point mid, float radius, GLuint colorIndex);
 
     /**
      * @return Number of vertices of a polygon.

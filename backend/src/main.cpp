@@ -97,7 +97,7 @@ extern "C"
 
     char *EMSCRIPTEN_KEEPALIVE getImage()
     {
-        checkSetup();
+        checkSetup(NULL);
         constexpr char prefix[] = "P6\n720\n720\n255\n";
         constexpr int prefix_len = sizeof(prefix) - 1;
         static std::vector<char> data(720 * 720 * 4 + prefix_len + 1);
