@@ -13,6 +13,10 @@ public:
     GLfloat x;
     GLfloat y;
 
+    /** Construct point at origin.
+    */
+    Point(): x{0}, y{0} {};
+
     /** Construct point by coordinates.
      * @param x X coordinate
      * @param y Y coordinate

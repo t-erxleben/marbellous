@@ -18,6 +18,7 @@ private:
     GLuint colorIndex; ///< Index of a color inside a palette. Exchanging the active palette will change the drawing color.
     
     bool isCircle;
+    Point creationPoint;
 
     /** Compute the number of vertices needed for a "circle" to appear smooth.
      * Canvas size is loaded from the options.
@@ -68,9 +69,14 @@ public:
      * @param indices Vector to be filled with triangle information.
      * @param vertices Vector to be filled with vertices.
      * @attention Winding order is clockwise so face culling in WGL needs to be disabled. 
-     * This is no performance limitation as each triangle should be rendered in any case anyway.
+     * This is no performance limitation as each triangle is allways visible.
     */
     void getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *vertices) const;
+
+    /** Return the point which was the original middle point.
+     * @return middle point
+    */
+    Point const & getCreationPoint();
 
     /** Displace a polygon as a result of a new circle appearing.
      * @param mid Middle point of the new circle causing displacement.

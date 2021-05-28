@@ -35,34 +35,29 @@ extern "C"
 
     int EMSCRIPTEN_KEEPALIVE addPalette(size_t num_colors)
     {
-        checkSetup(-1);
         return Options::getInstance()->addPalette(Palette{num_colors});
     }
 
     int EMSCRIPTEN_KEEPALIVE setActivePalette(int const id)
     {
-        checkSetup(-1);
         return Options::getInstance()->setActivePalette(id);
     }
 
     int EMSCRIPTEN_KEEPALIVE setColorAt(size_t const colorNumber, unsigned int const color)
     {
-        checkSetup(-1);
         Palette* p = Options::getInstance()->getActivePalette();
-
-        if(p->getSize() < colorNumber) return -1;
+        if(p->getSize() <= colorNumber) return -1;
         (*p)[colorNumber] = Color{color};
         return 0;        
     }
 
     int EMSCRIPTEN_KEEPALIVE setPaletteColors(unsigned int const c0, unsigned int const c1, unsigned int const c2, unsigned int const c3)
     {
-        checkSetup(-1);
 
         Palette* p = Options::getInstance()->getActivePalette();
         
         // add missing colors
-        int num_colors_missing = p->getSize()-4;
+        int num_colors_missing = 4 - p->getSize();
         for(int i = 0; i < num_colors_missing; ++i) p->add(Color{});
 
         setColorAt(0, c0);
@@ -74,24 +69,38 @@ extern "C"
 
     void EMSCRIPTEN_KEEPALIVE setBGColor(unsigned int const color)
     {
-        checkSetup();
         Options::getInstance()->setBGColor(Color{color});
     }
 
     // draw a circle at point (x,y) (should be normed to [0,1]^2) with radius r in the given color
-    int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float const r, unsigned int const color)
+    int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color)
     {
         checkSetup(-1);
 
-        return scene->addPolygon(Polygon{Point{x,y}, r, color});
+        // catch degenerated circle (earcut would fail to tesselate it)
+        r = (r>=0.001)?r:0.001;
+        int handle = scene->addPolygon(Polygon{Point{x,y}, r, color});
+        sceneRenderer->drawScene(*scene);
+        return handle;
     }
 
     // resize drop of given ID (return val of addDrop(...))
     // influence of resizeVal is not defined yet
-    int EMSCRIPTEN_KEEPALIVE resizeDrop(size_t const dropID, float const resizeVal)
+    int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius)
     {
         checkSetup(-1);
-        // TODO
+        try
+        {
+            auto &p = (*scene)[dropID];
+            p.makeCircle(p.getCreationPoint(), newRadius);
+        }
+        catch(const std::exception& e)
+        {
+            fprintf(stderr, "Tried to resize non existing drop!\n");
+            return -1;
+        }
+        sceneRenderer->drawScene(*scene);
+    
         return 0;
     }
 
@@ -114,7 +123,7 @@ extern "C"
         return data.data();
     }
   
-    // deprecated
+    // deprecated and only draws in color 0
     void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color)
     {
         checkSetup();
@@ -133,16 +142,11 @@ Init stuff:
     {
         // setup
 
-        ///This needs to be done in the front end:
+        ///This needs to be done in the front end (init call should be after bg):
         char id[] = "#image";
-        auto opt = Options::getInstance();
-        Palette p{};
-        opt->setBGColor(Color{0xf7e9ce});
-        opt->setActivePalette(opt->addPalette(p));
-        opt->getActivePalette()->add(Color{0x33CC33});
-        opt->getActivePalette()->add(Color{0x0000CC});
-        opt->getActivePalette()->add(Color{0xFFFF00});
-        opt->getActivePalette()->add(Color{0xFF0000});
+        setBGColor(0xf7e9ce);
+        setActivePalette(addPalette(2));
+        setPaletteColors(0x33CC33, 0x0000CC, 0xFFCC00, 0xFF0000);
         initWGLContext(id, 720, 720);
         ///--------------------------------
 
@@ -150,6 +154,9 @@ Init stuff:
         scene = new Scene{};
 
         setupDone = true;
+
+        int drop = addDrop(0, 0, 0.5, 2);
+        resizeDrop(drop, 0.2);
 
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);

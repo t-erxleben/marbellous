@@ -1,11 +1,11 @@
 #include "Polygon.hpp"
 
-Polygon::Polygon(Point mid, float radius, GLuint colorIndex): colorIndex{colorIndex}, isCircle{true}
+Polygon::Polygon(Point mid, float radius, GLuint colorIndex): colorIndex{colorIndex}, isCircle{true}, creationPoint{mid}
 {
     makeCircle(mid, radius);
 }
 
-Polygon::Polygon() : vertices{}, isCircle{true}
+Polygon::Polygon() : vertices{}, creationPoint{}, isCircle{true}
 {}
 
 size_t Polygon::getVertCount() const
@@ -47,13 +47,26 @@ void Polygon::displace(Point mid, float radius)
 
 void Polygon::makeCircle(Point mid, float radius)
 {
-    size_t count = circleVertCount(radius);
-    vertices.reserve(count);
-
-    for (int i = 0; i < count; ++i)
+    if(isCircle)
     {
-        // float angle = (float)i / (float)count * 2 * M_PI;
-        float angle = (float)i / (float)count * 2 * M_PI;
-        vertices.push_back(Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y));
+        printf("redraw\n");
+        size_t count = circleVertCount(radius);
+        vertices.reserve(count);
+
+        for (int i = 0; i < count; ++i)
+        {
+            float angle = (float)i / (float)count * 2 * M_PI;
+            vertices.push_back(Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y));
+        }
     }
+    else
+    {
+        fprintf(stderr, "Tried to make a new circle out of a arbitrary polygon!\n");
+    }
+
+}
+
+Point const & Polygon::getCreationPoint()
+{
+    return creationPoint;
 }
