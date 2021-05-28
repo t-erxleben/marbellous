@@ -53,7 +53,7 @@ void Polygon::makeCircle(Point mid, float radius)
         size_t count = circleVertCount(radius);
         vertices.reserve(count);
 
-        for (int i = 0; i < count; ++i)
+        for (int i = 0; i <= count; ++i)
         {
             float angle = (float)i / (float)count * 2 * M_PI;
             vertices.push_back(Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y));

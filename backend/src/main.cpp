@@ -155,8 +155,8 @@ Init stuff:
 
         setupDone = true;
 
-        int drop = addDrop(0, 0, 0.5, 2);
-        resizeDrop(drop, 0.2);
+        //int drop = addDrop(0, 0, 0.5, 2);
+        //resizeDrop(drop, 0.2);
 
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);
