@@ -100,8 +100,14 @@ extern "C"
         checkSetup(-1);
         try
         {
-            auto &p = (*scene)[dropID];
-            p.makeCircle(p.getCreationPoint(), newRadius);
+			auto p = scene->begin() + dropID;
+			Point c = p->getCreationPoint();
+            p->makeCircle(c, newRadius);
+			for(auto itr = scene->begin(); itr != scene->end(); ++itr) {
+				if(itr != p) {
+					itr->displace(c, newRadius);
+				}
+			}
         }
         catch(const std::exception& e)
         {

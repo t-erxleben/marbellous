@@ -39,10 +39,16 @@ size_t Polygon::circleVertCount(float radius)
     return vert_count;
 }
 
-void Polygon::displace(Point mid, float radius)
+void Polygon::displace(Point c, float r)
 {
     isCircle = false;
-    // TODO
+	for(auto& p : vertices) {
+		float dx = p.x - c.x;
+		float dy = p.y - c.y;
+		float s = sqrtf(1 + r*r/(dx*dx + dy*dy));
+		p.x = c.x + dx*s;
+		p.y = c.y + dy*s;
+	}	
 }
 
 void Polygon::makeCircle(Point mid, float radius)

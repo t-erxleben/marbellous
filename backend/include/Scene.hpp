@@ -14,6 +14,7 @@ private:
     size_t vertCount;
 
 public:
+
     /** Internal vector saving the references to the polygons
      * @param pol Polygon that will be added to the scene
      * @return Index of the saved polygon in the scene

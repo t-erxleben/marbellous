@@ -33,7 +33,17 @@ public:
         this->x += tx;
         this->y += ty;
     };
+
 };
+
+/**
+ * Calculate distance^2 between the points
+ */
+inline float distance2(const Point& a, const Point& b) {
+	float dx = a.x - b.x;
+	float dy = a.y - b.y;
+	return dx*dx + dy*dy;
+}
 
 
 // Add specialized template function to use our custom point in the earcutting lib
