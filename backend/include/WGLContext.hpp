@@ -39,4 +39,7 @@ class WGLContext
 
         void setCanvasSize(size_t x, size_t y);
         CanvasSize getCanvasSize();
+
+		void updateBGColor();
+		void setBGColor(const Color::rgb_t& bg);
 };

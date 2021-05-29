@@ -49,7 +49,6 @@ void Polygon::makeCircle(Point mid, float radius)
 {
     if(isCircle)
     {
-        printf("redraw\n");
         size_t count = circleVertCount(radius);
         vertices.reserve(count);
 

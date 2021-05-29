@@ -21,12 +21,19 @@ WGLContext::WGLContext(std::string canvasID, size_t x, size_t y): canvasSize{x,y
 
     glViewport(0,0, x, y);
 
-    auto bg = Options::getInstance()->getBGColor()->getRGB();
+	updateBGColor();
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void WGLContext::setBGColor(const Color::rgb_t& bg) {
     GLfloat r = ((float)std::get<0>(bg))/255.0f;
     GLfloat g = ((float)std::get<1>(bg))/255.0f;
     GLfloat b = ((float)std::get<2>(bg))/255.0f;
     glClearColor(r, g, b, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void WGLContext::updateBGColor() {
+	setBGColor(Options::getInstance()->getBGColor()->getRGB());
 }
 
 

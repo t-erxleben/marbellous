@@ -25,4 +25,5 @@ public:
     // get or set the color at index
     // might throw std::out_of_range
     Color& operator[](size_t const index);
+    const Color& operator[](size_t const index) const;
 };

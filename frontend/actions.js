@@ -3,16 +3,55 @@ var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
 var nodes = {};
-var backend = {};
+var backend = {fn_bind: false, dom_setup: false, init: false};
 var color = 0x228B22;
 var pallets = {}
 var Module = {
 	onRuntimeInitialized: function() {
-		backend.dropColor = Module.cwrap('dropColor',
-			'void',
-			['number','number','number','number']);
+		backend.addPallete = Module.cwrap('addPalette',
+			'number', ['number']);
+		backend.setActivePalette = Module.cwrap('setActivePalette',
+			'number', ['number']);
+		backend.setPaletteColors = Module.cwrap('setPaletteColors',
+			'number', ['number', 'number', 'number', 'number']);
+		backend.setBGColor = Module.cwrap('setBGColor',
+			'void', ['number']);
+		backend.addDrop = Module.cwrap('addDrop',
+			'number', ['number', 'number', 'number', 'number']);
+		backend.resizeDrop = Module.cwrap('resizeDrop',
+			'number', ['number', 'number']);
+		backend.setColorAt = Module.cwrap('setColorAt',
+			'number', ['number', 'number']);
+		backend.redraw = Module.cwrap('redraw',
+			'void', []);
+		backend.fn_bind = true;
+		init();
 	}
 };
+function color2int(color) {
+	if(color.charAt(0) == '#')	
+		return int("0x" + color.substr(1));
+	console.log(color)
+	return color.match('rgb\\((\\d*), (\\d*), (\\d*)')
+		.slice(1,4).reduce(function(acc,el){return acc*256+int(el)}, 0)
+}
+function init() {
+	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
+	backend.setBGColor(color2int(tool.image.style.backgroundColor));
+	console.log(color2int(tool.image.style.backgroundColor));
+	pallets[pallets.active].id = backend.addPallete(3);
+	backend.setActivePalette(pallets[pallets.active].id);
+	console.log(
+		color2int(pallets[pallets.active].A),
+		color2int(pallets[pallets.active].B),
+		color2int(pallets[pallets.active].C));
+	console.log(backend.setColorAt(0, color2int(pallets[pallets.active].A)),
+	backend.setColorAt(1, color2int(pallets[pallets.active].B)),
+	backend.setColorAt(2, color2int(pallets[pallets.active].C)));
+	backend.redraw();
+	backend.init = true;
+}
+
 function intersectRect(r1, r2) {
   return !(r2.left > r1.right || 
            r2.right < r1.left || 
@@ -245,6 +284,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	tool.overlay.addEventListener("mouseleave", tool.leave);
 	tool.overlay.addEventListener("contextmenu", function(e){e.preventDefault();});
 
+
 	states.forEach(function(s){
 		switchState(s, null);
 	});
@@ -283,12 +323,17 @@ document.addEventListener("DOMContentLoaded", function(){
 	pallets.active = el.value;
 	el.addEventListener("change", (ev)=>{pallets.active = el.value
 		if(pallets[pallets.active] === undefined) {
-			pallets[pallets.active] = {A: "black", B: "black", C: "black"};
+			pallets[pallets.active] = {id: backend.addPallete(3), A: "black", B: "black", C: "black"};
+			backend.setActivePalette(pallets[pallets.active].id);
+			backend.setPaletteColors(0,0,0,0);
+		} else {
+			backend.setActivePalette(pallets[pallets.active].id);
 		}
 		const {A, B, C} = pallets[pallets.active];
 		pallets.inputs.A.value = A;
 		pallets.inputs.B.value = B;
 		pallets.inputs.C.value = C;
+		backend.redraw();
 		updatePallet();
 	});
 	if(pallets[pallets.active] === undefined) {
@@ -299,18 +344,24 @@ document.addEventListener("DOMContentLoaded", function(){
 	{const el = document.getElementById('sidebar-pallet-color-1');
 	pallets[pallets.active]['A'] = el.value;
 	el.addEventListener("change", (ev)=>{pallets[pallets.active]['A'] = el.value;
+		backend.setColorAt(0, color2int(el.value));
+		backend.redraw();
 		updatePallet();});
 	pallets.inputs.A = el;
 	}
 	{const el = document.getElementById('sidebar-pallet-color-2');
 	pallets[pallets.active]['B'] = el.value;
 	el.addEventListener("change", (ev)=>{pallets[pallets.active]['B'] = el.value;
+		backend.setColorAt(1, color2int(el.value));
+		backend.redraw();
 		updatePallet();});
 	pallets.inputs.B = el;
 	}
 	{const el = document.getElementById('sidebar-pallet-color-3');
 	pallets[pallets.active]['C'] = el.value;
 	el.addEventListener("change", (ev)=>{pallets[pallets.active]['C'] = el.value;
+		backend.setColorAt(2, color2int(el.value));
+		backend.redraw();
 		updatePallet();});
 	pallets.inputs.C = el;
 	}
@@ -328,6 +379,8 @@ document.addEventListener("DOMContentLoaded", function(){
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
+	backend.dom_setup = true;
+	init();
 });
 
 
@@ -357,15 +410,21 @@ var dropper = {
 				if (time - dropper.lastdrop > 0.05) {
 					dropper.lastdrop = time;
 					const r = (time - dropper.time) * dropper.speed;
-					const arg = dropper.circle;
-					backend.dropColor(arg.x, arg.y, r, arg.color);
+					backend.resizeDrop(dropper.circle, r);
 				}
 				window.requestAnimationFrame(dropper.drop);
 			}
 		},
 	down: function(x,y,w,h) {
-		const clCode = int("0x" + pallets[pallets.active][color].substr(1));
-		dropper.circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0, color: clCode };
+		var cId = 0;
+		switch (color) {
+			case 'A': cId = 0; break;
+			case 'B': cId = 1; break;
+			case 'C': cId = 2; break;
+		}
+		const circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0};
+		dropper.circle = backend.addDrop(circle.x, circle.y, circle.r, cId);
+
 		dropper.active = true;
 		window.requestAnimationFrame(dropper.drop);
 	},

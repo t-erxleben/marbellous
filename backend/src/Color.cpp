@@ -24,7 +24,7 @@ void Color::set(unsigned int const color)
     b = color % 256;
 }
 
-std::tuple<uint8_t, uint8_t, uint8_t> Color::getRGB()
+std::tuple<uint8_t, uint8_t, uint8_t> Color::getRGB() const
 {
     return std::make_tuple(r,g,b);
 }

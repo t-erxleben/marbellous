@@ -8,6 +8,7 @@ private:
     uint8_t r,g,b;
 
 public:
+	using rgb_t = std::tuple<uint8_t, uint8_t, uint8_t>;
 
     /** Construct black.
     */  
@@ -31,5 +32,5 @@ public:
     void set(unsigned const int);
 
     // get color channels
-    std::tuple<uint8_t, uint8_t, uint8_t> getRGB();
+   	rgb_t getRGB() const;
 };

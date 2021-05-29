@@ -14,7 +14,7 @@ add_executable(Marbellous-debug EXCLUDE_FROM_ALL ${SOURCES})
 # emcc flags
 if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 	set_target_properties(Marbellous PROPERTIES LINK_FLAGS "-s EXTRA_EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS=[\"_dropColor\",\"_main\"] -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1")
-	set_target_properties(Marbellous-debug PROPERTIES LINK_FLAGS "-fsanitize=undefined,address -g4 -s ASSERTIONS=1 -s TOTAL_MEMORY=278790144  -s EXTRA_EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS=[\"_dropColor\",\"_main\"] -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1")
+	set_target_properties(Marbellous-debug PROPERTIES LINK_FLAGS "-fsanitize=undefined,address -g4 -s ASSERTIONS=1 -s TOTAL_MEMORY=278790144  -s EXTRA_EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS=[\"_dropColor\",\"_main\"] -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1 -s LLD_REPORT_UNDEFINED")
 	set_target_properties(Marbellous-debug PROPERTIES COMPILE_FLAGS "-fsanitize=undefined,address -s ASSERTIONS=1 -g4")
 endif()
 

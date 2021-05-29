@@ -3,7 +3,7 @@
 Palette::Palette(): colors{}
 {}
 
-Palette::Palette(size_t num_colors): colors{num_colors}
+Palette::Palette(size_t num_colors): colors(num_colors)
 {}
 
 size_t Palette::add(Color const col)
@@ -13,6 +13,11 @@ size_t Palette::add(Color const col)
 }
 
 Color& Palette::operator[](size_t const index)
+{
+    return colors.at(index);
+}
+
+const Color& Palette::operator[](size_t const index) const
 {
     return colors.at(index);
 }

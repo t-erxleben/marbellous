@@ -120,16 +120,12 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 
     // todo set uniforms
     auto opt = Options::getInstance();
-    auto p = opt->getActivePalette();
-    auto c0 = (*p)[0].getRGB();
-    auto c1 = (*p)[1].getRGB();
-    auto c2 = (*p)[2].getRGB();
-    auto c3 = (*p)[3].getRGB();
-
-    glUniform3f(color0Loc, std::get<0>(c0) / 255.0f, std::get<1>(c0) / 255.0f, std::get<2>(c0) / 255.0f);
-    glUniform3f(color1Loc, std::get<0>(c1) / 255.0f, std::get<1>(c1) / 255.0f, std::get<2>(c1) / 255.0f);
-    glUniform3f(color2Loc, std::get<0>(c2) / 255.0f, std::get<1>(c2) / 255.0f, std::get<2>(c2) / 255.0f);
-    glUniform3f(color3Loc, std::get<0>(c3) / 255.0f, std::get<1>(c3) / 255.0f, std::get<2>(c3) / 255.0f);
+    const auto& p = *opt->getActivePalette();
+	GLint locs[] = {color0Loc, color1Loc, color2Loc, color3Loc};
+	for(size_t i = 0; i < p.getSize(); ++i) {
+		auto c = p[i].getRGB();
+		glUniform3f(locs[i], std::get<0>(c) / 255.0f, std::get<1>(c) / 255.0f, std::get<2>(c) / 255.0f);
+	}
 
     glClear(GL_COLOR_BUFFER_BIT);
     // opengl es only supports GL_UNSIGNED_SHORT????!

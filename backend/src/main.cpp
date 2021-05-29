@@ -9,7 +9,7 @@
 
 #define checkSetup(RET) if (!setupDone) \
         { \
-            fprintf(stderr, "Backend is not initialized yet!"); \
+            fprintf(stderr, "Backend is not initialized yet!\n"); \
             return RET; \
         } \
 
@@ -70,6 +70,9 @@ extern "C"
     void EMSCRIPTEN_KEEPALIVE setBGColor(unsigned int const color)
     {
         Options::getInstance()->setBGColor(Color{color});
+		if(WGLContext::instance) {
+			WGLContext::instance->updateBGColor();
+		}
     }
 
     // draw a circle at point (x,y) (should be normed to [0,1]^2) with radius r in the given color
@@ -83,6 +86,12 @@ extern "C"
         sceneRenderer->drawScene(*scene);
         return handle;
     }
+
+	void EMSCRIPTEN_KEEPALIVE redraw()
+	{
+		checkSetup();
+		sceneRenderer->drawScene(*scene);
+	}
 
     // resize drop of given ID (return val of addDrop(...))
     // influence of resizeVal is not defined yet
@@ -144,10 +153,8 @@ Init stuff:
 
         ///This needs to be done in the front end (init call should be after bg):
         char id[] = "#image";
-        setBGColor(0xf7e9ce);
-        setActivePalette(addPalette(2));
-        setPaletteColors(0x33CC33, 0x0000CC, 0xFFCC00, 0xFF0000);
         initWGLContext(id, 720, 720);
+		WGLContext::instance->updateBGColor();
         ///--------------------------------
 
         sceneRenderer = new WGLSceneRenderer{};
