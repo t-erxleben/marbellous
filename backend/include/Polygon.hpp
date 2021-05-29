@@ -14,6 +14,7 @@ class Polygon
 {
 private:
     std::vector<Point> vertices; ///<List representation of the polygon.
+	std::vector<Point> dis; ///< list displacment
 
     GLuint colorIndex; ///< Index of a color inside a palette. Exchanging the active palette will change the drawing color.
     
@@ -91,4 +92,11 @@ public:
      * @attention Will throw an error if used on a polygon that is no longer a circle.
     */
     void makeCircle(Point mid, float radius);
+	
+	/// resetes displacement storage
+	void store() {
+		for(Point& d : dis) {
+			d = Point(0,0);
+		}
+	}
 };

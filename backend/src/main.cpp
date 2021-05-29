@@ -84,6 +84,7 @@ extern "C"
         r = (r>=0.001)?r:0.001;
         int handle = scene->addPolygon(Polygon{Point{x,y}, r, color});
         sceneRenderer->drawScene(*scene);
+		for(auto& p : *scene) {p.store();}
         return handle;
     }
 
