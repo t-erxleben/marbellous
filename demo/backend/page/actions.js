@@ -206,6 +206,9 @@ document.addEventListener("click", function(evnt){
 		handleClick(el);
 	}
 });
+document.addEventListener("touchstart", function() {
+	alert("No support for touch inputs at the moment!");	
+});
 function hideMenu() {
 	const submenu = active['menu'];
 	if(submenu) {
