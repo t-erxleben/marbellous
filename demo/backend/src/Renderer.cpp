@@ -92,9 +92,6 @@ void Renderer::drawTriangleFan(GLfloat* points, size_t pointCount, Color col)
     glBindBuffer(GL_ARRAY_BUFFER, vertexObject);
     glBufferData(GL_ARRAY_BUFFER, pointCount * 2 * sizeof(GLfloat), (void*)points, GL_STATIC_DRAW);
 
-    // Set the viewport
-    glViewport(0, 0, 720, 720);
-
     glVertexAttribPointer(positionLoc, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0); 
 
