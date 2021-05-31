@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GLES2/gl2.h>
+#include <GLES3/gl3.h>
 
 #include "Point.hpp"
 
@@ -8,5 +8,5 @@
 typedef struct __attribute__ ((packed)) WGLVertex
 {
     Point p;
-    GLushort color;
+    GLuint color; ///< This was of type GLushort first but we would have needed padding bytes.
 } WGLVertex;
