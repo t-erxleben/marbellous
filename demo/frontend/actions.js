@@ -206,6 +206,9 @@ document.addEventListener("click", function(evnt){
 		handleClick(el);
 	}
 });
+document.addEventListener("touchstart", function() {
+	alert("No support for touch inputs at the moment!");	
+});
 function hideMenu() {
 	const submenu = active['menu'];
 	if(submenu) {
@@ -259,22 +262,22 @@ document.addEventListener("DOMContentLoaded", function(){
 		div.style.maxHeight = div.scrollHeight;
 	});
 	sidebar.options = {
-		rake_dropper: document.getElementById('sidebar-rake-dropper'),
+		rake_dropper: document.getElementById('sidebar-color-grid'),
 		rake: document.getElementById('sidebar-rake'),
 		pallet: document.getElementById('sidebar-pallet'),
 	};
 	{
-	const el = document.getElementById('sidebar-rake-dropper-width')
+	const el = document.getElementById('sidebar-color-grid-width')
 	sidebar.rake_dropper.w = int(el.value);
 	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.w = int(ev.target.value)});
 	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}{
-	const el = document.getElementById('sidebar-rake-dropper-height')
+	const el = document.getElementById('sidebar-color-grid-height')
 	sidebar.rake_dropper.h = int(el.value);
 	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.h = int(ev.target.value)});
 	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
-	{const el = document.getElementById('sidebar-rake-dropper-offset')
+	{const el = document.getElementById('sidebar-color-grid-offset')
 	sidebar.rake_dropper.of = int(el.value);
 	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.of = int(ev.target.value)});
 	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});

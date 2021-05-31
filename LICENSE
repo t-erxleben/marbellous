@@ -1,4 +1,8 @@
-                    GNU GENERAL PUBLIC LICENSE
+This Licence is only for code written by us and published as this repository.
+The files from the submodule `mapbox/earcut` are licensed different, the 
+actual Licence for them can be found in there repository.
+
+ 					 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
