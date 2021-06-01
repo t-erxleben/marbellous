@@ -13,7 +13,39 @@ class WGLSceneRenderer: private WGLRenderer
 
         void constructBuffers(GLuint** indices, WGLVertex** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
 
-        std::string const vertex_source{
+		std::string vertex_canvas_source = 
+			R"==(#version 300 es
+			in vec2 position;
+			in uint colorCode;
+			in uint z;
+			out vec2 tex;
+			void main() {
+				switch (z) {
+					case uint(0): tex = vec2(0.25, 1.25); break;
+					case uint(1): tex = vec2(.25, .25); break;
+					case uint(2): tex = vec2(1.25, 0.25); break;
+				}
+				gl_Position = vec4(position, 0, 1.0);
+			}
+		)==";
+
+		std::string fragment_canvas_source = 
+			R"==(#version 300 es
+			precision mediump float;
+			uniform sampler2D samp;
+			in vec2 tex;
+			out vec4 fColor;
+			void main() {
+				fColor = texture(samp, tex)+
+						 texture(samp, tex + vec2(0.5,0.5))+
+						 texture(samp, tex + vec2(0,0.5))+
+						 texture(samp, tex + vec2(0.5,0));
+			}
+
+		)==";
+
+
+        std::string vertex_source = 
             R"==(#version 300 es
                 in vec2 position;
                 in uint colorCode;
@@ -23,15 +55,15 @@ class WGLSceneRenderer: private WGLRenderer
                 flat out uint colID;
                 void main(){
 					vec2 d = position.xy - disP;
+					if(abs(d.x) > 1.) { d.x = -sign(d.x)*(2. - abs(d.x)); }
+					if(abs(d.y) > 1.) { d.y = -sign(d.y)*(2. - abs(d.y)); }
 					float s = sqrt(1. + disR2/dot(d,d));
-					d = disP + d*s;
-                    gl_Position = vec4(d, float(z) / 4294967295.f, 1.0);
+                    gl_Position = vec4((position.xy + d*(s-1.))*0.5, float(z) / 4294967295.f, 1.0);
                     colID = colorCode;
                 }
-            )=="};
+            )==";
     
-        // todo
-        std::string const fragment_source{
+        std::string fragment_source = 
             R"==(#version 300 es
                 precision mediump float;
                 flat in uint colID;
@@ -54,10 +86,12 @@ class WGLSceneRenderer: private WGLRenderer
                     colorMap(colID, color);
                     fFragment = color;
                 }
-            )=="};
+            )==";
 
         GLuint vao;
         GLuint ebo;
+		GLuint vaoTriangle;
+		GLuint shaderProgram;
 
         GLint color0Loc;
         GLint color1Loc;
@@ -68,6 +102,12 @@ class WGLSceneRenderer: private WGLRenderer
 
 		GLuint frameBuffer;
 		GLuint frameTexture;
+
+		struct {
+			GLuint frameBuffer;
+			GLuint frameTexture;
+			GLuint program;
+		} wrapping;
 
 		unsigned generation = ~0;
         

@@ -107,6 +107,6 @@ public:
 
 	void displace(int dropID, float newRadius) {
 		displacement.p = polygons[dropID].getCreationPoint();
-		displacement.r = newRadius;
+		displacement.r = fmin(0.1f, newRadius); // FIXME: find maximum before math breaks
 	}
 };

@@ -2,9 +2,29 @@
 
 #include <cassert>
 
+
+WGLVertex const vTriangle[] = {
+	{{-1, 3}, 0, 0},
+	{{-1, -1}, 1, 1},
+	{{3, -1}, 2, 2}
+};
+
+GLint pos;
+GLint col;
+GLint z  ;
+
 WGLSceneRenderer::WGLSceneRenderer()
 {
-    setupShaderProgram(vertex_source, fragment_source);
+	wrapping.program = setupProgram(vertex_canvas_source, fragment_canvas_source);
+	shaderProgram = setupProgram(vertex_source, fragment_source);
+
+	glGenBuffers(1, &vaoTriangle);
+	glBindBuffer(GL_ARRAY_BUFFER, vaoTriangle);
+	glBufferData(GL_ARRAY_BUFFER, 3*sizeof(WGLVertex), vTriangle, GL_STATIC_DRAW);
+    pos = glGetAttribLocation(shaderProgram, "position");
+    col = glGetAttribLocation(shaderProgram, "colorCode");
+	z   = glGetAttribLocation(shaderProgram, "z");
+	char* offset = 0;
 
     // init vao
     glGenBuffers(1, &vao);
@@ -13,28 +33,6 @@ WGLSceneRenderer::WGLSceneRenderer()
     // init ebo
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-
-    // define attribs for vao
-    // define position
-    GLint pos = glGetAttribLocation(shaderProgram, "position");
-    GLint col = glGetAttribLocation(shaderProgram, "colorCode");
-	GLint z   = glGetAttribLocation(shaderProgram, "z");
-	char* offset = 0;
-
-    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), offset);
-    glEnableVertexAttribArray(pos);
-	offset += sizeof(WGLVertex::p);
-
-    glVertexAttribIPointer(z, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
-    glEnableVertexAttribArray(z);
-	offset += sizeof(WGLVertex::z);
-
-    // define color
-    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
-    glEnableVertexAttribArray(col);
-	offset += sizeof(WGLVertex::color);
-
-	assert(offset == (char*)sizeof(WGLVertex));
 
     // lookup uniform location
     color0Loc = glGetUniformLocation(shaderProgram, "c0");
@@ -59,8 +57,25 @@ WGLSceneRenderer::WGLSceneRenderer()
         fprintf(stderr, "failed to create framebuffer!");
     }
 
+	glGenFramebuffers(1, &wrapping.frameBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, wrapping.frameBuffer);
+	glGenTextures(1, &wrapping.frameTexture);
+	glBindTexture(GL_TEXTURE_2D, wrapping.frameTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720*1.5, 720*1.5, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, wrapping.frameTexture, 0);
+	glDrawBuffers(1, drawBuffers);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    {
+        fprintf(stderr, "failed to create framebuffer 2!");
+    }
+
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
+
+	glEnable(GL_STENCIL_TEST);
+	glActiveTexture(GL_TEXTURE0);
 }
 
 void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
@@ -97,11 +112,7 @@ void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, 
 
 void WGLSceneRenderer::setActive()
 {
-    glUseProgram(shaderProgram);
-    glBindBuffer(GL_ARRAY_BUFFER, vao);
-
-    // Set the viewport
-    glViewport(0, 0, 720, 720);
+	assert("deprpcated!");
 }
 
 void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len)
@@ -114,18 +125,40 @@ void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len)
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+void bindAttributes() {
+	char* offset = 0;
+    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(pos);
+	offset += sizeof(WGLVertex::p);
+
+    glVertexAttribIPointer(z, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(z);
+	offset += sizeof(WGLVertex::z);
+
+    // define color
+    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(col);
+	offset += sizeof(WGLVertex::color);
+}
+
 void WGLSceneRenderer::drawScene(Scene const &scene)
 {
-    setActive();
-	glEnable(GL_STENCIL_TEST);
+	GLint currentFB;
+	glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &currentFB);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, wrapping.frameBuffer);
+
+    glUseProgram(shaderProgram);
+    glBindBuffer(GL_ARRAY_BUFFER, vao);
+	bindAttributes();
+	glViewport(0, 0, 720*1.5, 720*1.5);
 
 	WGLVertex* vertices = nullptr;
 	GLuint* indices = nullptr;
 	if (generation != scene.getGeneration()) {
 		generation = scene.getGeneration();
 		constructBuffers(&indices, &vertices, scene, i_size, v_size);
-		glBufferData(GL_ARRAY_BUFFER, v_size, vertices, GL_DYNAMIC_DRAW);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_size, indices, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, v_size, vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_size, indices, GL_STATIC_DRAW);
 	}
 
     // todo set uniforms
@@ -141,8 +174,8 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 	glUniform1f(locDisR2, dis.r*dis.r);
 	glUniform2f(locDisP, dis.p.x, dis.p.y);
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
+	glClearColor(0,0,0,0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 	glStencilFunc(GL_EQUAL, 1, 0x01);
 	glDepthFunc(GL_LESS);
@@ -160,4 +193,15 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 
 	if(indices) { delete[] indices; }
 	if(vertices) { delete[] vertices; }
+
+	auto [r,g,b] = Options::getInstance()->getBGColor()->getRGB();
+	glClearColor(r/256.f, g/256.f,b/256.f, 1.f);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);// currentFB);
+	glStencilFunc(GL_ALWAYS, 1, 0x01);
+	glUseProgram(wrapping.program);
+	glBindTexture(GL_TEXTURE_2D, wrapping.frameTexture);
+	glBindBuffer(GL_ARRAY_BUFFER, vaoTriangle);
+	bindAttributes();
+	glViewport(0, 0, 720, 720);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 3);
 }

@@ -16,7 +16,7 @@ public:
 
     /** Construct point at origin.
     */
-    Point(): x{0}, y{0} {};
+    constexpr Point(): x{0}, y{0} {};
 
     /** Construct point by coordinates.
      * @param x X coordinate
