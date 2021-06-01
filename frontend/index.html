@@ -10,6 +10,15 @@
 		<title>Marbellous</title>
 	</head>
 	<body>
+	<noscript>
+		<div style="position: absolute; top:50%;left:25%; z-index: 10;background: #EEE; border: solid gray 5px;transform: translate(-16%,-50%);min-width:75%;text-align:center;">
+			<p style="margin: 30 30 0 30">
+				<b>You must enable JavaScript to use Marbellous in your browser.</b>
+			</p><p style="margin: 15 30 30 30">
+				Please consider one of the following guides if you don't know how: <a href="https://www.enablejavascript.io/en">https://www.enablejavascript.io/en</a>
+			</p>
+		</div>
+	</noscript>
 	<input id="sidebar-btn" type="checkbox" class="sidebar">
 	<label for="sidebar-btn" class="sidebar">
 		<img src="icons/arrow-right-solid.svg" title="">
@@ -225,7 +234,9 @@
 			--><div style="display:inline-block"><h1 style="text-align:center">Marbellous</h1><div class="page">
 			<canvas width="720" height="720" id="image" style="background: #f7e9ce;"></canvas>
 			<canvas width="720" height="720" id="overlay"></canvas>
-		</div></div></div>
+		</div></div>
+		<p class="notice">The source code and legal notice can be found at the <a href="https://github.com/t-erxleben/marbellous">Marbellous</a> GitHub reposetory.</p>
+		</div>
 		<img style="display: none" id="img-color-dropper" width="32" height="32" src="icons/eye-dropper-solid.png">
 		<img style="display: none" id="img-color-sparkle" width="32" height="32" src="icons/sparkle-solid.png">
 	</body>
