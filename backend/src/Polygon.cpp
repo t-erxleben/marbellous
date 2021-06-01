@@ -20,6 +20,7 @@ void Polygon::getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *
     poly.push_back(this->vertices);
     *indices = mapbox::earcut<GLuint>(poly);
 
+	int count = 0;
     for (auto& p : this->vertices)
     {
         vertices->push_back(WGLVertex{p, this->colorIndex});
@@ -62,14 +63,14 @@ void Polygon::makeCircle(Point mid, float radius)
     if(isCircle)
     {
         size_t count = circleVertCount(radius);
-		vertices.reserve(count);
-		dis.reserve(count);
+		vertices.resize(count);
+		dis.resize(count);
 
-        for (int i = 0; i <= count; ++i)
+        for (int i = 0; i < count; ++i)
         {
             float angle = (float)i / (float)count * 2 * M_PI;
-            vertices.push_back(Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y));
-			dis.push_back(Point(0,0));
+            vertices[i] = Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y);
+			dis[i] = Point(0,0);
         }
     }
     else
