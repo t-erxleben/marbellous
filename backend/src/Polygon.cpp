@@ -39,16 +39,13 @@ size_t Polygon::circleVertCount(float radius)
 void Polygon::displace(Point c, float r)
 {
     isCircle = false;
-	auto itr = dis.begin();
+	std::cout << "c: " << c.x << ", " << c.y << std::endl;
 	for(auto& p : vertices) {
-		Point o(p.x - itr->x, p.y - itr->y);
-		float dx = o.x - c.x;
-		float dy = o.y - c.y;
+		float dx = p.x - c.x;
+		float dy = p.y - c.y;
 		float s = sqrtf(1 + r*r/(dx*dx + dy*dy));
 		p.x = c.x + dx*s;
 		p.y = c.y + dy*s;
-		*itr = Point(p.x - o.x, p.y - o.y);
-		++itr;
 	}	
 }
 
@@ -56,15 +53,12 @@ void Polygon::makeCircle(Point mid, float radius)
 {
     if(isCircle)
     {
-        size_t count = circleVertCount(radius);
+        size_t count = 15; // circleVertCount(radius);
 		vertices.resize(count);
-		dis.resize(count);
-
         for (int i = 0; i < count; ++i)
         {
             float angle = (float)i / (float)count * 2 * M_PI;
             vertices[i] = Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y);
-			dis[i] = Point(0,0);
         }
     }
     else

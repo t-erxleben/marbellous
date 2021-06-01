@@ -9,6 +9,8 @@
 class WGLSceneRenderer: private WGLRenderer
 {
     private:
+		size_t i_size, v_size;
+
         void constructBuffers(GLuint** indices, WGLVertex** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
 
         std::string const vertex_source{
@@ -16,9 +18,14 @@ class WGLSceneRenderer: private WGLRenderer
                 in vec2 position;
                 in uint colorCode;
 				in uint z;
+				uniform float disR2;
+				uniform vec2 disP;
                 flat out uint colID;
                 void main(){
-                    gl_Position = vec4(position, float(z) / 4294967295.f, 1.0);
+					vec2 d = position.xy - disP;
+					float s = sqrt(1. + disR2/dot(d,d));
+					d = disP + d*s;
+                    gl_Position = vec4(d, float(z) / 4294967295.f, 1.0);
                     colID = colorCode;
                 }
             )=="};
@@ -56,10 +63,13 @@ class WGLSceneRenderer: private WGLRenderer
         GLint color1Loc;
         GLint color2Loc;
         GLint color3Loc;
+		GLint locDisR2;
+		GLint locDisP;
 
 		GLuint frameBuffer;
 		GLuint frameTexture;
 
+		unsigned generation = ~0;
         
     public:
         WGLSceneRenderer();

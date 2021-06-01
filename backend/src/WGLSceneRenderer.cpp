@@ -41,6 +41,8 @@ WGLSceneRenderer::WGLSceneRenderer()
     color1Loc = glGetUniformLocation(shaderProgram, "c1");
     color2Loc = glGetUniformLocation(shaderProgram, "c2");
     color3Loc = glGetUniformLocation(shaderProgram, "c3");
+	locDisR2  = glGetUniformLocation(shaderProgram, "disR2");
+	locDisP   = glGetUniformLocation(shaderProgram, "disP");
 
     glGenFramebuffers(1, &frameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
@@ -117,14 +119,14 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
     setActive();
 	glEnable(GL_STENCIL_TEST);
 
-    WGLVertex* vertices;
-	GLuint* indices;
-    size_t i_size, v_size;
-
-    constructBuffers(&indices, &vertices, scene, i_size, v_size);
-
-    glBufferData(GL_ARRAY_BUFFER, v_size, vertices, GL_DYNAMIC_DRAW);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_size, indices, GL_DYNAMIC_DRAW);
+	WGLVertex* vertices = nullptr;
+	GLuint* indices = nullptr;
+	if (generation != scene.getGeneration()) {
+		generation = scene.getGeneration();
+		constructBuffers(&indices, &vertices, scene, i_size, v_size);
+		glBufferData(GL_ARRAY_BUFFER, v_size, vertices, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_size, indices, GL_DYNAMIC_DRAW);
+	}
 
     // todo set uniforms
     auto opt = Options::getInstance();
@@ -134,6 +136,10 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 		auto c = p[i].getRGB();
 		glUniform3f(locs[i], std::get<0>(c) / 255.0f, std::get<1>(c) / 255.0f, std::get<2>(c) / 255.0f);
 	}
+
+	const auto& dis = scene.getDisplacement();
+	glUniform1f(locDisR2, dis.r*dis.r);
+	glUniform2f(locDisP, dis.p.x, dis.p.y);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -152,6 +158,6 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 
     glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
-	delete[] indices;
-	delete[] vertices;
+	if(indices) { delete[] indices; }
+	if(vertices) { delete[] vertices; }
 }

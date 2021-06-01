@@ -81,10 +81,11 @@ extern "C"
         checkSetup(-1);
 
         // catch degenerated circle (earcut would fail to tesselate it)
-        r = (r>=0.001)?r:0.001;
+		scene->store();
+        r = (r>=0.0001)?r:0.0001;
         int handle = scene->addPolygon(Polygon{Point{x,y}, r, color});
+		scene->displace(handle, r);
         sceneRenderer->drawScene(*scene);
-		for(auto& p : *scene) {p.store();}
         return handle;
     }
 
@@ -101,14 +102,7 @@ extern "C"
         checkSetup(-1);
         try
         {
-			auto p = scene->begin() + dropID;
-			Point c = p->getCreationPoint();
-            p->makeCircle(c, newRadius);
-			for(auto itr = scene->begin(); itr != scene->end(); ++itr) {
-				if(itr != p) {
-					itr->displace(c, newRadius);
-				}
-			}
+			scene->displace(dropID, newRadius);
         }
         catch(const std::exception& e)
         {
