@@ -21,16 +21,13 @@ GLuint WGLRenderer::compileShader(GLenum type, std::string source) const{
     // Check if there were errors
     int infoLen = 0;
     glGetShaderiv( shader, GL_INFO_LOG_LENGTH, &infoLen );
-
     if (infoLen > 1) {
-
         char infoLog[infoLen];
-
         // And print them out
         glGetShaderInfoLog( shader, infoLen, NULL, infoLog );
-        printf("%s\n", infoLog);
-
+        printf("%s", infoLog);
     }
+
 
     return shader;
 }

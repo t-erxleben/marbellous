@@ -1,5 +1,7 @@
 #include "WGLSceneRenderer.hpp"
 
+#include <cassert>
+
 WGLSceneRenderer::WGLSceneRenderer()
 {
     setupShaderProgram(vertex_source, fragment_source);
@@ -16,11 +18,23 @@ WGLSceneRenderer::WGLSceneRenderer()
     // define position
     GLint pos = glGetAttribLocation(shaderProgram, "position");
     GLint col = glGetAttribLocation(shaderProgram, "colorCode");
-    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), 0);
+	GLint z   = glGetAttribLocation(shaderProgram, "z");
+	char* offset = 0;
+
+    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), offset);
     glEnableVertexAttribArray(pos);
+	offset += sizeof(WGLVertex::p);
+
+    glVertexAttribIPointer(z, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(z);
+	offset += sizeof(WGLVertex::z);
+
     // define color
-    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), (void *)(2 * sizeof(GLfloat)));
+    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
     glEnableVertexAttribArray(col);
+	offset += sizeof(WGLVertex::color);
+
+	assert(offset == (char*)sizeof(WGLVertex));
 
     // lookup uniform location
     color0Loc = glGetUniformLocation(shaderProgram, "c0");
@@ -47,43 +61,35 @@ WGLSceneRenderer::WGLSceneRenderer()
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void WGLSceneRenderer::constructBuffers(void **indices, void **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
+void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
 {
-    std::vector<std::vector<WGLVertex>> all_vertices{scene.getPolygonCount()};
-    std::vector<std::vector<GLuint>> all_indices{scene.getPolygonCount()};
-
     size_t v_count = 0;
-    size_t i_count = 0;
+	for(const auto& p : scene) { v_count += p.getVertCount(); }
+	size_t i_count = v_count + scene.getPolygonCount();
 
-    for (int i = 0; i < scene.getPolygonCount(); ++i)
-    {
-        scene[i].getDrawInfo(&all_indices[i], &all_vertices[i]);
-        v_count += all_vertices[i].size();
-        i_count += all_indices[i].size();
-    }
-
-    indices_size = i_count * sizeof(GLuint);
     vertices_size = v_count * sizeof(WGLVertex);
+	indices_size = i_count * sizeof(GLuint);
 
-    *indices = malloc(indices_size);
-    *vertices = malloc(vertices_size);
+    WGLVertex* verts = new WGLVertex[v_count];
+	*vertices = verts;
+	*indices = new GLuint[i_count];
 
-    size_t pos = 0;
-    size_t offset = 0;
-    for (int itr = 0; itr < scene.getPolygonCount(); ++itr)
+    size_t v_offset = 0;
+    size_t i_offset = 0;
+	std::vector<WGLVertex> verts_v;
+	GLuint count =  0;
+    for (const auto& p : scene)
     {
-        // Translate indices into index space of all triangles for all polygons
-        auto &i = all_indices[itr];
-        auto &v = all_vertices[itr];
-
-        for (auto &entry : i)
-            entry += offset;
-
-        memcpy(static_cast<WGLVertex *>(*vertices) + offset, v.data(), v.size() * sizeof(WGLVertex));
-        offset += v.size();
-
-        memcpy(static_cast<GLuint *>(*indices) + pos, i.data(), i.size() * sizeof(GLuint));
-        pos += i.size();
+		p.getDrawInfo(verts_v, count);
+		memcpy(verts + v_offset, verts_v.data(), verts_v.size() * sizeof(WGLVertex));
+		for(size_t i = 0; i < verts_v.size(); ++i) {
+			(*indices)[i_offset + i] = v_offset+i;
+		}
+		(*indices)[i_offset + verts_v.size()] = PRIMITIVE_RESTART;
+		i_offset += verts_v.size() + 1;
+		v_offset += verts_v.size();
+		++count;
+		assert(count != 0); // overflow check
     }
 }
 
@@ -109,8 +115,10 @@ void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len)
 void WGLSceneRenderer::drawScene(Scene const &scene)
 {
     setActive();
+	glEnable(GL_STENCIL_TEST);
 
-    void *indices, *vertices;
+    WGLVertex* vertices;
+	GLuint* indices;
     size_t i_size, v_size;
 
     constructBuffers(&indices, &vertices, scene, i_size, v_size);
@@ -127,10 +135,23 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 		glUniform3f(locs[i], std::get<0>(c) / 255.0f, std::get<1>(c) / 255.0f, std::get<2>(c) / 255.0f);
 	}
 
-    glClear(GL_COLOR_BUFFER_BIT);
-    // opengl es only supports GL_UNSIGNED_SHORT????!
-    glDrawElements(GL_TRIANGLES, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-    free(indices);
-    free(vertices);
+	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+	glStencilFunc(GL_EQUAL, 1, 0x01);
+	glDepthFunc(GL_LESS);
+	glStencilOp(GL_INVERT, GL_KEEP, GL_INCR);
+	glStencilMask(0xFF);
+
+    glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+
+	glStencilFunc(GL_EQUAL, 1,  0x01);
+	glDepthFunc(GL_ALWAYS);
+	glStencilMask(0x00);
+	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+
+    glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+
+	delete[] indices;
+	delete[] vertices;
 }

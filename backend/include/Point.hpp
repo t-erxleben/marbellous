@@ -2,7 +2,8 @@
 
 #include <GLES3/gl3.h>
 #include <math.h>
-#include <earcut.hpp>
+
+constexpr size_t PRIMITIVE_RESTART = 4294967295;
 
 /**
  * Contains a point in 2D (GLfloat).
@@ -46,7 +47,7 @@ inline float distance2(const Point& a, const Point& b) {
 }
 
 
-// Add specialized template function to use our custom point in the earcutting lib
+/*// Add specialized template function to use our custom point in the earcutting lib
 namespace mapbox {
 namespace util {
 
@@ -64,4 +65,4 @@ struct nth<1, Point> {
 };
 
 } 
-}
+}*/

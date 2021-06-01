@@ -5,7 +5,6 @@
 #include "Point.hpp"
 #include "WGLVertex.hpp"
 #include "WGLContext.hpp"
-#include "earcut.hpp"
 
 /**
  * Represent polygons in 2D as a list of vertices in counter-clockwise order.
@@ -72,7 +71,7 @@ public:
      * @attention Winding order is clockwise so face culling in WGL needs to be disabled. 
      * This is no performance limitation as each triangle is allways visible.
     */
-    void getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *vertices) const;
+    void getDrawInfo(std::vector<WGLVertex>& vertices, GLuint z) const;
 
     /** Return the point which was the original middle point.
      * @return middle point

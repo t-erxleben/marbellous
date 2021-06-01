@@ -9,15 +9,16 @@
 class WGLSceneRenderer: private WGLRenderer
 {
     private:
-        void constructBuffers(void** indices, void** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
+        void constructBuffers(GLuint** indices, WGLVertex** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
 
         std::string const vertex_source{
             R"==(#version 300 es
                 in vec2 position;
                 in uint colorCode;
+				in uint z;
                 flat out uint colID;
                 void main(){
-                    gl_Position = vec4(position, 0.0, 1.0);
+                    gl_Position = vec4(position, float(z) / 4294967295.f, 1.0);
                     colID = colorCode;
                 }
             )=="};
