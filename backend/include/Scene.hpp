@@ -7,13 +7,30 @@
 /**
  * Contains a vector of polygons and is iterable.
  */
+
+static constexpr int CANVAS_SIZE = 1080;
+static constexpr int IMAGE_SIZE = 1080;
+
 class Scene
 {
 private:
     std::vector<Polygon> polygons; ///<Internal vector to store all polygons
     size_t vertCount;
+	unsigned generation = 0; ///< generation of polygons, needed to reduce buffer updates on GPU
+	struct {
+		Point p;
+		float r;
+	} displacement;
 
 public:
+
+	const auto& getDisplacement() const {
+		return displacement;
+	}
+
+	unsigned getGeneration() const {
+		return generation;
+	}
 
     /** Internal vector saving the references to the polygons
      * @param pol Polygon that will be added to the scene
@@ -82,4 +99,18 @@ public:
     {
         return polygons.end();
     }
+
+	// stores current state, advance generation
+	void store() {
+		for(auto& p : *this) {
+			p.displace(displacement.p, displacement.r);
+		}
+		displacement.r = 0;
+		++generation;
+	}
+
+	void displace(int dropID, float newRadius) {
+		displacement.p = polygons[dropID].getCreationPoint();
+		displacement.r = fmin(0.1f, newRadius); // FIXME: find maximum before math breaks
+	}
 };

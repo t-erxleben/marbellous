@@ -21,29 +21,27 @@ GLuint WGLRenderer::compileShader(GLenum type, std::string source) const{
     // Check if there were errors
     int infoLen = 0;
     glGetShaderiv( shader, GL_INFO_LOG_LENGTH, &infoLen );
-
     if (infoLen > 1) {
-
         char infoLog[infoLen];
-
         // And print them out
         glGetShaderInfoLog( shader, infoLen, NULL, infoLog );
-        printf("%s\n", infoLog);
-
+        printf("%s", infoLog);
     }
+
 
     return shader;
 }
 
-void WGLRenderer::setupShaderProgram(std::string vert, std::string frag)
+GLuint WGLRenderer::setupProgram(std::string vert, std::string frag)
 {
     GLint fragmentShader = compileShader(GL_FRAGMENT_SHADER, frag);
     GLint vertexShader = compileShader(GL_VERTEX_SHADER, vert);
 
-    shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
+    GLint program = glCreateProgram();
+    glAttachShader(program, vertexShader);
+    glAttachShader(program, fragmentShader);
 
-    glLinkProgram(shaderProgram);
-    glValidateProgram(shaderProgram);
+    glLinkProgram(program);
+    glValidateProgram(program);
+	return program;
 }

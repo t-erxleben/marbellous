@@ -1,4 +1,5 @@
 #include "Polygon.hpp"
+#include <optional>
 
 Polygon::Polygon(Point mid, float radius, GLuint colorIndex): colorIndex{colorIndex}, isCircle{true}, creationPoint{mid}
 {
@@ -13,18 +14,12 @@ size_t Polygon::getVertCount() const
     return vertices.size();
 }
 
-void Polygon::getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *vertices) const
+void Polygon::getDrawInfo(std::vector<WGLVertex>& vertices, GLuint z) const
 {
-    // following polylines in the vector would be interpreted as holes
-    std::vector<std::vector<Point>> poly{};
-    poly.push_back(this->vertices);
-    *indices = mapbox::earcut<GLuint>(poly);
-
-	int count = 0;
-    for (auto& p : this->vertices)
-    {
-        vertices->push_back(WGLVertex{p, this->colorIndex});
-    }
+	vertices.resize(this->vertices.size());
+	for(size_t i = 0; i < this->vertices.size(); ++i) {
+		vertices[i] = WGLVertex{this->vertices[i], z, colorIndex};
+	}
 }
 
 size_t Polygon::circleVertCount(float radius)
@@ -45,32 +40,57 @@ size_t Polygon::circleVertCount(float radius)
 void Polygon::displace(Point c, float r)
 {
     isCircle = false;
-	auto itr = dis.begin();
+	Point last;
+	Point origin;
+	std::vector<std::pair<size_t, Point>> newPoints{};
+	int i = 0;
 	for(auto& p : vertices) {
-		Point o(p.x - itr->x, p.y - itr->y);
-		float dx = o.x - c.x;
-		float dy = o.y - c.y;
-		float s = sqrtf(1 + r*r/(dx*dx + dy*dy));
-		p.x = c.x + dx*s;
-		p.y = c.y + dy*s;
-		*itr = Point(p.x - o.x, p.y - o.y);
-		++itr;
+		origin = p;
+		float dx = p.x - c.x;
+		float dy = p.y - c.y;
+		if(abs(dx) > 1.f) { dx = (dx>0?-1.f:1.f)*(2.f - abs(dx)); }
+		if(abs(dy) > 1.f) { dy = (dy>0?-1.f:1.f)*(2.f - abs(dy)); }
+		float s = sqrtf(1 + r*r/(dx*dx + dy*dy)) - 1.f;
+		Point n(p.x + dx*s, p.y + dy*s);
+		if(i && distance2(last, n) > 0.00001) {
+			Point newPoint((origin.x+p.x)/2.f,(origin.y+p.y)/2.f); 
+			dx = newPoint.x - c.x;
+			dy = newPoint.y - c.y;
+			if(abs(dx) > 1.f) { dx = (dx>0?-1.f:1.f)*(2.f - abs(dx)); }
+			if(abs(dy) > 1.f) { dy = (dy>0?-1.f:1.f)*(2.f - abs(dy)); }
+			s = sqrtf(1 + r*r/(dx*dx + dy*dy)) - 1.f;
+			newPoint.translate(dx*s,dy*s);
+			newPoints.push_back(std::make_pair(i, newPoint));
+		}
+		p = n;
+		last = n;
+		++i;
 	}	
+	vertices.resize(vertices.size() + newPoints.size());
+	int offset = newPoints.size();
+	auto nItr = newPoints.rbegin();
+	for(i = vertices.size()-1; i >= 0; --i) {
+		int src = i-offset;
+		if(offset && src == nItr->first) {
+			vertices[i] = nItr->second;
+			--offset;
+		} else {
+			vertices[i] = vertices[src];
+		}
+	}
 }
 
 void Polygon::makeCircle(Point mid, float radius)
 {
     if(isCircle)
     {
-        size_t count = circleVertCount(radius);
+		// FIXME: for debug puprese only
+        size_t count = 200; // circleVertCount(radius);
 		vertices.resize(count);
-		dis.resize(count);
-
         for (int i = 0; i < count; ++i)
         {
             float angle = (float)i / (float)count * 2 * M_PI;
             vertices[i] = Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y);
-			dis[i] = Point(0,0);
         }
     }
     else
