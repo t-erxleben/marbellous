@@ -25,7 +25,8 @@ class WGLSceneRenderer: private WGLRenderer
 					vec2 d = position.xy - disP;
 					float s = sqrt(1. + disR2/dot(d,d));
 					d = disP + d*s;
-                    gl_Position = vec4(d, float(z) / 4294967295.f, 1.0);
+					// depth buffer has a resolution from >=16bit
+                    gl_Position = vec4(d, float(z) / 65535.f, 1.0);
                     colID = colorCode;
                 }
             )=="};

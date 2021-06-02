@@ -61,6 +61,9 @@ WGLSceneRenderer::WGLSceneRenderer()
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
+	glClearDepthf(0);
+	glEnable(GL_STENCIL_TEST);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
@@ -140,19 +143,22 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 	const auto& dis = scene.getDisplacement();
 	glUniform1f(locDisR2, dis.r*dis.r);
 	glUniform2f(locDisP, dis.p.x, dis.p.y);
+	glClearDepthf(0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
+	// test which pixel shoud be drawn
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 	glStencilFunc(GL_EQUAL, 1, 0x01);
-	glDepthFunc(GL_LESS);
-	glStencilOp(GL_INVERT, GL_KEEP, GL_INCR);
+	glDepthFunc(GL_GREATER);
+	glStencilOp(GL_INVERT, GL_INVERT, GL_REPLACE);
 	glStencilMask(0xFF);
 
     glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
+
+	// draw pixel
 	glStencilFunc(GL_EQUAL, 1,  0x01);
-	glDepthFunc(GL_ALWAYS);
+	glDepthFunc(GL_GEQUAL);
 	glStencilMask(0x00);
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
