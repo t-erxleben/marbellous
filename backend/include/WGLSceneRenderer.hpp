@@ -53,7 +53,10 @@ class WGLSceneRenderer: private WGLRenderer
                 void main() {
                     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
                     colorMap(colID, color);
-                    fFragment = color;
+					fFragment = color;
+					/*float d = (2.*gl_FragCoord.z - gl_DepthRange.near - gl_DepthRange.far)/(gl_DepthRange.far - gl_DepthRange.near);
+					d /= gl_FragCoord.w;
+					fFragment = vec4(d, 0., 0., 1.);*/
                 }
             )=="};
 

@@ -62,8 +62,10 @@ WGLSceneRenderer::WGLSceneRenderer()
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 	glClearDepthf(0);
+	glClearStencil(0);
 	glEnable(GL_STENCIL_TEST);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
 }
 
 void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
@@ -96,6 +98,7 @@ void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, 
 		++count;
 		assert(count != 0); // overflow check
     }
+	std::cerr << "count: " << count << std::endl;
 }
 
 void WGLSceneRenderer::setActive()
@@ -143,27 +146,44 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 	const auto& dis = scene.getDisplacement();
 	glUniform1f(locDisR2, dis.r*dis.r);
 	glUniform2f(locDisP, dis.p.x, dis.p.y);
-	glClearDepthf(0);
+	glClearStencil(0);
+	glClearDepthf(0.f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	// test which pixel shoud be drawn
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-	glStencilFunc(GL_EQUAL, 1, 0x01);
+	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_GREATER);
-	glStencilOp(GL_INVERT, GL_INVERT, GL_REPLACE);
-	glStencilMask(0xFF);
+	glStencilOp(GL_INVERT, GL_KEEP, GL_INVERT);
 
-    glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+	char* offset = 0;
+	for(const auto& p : scene) {
+		glClear(GL_STENCIL_BUFFER_BIT);
+		glStencilFunc(GL_ALWAYS, 1, 0x01);
+		glStencilMask(0xFF);
+		glDrawElements(GL_TRIANGLE_FAN, p.getVertCount(), GL_UNSIGNED_INT, offset);
+
+		glStencilFunc(GL_EQUAL, 1, 0x01);
+		glStencilMask(0x00);
+		glDrawElements(GL_TRIANGLE_FAN, p.getVertCount(), GL_UNSIGNED_INT, offset);
+		offset += sizeof(GLuint) * (p.getVertCount() + 1);
+	}
 
 
 	// draw pixel
-	glStencilFunc(GL_EQUAL, 1,  0x01);
-	glDepthFunc(GL_GEQUAL);
+	glStencilFunc(GL_ALWAYS, 1,  0x01);
+	glDepthFunc(GL_EQUAL);
 	glStencilMask(0x00);
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+	glBlendColor(0, 0, 0, 0.2f);
+	glBlendFunc(GL_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
-    glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
-
+	glStencilFunc(GL_ALWAYS, 1, 0x00);
+	glDepthFunc(GL_ALWAYS);
+	glBlendColor(0.f, 0.f, 0.f, 1.f);
+    glDrawElements(GL_LINES, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+	
 	if(indices) { delete[] indices; }
 	if(vertices) { delete[] vertices; }
 }

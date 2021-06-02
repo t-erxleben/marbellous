@@ -80,11 +80,21 @@ extern "C"
     {
         checkSetup(-1);
 
-        // catch degenerated circle (earcut would fail to tesselate it)
+        // catch degenerated circle
+        sceneRenderer->drawScene(*scene);
+
 		scene->store();
         r = (r>=0.0001)?r:0.0001;
+		scene->displace({x,y}, r);
+
+		/*uint8_t c[4];
+		glReadPixels((x+1.f)*720/2, (1.f-y)*720/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
+		const auto& [cr,cg,cb] = (*Options::getInstance()->getActivePalette())[color].getRGB();
+		if(cr == c[0] && cg == c[1] && cb == c[2]) {
+			return -1;
+		}
+		std::cerr << "new polygone\n";*/
         int handle = scene->addPolygon(Polygon{Point{x,y}, r, color});
-		scene->displace(handle, r);
         sceneRenderer->drawScene(*scene);
         return handle;
     }
@@ -102,7 +112,7 @@ extern "C"
         checkSetup(-1);
         try
         {
-			scene->displace(dropID, newRadius);
+			scene->displace(scene->getDisplacement().p, newRadius);
         }
         catch(const std::exception& e)
         {

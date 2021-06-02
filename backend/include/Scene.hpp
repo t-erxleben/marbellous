@@ -105,8 +105,8 @@ public:
 		++generation;
 	}
 
-	void displace(int dropID, float newRadius) {
-		displacement.p = polygons[dropID].getCreationPoint();
+	void displace(Point p, float newRadius) {
+		displacement.p = p;
 		displacement.r = newRadius;
 	}
 };

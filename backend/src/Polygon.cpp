@@ -53,7 +53,7 @@ void Polygon::makeCircle(Point mid, float radius)
 {
     if(isCircle)
     {
-        size_t count = 15; // circleVertCount(radius);
+        size_t count = 200; // circleVertCount(radius);
 		vertices.resize(count);
         for (int i = 0; i < count; ++i)
         {
