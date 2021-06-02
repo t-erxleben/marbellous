@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - feature/#25-hosting
+      - feature#69/switch_pages
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
 
       - name: Run emCMake
         run: |
-          cd demo/backend/
+          cd backend/
           emcmake cmake
           make install
 
