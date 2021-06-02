@@ -7,6 +7,10 @@
 /**
  * Contains a vector of polygons and is iterable.
  */
+
+static constexpr int CANVAS_SIZE = 1080;
+static constexpr int IMAGE_SIZE = 1080;
+
 class Scene
 {
 private:

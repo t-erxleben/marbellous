@@ -154,7 +154,7 @@ Init stuff:
 
         ///This needs to be done in the front end (init call should be after bg):
         char id[] = "#image";
-        initWGLContext(id, 720, 720);
+        initWGLContext(id, CANVAS_SIZE, CANVAS_SIZE);
 		WGLContext::instance->updateBGColor();
         ///--------------------------------
 

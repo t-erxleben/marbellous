@@ -46,7 +46,7 @@ WGLSceneRenderer::WGLSceneRenderer()
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     glGenTextures(1, &frameTexture);
     glBindTexture(GL_TEXTURE_2D, frameTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, IMAGE_SIZE, IMAGE_SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameTexture, 0);
@@ -61,7 +61,7 @@ WGLSceneRenderer::WGLSceneRenderer()
 	glBindFramebuffer(GL_FRAMEBUFFER, wrapping.frameBuffer);
 	glGenTextures(1, &wrapping.frameTexture);
 	glBindTexture(GL_TEXTURE_2D, wrapping.frameTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720*1.5, 720*1.5, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CANVAS_SIZE*1.5, CANVAS_SIZE*1.5, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, wrapping.frameTexture, 0);
@@ -117,11 +117,11 @@ void WGLSceneRenderer::setActive()
 
 void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len)
 {
-    assert(len == 720 * 720 * 4);
+    assert(len == IMAGE_SIZE * IMAGE_SIZE * 4);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-    glViewport(0, 0, 720, 720);
+    glViewport(0, 0, IMAGE_SIZE, IMAGE_SIZE);
     drawScene(scene);
-    glReadPixels(0, 0, 720, 720, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glReadPixels(0, 0, IMAGE_SIZE, IMAGE_SIZE, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -150,7 +150,7 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
     glUseProgram(shaderProgram);
     glBindBuffer(GL_ARRAY_BUFFER, vao);
 	bindAttributes();
-	glViewport(0, 0, 720*1.5, 720*1.5);
+	glViewport(0, 0, CANVAS_SIZE*1.5, CANVAS_SIZE*1.5);
 
 	WGLVertex* vertices = nullptr;
 	GLuint* indices = nullptr;
@@ -167,7 +167,7 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 	GLint locs[] = {color0Loc, color1Loc, color2Loc, color3Loc};
 	for(size_t i = 0; i < p.getSize(); ++i) {
 		auto c = p[i].getRGB();
-		glUniform3f(locs[i], std::get<0>(c) / 255.0f, std::get<1>(c) / 255.0f, std::get<2>(c) / 255.0f);
+		glUniform3f(locs[i], std::get<0>(c) / 256.0f, std::get<1>(c) / 256.0f, std::get<2>(c) / 256.0f);
 	}
 
 	const auto& dis = scene.getDisplacement();
@@ -202,6 +202,6 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 	glBindTexture(GL_TEXTURE_2D, wrapping.frameTexture);
 	glBindBuffer(GL_ARRAY_BUFFER, vaoTriangle);
 	bindAttributes();
-	glViewport(0, 0, 720, 720);
+	glViewport(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 3);
 }
