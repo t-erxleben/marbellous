@@ -196,7 +196,7 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 
 	auto [r,g,b] = Options::getInstance()->getBGColor()->getRGB();
 	glClearColor(r/256.f, g/256.f,b/256.f, 1.f);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);// currentFB);
+	glBindFramebuffer(GL_FRAMEBUFFER, currentFB);
 	glStencilFunc(GL_ALWAYS, 1, 0x01);
 	glUseProgram(wrapping.program);
 	glBindTexture(GL_TEXTURE_2D, wrapping.frameTexture);
