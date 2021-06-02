@@ -1,7 +1,0 @@
-/home/runner/work/marbellous/marbellous/demo/backend/CMakeFiles/install/strip.dir
-/home/runner/work/marbellous/marbellous/demo/backend/CMakeFiles/install/local.dir
-/home/runner/work/marbellous/marbellous/demo/backend/CMakeFiles/Marbellous.dir
-/home/runner/work/marbellous/marbellous/demo/backend/CMakeFiles/rebuild_cache.dir
-/home/runner/work/marbellous/marbellous/demo/backend/CMakeFiles/edit_cache.dir
-/home/runner/work/marbellous/marbellous/demo/backend/CMakeFiles/install.dir
-/home/runner/work/marbellous/marbellous/demo/backend/CMakeFiles/list_install_components.dir

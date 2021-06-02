@@ -1,1 +1,0 @@
-/home/runner/work/_temp/f36c64bc-d445-4b70-9ece-1d6f9729cbbb/emsdk-master/upstream/emscripten/em++ -s EXTRA_EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -s EXPORTED_FUNCTIONS=["_dropColor","_main"] -O3 -s ALLOW_MEMORY_GROWTH=1 -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1 @CMakeFiles/Marbellous.dir/objects1.rsp -o Marbellous.js 
