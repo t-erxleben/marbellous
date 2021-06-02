@@ -151,38 +151,24 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	// test which pixel shoud be drawn
-	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-	glDepthMask(GL_TRUE);
-	glDepthFunc(GL_GREATER);
-	glStencilOp(GL_INVERT, GL_KEEP, GL_INVERT);
+	glDepthMask(GL_FALSE);
+	glDepthFunc(GL_ALWAYS);
+	glStencilOp(GL_INVERT, GL_KEEP, GL_KEEP);
 
 	char* offset = 0;
 	for(const auto& p : scene) {
 		glClear(GL_STENCIL_BUFFER_BIT);
-		glStencilFunc(GL_ALWAYS, 1, 0x01);
+		glStencilFunc(GL_NEVER, 1, 0x01);
 		glStencilMask(0xFF);
+		glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 		glDrawElements(GL_TRIANGLE_FAN, p.getVertCount(), GL_UNSIGNED_INT, offset);
 
 		glStencilFunc(GL_EQUAL, 1, 0x01);
 		glStencilMask(0x00);
+		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 		glDrawElements(GL_TRIANGLE_FAN, p.getVertCount(), GL_UNSIGNED_INT, offset);
 		offset += sizeof(GLuint) * (p.getVertCount() + 1);
 	}
-
-
-	// draw pixel
-	glStencilFunc(GL_ALWAYS, 1,  0x01);
-	glDepthFunc(GL_EQUAL);
-	glStencilMask(0x00);
-	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-	glBlendColor(0, 0, 0, 0.2f);
-	glBlendFunc(GL_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
-
-	glStencilFunc(GL_ALWAYS, 1, 0x00);
-	glDepthFunc(GL_ALWAYS);
-	glBlendColor(0.f, 0.f, 0.f, 1.f);
-    glDrawElements(GL_LINES, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 	
 	if(indices) { delete[] indices; }
 	if(vertices) { delete[] vertices; }

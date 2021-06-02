@@ -81,7 +81,7 @@ extern "C"
         checkSetup(-1);
 
         // catch degenerated circle
-        sceneRenderer->drawScene(*scene);
+        // sceneRenderer->drawScene(*scene);
 
 		scene->store();
         r = (r>=0.0001)?r:0.0001;
