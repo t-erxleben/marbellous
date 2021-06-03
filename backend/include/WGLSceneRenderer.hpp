@@ -26,7 +26,7 @@ class WGLSceneRenderer: private WGLRenderer
 					float s = sqrt(1. + disR2/dot(d,d));
 					d = disP + d*s;
 					// depth buffer has a resolution from >=16bit
-                    gl_Position = vec4(d, float(z) / 65535.f, 1.0);
+                    gl_Position = vec4(d, float(z+uint(1)) / 12.f, 1.0);
                     colID = colorCode;
                 }
             )=="};
@@ -54,9 +54,6 @@ class WGLSceneRenderer: private WGLRenderer
                     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
                     colorMap(colID, color);
 					fFragment = color;
-					/*float d = (2.*gl_FragCoord.z - gl_DepthRange.near - gl_DepthRange.far)/(gl_DepthRange.far - gl_DepthRange.near);
-					d /= gl_FragCoord.w;
-					fFragment = vec4(d, 0., 0., 1.);*/
                 }
             )=="};
 

@@ -1,4 +1,5 @@
 #include "Polygon.hpp"
+#include <optional>
 
 Polygon::Polygon(Point mid, float radius, GLuint colorIndex): colorIndex{colorIndex}, isCircle{true}, creationPoint{mid}
 {
@@ -38,15 +39,48 @@ size_t Polygon::circleVertCount(float radius)
 
 void Polygon::displace(Point c, float r)
 {
+	constexpr float MAX_DISTANCE2 = 0.001f;
     isCircle = false;
 	std::cout << "c: " << c.x << ", " << c.y << std::endl;
+	size_t insertCount = 0;
+	std::optional<Point> last = std::nullopt;
 	for(auto& p : vertices) {
 		float dx = p.x - c.x;
 		float dy = p.y - c.y;
 		float s = sqrtf(1 + r*r/(dx*dx + dy*dy));
-		p.x = c.x + dx*s;
-		p.y = c.y + dy*s;
+		dx *= s;
+		dy *= s;
+		p.x = c.x + dx;
+		p.y = c.y + dy;
+		if(last) {
+			if(distance2(last.value(), p) > MAX_DISTANCE2) {
+				++insertCount;
+			}
+		}
+		last = p;
 	}	
+
+	/*vertices.resize(vertices.size() + insertCount);
+	for(size_t i = vertices.size() - 1; i > 0; --i) {
+		if(distance2(vertices[i], vertices[i-1]) > MAX_DISTANCE2) {
+			Point a {
+				sqrtf(powf(vertices[i].x - c.x, 2) - r*r),
+				sqrtf(powf(vertices[i].y - c.y, 2) - r*r)
+			};
+			Point b {
+				sqrtf(powf(vertices[i].x - c.x, 2) - r*r),
+				sqrtf(powf(vertices[i].y - c.y, 2) - r*r)
+			};
+			float dx = (a.x + b.x) / 2.f;
+			float dy = (a.y + b.y) / 2.f;
+			float s = sqrtf(1 + r*r/(dx*dx + dy*dy));
+			dx *= s; dy *= s;
+			vertices[i] = Point(c.x + dx, c.y + dy);
+			--insertCount;
+		} else {
+			vertices[i] = vertices[i - insertCount];
+		}
+	}*/
 }
 
 void Polygon::makeCircle(Point mid, float radius)
