@@ -62,10 +62,10 @@ WGLSceneRenderer::WGLSceneRenderer()
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 	glClearDepthf(1.);
-	glClearStencil(0b100);
+	glClearStencil(0b10);
 	glEnable(GL_STENCIL_TEST);
 	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
+	glEnable(GL_BLEND);
 }
 
 void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
@@ -150,34 +150,35 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	// test which pixel shoud be drawn
+	glBlendColor(0, 0, 0, 0.2f);
+	glBlendFunc(GL_CONSTANT_ALPHA, GL_ZERO);
 
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 	glDepthMask(GL_TRUE);
-	glStencilMask(0b110);
-	glStencilFunc(GL_NOTEQUAL, 0b000, 0b110);
+	glStencilMask(0b11);
+	glStencilFunc(GL_NOTEQUAL, 0b00, 0b11);
 	glStencilOp(GL_KEEP, GL_INVERT, GL_DECR);
 	glDepthFunc(GL_NOTEQUAL);
 	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
-
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-	glStencilFunc(GL_EQUAL, 0b000, 0b100);
+	glStencilFunc(GL_EQUAL, 0b00, 0b11);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 	glDepthFunc(GL_LESS);
 	glDepthMask(GL_FALSE);
 	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
-	glStencilFunc(GL_EQUAL, 0b010, 0b010);
+	glStencilFunc(GL_EQUAL, 0b01, 0b01);
 	glDepthFunc(GL_EQUAL);
+	glDepthFunc(GL_FALSE);
 	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
-	/*glBlendColor(0, 0, 0, 1.f);
 	glDepthMask(0);
-	glStencilMask(0);
-	glBlendFunc(GL_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+	glBlendFunc(GL_ONE, GL_ZERO);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 	glStencilFunc(GL_ALWAYS, 0, 0);
 	glDepthFunc(GL_ALWAYS);
-	glDrawElements(GL_LINE_LOOP, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);*/
+	glDrawElements(GL_LINE_LOOP, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 	
 	if(indices) { delete[] indices; }
 	if(vertices) { delete[] vertices; }
