@@ -59,28 +59,6 @@ void Polygon::displace(Point c, float r)
 		}
 		last = p;
 	}	
-
-	/*vertices.resize(vertices.size() + insertCount);
-	for(size_t i = vertices.size() - 1; i > 0; --i) {
-		if(distance2(vertices[i], vertices[i-1]) > MAX_DISTANCE2) {
-			Point a {
-				sqrtf(powf(vertices[i].x - c.x, 2) - r*r),
-				sqrtf(powf(vertices[i].y - c.y, 2) - r*r)
-			};
-			Point b {
-				sqrtf(powf(vertices[i].x - c.x, 2) - r*r),
-				sqrtf(powf(vertices[i].y - c.y, 2) - r*r)
-			};
-			float dx = (a.x + b.x) / 2.f;
-			float dy = (a.y + b.y) / 2.f;
-			float s = sqrtf(1 + r*r/(dx*dx + dy*dy));
-			dx *= s; dy *= s;
-			vertices[i] = Point(c.x + dx, c.y + dy);
-			--insertCount;
-		} else {
-			vertices[i] = vertices[i - insertCount];
-		}
-	}*/
 }
 
 void Polygon::makeCircle(Point mid, float radius)
