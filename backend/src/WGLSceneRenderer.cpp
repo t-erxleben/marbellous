@@ -61,7 +61,7 @@ WGLSceneRenderer::WGLSceneRenderer()
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
-	glClearDepthf(0.);
+	glClearDepthf(1.);
 	glClearStencil(0b100);
 	glEnable(GL_STENCIL_TEST);
 	glEnable(GL_DEPTH_TEST);
@@ -85,8 +85,9 @@ void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, 
     size_t i_offset = 0;
 	std::vector<WGLVertex> verts_v;
 	GLuint count =  0;
-    for (const auto& p : scene)
+    for (auto itr = scene.rbegin(); itr != scene.rend(); ++itr )
     {
+		const Polygon& p = *itr;
 		p.getDrawInfo(verts_v, count);
 		memcpy(verts + v_offset, verts_v.data(), verts_v.size() * sizeof(WGLVertex));
 		for(size_t i = 0; i < verts_v.size(); ++i) {
@@ -150,15 +151,7 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 
 	// test which pixel shoud be drawn
 
-	glDepthMask(GL_FALSE);
-	glDepthFunc(GL_NEVER);
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-	glStencilMask(0b101);
-	glStencilOp(GL_INVERT, GL_INVERT, GL_INVERT);
-	glStencilFunc(GL_NEVER, 0, 0);
-	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
-
-
 	glDepthMask(GL_TRUE);
 	glStencilMask(0b110);
 	glStencilFunc(GL_NOTEQUAL, 0b000, 0b110);
@@ -166,17 +159,16 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 	glDepthFunc(GL_NOTEQUAL);
 	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
-	glDepthFunc(GL_LESS);
-	glDepthMask(GL_FALSE);
-	glStencilFunc(GL_EQUAL, 0b000, 0b001);
-	glStencilOp(GL_KEEP, GL_INVERT, GL_KEEP);
-	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
-
 
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-	glStencilFunc(GL_LESS, 0b000, 0b011);
-	glDepthFunc(GL_ALWAYS);
+	glStencilFunc(GL_EQUAL, 0b000, 0b100);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	glDepthFunc(GL_LESS);
 	glDepthMask(GL_FALSE);
+	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+
+	glStencilFunc(GL_EQUAL, 0b010, 0b010);
+	glDepthFunc(GL_EQUAL);
 	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
 	/*glBlendColor(0, 0, 0, 1.f);

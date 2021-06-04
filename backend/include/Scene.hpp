@@ -79,6 +79,10 @@ public:
     {
         return polygons.begin();
     }
+	std::vector<Polygon>::const_reverse_iterator rbegin() const
+	{
+		return polygons.rbegin();
+	}
 
     /**
      * @return End iterator over the polygons in the scene
@@ -95,6 +99,10 @@ public:
     {
         return polygons.end();
     }
+	std::vector<Polygon>::const_reverse_iterator rend() const
+	{
+		return polygons.rend();
+	}
 
 	// stores current state, advance generation
 	void store() {
