@@ -1,5 +1,4 @@
 #include "Polygon.hpp"
-#include <optional>
 
 Polygon::Polygon(Point mid, float radius, GLuint colorIndex): colorIndex{colorIndex}, isCircle{true}, creationPoint{mid}
 {
@@ -39,10 +38,7 @@ size_t Polygon::circleVertCount(float radius)
 
 void Polygon::displace(Point c, float r)
 {
-	constexpr float MAX_DISTANCE2 = 0.001f;
     isCircle = false;
-	size_t insertCount = 0;
-	std::optional<Point> last = std::nullopt;
 	for(auto& p : vertices) {
 		float dx = p.x - c.x;
 		float dy = p.y - c.y;
@@ -51,12 +47,6 @@ void Polygon::displace(Point c, float r)
 		dy *= s;
 		p.x = c.x + dx;
 		p.y = c.y + dy;
-		if(last) {
-			if(distance2(last.value(), p) > MAX_DISTANCE2) {
-				++insertCount;
-			}
-		}
-		last = p;
 	}	
 }
 
