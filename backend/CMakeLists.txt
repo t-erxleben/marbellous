@@ -10,6 +10,7 @@ file(GLOB SOURCES src/*.cpp)
 # add the executable
 add_executable(Marbellous ${SOURCES})
 add_executable(Marbellous-debug EXCLUDE_FROM_ALL ${SOURCES})
+set_target_properties(Marbellous Marbellous-debug PROPERTIES CXX_STANDARD 17)
 
 # emcc flags
 if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")

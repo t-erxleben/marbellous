@@ -9,15 +9,24 @@
 class WGLSceneRenderer: private WGLRenderer
 {
     private:
-        void constructBuffers(void** indices, void** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
+		size_t i_size, v_size;
+
+        void constructBuffers(GLuint** indices, WGLVertex** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
 
         std::string const vertex_source{
             R"==(#version 300 es
                 in vec2 position;
                 in uint colorCode;
+				in uint z;
+				uniform float disR2;
+				uniform vec2 disP;
                 flat out uint colID;
                 void main(){
-                    gl_Position = vec4(position, 0.0, 1.0);
+					vec2 d = position.xy - disP;
+					float s = sqrt(1. + disR2/dot(d,d));
+					d = disP + d*s;
+					// depth buffer has a resolution from >=16bit
+                    gl_Position = vec4(d, float(z) / 65530.f, 1.0);
                     colID = colorCode;
                 }
             )=="};
@@ -44,7 +53,7 @@ class WGLSceneRenderer: private WGLRenderer
                 void main() {
                     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
                     colorMap(colID, color);
-                    fFragment = color;
+					fFragment = color;
                 }
             )=="};
 
@@ -55,10 +64,13 @@ class WGLSceneRenderer: private WGLRenderer
         GLint color1Loc;
         GLint color2Loc;
         GLint color3Loc;
+		GLint locDisR2;
+		GLint locDisP;
 
 		GLuint frameBuffer;
 		GLuint frameTexture;
 
+		unsigned generation = ~0;
         
     public:
         WGLSceneRenderer();

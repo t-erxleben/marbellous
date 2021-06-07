@@ -5,8 +5,9 @@
 #include "Point.hpp"
 
 // no further logic needed, therefor only a struct
-typedef struct __attribute__ ((packed)) WGLVertex
+struct __attribute__ ((packed)) WGLVertex
 {
     Point p;
+	GLuint z;
     GLuint color; ///< This was of type GLushort first but we would have needed padding bytes.
-} WGLVertex;
+};

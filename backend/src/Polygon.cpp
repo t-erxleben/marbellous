@@ -13,18 +13,12 @@ size_t Polygon::getVertCount() const
     return vertices.size();
 }
 
-void Polygon::getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *vertices) const
+void Polygon::getDrawInfo(std::vector<WGLVertex>& vertices, GLuint z) const
 {
-    // following polylines in the vector would be interpreted as holes
-    std::vector<std::vector<Point>> poly{};
-    poly.push_back(this->vertices);
-    *indices = mapbox::earcut<GLuint>(poly);
-
-	int count = 0;
-    for (auto& p : this->vertices)
-    {
-        vertices->push_back(WGLVertex{p, this->colorIndex});
-    }
+	vertices.resize(this->vertices.size());
+	for(size_t i = 0; i < this->vertices.size(); ++i) {
+		vertices[i] = WGLVertex{this->vertices[i], z, colorIndex};
+	}
 }
 
 size_t Polygon::circleVertCount(float radius)
@@ -45,16 +39,14 @@ size_t Polygon::circleVertCount(float radius)
 void Polygon::displace(Point c, float r)
 {
     isCircle = false;
-	auto itr = dis.begin();
 	for(auto& p : vertices) {
-		Point o(p.x - itr->x, p.y - itr->y);
-		float dx = o.x - c.x;
-		float dy = o.y - c.y;
+		float dx = p.x - c.x;
+		float dy = p.y - c.y;
 		float s = sqrtf(1 + r*r/(dx*dx + dy*dy));
-		p.x = c.x + dx*s;
-		p.y = c.y + dy*s;
-		*itr = Point(p.x - o.x, p.y - o.y);
-		++itr;
+		dx *= s;
+		dy *= s;
+		p.x = c.x + dx;
+		p.y = c.y + dy;
 	}	
 }
 
@@ -62,15 +54,12 @@ void Polygon::makeCircle(Point mid, float radius)
 {
     if(isCircle)
     {
-        size_t count = circleVertCount(radius);
+        size_t count = 200; // circleVertCount(radius);
 		vertices.resize(count);
-		dis.resize(count);
-
         for (int i = 0; i < count; ++i)
         {
             float angle = (float)i / (float)count * 2 * M_PI;
             vertices[i] = Point(radius * cosf(angle) + mid.x, radius * sinf(angle) + mid.y);
-			dis[i] = Point(0,0);
         }
     }
     else

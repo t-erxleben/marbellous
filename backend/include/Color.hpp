@@ -11,6 +11,10 @@ private:
 public:
 	using rgb_t = std::tuple<uint8_t, uint8_t, uint8_t>;
 
+	bool operator==(const Color& oth) const {
+		return r == oth.r && g == oth.g && b == oth.b;
+	}
+
     /** Construct black.
     */  
     Color();
