@@ -65,7 +65,6 @@ WGLSceneRenderer::WGLSceneRenderer()
 	glClearStencil(0b10);
 	glEnable(GL_STENCIL_TEST);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
 }
 
 void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
@@ -99,7 +98,6 @@ void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, 
 		++count;
 		assert(count != 0); // overflow check
     }
-	std::cerr << "count: " << count << std::endl;
 }
 
 void WGLSceneRenderer::setActive()
@@ -124,7 +122,6 @@ void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len)
 void WGLSceneRenderer::drawScene(Scene const &scene)
 {
     setActive();
-	glEnable(GL_STENCIL_TEST);
 
 	WGLVertex* vertices = nullptr;
 	GLuint* indices = nullptr;
@@ -149,10 +146,6 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 	glUniform2f(locDisP, dis.p.x, dis.p.y);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	// test which pixel shoud be drawn
-	glBlendColor(0, 0, 0, 0.2f);
-	glBlendFunc(GL_CONSTANT_ALPHA, GL_ZERO);
-
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 	glDepthMask(GL_TRUE);
 	glStencilMask(0b11);
@@ -170,16 +163,8 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 
 	glStencilFunc(GL_EQUAL, 0b01, 0b01);
 	glDepthFunc(GL_EQUAL);
-	glDepthFunc(GL_FALSE);
 	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
-	glDepthMask(0);
-	glBlendFunc(GL_ONE, GL_ZERO);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-	glStencilFunc(GL_ALWAYS, 0, 0);
-	glDepthFunc(GL_ALWAYS);
-	glDrawElements(GL_LINE_LOOP, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
-	
 	if(indices) { delete[] indices; }
 	if(vertices) { delete[] vertices; }
 }

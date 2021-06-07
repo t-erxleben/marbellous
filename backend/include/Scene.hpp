@@ -105,7 +105,7 @@ public:
 	}
 
 	// stores current state, advance generation
-	void store() {
+	void applyDisplacement() {
 		for(auto& p : *this) {
 			p.displace(displacement.p, displacement.r);
 		}
@@ -113,7 +113,7 @@ public:
 		++generation;
 	}
 
-	void displace(Point p, float newRadius) {
+	void setDisplacement(Point p, float newRadius) {
 		displacement.p = p;
 		displacement.r = newRadius;
 	}

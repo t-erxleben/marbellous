@@ -47,6 +47,9 @@ private:
     
 
 public:
+
+	static constexpr float MIN_R = 0.0001;
+
     /** Create an empty Polygon.
     */
     Polygon();

@@ -41,7 +41,6 @@ void Polygon::displace(Point c, float r)
 {
 	constexpr float MAX_DISTANCE2 = 0.001f;
     isCircle = false;
-	std::cout << "c: " << c.x << ", " << c.y << std::endl;
 	size_t insertCount = 0;
 	std::optional<Point> last = std::nullopt;
 	for(auto& p : vertices) {

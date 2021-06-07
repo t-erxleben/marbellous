@@ -80,21 +80,18 @@ extern "C"
     {
         checkSetup(-1);
 
-        // catch degenerated circle
-        // sceneRenderer->drawScene(*scene);
+		scene->applyDisplacement();
+        r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
+		scene->setDisplacement({x,y}, r);
 
-		scene->store();
-        r = (r>=0.0001)?r:0.0001;
-		scene->displace({x,y}, r);
-
-		/*uint8_t c[4];
+		/*uint8_t c[4]; more poost
 		glReadPixels((x+1.f)*720/2, (1.f-y)*720/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
 		const auto& [cr,cg,cb] = (*Options::getInstance()->getActivePalette())[color].getRGB();
 		if(cr == c[0] && cg == c[1] && cb == c[2]) {
 			return -1;
 		}
 		std::cerr << "new polygone\n";*/
-        int handle = scene->addPolygon(Polygon{Point{x,y}, r, color});
+        int handle = scene->addPolygon(Polygon{Point{x,y}, Polygon::MIN_R, color});
         sceneRenderer->drawScene(*scene);
         return handle;
     }
@@ -112,7 +109,7 @@ extern "C"
         checkSetup(-1);
         try
         {
-			scene->displace(scene->getDisplacement().p, newRadius);
+			scene->setDisplacement(scene->getDisplacement().p, newRadius);
         }
         catch(const std::exception& e)
         {
@@ -147,7 +144,7 @@ extern "C"
     void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color)
     {
         checkSetup();
-        if (r > 0.01) // TODO: replace with eps
+        if (r > Polygon::MIN_R)
         {
             scene->addPolygon(Polygon{Point{x, y}, r, 0});
             sceneRenderer->drawScene(*scene);
@@ -166,15 +163,11 @@ Init stuff:
         char id[] = "#image";
         initWGLContext(id, 720, 720);
 		WGLContext::instance->updateBGColor();
-        ///--------------------------------
 
         sceneRenderer = new WGLSceneRenderer{};
         scene = new Scene{};
 
         setupDone = true;
-
-        //int drop = addDrop(0, 0, 0.5, 2);
-        //resizeDrop(drop, 0.2);
 
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);
