@@ -12,8 +12,21 @@ class Scene
 private:
     std::vector<Polygon> polygons; ///<Internal vector to store all polygons
     size_t vertCount;
+	unsigned generation = 0; ///< generation of polygons, needed to reduce buffer updates on GPU
+	struct {
+		Point p;
+		float r;
+	} displacement;
 
 public:
+
+	const auto& getDisplacement() const {
+		return displacement;
+	}
+
+	unsigned getGeneration() const {
+		return generation;
+	}
 
     /** Internal vector saving the references to the polygons
      * @param pol Polygon that will be added to the scene
@@ -66,6 +79,10 @@ public:
     {
         return polygons.begin();
     }
+	std::vector<Polygon>::const_reverse_iterator rbegin() const
+	{
+		return polygons.rbegin();
+	}
 
     /**
      * @return End iterator over the polygons in the scene
@@ -82,4 +99,22 @@ public:
     {
         return polygons.end();
     }
+	std::vector<Polygon>::const_reverse_iterator rend() const
+	{
+		return polygons.rend();
+	}
+
+	// stores current state, advance generation
+	void applyDisplacement() {
+		for(auto& p : *this) {
+			p.displace(displacement.p, displacement.r);
+		}
+		displacement.r = 0;
+		++generation;
+	}
+
+	void setDisplacement(Point p, float newRadius) {
+		displacement.p = p;
+		displacement.r = newRadius;
+	}
 };

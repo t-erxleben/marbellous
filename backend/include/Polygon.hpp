@@ -5,7 +5,6 @@
 #include "Point.hpp"
 #include "WGLVertex.hpp"
 #include "WGLContext.hpp"
-#include "earcut.hpp"
 
 /**
  * Represent polygons in 2D as a list of vertices in counter-clockwise order.
@@ -14,7 +13,6 @@ class Polygon
 {
 private:
     std::vector<Point> vertices; ///<List representation of the polygon.
-	std::vector<Point> dis; ///< list displacment
 
     GLuint colorIndex; ///< Index of a color inside a palette. Exchanging the active palette will change the drawing color.
     
@@ -49,6 +47,9 @@ private:
     
 
 public:
+
+	static constexpr float MIN_R = 0.0001;
+
     /** Create an empty Polygon.
     */
     Polygon();
@@ -72,7 +73,7 @@ public:
      * @attention Winding order is clockwise so face culling in WGL needs to be disabled. 
      * This is no performance limitation as each triangle is allways visible.
     */
-    void getDrawInfo(std::vector<GLuint> *indices, std::vector<WGLVertex> *vertices) const;
+    void getDrawInfo(std::vector<WGLVertex>& vertices, GLuint z) const;
 
     /** Return the point which was the original middle point.
      * @return middle point
@@ -94,9 +95,4 @@ public:
     void makeCircle(Point mid, float radius);
 	
 	/// resetes displacement storage
-	void store() {
-		for(Point& d : dis) {
-			d = Point(0,0);
-		}
-	}
 };

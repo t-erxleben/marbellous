@@ -1,3 +1,0 @@
-[submodule "backend/include/earcut"]
-	path = backend/include/earcut
-	url = https://github.com/mapbox/earcut.hpp

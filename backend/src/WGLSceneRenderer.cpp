@@ -1,5 +1,7 @@
 #include "WGLSceneRenderer.hpp"
 
+#include <cassert>
+
 WGLSceneRenderer::WGLSceneRenderer()
 {
     setupShaderProgram(vertex_source, fragment_source);
@@ -16,17 +18,31 @@ WGLSceneRenderer::WGLSceneRenderer()
     // define position
     GLint pos = glGetAttribLocation(shaderProgram, "position");
     GLint col = glGetAttribLocation(shaderProgram, "colorCode");
-    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), 0);
+	GLint z   = glGetAttribLocation(shaderProgram, "z");
+	char* offset = 0;
+
+    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), offset);
     glEnableVertexAttribArray(pos);
+	offset += sizeof(WGLVertex::p);
+
+    glVertexAttribIPointer(z, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(z);
+	offset += sizeof(WGLVertex::z);
+
     // define color
-    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), (void *)(2 * sizeof(GLfloat)));
+    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
     glEnableVertexAttribArray(col);
+	offset += sizeof(WGLVertex::color);
+
+	assert(offset == (char*)sizeof(WGLVertex));
 
     // lookup uniform location
     color0Loc = glGetUniformLocation(shaderProgram, "c0");
     color1Loc = glGetUniformLocation(shaderProgram, "c1");
     color2Loc = glGetUniformLocation(shaderProgram, "c2");
     color3Loc = glGetUniformLocation(shaderProgram, "c3");
+	locDisR2  = glGetUniformLocation(shaderProgram, "disR2");
+	locDisP   = glGetUniformLocation(shaderProgram, "disP");
 
     glGenFramebuffers(1, &frameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
@@ -45,45 +61,42 @@ WGLSceneRenderer::WGLSceneRenderer()
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
+	glClearDepthf(1.);
+	glClearStencil(0b10);
+	glEnable(GL_STENCIL_TEST);
+	glEnable(GL_DEPTH_TEST);
 }
 
-void WGLSceneRenderer::constructBuffers(void **indices, void **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
+void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, Scene const &scene, size_t &indices_size, size_t &vertices_size)
 {
-    std::vector<std::vector<WGLVertex>> all_vertices{scene.getPolygonCount()};
-    std::vector<std::vector<GLuint>> all_indices{scene.getPolygonCount()};
-
     size_t v_count = 0;
-    size_t i_count = 0;
+	for(const auto& p : scene) { v_count += p.getVertCount(); }
+	size_t i_count = v_count + scene.getPolygonCount();
 
-    for (int i = 0; i < scene.getPolygonCount(); ++i)
-    {
-        scene[i].getDrawInfo(&all_indices[i], &all_vertices[i]);
-        v_count += all_vertices[i].size();
-        i_count += all_indices[i].size();
-    }
-
-    indices_size = i_count * sizeof(GLuint);
     vertices_size = v_count * sizeof(WGLVertex);
+	indices_size = i_count * sizeof(GLuint);
 
-    *indices = malloc(indices_size);
-    *vertices = malloc(vertices_size);
+    WGLVertex* verts = new WGLVertex[v_count];
+	*vertices = verts;
+	*indices = new GLuint[i_count];
 
-    size_t pos = 0;
-    size_t offset = 0;
-    for (int itr = 0; itr < scene.getPolygonCount(); ++itr)
+    size_t v_offset = 0;
+    size_t i_offset = 0;
+	std::vector<WGLVertex> verts_v;
+	GLuint count =  0;
+    for (auto itr = scene.rbegin(); itr != scene.rend(); ++itr )
     {
-        // Translate indices into index space of all triangles for all polygons
-        auto &i = all_indices[itr];
-        auto &v = all_vertices[itr];
-
-        for (auto &entry : i)
-            entry += offset;
-
-        memcpy(static_cast<WGLVertex *>(*vertices) + offset, v.data(), v.size() * sizeof(WGLVertex));
-        offset += v.size();
-
-        memcpy(static_cast<GLuint *>(*indices) + pos, i.data(), i.size() * sizeof(GLuint));
-        pos += i.size();
+		const Polygon& p = *itr;
+		p.getDrawInfo(verts_v, count);
+		memcpy(verts + v_offset, verts_v.data(), verts_v.size() * sizeof(WGLVertex));
+		for(size_t i = 0; i < verts_v.size(); ++i) {
+			(*indices)[i_offset + i] = v_offset+i;
+		}
+		(*indices)[i_offset + verts_v.size()] = PRIMITIVE_RESTART;
+		i_offset += verts_v.size() + 1;
+		v_offset += verts_v.size();
+		++count;
+		assert(count != 0); // overflow check
     }
 }
 
@@ -110,13 +123,14 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 {
     setActive();
 
-    void *indices, *vertices;
-    size_t i_size, v_size;
-
-    constructBuffers(&indices, &vertices, scene, i_size, v_size);
-
-    glBufferData(GL_ARRAY_BUFFER, v_size, vertices, GL_DYNAMIC_DRAW);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_size, indices, GL_DYNAMIC_DRAW);
+	WGLVertex* vertices = nullptr;
+	GLuint* indices = nullptr;
+	if (generation != scene.getGeneration()) {
+		generation = scene.getGeneration();
+		constructBuffers(&indices, &vertices, scene, i_size, v_size);
+		glBufferData(GL_ARRAY_BUFFER, v_size, vertices, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_size, indices, GL_DYNAMIC_DRAW);
+	}
 
     // todo set uniforms
     auto opt = Options::getInstance();
@@ -127,10 +141,30 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 		glUniform3f(locs[i], std::get<0>(c) / 255.0f, std::get<1>(c) / 255.0f, std::get<2>(c) / 255.0f);
 	}
 
-    glClear(GL_COLOR_BUFFER_BIT);
-    // opengl es only supports GL_UNSIGNED_SHORT????!
-    glDrawElements(GL_TRIANGLES, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+	const auto& dis = scene.getDisplacement();
+	glUniform1f(locDisR2, dis.r*dis.r);
+	glUniform2f(locDisP, dis.p.x, dis.p.y);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-    free(indices);
-    free(vertices);
+	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+	glDepthMask(GL_TRUE);
+	glStencilMask(0b11);
+	glStencilFunc(GL_NOTEQUAL, 0b00, 0b11);
+	glStencilOp(GL_KEEP, GL_INVERT, GL_DECR);
+	glDepthFunc(GL_NOTEQUAL);
+	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+
+	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+	glStencilFunc(GL_EQUAL, 0b00, 0b11);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	glDepthFunc(GL_LESS);
+	glDepthMask(GL_FALSE);
+	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+
+	glStencilFunc(GL_EQUAL, 0b01, 0b01);
+	glDepthFunc(GL_EQUAL);
+	glDrawElements(GL_TRIANGLE_FAN, i_size / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+
+	if(indices) { delete[] indices; }
+	if(vertices) { delete[] vertices; }
 }
