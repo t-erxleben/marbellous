@@ -26,7 +26,7 @@
 				input.checked = window.localStorage.getItem('store-active');
 			});
 		</script>
-		<script src="actions.js"></script>
+		<script src="main.js"></script>
 		<script src="Marbellous.js"></script>
 		<title>Marbellous</title>
 	</head>
@@ -116,14 +116,14 @@
 				<div><table>
 					<tr>
 						<td><label
-							for="sidebar-rake-offset"
+							for="sidebar-rake-placement"
 							title="space between nails in rake">
 								offset:
-							</label>‰</td>
+							</label></td>
 						<td><input
-								id="sidebar-rake-offset"
-								type="number" autocomplete="on"
-								size="5" min="0" max="1000" step="10" value="150">
+								id="sidebar-rake-placement"
+								type="text" autocomplete="on"
+								size="5" value="150">‰
 						</td>	
 					</tr>
 					</table></div>

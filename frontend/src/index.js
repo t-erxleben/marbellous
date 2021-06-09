@@ -1,3 +1,6 @@
+import * as parser from './parser.js'
+
+
 const int = parseInt;
 
 window.Storage =  class Storage {
@@ -19,6 +22,15 @@ window.Storage =  class Storage {
 
 
 
+class RakeConfig {
+	constructor(term) {
+		this.config = parser.parse(term);
+		console.log(this.config);
+		let sum = 0;
+		this.patternWidth = this.config.spacing.reduce(function (a,b){ return a + b; }, 0);
+	}
+}
+
 var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
@@ -26,7 +38,7 @@ var nodes = {};
 var backend = {fn_bind: false, dom_setup: false, init: false};
 var color = 0x228B22;
 var pallets = {}
-var Module = {
+window.Module = {
 	onRuntimeInitialized: function() {
 		backend.addPallete = Module.cwrap('addPalette',
 			'number', ['number']);
@@ -429,6 +441,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	};
 	updatePallet();
 
+<<<<<<< HEAD:frontend/actions.js
 	{	const id = 'sidebar-rake-offset';
 		const el = document.getElementById(id);
 		fetchAndSet(el, id)
@@ -436,6 +449,12 @@ document.addEventListener("DOMContentLoaded", function(){
 		el.addEventListener('change', (ev)=>{
 			rake.config.of = int(el.value);
 			storage.store(id, el.value);
+=======
+	{const el = document.getElementById('sidebar-rake-placement');
+		rake.config.placement = new RakeConfig(el.value);
+		el.addEventListener('change', (ev)=>{
+			rake.config.placement = new RakeConfig(el.value);
+>>>>>>> 9fcad02 (Add rake syntax parser):frontend/src/index.js
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
@@ -688,12 +707,13 @@ var rake = {
 		}
 	},
 	setPattern: function(ctx) {
-		if(this.of !== rake.config.of) {
-			this.of = rake.config.of;
+		if(this.placement !== rake.config.placement) {
+			this.placement = rake.config.placement;
 			rake.init();
 			const r = 5;
 			this.size = {x: r, y: r};
-			const of = ctx.canvas.width * this.of / 1000;
+			console.log(this.placement.patternWidth);
+			const of = ctx.canvas.width * this.placement.patternWidth / 1000;
 			rake.canvas.width = this.size.x * 2 + of;
 			rake.canvas.height = this.size.y * 2;
 			rake.ctx.setTransform(1,0,0,1,0,0);

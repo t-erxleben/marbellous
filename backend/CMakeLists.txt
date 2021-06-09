@@ -26,5 +26,5 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Marbellous-debug.js DESTINATION ${CMAK
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Marbellous-debug.wasm ${CMAKE_CURRENT_BINARY_DIR}/Marbellous-debug.wasm.map DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/page/
 	COMPONENT Marbellous-debug EXCLUDE_FROM_ALL)
 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/../frontend/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/page/ COMPONENT Marbellous-debug)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/../frontend/dist/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/page/ COMPONENT Marbellous-debug)
 
