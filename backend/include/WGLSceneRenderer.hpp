@@ -69,6 +69,7 @@ class WGLSceneRenderer: private WGLRenderer
 
 		GLuint frameBuffer;
 		GLuint frameTexture;
+		GLuint depthStencilTexture;
 
 		unsigned generation = ~0;
         
