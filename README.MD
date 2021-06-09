@@ -33,5 +33,4 @@ You can play with the current version at [github pages](https://t-erxleben.githu
 
 ## Copyright notice
 
-We use [earcut](https://github.com/mapbox/earcut.hpp) to generate triangle meshes.
-Thank you mapbox team for providing it.
+We use [PEG.js](https://pegjs.org/) to parse syntax. Thank you for this great tooling
