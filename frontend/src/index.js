@@ -1,4 +1,4 @@
-import * as parser from './parser.js'
+import * as parser from './rake_syntax.pegjs'
 
 
 const int = parseInt;

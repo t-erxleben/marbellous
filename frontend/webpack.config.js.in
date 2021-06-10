@@ -1,4 +1,12 @@
 module.exports = {
+	module: {
+		rules: [
+			{
+				test: /\.pegjs$/,
+				use: 'pegjs-loader'
+			}
+		]
+	},
 	mode: "production",
 	entry: {
 		index: "${FRONTEND_DIR}/src/index.js"
