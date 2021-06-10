@@ -4,17 +4,16 @@ cmake_minimum_required(VERSION 3.10)
 project(Marbellous)
 
 set(FRONTEND_DIR ${CMAKE_SOURCE_DIR}/../frontend/)
-file(GLOB JS_SOURCESS ${FRONTEND_DIR}/src/*.js)
+file(GLOB WEB_SOURCESS ${FRONTEND_DIR}/src/*)
 file(GLOB SOURCES src/*.cpp)
 
 configure_file(${FRONTEND_DIR}/package.json ${CMAKE_CURRENT_BINARY_DIR}/package.json)
 configure_file(${FRONTEND_DIR}/webpack.config.js.in ${CMAKE_CURRENT_BINARY_DIR}/webpack.config.js)
-execute_process(COMMAND "npm install" WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(include/)
 
-message(WARNING ${JS_SOURCESS})
-add_custom_command(OUTPUT dist/index.js COMMAND npx webpack WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS ${JS_SOURCESS})
+add_custom_command(OUTPUT npm.stamp COMMAND npm install WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+add_custom_command(OUTPUT dist/index.js COMMAND npx webpack WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS ${WEB_SOURCESS} npm.stamp)
 
 # add the executable
 add_executable(Marbellous dist/index.js ${SOURCES})
