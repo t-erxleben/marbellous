@@ -2,9 +2,17 @@ const int = parseInt;
 
 class Storage {
 	constructor() {
-		this.fetch = function(id) {
-		}
-		this.store = function(id, value) {
+		this.store = windows.localStorage;
+		if(this.store.getItem('store-active'))	{
+			this.fetch = function(id) {
+				return this.store.getItem(id)
+			}
+			this.store = function(id, value) {
+				this.store.setItem(id, value)
+			}
+		} else {
+			this.fetch = function() { return null; }
+			this.store = function() {}
 		}
 	}
 }
