@@ -162,6 +162,12 @@ extern "C"
         }
     }
 
+	// execute a linear rake in direction <x,y> with speed <speed>. <nails> is an array of bool with
+	// are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
+	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, bool nails[100]) {
+		// TODO: implement 
+	}
+
 /*------------------------------------------
 Init stuff:
 --------------------------------------------*/
