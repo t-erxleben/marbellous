@@ -1,4 +1,14 @@
 const int = parseInt;
+
+class Storage {
+	constructor() {
+		this.fetch = function(id) {
+		}
+		this.store = function(id, value) {
+		}
+	}
+}
+
 var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
@@ -262,8 +272,13 @@ function hideMenu() {
 		}
 	}
 }
-
+function fetchAndSet(element, id) {
+	const val = storage.fetch(id);
+	if (val) { element.value = val; }
+}
+var storage = null
 document.addEventListener("DOMContentLoaded", function(){
+	storage = new Storage()
 	document.querySelectorAll('menu input[type="radio"]').forEach(function(rad){
 		if (rad.checked) {
 			active[rad.attributes.name.nodeValue] = rad;
@@ -304,14 +319,18 @@ document.addEventListener("DOMContentLoaded", function(){
 		pallet: document.getElementById('sidebar-pallet'),
 	};
 	{
-	const el = document.getElementById('sidebar-rake-dropper-width')
+	const id = 'sidebar-rake-dropper-width';
+	const el = document.getElementById(id)
+	fetchAndSet(el, id);
 	sidebar.rake_dropper.w = int(el.value);
-	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.w = int(ev.target.value)});
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.w = int(ev.target.value); storage.store(id, ev.target.value)});
 	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}{
-	const el = document.getElementById('sidebar-rake-dropper-height')
+	const id = 'sidebar-rake-dropper-height'
+	const el = document.getElementById(id)
+	fetchAndSet(el, id);
 	sidebar.rake_dropper.h = int(el.value);
-	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.h = int(ev.target.value)});
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.h = int(ev.target.value); storage.store(id, ev.target.value)});
 	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
 	{const el = document.getElementById('sidebar-rake-dropper-offset')
@@ -375,10 +394,13 @@ document.addEventListener("DOMContentLoaded", function(){
 	};
 	updatePallet();
 
-	{const el = document.getElementById('sidebar-rake-offset');
+	{	const id = 'sidebar-rake-offset';
+		const el = document.getElementById(id);
+		fetchAndSet(el, id)
 		rake.config.of = int(el.value);
 		el.addEventListener('change', (ev)=>{
 			rake.config.of = int(el.value);
+			storage.store(id, el.value);
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
