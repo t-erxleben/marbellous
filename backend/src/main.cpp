@@ -89,12 +89,9 @@ extern "C"
 		uint8_t c[4];
 		glReadPixels((x+1.f)*720/2, (y+1.f)*720/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
 		const auto& [cr,cg,cb] = (*Options::getInstance()->getActivePalette())[color].getRGB();
-		std::cout << "target: "<< (int)cr << ", " << (int)cg << ", " << (int)cb << std::endl;
-		std::cout << "\t" << (int)c[0] << ", " << (int)c[1] << ", " << (int)c[2] << std::endl;
 		if(cr == c[0] && cg == c[1] && cb == c[2]) {
 			return -1;
 		}
-		std::cerr << "new polygone\n";
         int handle = scene->addPolygon(Polygon{Point{x,y}, Polygon::MIN_R, color});
         return handle;
     }

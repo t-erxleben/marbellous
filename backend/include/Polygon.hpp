@@ -12,9 +12,9 @@
 class Polygon
 {
 private:
-	static constexpr float VERTEX_DISTANCE = 0.01f;
-	static constexpr float MAX_DISTANCE2 = VERTEX_DISTANCE * VERTEX_DISTANCE;
-	static constexpr float MIN_DISTANCE2 = MAX_DISTANCE2 * 0.5f;
+	static constexpr float VERTEX_DISTANCE = 0.01f; ///< largest distance between vertices -> insertion when distance ist greater
+	static constexpr float MAX_DISTANCE2 = VERTEX_DISTANCE * VERTEX_DISTANCE; // squared for easier useage
+	static constexpr float MIN_DISTANCE2 = MAX_DISTANCE2 * 0.5f; ///< minimal distance -> collapsion when distance is smaller
 	struct Data {
 		Point pos;
 		int insertion; ///< >0 -> insert after this vertex x, <0 remove this

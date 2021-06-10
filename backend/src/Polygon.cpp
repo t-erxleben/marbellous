@@ -91,7 +91,6 @@ int Polygon::calcInsertion(const Point& start, const Point& end) {
 void Polygon::displace(Point c, float r)
 {
 	assert(vertices.size() > 2);
-	std::cerr << "from: " << vertices.size();
     isCircle = false;
 	displacePoint(vertices[0].pos, c, r);
 	int size_diff = 0;
@@ -108,6 +107,8 @@ void Polygon::displace(Point c, float r)
 	vertices[0].insertion
 		= calcInsertion(vertices.back().pos, vertices[0].pos);
 	size_diff += vertices[0].insertion;
+
+	// remove collapsed vertices
 	int del = 0;
 	{
 		auto dst = vertices.begin();
@@ -120,6 +121,8 @@ void Polygon::displace(Point c, float r)
 		}
 		del = src - dst;
 	}
+
+	// insert new vertices
 	if(size_diff > 0) { vertices.resize(vertices.size() + size_diff); }
 	auto dst = vertices.rbegin() + std::max(0, -size_diff);
 	auto src = vertices.rbegin() + del + std::max(0, size_diff);
@@ -150,7 +153,6 @@ void Polygon::displace(Point c, float r)
 		assert(src >= dst);
 	}
 	if(size_diff < 0) { vertices.resize(vertices.size() + size_diff);}
-	std::cerr << "\tto: " << vertices.size() << std::endl;
 }
 
 void Polygon::makeCircle(Point mid, float radius)

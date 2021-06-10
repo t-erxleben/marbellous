@@ -108,16 +108,17 @@ public:
 
 	// stores current state, advance generation
 	void applyDisplacement() {
-		int count = 0;
 		for(auto& p : *this) {
-			std::cerr << count++ << ": ";
 			p.displace(displacement.p, displacement.r);
 		}
+
+		// remove polygons with less then 3 vertices
 		polygons.erase(
 			std::remove_if(begin(), end(), [](const Polygon& p){
 				return p.getVertCount() < 3;
 			}),
 			end());
+
 		displacement.r = 0;
 		++generation;
 	}
