@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 
 #include "Polygon.hpp"
 
@@ -35,6 +36,7 @@ public:
     int addPolygon(Polygon const &pol)
     {
         polygons.push_back(pol);
+		++generation;
         return polygons.size() - 1;
     }
 
@@ -106,9 +108,16 @@ public:
 
 	// stores current state, advance generation
 	void applyDisplacement() {
+		int count = 0;
 		for(auto& p : *this) {
+			std::cerr << count++ << ": ";
 			p.displace(displacement.p, displacement.r);
 		}
+		polygons.erase(
+			std::remove_if(begin(), end(), [](const Polygon& p){
+				return p.getVertCount() < 3;
+			}),
+			end());
 		displacement.r = 0;
 		++generation;
 	}

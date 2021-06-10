@@ -12,7 +12,14 @@
 class Polygon
 {
 private:
-    std::vector<Point> vertices; ///<List representation of the polygon.
+	static constexpr float VERTEX_DISTANCE = 0.01f;
+	static constexpr float MAX_DISTANCE2 = VERTEX_DISTANCE * VERTEX_DISTANCE;
+	static constexpr float MIN_DISTANCE2 = MAX_DISTANCE2 * 0.5f;
+	struct Data {
+		Point pos;
+		int insertion; ///< >0 -> insert after this vertex x, <0 remove this
+	};
+    std::vector<Data> vertices; ///<List representation of the polygon.
 
     GLuint colorIndex; ///< Index of a color inside a palette. Exchanging the active palette will change the drawing color.
     
@@ -45,6 +52,10 @@ private:
     */
     static size_t circleVertCount(float radius);
     
+	/** calculate how many points should be inserted between two
+	 * adjanticive points
+	 */
+	static int calcInsertion(const Point& start, const Point& end);
 
 public:
 
