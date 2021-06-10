@@ -154,21 +154,21 @@ function switchState(_old, _new) {
 	});
 
 }
-
+var download_side = null;
 function downloadCanvas() {
 	const ptr = Module.ccall("getImage", "number", [], []);	
 	const len = Module.HEAPU8[ptr] + 720*720*3 + 40;
 	const data = Module.HEAPU8.slice(ptr+1, ptr+len);
 	const blob = new Blob([data], {type: 'image/x-portable-pixmap'});
-	if(!this.a) {
-		this.a = document.createElement('a');
-		document.body.appendChild(this.a);
-		this.a.style.display = 'none';
+	if(!download_side) {
+		download_side = document.createElement('a');
+		document.body.appendChild(download_side);
+		download_side.style.display = 'none';
 	}
 	const url = window.URL.createObjectURL(blob);
-	this.a.href = url;
-	this.a.download = "marebllous-image.ppm";
-	this.a.click();
+	download_side.href = url;
+	download_side.download = "marebllous-image.ppm";
+	download_side.click();
 }
 
 
@@ -441,20 +441,13 @@ document.addEventListener("DOMContentLoaded", function(){
 	};
 	updatePallet();
 
-<<<<<<< HEAD:frontend/actions.js
-	{	const id = 'sidebar-rake-offset';
+	{	const id = 'sidebar-rake-placement'
 		const el = document.getElementById(id);
 		fetchAndSet(el, id)
-		rake.config.of = int(el.value);
-		el.addEventListener('change', (ev)=>{
-			rake.config.of = int(el.value);
-			storage.store(id, el.value);
-=======
-	{const el = document.getElementById('sidebar-rake-placement');
 		rake.config.placement = new RakeConfig(el.value);
 		el.addEventListener('change', (ev)=>{
 			rake.config.placement = new RakeConfig(el.value);
->>>>>>> 9fcad02 (Add rake syntax parser):frontend/src/index.js
+			storage.store(id, el.value);
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}

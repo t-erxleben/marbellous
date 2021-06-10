@@ -3,13 +3,22 @@ cmake_minimum_required(VERSION 3.10)
 # set the project name
 project(Marbellous)
 
-include_directories(include/ include/earcut/include/mapbox/)
-
+set(FRONTEND_DIR ${CMAKE_SOURCE_DIR}/../frontend/)
+file(GLOB JS_SOURCESS ${FRONTEND_DIR}/src/*.js)
 file(GLOB SOURCES src/*.cpp)
 
+configure_file(${FRONTEND_DIR}/package.json ${CMAKE_CURRENT_BINARY_DIR}/package.json)
+configure_file(${FRONTEND_DIR}/webpack.config.js.in ${CMAKE_CURRENT_BINARY_DIR}/webpack.config.js)
+execute_process(COMMAND "npm install" WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
+include_directories(include/)
+
+message(WARNING ${JS_SOURCESS})
+add_custom_command(OUTPUT dist/index.js COMMAND npx webpack WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS ${JS_SOURCESS})
+
 # add the executable
-add_executable(Marbellous ${SOURCES})
-add_executable(Marbellous-debug EXCLUDE_FROM_ALL ${SOURCES})
+add_executable(Marbellous dist/index.js ${SOURCES})
+add_executable(Marbellous-debug EXCLUDE_FROM_ALL dist/index.js ${SOURCES})
 set_target_properties(Marbellous Marbellous-debug PROPERTIES CXX_STANDARD 17)
 
 # emcc flags
@@ -26,5 +35,5 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Marbellous-debug.js DESTINATION ${CMAK
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Marbellous-debug.wasm ${CMAKE_CURRENT_BINARY_DIR}/Marbellous-debug.wasm.map DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/page/
 	COMPONENT Marbellous-debug EXCLUDE_FROM_ALL)
 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/../frontend/dist/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/page/ COMPONENT Marbellous-debug)
-
+install(DIRECTORY ${FRONTEND_DIR}/dist/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/page/ COMPONENT Marbellous-debug)
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/page/ COMPONENT Marbellous-debug)
