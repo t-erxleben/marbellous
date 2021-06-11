@@ -127,7 +127,7 @@ function downloadCanvas() {
 	const ptr = Module.ccall("getImage", "number", [], []);	
 	const len = Module.HEAPU8[ptr] + 720*720*3 + 40;
 	const data = Module.HEAPU8.slice(ptr+1, ptr+len);
-	const blob = new Blob([data], {type: 'image/ppm'});
+	const blob = new Blob([data], {type: 'image/x-portable-pixmap'});
 	if(!this.a) {
 		this.a = document.createElement('a');
 		document.body.appendChild(this.a);

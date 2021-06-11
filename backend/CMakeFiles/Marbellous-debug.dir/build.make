@@ -74,120 +74,120 @@ CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o: CMakeFiles/Marbellous-debug.dir
 CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o: src/Color.cpp
 CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o: CMakeFiles/Marbellous-debug.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/Color.cpp
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/Color.cpp
 
 CMakeFiles/Marbellous-debug.dir/src/Color.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Marbellous-debug.dir/src/Color.cpp.i"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/Color.cpp > CMakeFiles/Marbellous-debug.dir/src/Color.cpp.i
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/Color.cpp > CMakeFiles/Marbellous-debug.dir/src/Color.cpp.i
 
 CMakeFiles/Marbellous-debug.dir/src/Color.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Marbellous-debug.dir/src/Color.cpp.s"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/Color.cpp -o CMakeFiles/Marbellous-debug.dir/src/Color.cpp.s
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/Color.cpp -o CMakeFiles/Marbellous-debug.dir/src/Color.cpp.s
 
 CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o: CMakeFiles/Marbellous-debug.dir/flags.make
 CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o: CMakeFiles/Marbellous-debug.dir/includes_CXX.rsp
 CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o: src/Options.cpp
 CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o: CMakeFiles/Marbellous-debug.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/Options.cpp
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/Options.cpp
 
 CMakeFiles/Marbellous-debug.dir/src/Options.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Marbellous-debug.dir/src/Options.cpp.i"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/Options.cpp > CMakeFiles/Marbellous-debug.dir/src/Options.cpp.i
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/Options.cpp > CMakeFiles/Marbellous-debug.dir/src/Options.cpp.i
 
 CMakeFiles/Marbellous-debug.dir/src/Options.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Marbellous-debug.dir/src/Options.cpp.s"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/Options.cpp -o CMakeFiles/Marbellous-debug.dir/src/Options.cpp.s
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/Options.cpp -o CMakeFiles/Marbellous-debug.dir/src/Options.cpp.s
 
 CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o: CMakeFiles/Marbellous-debug.dir/flags.make
 CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o: CMakeFiles/Marbellous-debug.dir/includes_CXX.rsp
 CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o: src/Palette.cpp
 CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o: CMakeFiles/Marbellous-debug.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/Palette.cpp
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/Palette.cpp
 
 CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.i"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/Palette.cpp > CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.i
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/Palette.cpp > CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.i
 
 CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.s"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/Palette.cpp -o CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.s
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/Palette.cpp -o CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.s
 
 CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o: CMakeFiles/Marbellous-debug.dir/flags.make
 CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o: CMakeFiles/Marbellous-debug.dir/includes_CXX.rsp
 CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o: src/Polygon.cpp
 CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o: CMakeFiles/Marbellous-debug.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/Polygon.cpp
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/Polygon.cpp
 
 CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.i"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/Polygon.cpp > CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.i
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/Polygon.cpp > CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.i
 
 CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.s"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/Polygon.cpp -o CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.s
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/Polygon.cpp -o CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.s
 
 CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o: CMakeFiles/Marbellous-debug.dir/flags.make
 CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o: CMakeFiles/Marbellous-debug.dir/includes_CXX.rsp
 CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o: src/WGLContext.cpp
 CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o: CMakeFiles/Marbellous-debug.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/WGLContext.cpp
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/WGLContext.cpp
 
 CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.i"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/WGLContext.cpp > CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.i
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/WGLContext.cpp > CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.i
 
 CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.s"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/WGLContext.cpp -o CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.s
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/WGLContext.cpp -o CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.s
 
 CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o: CMakeFiles/Marbellous-debug.dir/flags.make
 CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o: CMakeFiles/Marbellous-debug.dir/includes_CXX.rsp
 CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o: src/WGLRenderer.cpp
 CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o: CMakeFiles/Marbellous-debug.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/WGLRenderer.cpp
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/WGLRenderer.cpp
 
 CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.i"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/WGLRenderer.cpp > CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.i
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/WGLRenderer.cpp > CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.i
 
 CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.s"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/WGLRenderer.cpp -o CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.s
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/WGLRenderer.cpp -o CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.s
 
 CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o: CMakeFiles/Marbellous-debug.dir/flags.make
 CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o: CMakeFiles/Marbellous-debug.dir/includes_CXX.rsp
 CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o: src/WGLSceneRenderer.cpp
 CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o: CMakeFiles/Marbellous-debug.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/WGLSceneRenderer.cpp
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/WGLSceneRenderer.cpp
 
 CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.i"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/WGLSceneRenderer.cpp > CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.i
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/WGLSceneRenderer.cpp > CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.i
 
 CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.s"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/WGLSceneRenderer.cpp -o CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.s
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/WGLSceneRenderer.cpp -o CMakeFiles/Marbellous-debug.dir/src/WGLSceneRenderer.cpp.s
 
 CMakeFiles/Marbellous-debug.dir/src/main.cpp.o: CMakeFiles/Marbellous-debug.dir/flags.make
 CMakeFiles/Marbellous-debug.dir/src/main.cpp.o: CMakeFiles/Marbellous-debug.dir/includes_CXX.rsp
 CMakeFiles/Marbellous-debug.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/Marbellous-debug.dir/src/main.cpp.o: CMakeFiles/Marbellous-debug.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Marbellous-debug.dir/src/main.cpp.o"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/main.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/main.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/main.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/main.cpp
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Marbellous-debug.dir/src/main.cpp.o -MF CMakeFiles/Marbellous-debug.dir/src/main.cpp.o.d -o CMakeFiles/Marbellous-debug.dir/src/main.cpp.o -c /home/runner/work/marbellous/marbellous/backend/src/main.cpp
 
 CMakeFiles/Marbellous-debug.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Marbellous-debug.dir/src/main.cpp.i"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/main.cpp > CMakeFiles/Marbellous-debug.dir/src/main.cpp.i
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/marbellous/marbellous/backend/src/main.cpp > CMakeFiles/Marbellous-debug.dir/src/main.cpp.i
 
 CMakeFiles/Marbellous-debug.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Marbellous-debug.dir/src/main.cpp.s"
-	/home/runner/work/_temp/63091ca4-7b85-46e1-ac90-868500474271/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/main.cpp -o CMakeFiles/Marbellous-debug.dir/src/main.cpp.s
+	/home/runner/work/_temp/b3ae959d-96b8-41fb-9d36-5f665b926f73/emsdk-master/upstream/emscripten/em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/marbellous/marbellous/backend/src/main.cpp -o CMakeFiles/Marbellous-debug.dir/src/main.cpp.s
 
 # Object files for target Marbellous-debug
 Marbellous__debug_OBJECTS = \
