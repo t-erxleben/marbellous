@@ -242,3 +242,54 @@ p.notice {
 	width: 100%;
 	margin: 50 auto;
 }
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 2em;
+	height: 1em;
+}
+
+.switch input {
+	display: none;
+}
+
+span.slider {
+	border-radius: 1em;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+span.slider:before {
+	border-radius: 50%;
+	position: absolute;
+	content: "";
+	height: 0.75em;
+	width: 0.75em;
+	left: 0.125em;
+	bottom: 0.125em;
+	background-color: white;
+	transition: .4s;
+	-webkit-transition: .4s;
+}
+
+input.slider:checked + span.slider {
+	background-color: #2169F3;
+}
+
+input.slider:focus + span.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input.slider:checked + span.slider:before {
+  -webkit-transform: translateX(1em);
+  -ms-transform: translateX(1em);
+  transform: translateX(1em);
+}
