@@ -10,7 +10,7 @@
 				if(switchStore.input.checked) {
 					window.localStorage.setItem('store-active', '1');
 				} else {
-					if(window.confirm('When you the broswer storage all stored data will be cleard!\nthere is no way to undo this!')) {
+					if(window.confirm('When you disable browser storage all stored options will be cleared.\nThere is no way to undo this!')) {
 						window.localStorage.clear();
 					} else {
 						switchStore.input.checked = true
