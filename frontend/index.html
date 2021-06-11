@@ -5,6 +5,27 @@
 		<meta name="description" content="A marebling tool">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" href="stylesheet.css">
+		<script>
+			function switchStore() {
+				if(switchStore.input.checked) {
+					window.localStorage.setItem('store-active', '1');
+				} else {
+					if(window.confirm('When you disable browser storage all stored options will be cleared.\nThere is no way to undo this!')) {
+						window.localStorage.clear();
+					} else {
+						switchStore.input.checked = true
+					}
+				}
+				if(window.storage) {
+					window.storage = new window.Storage()
+				}
+			}
+			document.addEventListener('DOMContentLoaded', function() {
+				const input = document.getElementById('store-active')
+				switchStore.input = input
+				input.checked = window.localStorage.getItem('store-active');
+			});
+		</script>
 		<script src="actions.js"></script>
 		<script src="Marbellous.js"></script>
 		<title>Marbellous</title>
@@ -24,6 +45,22 @@
 		<img src="icons/arrow-right-solid.svg" title="">
 	</label>
 	<menu class="sidebar">
+		<!-- general -->
+		<li>
+				<input type="radio" name="sidebar" id="sidebar-general" />
+				<label for="sidebar-general">General</label>
+				<div>
+					<table>
+						<tr>
+							<td><label title="Enable to store settings in browser. This will persist the settings even when you close and revisit the site later. This only effects settings which you changed after enabling storing!">store settings</label></td>
+							<td><label class="switch" title="Enable to store settings in browser. This will persist the settings even when you close and revisit the site later. This only effects settings which you changed after enabling storing!">
+									<input id="store-active" class="slider" type="checkbox" onclick="switchStore()">
+									<span class="slider"></span>
+								</label></td>
+						</tr>
+					</table>
+				</div>
+		</li>
 		<!-- help menu -->
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-help"/>

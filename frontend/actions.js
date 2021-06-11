@@ -1,4 +1,24 @@
 const int = parseInt;
+
+window.Storage =  class Storage {
+	constructor() {
+		const store = window.localStorage;
+		if(store.getItem('store-active'))	{
+			this.fetch = function(id) {
+				return store.getItem(id)
+			}
+			this.store = function(id, value) {
+				store.setItem(id, value)
+			}
+		} else {
+			this.fetch = function() { return null; }
+			this.store = function() {}
+		}
+	}
+}
+
+
+
 var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
@@ -262,8 +282,13 @@ function hideMenu() {
 		}
 	}
 }
-
+function fetchAndSet(element, id) {
+	const val = storage.fetch(id);
+	if (val) { element.value = val; }
+}
+window.storage = null
 document.addEventListener("DOMContentLoaded", function(){
+	storage = new Storage()
 	document.querySelectorAll('menu input[type="radio"]').forEach(function(rad){
 		if (rad.checked) {
 			active[rad.attributes.name.nodeValue] = rad;
@@ -304,65 +329,94 @@ document.addEventListener("DOMContentLoaded", function(){
 		pallet: document.getElementById('sidebar-pallet'),
 	};
 	{
-	const el = document.getElementById('sidebar-rake-dropper-width')
+	const id = 'sidebar-rake-dropper-width';
+	const el = document.getElementById(id)
+	fetchAndSet(el, id);
 	sidebar.rake_dropper.w = int(el.value);
-	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.w = int(ev.target.value)});
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.w = int(ev.target.value); storage.store(id, ev.target.value)});
 	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}{
-	const el = document.getElementById('sidebar-rake-dropper-height')
+	const id = 'sidebar-rake-dropper-height'
+	const el = document.getElementById(id)
+	fetchAndSet(el, id);
 	sidebar.rake_dropper.h = int(el.value);
-	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.h = int(ev.target.value)});
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.h = int(ev.target.value); storage.store(id, ev.target.value)});
 	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
-	{const el = document.getElementById('sidebar-rake-dropper-offset')
+	{
+	const id = 'sidebar-rake-dropper-offset'
+	const el = document.getElementById(id)
+	fetchAndSet(el, id);
 	sidebar.rake_dropper.of = int(el.value);
-	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.of = int(ev.target.value)});
+	el.addEventListener("change", (ev)=>{sidebar.rake_dropper.of = int(ev.target.value); storage.store(id, ev.target.value)});
 	el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
 
-	{const el = document.getElementById('sidebar-pallet-active-pallet');
+	{
+	const id = 'sidebar-pallet-active-pallet'
+	const el = document.getElementById(id);
+	fetchAndSet(el, id);
 	pallets.active = el.value;
 	el.addEventListener("change", (ev)=>{pallets.active = el.value
+		storage.store(id, el.value);
 		if(pallets[pallets.active] === undefined) {
-			pallets[pallets.active] = {id: backend.addPallete(3), A: "black", B: "black", C: "black"};
+			pallets[pallets.active] = {id: backend.addPallete(3), A: null, B: null, C: null};
 			backend.setActivePalette(pallets[pallets.active].id);
-			backend.setPaletteColors(0,0,0,0);
 		} else {
 			backend.setActivePalette(pallets[pallets.active].id);
 		}
-		const {A, B, C} = pallets[pallets.active];
-		pallets.inputs.A.value = A;
-		pallets.inputs.B.value = B;
-		pallets.inputs.C.value = C;
+		var {A, B, C} = pallets[pallets.active];
+		fetchAndSet(pallets.inputs.A, pallets.active + 'sidebar-pallet-color-1')
+		A = pallets.inputs.A.value;
+		fetchAndSet(pallets.inputs.B, pallets.active + 'sidebar-pallet-color-2')
+		B = pallets.inputs.B.value;
+		fetchAndSet(pallets.inputs.C, pallets.active + 'sidebar-pallet-color-3')
+		C = pallets.inputs.C.value;
+		backend.setPaletteColors(color2int(A), color2int(B), color2int(C));
 		backend.redraw();
 		updatePallet();
 	});
 	if(pallets[pallets.active] === undefined) {
 		pallets[pallets.active] = {A: "black", B: "black", C: "black"};
 	}
-	pallets.inputs = {};
+		pallets.inputs = {};
 	}
-	{const el = document.getElementById('sidebar-pallet-color-1');
+	{
+	const iid = 'sidebar-pallet-color-1';
+	const el = document.getElementById(iid);
+	const id = function() { return pallets.active + iid }
+	fetchAndSet(el, id());
 	pallets[pallets.active]['A'] = el.value;
 	el.addEventListener("change", (ev)=>{pallets[pallets.active]['A'] = el.value;
+		storage.store(id(), el.value);
 		backend.setColorAt(0, color2int(el.value));
 		backend.redraw();
 		updatePallet();});
 	pallets.inputs.A = el;
 	}
-	{const el = document.getElementById('sidebar-pallet-color-2');
+	{
+	const iid = 'sidebar-pallet-color-2'
+	const el = document.getElementById(iid);
+	const id = function() { return pallets.active + iid }
+	fetchAndSet(el, id())
 	pallets[pallets.active]['B'] = el.value;
 	el.addEventListener("change", (ev)=>{pallets[pallets.active]['B'] = el.value;
+		storage.store(id(), el.value);
 		backend.setColorAt(1, color2int(el.value));
 		backend.redraw();
 		updatePallet();});
 	pallets.inputs.B = el;
 	}
-	{const el = document.getElementById('sidebar-pallet-color-3');
+	{
+	const iid = 'sidebar-pallet-color-3'
+	const el = document.getElementById(iid);
+	const id = function() { return pallets.active + iid }
+	fetchAndSet(el, id())
 	pallets[pallets.active]['C'] = el.value;
 	el.addEventListener("change", (ev)=>{pallets[pallets.active]['C'] = el.value;
+		storage.store(id(), el.value)
 		backend.setColorAt(2, color2int(el.value));
 		backend.redraw();
 		updatePallet();});
@@ -375,10 +429,13 @@ document.addEventListener("DOMContentLoaded", function(){
 	};
 	updatePallet();
 
-	{const el = document.getElementById('sidebar-rake-offset');
+	{	const id = 'sidebar-rake-offset';
+		const el = document.getElementById(id);
+		fetchAndSet(el, id)
 		rake.config.of = int(el.value);
 		el.addEventListener('change', (ev)=>{
 			rake.config.of = int(el.value);
+			storage.store(id, el.value);
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
