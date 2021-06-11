@@ -2,6 +2,7 @@
 
 #include <GLES3/gl3.h>
 #include <math.h>
+#include <iostream>
 
 constexpr size_t PRIMITIVE_RESTART = 4294967295;
 
@@ -34,6 +35,45 @@ public:
         this->x += tx;
         this->y += ty;
     };
+
+	static Point mix(const Point& a, const Point& b, float m) {
+		return Point(
+			a.x * m + b.x * (1.f-m),
+			a.y * m + b.y * (1.f-m)
+		);
+	}
+
+	bool operator==(const Point& oth) const {
+		return x == oth.x && y == oth.y;
+	}
+
+	Point operator-(const Point& rh) const {
+		return Point(x - rh.x, y - rh.y);
+	}
+	Point operator+(const Point& rh) const {
+		return Point(x + rh.x, y + rh.y);
+	}
+
+	float operator*(const Point& rh) const {
+		return x*rh.x + y*rh.y;
+	}
+
+	Point& operator*=(float f) {
+		x *= f;
+		y *= f;
+		return *this;
+	}
+
+	Point& operator/=(float f) {
+		x /= f;
+		y /= f;
+		return *this;
+	}
+
+	friend std::ostream& operator<<(std::ostream& out, const Point& p) {
+		out << "(" << p.x << "," << p.y << ")";
+		return out;
+	}
 
 };
 

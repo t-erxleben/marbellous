@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 
 #include "Polygon.hpp"
 
@@ -35,6 +36,7 @@ public:
     int addPolygon(Polygon const &pol)
     {
         polygons.push_back(pol);
+		++generation;
         return polygons.size() - 1;
     }
 
@@ -109,6 +111,14 @@ public:
 		for(auto& p : *this) {
 			p.displace(displacement.p, displacement.r);
 		}
+
+		// remove polygons with less then 3 vertices
+		polygons.erase(
+			std::remove_if(begin(), end(), [](const Polygon& p){
+				return p.getVertCount() < 3;
+			}),
+			end());
+
 		displacement.r = 0;
 		++generation;
 	}
