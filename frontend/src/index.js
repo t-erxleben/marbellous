@@ -446,8 +446,12 @@ document.addEventListener("DOMContentLoaded", function(){
 		fetchAndSet(el, id)
 		rake.config.placement = new RakeConfig(el.value);
 		el.addEventListener('change', (ev)=>{
-			rake.config.placement = new RakeConfig(el.value);
-			storage.store(id, el.value);
+			try {
+				rake.config.placement = new RakeConfig(el.value);
+				storage.store(id, el.value);
+			} catch (e) {
+				// TODO: error handling
+			}
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}

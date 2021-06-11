@@ -82,7 +82,7 @@
 							>dx:</label></td>
 					<td><input id="sidebar-rake-dropper-width"
 						type="number" autocomplete="on"
-						size="5" min="0" max="1000" step="10" value="100"
+						size="5" min="0" max="1000" step="1" value="100"
 						title="Horizontal space between to rake columns.">‰</td>
 				</tr>
 				<tr>
@@ -93,7 +93,7 @@
 					<td><input
 						id="sidebar-rake-dropper-height"
 						type="number" autocomplete="on"
-						size="5" min="0" max="1000" step="10" value="100"
+						size="5" min="0" max="1000" step="1" value="100"
 						title="Vertical space between to rake rows.">‰</td>
 				</tr>
 				<tr>
@@ -104,7 +104,7 @@
 					<td><input
 						id="sidebar-rake-dropper-offset"
 						type="number" autocomplete="on"
-						size="5" min="0" max="1000" step="10" value="25"
+						size="5" min="0" max="1000" step="1" value="25"
 						title="Vertical Offset between every first and second column.">‰</td>
 				</tr>
 			</table></div>
@@ -118,12 +118,14 @@
 						<td><label
 							for="sidebar-rake-placement"
 							title="space between nails in rake">
-								offset:
+								placement:
 							</label></td>
 						<td><input
+								title="<offset>:<space>(,<space>)*"
 								id="sidebar-rake-placement"
 								type="text" autocomplete="on"
-								size="5" value="150">‰
+								pattern="([0-9]*:)?([0-9]+,)*[0-9]+"
+								value="150">‰
 						</td>	
 					</tr>
 					</table></div>
