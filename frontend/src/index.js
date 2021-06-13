@@ -1,3 +1,6 @@
+import * as parser from './rake_syntax.pegjs'
+
+
 const int = parseInt;
 
 window.Storage =  class Storage {
@@ -19,6 +22,35 @@ window.Storage =  class Storage {
 
 
 
+class RakeConfig {
+	constructor(term) {
+		this.config = parser.parse(term);
+		this.patternWidth = this.config.spacing.reduce(function (a,b){ return a + b + 1; }, 0);
+		this.pattern = new Array(this.patternWidth).fill(0)
+		const pat = this.pattern
+		var sum = 0
+		this.config.spacing.forEach(
+			function(x) {
+				pat[sum] = 1
+				sum += x
+			}
+		)
+		this.createPattern = function() {}
+		this.getNails = function(width, handle) {
+			return new Array(width).map(function(x,i) {
+				const d = i - handle + origin
+				if(d > 0)  {
+					return this.pattern[d % this.patternWidth]
+				} else if ( d < 0) {
+					return this.pattern[this.patternWidth - 1 - (d % this.patternWidth)]
+				} else {
+					return 1
+				}
+			})
+		}
+	}
+}
+
 var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
@@ -26,7 +58,7 @@ var nodes = {};
 var backend = {fn_bind: false, dom_setup: false, init: false};
 var color = 0x228B22;
 var pallets = {}
-var Module = {
+window.Module = {
 	onRuntimeInitialized: function() {
 		backend.addPallete = Module.cwrap('addPalette',
 			'number', ['number']);
@@ -44,6 +76,9 @@ var Module = {
 			'number', ['number', 'number']);
 		backend.redraw = Module.cwrap('redraw',
 			'void', []);
+		backend.startRaking = Module.cwrap('startRaking', 'void', [])
+		backend.rakeLinear = Module.cwrap('rakeLinear',
+			'boolean', ['number', 'number', 'number', 'array'])
 		backend.fn_bind = true;
 		init();
 	}
@@ -140,23 +175,26 @@ function switchState(_old, _new) {
 	nodes[_old].forEach(function(e){
 		e.node.remove();
 	});
+	if(_new === 'rake') {
+		backend.startRaking()
+	}
 
 }
-
+var download_side = null;
 function downloadCanvas() {
 	const ptr = Module.ccall("getImage", "number", [], []);	
 	const len = Module.HEAPU8[ptr] + 720*720*3 + 40;
 	const data = Module.HEAPU8.slice(ptr+1, ptr+len);
 	const blob = new Blob([data], {type: 'image/x-portable-pixmap'});
-	if(!this.a) {
-		this.a = document.createElement('a');
-		document.body.appendChild(this.a);
-		this.a.style.display = 'none';
+	if(!download_side) {
+		download_side = document.createElement('a');
+		document.body.appendChild(download_side);
+		download_side.style.display = 'none';
 	}
 	const url = window.URL.createObjectURL(blob);
-	this.a.href = url;
-	this.a.download = "marebllous-image.ppm";
-	this.a.click();
+	download_side.href = url;
+	download_side.download = "marebllous-image.ppm";
+	download_side.click();
 }
 
 
@@ -429,13 +467,17 @@ document.addEventListener("DOMContentLoaded", function(){
 	};
 	updatePallet();
 
-	{	const id = 'sidebar-rake-offset';
+	{	const id = 'sidebar-rake-placement'
 		const el = document.getElementById(id);
 		fetchAndSet(el, id)
-		rake.config.of = int(el.value);
+		rake.config.placement = new RakeConfig(el.value);
 		el.addEventListener('change', (ev)=>{
-			rake.config.of = int(el.value);
-			storage.store(id, el.value);
+			try {
+				rake.config.placement = new RakeConfig(el.value);
+				storage.store(id, el.value);
+			} catch (e) {
+				// TODO: error handling
+			}
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
@@ -688,12 +730,13 @@ var rake = {
 		}
 	},
 	setPattern: function(ctx) {
-		if(this.of !== rake.config.of) {
-			this.of = rake.config.of;
+		if(this.placement !== rake.config.placement) {
+			this.placement = rake.config.placement;
 			rake.init();
 			const r = 5;
 			this.size = {x: r, y: r};
-			const of = ctx.canvas.width * this.of / 1000;
+			console.log(this.placement.patternWidth);
+			const of = ctx.canvas.width * this.placement.patternWidth / 1000;
 			rake.canvas.width = this.size.x * 2 + of;
 			rake.canvas.height = this.size.y * 2;
 			rake.ctx.setTransform(1,0,0,1,0,0);
@@ -729,6 +772,20 @@ var rake = {
 
 		ctx.strokeStyle = 'black';
 		rake.config.line(ctx, start,end, w, h);
+	},
+	up: function(start, end, w, h) {
+		if(!start || !end) { return}
+		const d = {x: end.x - start.x, y: end.y - start.y} 
+		const len =  Math.sqrt(d.x*d.x+d.y*d.y)
+		const up = {x: -d.y, y: d.x};
+		var handle = 0;
+		// TODO: adopt for free form rakes!
+		if(Math.abs(d.y) > Math.abs(d.x)) {
+			handle = Math.floor((start.y + 1.) / 2. * 1000.)
+		} else {
+			handle = Math.floor((start.x + 1.) / 2. * 1000.)
+		}
+		backend.rakeLinear(d.x/w, d.y/h, len,rake.config.placement.getNails(1000, handle))
 	}
 };
 // snap line parallel to axisa
@@ -779,12 +836,13 @@ var tool = {
 		}
 	},
 	over: function(evnt) {
+		tool.pos = tool.translate({x: evnt.offsetX, y: evnt.offsetY})
 		if (!tool.ctx) {
 			tool.ctx = tool.overlay.getContext("2d");
 		}
 		if(tool.ctx) {
 			tool.clear();
-			const p = tool.translate({x:evnt.offsetX, y:evnt.offsetY});
+			const p = tool.pos;
 			if(tool.start !== null && tool.tool[state].onemove) {
 				const [s,e] = snap(tool.start, p);
 				tool.tool[state].onemove(tool.ctx, s,e , tool.overlay.width, tool.overlay.height);
@@ -795,10 +853,15 @@ var tool = {
 		}
 	},
 	up: function(evnt) {
-		tool.start = null;
 		if(tool.tool[state].up) {
-			tool.tool[state].up();
+			if(tool.start && tool.pos) {
+				const [s,e]  = snap(tool.start, tool.pos)
+				tool.tool[state].up(s,e,tool.overlay.width, tool.overlay.height);
+			} else {
+				tool.tool[state].up()
+			}
 		}
+		tool.start = null;
 		// tool.overlay.drawImage()
 	},
 };

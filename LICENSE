@@ -1,6 +1,6 @@
 This Licence is only for code written by us and published as this repository.
-The files from the submodule `mapbox/earcut` are licensed different, the 
-actual Licence for them can be found in there repository.
+The code in `frontend/src/parser.js` is generated from pegjs. Check there Licensing
+at https://pegjs.org/
 
  					 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
