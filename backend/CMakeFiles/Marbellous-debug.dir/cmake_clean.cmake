@@ -19,6 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Marbellous-debug.dir/src/main.cpp.o.d"
   "Marbellous-debug.js"
   "Marbellous-debug.pdb"
+  "dist/index.js"
+  "npm.stamp"
 )
 
 # Per-language clean rules from dependency scanning.

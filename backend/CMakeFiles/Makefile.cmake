@@ -37,6 +37,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeLists.txt"
   "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/cmake/Modules/CMakeSystemSpecificInformation.cmake"
   "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+  "/home/runner/work/marbellous/marbellous/frontend/package.json"
+  "/home/runner/work/marbellous/marbellous/frontend/webpack.config.js.in"
   )
 
 # The corresponding makefile is:
@@ -50,6 +52,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/3.20.1/CMakeSystem.cmake"
   "CMakeFiles/3.20.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.20.1/CMakeCXXCompiler.cmake"
+  "package.json"
+  "webpack.config.js"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

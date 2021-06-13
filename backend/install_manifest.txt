@@ -3,7 +3,6 @@
 /home/runner/work/marbellous/marbellous/backend/page//favicon.ico
 /home/runner/work/marbellous/marbellous/backend/page//stylesheet.css
 /home/runner/work/marbellous/marbellous/backend/page//index.html
-/home/runner/work/marbellous/marbellous/backend/page//actions.js
 /home/runner/work/marbellous/marbellous/backend/page//icons/movement.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/eye-dropper-solid.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/question-solid.svg
@@ -23,3 +22,4 @@
 /home/runner/work/marbellous/marbellous/backend/page//icons/file-download-solid.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/empty.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/image-regular.svg
+/home/runner/work/marbellous/marbellous/backend/page//index.js
