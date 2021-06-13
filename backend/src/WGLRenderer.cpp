@@ -32,15 +32,15 @@ GLuint WGLRenderer::compileShader(GLenum type, std::string source) const{
     return shader;
 }
 
-void WGLRenderer::setupShaderProgram(std::string vert, std::string frag)
+void WGLRenderer::setupShaderProgram(std::string vert, std::string frag, GLint& shader)
 {
     GLint fragmentShader = compileShader(GL_FRAGMENT_SHADER, frag);
     GLint vertexShader = compileShader(GL_VERTEX_SHADER, vert);
 
-    shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
+    shader = glCreateProgram();
+    glAttachShader(shader, vertexShader);
+    glAttachShader(shader, fragmentShader);
 
-    glLinkProgram(shaderProgram);
-    glValidateProgram(shaderProgram);
+    glLinkProgram(shader);
+    glValidateProgram(shader);
 }
