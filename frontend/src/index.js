@@ -25,9 +25,29 @@ window.Storage =  class Storage {
 class RakeConfig {
 	constructor(term) {
 		this.config = parser.parse(term);
-		console.log(this.config);
-		let sum = 0;
-		this.patternWidth = this.config.spacing.reduce(function (a,b){ return a + b; }, 0);
+		this.patternWidth = this.config.spacing.reduce(function (a,b){ return a + b + 1; }, 0);
+		this.pattern = new Array(this.patternWidth).fill(0)
+		const pat = this.pattern
+		var sum = 0
+		this.config.spacing.forEach(
+			function(x) {
+				pat[sum] = 1
+				sum += x
+			}
+		)
+		this.createPattern = function() {}
+		this.getNails = function(width, handle) {
+			return new Array(width).map(function(x,i) {
+				const d = i - handle + origin
+				if(d > 0)  {
+					return this.pattern[d % this.patternWidth]
+				} else if ( d < 0) {
+					return this.pattern[this.patternWidth - 1 - (d % this.patternWidth)]
+				} else {
+					return 1
+				}
+			})
+		}
 	}
 }
 
@@ -56,6 +76,9 @@ window.Module = {
 			'number', ['number', 'number']);
 		backend.redraw = Module.cwrap('redraw',
 			'void', []);
+		backend.startRaking = Module.cwrap('startRaking', 'void', [])
+		backend.rakeLinear = Module.cwrap('rakeLinear',
+			'boolean', ['number', 'number', 'number', 'array'])
 		backend.fn_bind = true;
 		init();
 	}
@@ -152,6 +175,9 @@ function switchState(_old, _new) {
 	nodes[_old].forEach(function(e){
 		e.node.remove();
 	});
+	if(_new === 'rake') {
+		backend.startRaking()
+	}
 
 }
 var download_side = null;
@@ -746,6 +772,20 @@ var rake = {
 
 		ctx.strokeStyle = 'black';
 		rake.config.line(ctx, start,end, w, h);
+	},
+	up: function(start, end, w, h) {
+		if(!start || !end) { return}
+		const d = {x: end.x - start.x, y: end.y - start.y} 
+		const len =  Math.sqrt(d.x*d.x+d.y*d.y)
+		const up = {x: -d.y, y: d.x};
+		var handle = 0;
+		// TODO: adopt for free form rakes!
+		if(Math.abs(d.y) > Math.abs(d.x)) {
+			handle = Math.floor((start.y + 1.) / 2. * 1000.)
+		} else {
+			handle = Math.floor((start.x + 1.) / 2. * 1000.)
+		}
+		backend.rakeLinear(d.x/w, d.y/h, len,rake.config.placement.getNails(1000, handle))
 	}
 };
 // snap line parallel to axisa
@@ -796,12 +836,13 @@ var tool = {
 		}
 	},
 	over: function(evnt) {
+		tool.pos = tool.translate({x: evnt.offsetX, y: evnt.offsetY})
 		if (!tool.ctx) {
 			tool.ctx = tool.overlay.getContext("2d");
 		}
 		if(tool.ctx) {
 			tool.clear();
-			const p = tool.translate({x:evnt.offsetX, y:evnt.offsetY});
+			const p = tool.pos;
 			if(tool.start !== null && tool.tool[state].onemove) {
 				const [s,e] = snap(tool.start, p);
 				tool.tool[state].onemove(tool.ctx, s,e , tool.overlay.width, tool.overlay.height);
@@ -812,10 +853,16 @@ var tool = {
 		}
 	},
 	up: function(evnt) {
-		tool.start = null;
 		if(tool.tool[state].up) {
-			tool.tool[state].up();
+			console.log(tool.start, tool.pos);
+			if(tool.start && tool.pos) {
+				const [s,e]  = snap(tool.start, tool.pos)
+				tool.tool[state].up(s,e,tool.overlay.width, tool.overlay.height);
+			} else {
+				tool.tool[state].up()
+			}
 		}
+		tool.start = null;
 		// tool.overlay.drawImage()
 	},
 };
