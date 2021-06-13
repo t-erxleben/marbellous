@@ -322,6 +322,33 @@ src/WGLContext.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.s
 .PHONY : src/WGLContext.cpp.s
 
+src/WGLRakeRenderer.o: src/WGLRakeRenderer.cpp.o
+.PHONY : src/WGLRakeRenderer.o
+
+# target to build an object file
+src/WGLRakeRenderer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/WGLRakeRenderer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/WGLRakeRenderer.cpp.o
+.PHONY : src/WGLRakeRenderer.cpp.o
+
+src/WGLRakeRenderer.i: src/WGLRakeRenderer.cpp.i
+.PHONY : src/WGLRakeRenderer.i
+
+# target to preprocess a source file
+src/WGLRakeRenderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/WGLRakeRenderer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/WGLRakeRenderer.cpp.i
+.PHONY : src/WGLRakeRenderer.cpp.i
+
+src/WGLRakeRenderer.s: src/WGLRakeRenderer.cpp.s
+.PHONY : src/WGLRakeRenderer.s
+
+# target to generate assembly for a file
+src/WGLRakeRenderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/WGLRakeRenderer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/WGLRakeRenderer.cpp.s
+.PHONY : src/WGLRakeRenderer.cpp.s
+
 src/WGLRenderer.o: src/WGLRenderer.cpp.o
 .PHONY : src/WGLRenderer.o
 
@@ -432,6 +459,9 @@ help:
 	@echo "... src/WGLContext.o"
 	@echo "... src/WGLContext.i"
 	@echo "... src/WGLContext.s"
+	@echo "... src/WGLRakeRenderer.o"
+	@echo "... src/WGLRakeRenderer.i"
+	@echo "... src/WGLRakeRenderer.s"
 	@echo "... src/WGLRenderer.o"
 	@echo "... src/WGLRenderer.i"
 	@echo "... src/WGLRenderer.s"

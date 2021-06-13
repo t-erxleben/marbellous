@@ -7,7 +7,6 @@
 class WGLRenderer
 {
 public:
-    GLint shaderProgram;
     GLuint compileShader(GLenum const type, std::string const shader) const;
-    void setupShaderProgram(std::string vert, std::string frag);
+    void setupShaderProgram(std::string vert, std::string frag, GLint& shader);
 };
