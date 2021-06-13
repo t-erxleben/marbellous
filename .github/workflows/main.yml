@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - feature#69/switch_pages
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -19,13 +18,11 @@ jobs:
         uses: mymindstorm/setup-emsdk@v9
         with:
           version: 2.0.16
+          actions-cache-folder: emsdk-cache
 
       #Following two just for info in case something goes wrong
       - name: Verify
         run: emcc -v
-
-      - name: Tree
-        run: tree
 
       - name: Run emCMake
         run: |
