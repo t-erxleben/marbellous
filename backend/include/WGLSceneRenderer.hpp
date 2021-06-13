@@ -5,6 +5,7 @@
 
 #include "WGLRenderer.hpp"
 #include "Scene.hpp"
+#include <cassert>
 
 class WGLSceneRenderer: private WGLRenderer
 {
@@ -57,6 +58,8 @@ class WGLSceneRenderer: private WGLRenderer
                 }
             )=="};
 
+        GLint shaderProgram;
+
         GLuint vao;
         GLuint ebo;
 
@@ -76,5 +79,5 @@ class WGLSceneRenderer: private WGLRenderer
         WGLSceneRenderer();
 		void drawToBuffer(const Scene& scene, char* data, int len);
         void drawScene(Scene const & scene);
-        void setActive();
+        void setActive() const;
 };

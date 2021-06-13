@@ -1,10 +1,8 @@
 #include "WGLSceneRenderer.hpp"
 
-#include <cassert>
-
 WGLSceneRenderer::WGLSceneRenderer()
 {
-    setupShaderProgram(vertex_source, fragment_source);
+    setupShaderProgram(vertex_source, fragment_source, shaderProgram);
 
     // init vao
     glGenBuffers(1, &vao);
@@ -100,7 +98,7 @@ void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, 
     }
 }
 
-void WGLSceneRenderer::setActive()
+void WGLSceneRenderer::setActive() const
 {
     glUseProgram(shaderProgram);
     glBindBuffer(GL_ARRAY_BUFFER, vao);

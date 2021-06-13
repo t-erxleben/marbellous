@@ -4,6 +4,8 @@
 
 #include "WGLSceneRenderer.hpp"
 
+#include <cassert>
+
 class WGLRakeRenderer: private WGLRenderer
 {
     private:
@@ -11,7 +13,7 @@ class WGLRakeRenderer: private WGLRenderer
         // both shaders will be using that
         std::string const vertex_source{
             R"==(#version 300 es
-                in vec2 position;
+                layout (location = 0) in vec2 position;
                 out vec2 texCoord;
                 void main(){
                     gl_Position = vec4(position, 0.0, 1.0);
@@ -31,8 +33,27 @@ class WGLRakeRenderer: private WGLRenderer
                 out vec4 fFragment;
  
                 void main() {
-                    // todo calc distance d
-                    vec2 orig = texCoord - stroke * pow(viscosity, scaling * d);
+                    const float eps = 0.000001;
+                    int i;
+                    int dir;
+                    float d;
+                    float nailPos;
+                    vec2 shift = vec2(0.0, 0.0);
+
+                    // assuming only strokes in x and y direction
+                    dir = (dot(stroke, vec2(1.0, 0.0) < eps) ? 0 : 1;
+
+                    for(i = 0; i < nails.length(); ++i)
+                    {
+                        if(nails[i])
+                        {
+                            // 2.0 is the side length of the canvas
+                            nailPos = float(i) * 2.0 / float(nails.length())
+                            d = abs(gl_FragCoord[dir] - nailPos)
+                            shift += stroke * pow(viscosity, scaling * d);
+                        }
+                    }
+                    vec2 orig = texCoord - shift;
 					fFragment = texture(tex, orig);
                 }
             )=="};
@@ -69,15 +90,33 @@ class WGLRakeRenderer: private WGLRenderer
         // expects to be used to draw exactly one triangle defined by (-1, -1), (-1, 3), (3, -1)
         GLint drawShader;
 
-        void loadTexFromScene(WGLSceneRenderer const * sr);
+        GLint rakeShader;
+
+        // Frame buffer with to textures; one to load from and one to draw to
+        GLuint fbo, fbo_screenshot;
+        GLuint tex[2];
+        uint8_t curr_tex;
+        
+        // one and single triangle
+        GLuint vbo;
+
+        // uniform locations
+        GLint color0Loc;
+        GLint color1Loc;
+        GLint color2Loc;
+        GLint color3Loc;
+        GLint nailsLoc;
+        GLint strokeLoc;
+        GLint viscosityLoc;
+        GLint scalingLoc;
+
+        void loadTexFromScene(WGLSceneRenderer const & sr);
+        void drawFromTexture();
 
     public:
 
-        WGLRakeRenderer(WGLSceneRenderer const * sr);
-        void reset(WGLSceneRenderer const * sr);
-        void draw();
-        void drawToBuffer(char *data, int len);
-
-
-
+        WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s);
+        void reset(WGLSceneRenderer& sr, Scene const & s);
+        void rakeAndDraw(float x, float y, float speed, bool nails[100]);
+        void drawToBuffer(void* buf, size_t& length);
 };
