@@ -854,7 +854,6 @@ var tool = {
 	},
 	up: function(evnt) {
 		if(tool.tool[state].up) {
-			console.log(tool.start, tool.pos);
 			if(tool.start && tool.pos) {
 				const [s,e]  = snap(tool.start, tool.pos)
 				tool.tool[state].up(s,e,tool.overlay.width, tool.overlay.height);
