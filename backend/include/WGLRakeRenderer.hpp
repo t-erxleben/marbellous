@@ -24,7 +24,7 @@ class WGLRakeRenderer: private WGLRenderer
         std::string const rake_fragment_source{
             R"==(#version 300 es
                 precision mediump float;
-                uniform bool nails[];
+                uniform bool nails[1000];
                 uniform vec2 stroke;
                 uniform float viscosity;
                 uniform float scaling;
@@ -35,21 +35,20 @@ class WGLRakeRenderer: private WGLRenderer
                 void main() {
                     const float eps = 0.000001;
                     int i;
-                    int dir;
+                    int dim;
                     float d;
                     float nailPos;
                     vec2 shift = vec2(0.0, 0.0);
 
                     // assuming only strokes in x and y direction
-                    dir = (dot(stroke, vec2(1.0, 0.0) < eps) ? 0 : 1;
-
+                    dim = (dot(stroke, vec2(1.0, 0.0)) < eps) ? 0 : 1;
                     for(i = 0; i < nails.length(); ++i)
                     {
                         if(nails[i])
                         {
                             // 2.0 is the side length of the canvas
-                            nailPos = float(i) * 2.0 / float(nails.length())
-                            d = abs(gl_FragCoord[dir] - nailPos)
+                            nailPos = float(i) * 2.0 / float(nails.length());
+                            d = abs(gl_FragCoord[dim] - nailPos);
                             shift += stroke * pow(viscosity, scaling * d);
                         }
                     }
@@ -61,26 +60,24 @@ class WGLRakeRenderer: private WGLRenderer
         std::string const draw_fragment_source{
             R"==(#version 300 es
                 precision mediump float;
-                uniform vec3 c0;
-                uniform vec3 c1;
-                uniform vec3 c2;
-                uniform vec3 c3;
+                uniform vec3 c[10];
                 uniform sampler2D tex;
                 in vec2 texCoord;
                 out vec4 fFragment;
 
-                void colorMap(in uint cc, out vec4 color) {
-                    switch(cc) {
-                        case 0u: color = vec4(c0, 1.0f); break;
-                        case 1u: color = vec4(c1, 1.0f); break;
-                        case 2u: color = vec4(c2, 1.0f); break;
-                        case 3u: color = vec4(c3, 1.0f); break;
-                        default: color = vec4(1.0f, 0.0f, 0.5f, 1.0f);
-                    }
-                }
                 void main() {
                     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
-                    colorMap(texture(tex, texCoord), color);
+                    int colID = int(texture(tex, texCoord).r);
+
+                    if(int(colID) < c.length())
+                    {
+                        color = vec4(c[colID], 1.0);
+                    }
+                     else
+                    {
+                        // bright magenta for default color
+                        color = vec4(1.0, 0.0, 1.0, 1.0);
+                    }
                     fFragment = color;
                 }
             )=="};
@@ -101,10 +98,7 @@ class WGLRakeRenderer: private WGLRenderer
         GLuint vbo;
 
         // uniform locations
-        GLint color0Loc;
-        GLint color1Loc;
-        GLint color2Loc;
-        GLint color3Loc;
+        GLint colorLoc;
         GLint nailsLoc;
         GLint strokeLoc;
         GLint viscosityLoc;
@@ -117,6 +111,7 @@ class WGLRakeRenderer: private WGLRenderer
 
         WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s);
         void reset(WGLSceneRenderer& sr, Scene const & s);
-        void rakeAndDraw(float x, float y, float speed, bool nails[100]);
+        void rake(float x, float y, float speed, bool nails[100]);
+        void draw();
         void drawToBuffer(void* buf, size_t& length);
 };

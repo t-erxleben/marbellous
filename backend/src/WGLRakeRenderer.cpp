@@ -13,10 +13,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     setupShaderProgram(vertex_source, draw_fragment_source, drawShader);
 
     // get all uniform locations
-    color0Loc = glGetUniformLocation(drawShader, "c0");
-    color1Loc = glGetUniformLocation(drawShader, "c1");
-    color2Loc = glGetUniformLocation(drawShader, "c2");
-    color3Loc = glGetUniformLocation(drawShader, "c3");
+    colorLoc = glGetUniformLocation(drawShader, "c");
     nailsLoc = glGetUniformLocation(rakeShader, "nails");
     viscosityLoc = glGetUniformLocation(rakeShader, "viscosity");
     strokeLoc = glGetUniformLocation(rakeShader, "stroke");
@@ -27,10 +24,9 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glEnableVertexAttribArray(0);
 
     // get rendered scene 
-    // todo: this needs to be in color codes; see issue #94
     std::vector<char> data(720*720*4);
     int len = data.size();
-    sr.drawToBuffer(s, data.data(), len);
+    sr.drawToBuffer(s, data.data(), len, false);
 
     // init fbo
     glGenFramebuffers(1, &fbo);
@@ -57,7 +53,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glDrawBuffers(1, drawBuffers);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
-        fprintf(stderr, "failed to create framebuffer for raking!");
+        fprintf(stderr, "failed to create framebuffer for raking!\n");
     }
 
     // init screenshot fbo
@@ -74,7 +70,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glDrawBuffers(1, drawBuffers);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
-        fprintf(stderr, "failed to create framebuffer for rake screenshot!");
+        fprintf(stderr, "failed to create framebuffer for rake screenshot!\n");
     }
 
     // unbind
@@ -109,12 +105,12 @@ void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void WGLRakeRenderer::rakeAndDraw(float x, float y, float speed, bool nails[1000])
+void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 {
     glUseProgram(rakeShader);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glBindTexture(GL_TEXTURE0, tex[curr_tex]);
+    glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
 
     // copy for now
     GLuint* nailsi = new GLuint[1000];
@@ -126,36 +122,42 @@ void WGLRakeRenderer::rakeAndDraw(float x, float y, float speed, bool nails[1000
     glUniform1f(scalingLoc, 1.0);
     glUniform2f(strokeLoc, x*speed, y*speed);
 
-    // todo draw call
+    // draw call
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     // swap textures
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex[curr_tex], 0);
     curr_tex = !curr_tex;
-    glBindTexture(GL_TEXTURE0, tex[curr_tex]);
-
-    // change shader
-    glUseProgram(drawShader);
-
-    // draw to screen
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
 
     // unbind
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindTexture(GL_TEXTURE0, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void WGLRakeRenderer::draw()
+{
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
+    glUseProgram(drawShader);
+    
+    auto opt = Options::getInstance();
+    std::vector<GLfloat> v;
+    auto p = *opt->getActivePalette();
+    buildColorBuffer(p, v);
+    glUniform3fv(colorLoc, p.getSize()*3, v.data());
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void WGLRakeRenderer::drawToBuffer(void* buf, size_t& length)
 {
     assert(length == 720 * 720 * 4);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glUseProgram(drawShader);
-    
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    draw();
     glReadPixels(0, 0, 720, 720, GL_RGBA, GL_UNSIGNED_BYTE, buf);
-
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

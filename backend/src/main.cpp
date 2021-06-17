@@ -6,6 +6,7 @@
 #include "WGLSceneRenderer.hpp"
 #include "Scene.hpp"
 #include "Options.hpp"
+#include "WGLRakeRenderer.hpp"
 
 #define checkSetup(RET) if (!setupDone) \
         { \
@@ -75,7 +76,7 @@ extern "C"
 		}
     }
 
-    // draw a circle at point (x,y) (should be normed to [0,1]^2) with radius r in the given color
+    // draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
     int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color)
     {
         checkSetup(-1);
@@ -190,6 +191,29 @@ Init stuff:
         scene = new Scene{};
 
         setupDone = true;
+
+        auto opt = Options::getInstance();
+        Palette p;
+        p.add(Color(0x8e1f1f));
+        p.add(Color(0x8e571f));
+        p.add(Color(0x8e1f57));
+        opt->setActivePalette(opt->addPalette(p));
+
+        for(int i = -5; i<=5; ++i)
+        {
+            for(int j = -5; j<=5; ++j)
+            {
+                addDrop(static_cast<float>(i)/5.0, static_cast<float>(j)/5.0, 0.07, abs((i*j)%3));
+            }
+        }
+        redraw();
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        WGLRakeRenderer r{*sceneRenderer, *scene};
+        bool nails[1000];
+        for(int i = 0; i <1000; ++i) nails[i] = i % 50 == 0;
+        r.rake(1.0, 0.0, 300.0, nails);
+        r.draw();
 
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);
