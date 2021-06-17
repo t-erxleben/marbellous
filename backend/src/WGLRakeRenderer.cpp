@@ -19,14 +19,15 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     strokeLoc = glGetUniformLocation(rakeShader, "stroke");
     scalingLoc = glGetUniformLocation(rakeShader, "scaling");
 
-    //set attrib (should just work for both shader because layout is set in shader code)
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(0);
 
     // get rendered scene 
     std::vector<char> data(720*720*4);
     int len = data.size();
     sr.drawToBuffer(s, data.data(), len, false);
+
+    //set attrib (should just work for both shader because layout is set in shader code)
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
 
     // init fbo
     glGenFramebuffers(1, &fbo);
@@ -65,12 +66,12 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fbo_screenshot, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colBuff, 0);
 
     glDrawBuffers(1, drawBuffers);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
-        fprintf(stderr, "failed to create framebuffer for rake screenshot!\n");
+        fprintf(stderr, "failed to create framebuffer for rake screenshot! state is: %i\n", glCheckFramebufferStatus(GL_FRAMEBUFFER));
     }
 
     // unbind
@@ -107,6 +108,8 @@ void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
 
 void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 {
+    printf("rake\n");
+
     glUseProgram(rakeShader);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
@@ -121,6 +124,9 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
     glUniform1f(viscosityLoc, 0.9);
     glUniform1f(scalingLoc, 1.0);
     glUniform2f(strokeLoc, x*speed, y*speed);
+
+    glViewport(0, 0, 720, 720);
+
 
     // draw call
     glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -137,6 +143,7 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 
 void WGLRakeRenderer::draw()
 {
+    printf("draw\n");
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
     glUseProgram(drawShader);
@@ -146,6 +153,9 @@ void WGLRakeRenderer::draw()
     auto p = *opt->getActivePalette();
     buildColorBuffer(p, v);
     glUniform3fv(colorLoc, p.getSize()*3, v.data());
+
+    glViewport(0, 0, 720, 720);
+
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
