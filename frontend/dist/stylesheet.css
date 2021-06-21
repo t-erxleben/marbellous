@@ -125,6 +125,7 @@ body {
 
 .menu {
 	vertical-align: middle;
+	padding-right: 100px;
 }
 
 .menu > li, .menu menu > li {
@@ -234,6 +235,10 @@ body {
 	top: 55;
 	left: 55;
 	opacity: 1;
+}
+
+body > #content {
+	margin-left: -132px;
 }
 
 p.notice {
