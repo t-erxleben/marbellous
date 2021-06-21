@@ -79,6 +79,7 @@ window.Module = {
 		backend.startRaking = Module.cwrap('startRaking', 'void', [])
 		backend.rakeLinear = Module.cwrap('rakeLinear',
 			'boolean', ['number', 'number', 'number', 'array'])
+		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
 		backend.fn_bind = true;
 		init();
 	}
@@ -93,9 +94,9 @@ function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
 	backend.setBGColor(color2int(tool.image.style.backgroundColor));
 	pallets[pallets.active].id = backend.addPallete(3);
+	const {A, B, C} = pallets[pallets.active]
+	backend.setPaletteColors(color2int(A), color2int(B), color2int(C))
 	backend.setActivePalette(pallets[pallets.active].id);
-	backend.setColorAt(1, color2int(pallets[pallets.active].B)),
-	backend.setColorAt(2, color2int(pallets[pallets.active].C)));
 	backend.redraw();
 	backend.init = true;
 }
@@ -386,83 +387,87 @@ document.addEventListener("DOMContentLoaded", function(){
 	sidebar.menu = document.querySelector('menu.sidebar');
 
 	{
-	const id = 'sidebar-pallet-active-pallet'
-	const el = document.getElementById(id);
-	fetchAndSet(el, id);
-	pallets.active = el.value;
-	el.addEventListener("change", (ev)=>{pallets.active = el.value
-		storage.store(id, el.value);
-		if(pallets[pallets.active] === undefined) {
-			pallets[pallets.active] = {id: backend.addPallete(3), A: null, B: null, C: null};
-			backend.setActivePalette(pallets[pallets.active].id);
-		} else {
-			backend.setActivePalette(pallets[pallets.active].id);
-		}
-		var {A, B, C} = pallets[pallets.active];
-		if(A == null) { fetchAndSet(pallets.inputs.A, pallets.active + 'sidebar-pallet-color-1') }
-		else { pallets.inputs.A.value = A }
-		if(B == null) { fetchAndSet(pallets.inputs.B, pallets.active + 'sidebar-pallet-color-2') }
-		else { pallets.inputs.B.value = B }
-		if(C == null) { fetchAndSet(pallets.inputs.C, pallets.active + 'sidebar-pallet-color-3') }
-		else { pallets.inputs.C.value = C }
-		A = pallets.inputs.A.value;
-		B = pallets.inputs.B.value;
-		C = pallets.inputs.C.value;
-		pallets[pallets.active] = {A, B, C}
-		backend.setPaletteColors(color2int(A), color2int(B), color2int(C));
-		backend.redraw();
-		updatePallet();
-	});
-	if(pallets[pallets.active] === undefined) {
-		pallets[pallets.active] = {A: "black", B: "black", C: "black"};
-	}
+		const id = 'sidebar-pallet-active-pallet'
+		const el = document.getElementById(id);
+		fetchAndSet(el, id);
+		pallets.active = el.value;
+		el.addEventListener("change", (ev)=>{pallets.active = el.value
+			storage.store(id, el.value);
+			if(pallets[pallets.active] === undefined) {
+				pallets[pallets.active] = {id: backend.addPallete(3), A: null, B: null, C: null};
+				backend.setActivePalette(pallets[pallets.active].id);
+			} else {
+				backend.setActivePalette(pallets[pallets.active].id);
+			}
+			var {A, B, C} = pallets[pallets.active];
+			if(A == null) { fetchAndSet(pallets.inputs.A, pallets.active + 'sidebar-pallet-color-1') }
+			else { pallets.inputs.A.value = A }
+			if(B == null) { fetchAndSet(pallets.inputs.B, pallets.active + 'sidebar-pallet-color-2') }
+			else { pallets.inputs.B.value = B }
+			if(C == null) { fetchAndSet(pallets.inputs.C, pallets.active + 'sidebar-pallet-color-3') }
+			else { pallets.inputs.C.value = C }
+			A = pallets.inputs.A.value;
+			B = pallets.inputs.B.value;
+			C = pallets.inputs.C.value;
+			pallets[pallets.active] = {A, B, C}
+			console.log('pallet: ', A, B, C);
+			backend.setPaletteColors(color2int(A), color2int(B), color2int(C));
+			backend.redraw();
+			updatePallet();
+		});
 		pallets.inputs = {};
+		if(pallets[pallets.active] == undefined) {
+			pallets[pallets.active] = {}
+		}
 	}
 	{
-	const iid = 'sidebar-pallet-color-1';
-	const el = document.getElementById(iid);
-	const id = function() { return pallets.active + iid }
-	fetchAndSet(el, id());
-	pallets[pallets.active]['A'] = el.value;
-	el.addEventListener("change", (ev)=>{pallets[pallets.active]['A'] = el.value;
-		storage.store(id(), el.value);
-		backend.setColorAt(0, color2int(el.value));
-		backend.redraw();
-		updatePallet();});
-	pallets.inputs.A = el;
+		const iid = 'sidebar-pallet-color-1';
+		const el = document.getElementById(iid);
+		const id = function() { return pallets.active + iid }
+		fetchAndSet(el, id());
+		pallets[pallets.active]['A'] = el.value;
+		el.addEventListener("change", (ev)=>{pallets[pallets.active]['A'] = el.value;
+			storage.store(id(), el.value);
+			backend.setColorAt(0, color2int(el.value));
+			backend.redraw();
+			updatePallet();});
+		pallets.inputs.A = el;
+		pallets[pallets.active].A = el.value
 	}
 	{
-	const iid = 'sidebar-pallet-color-2'
-	const el = document.getElementById(iid);
-	const id = function() { return pallets.active + iid }
-	fetchAndSet(el, id())
-	pallets[pallets.active]['B'] = el.value;
-	el.addEventListener("change", (ev)=>{pallets[pallets.active]['B'] = el.value;
-		storage.store(id(), el.value);
-		backend.setColorAt(1, color2int(el.value));
-		backend.redraw();
-		updatePallet();});
-	pallets.inputs.B = el;
+		const iid = 'sidebar-pallet-color-2'
+		const el = document.getElementById(iid);
+		const id = function() { return pallets.active + iid }
+		fetchAndSet(el, id())
+		pallets[pallets.active]['B'] = el.value;
+		el.addEventListener("change", (ev)=>{pallets[pallets.active]['B'] = el.value;
+			storage.store(id(), el.value);
+			backend.setColorAt(1, color2int(el.value));
+			backend.redraw();
+			updatePallet();});
+		pallets.inputs.B = el;
+		pallets[pallets.active].B = el.value
 	}
 	{
-	const iid = 'sidebar-pallet-color-3'
-	const el = document.getElementById(iid);
-	const id = function() { return pallets.active + iid }
-	fetchAndSet(el, id())
-	pallets[pallets.active]['C'] = el.value;
-	el.addEventListener("change", (ev)=>{pallets[pallets.active]['C'] = el.value;
-		storage.store(id(), el.value)
-		backend.setColorAt(2, color2int(el.value));
-		backend.redraw();
-		updatePallet();});
-	pallets.inputs.C = el;
+		const iid = 'sidebar-pallet-color-3'
+		const el = document.getElementById(iid);
+		const id = function() { return pallets.active + iid }
+		fetchAndSet(el, id())
+		pallets[pallets.active]['C'] = el.value;
+		el.addEventListener("change", (ev)=>{pallets[pallets.active]['C'] = el.value;
+			storage.store(id(), el.value)
+			backend.setColorAt(2, color2int(el.value));
+			backend.redraw();
+			updatePallet();});
+		pallets.inputs.C = el;
+		pallets[pallets.active].C = el.value
 	}
 	pallets.nodes = {
 		A: document.getElementById('color-1').labels[0],
 		B: document.getElementById('color-2').labels[0],
 		C: document.getElementById('color-3').labels[0],
 	};
-	updatePallet();
+	updatePallet()
 
 	{	const id = 'sidebar-rake-placement'
 		const el = document.getElementById(id);
@@ -512,6 +517,8 @@ var dropper = {
 					backend.resizeDrop(dropper.circle, r);
 				}
 				window.requestAnimationFrame(dropper.drop);
+			} else {
+				backend.finishDrop(dropper.drop);
 			}
 		},
 	down: function(x,y,w,h) {

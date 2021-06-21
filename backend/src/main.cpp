@@ -107,19 +107,25 @@ extern "C"
     int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius)
     {
         checkSetup(-1);
-        try
-        {
-			scene->setDisplacement(scene->getDisplacement().p, newRadius);
-        }
-        catch(const std::exception& e)
-        {
-            fprintf(stderr, "Tried to resize non existing drop!\n");
-            return -1;
-        }
+		if(dropID >= 0 && dropID != scene->getPolygonCount() - 1) {
+			fprintf(stderr, "Can only resize the last added drop!\n\tgot: %i, expected: %lu",
+					dropID,
+					scene->getPolygonCount() - 1);
+			return -1;
+		}
+		scene->setDisplacement(scene->getDisplacement().p, newRadius);
         sceneRenderer->drawScene(*scene);
     
         return 0;
     }
+
+	int EMSCRIPTEN_KEEPALIVE finishDrop(int dropID)
+	{
+		checkSetup(-1);
+		scene->applyDisplacement();
+		sceneRenderer->drawScene(*scene);
+		return 0;
+	}
 
     char *EMSCRIPTEN_KEEPALIVE getImage()
     {
