@@ -37,7 +37,7 @@ class RakeConfig {
 		)
 		this.createPattern = function() {}
 		this.getNails = function(handle) {
-			width = 1000
+			const width = 1000
 			return new Array(width).map(function(x,i) {
 				const d = i - handle + origin
 				if(d > 0 && d % 10 == 0)  {
@@ -715,16 +715,26 @@ var rake = {
 	},
 	setPattern: function(ctx) {
 		if(this.placement !== rake.config.placement) {
+			console.log(rake.config.placement)
 			this.placement = rake.config.placement;
 			rake.init();
 			const r = 5;
 			this.size = {x: r, y: r};
-			const of = ctx.canvas.width * this.placement.patternWidth / 1000;
-			rake.canvas.width = this.size.x * 2 + of;
+			const scale = ctx.canvas.width / 100
+			const of = this.placement.patternWidth * scale
+			rake.canvas.width = of;
 			rake.canvas.height = this.size.y * 2;
 			rake.ctx.setTransform(1,0,0,1,0,0);
 			rake.ctx.beginPath();
-			rake.ctx.ellipse(this.size.x, this.size.y,this.size.x,this.size.y,0, 2 * Math.PI, false);
+			{
+				var x = r
+				const y = r
+				rake.config.placement.config.spacing.forEach( function(space) {
+					rake.ctx.moveTo(x,y)
+					rake.ctx.ellipse(x, y, r, r, 0, 2 * Math.PI, false)
+					x += (1+space) * scale
+				})
+			}
 			rake.ctx.stroke();
 			this.pattern = ctx.createPattern(rake.canvas, 'repeat');
 		}
