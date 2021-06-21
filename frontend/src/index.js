@@ -36,12 +36,13 @@ class RakeConfig {
 			}
 		)
 		this.createPattern = function() {}
-		this.getNails = function(width, handle) {
+		this.getNails = function(handle) {
+			width = 1000
 			return new Array(width).map(function(x,i) {
 				const d = i - handle + origin
-				if(d > 0)  {
+				if(d > 0 && d % 10 == 0)  {
 					return this.pattern[d % this.patternWidth]
-				} else if ( d < 0) {
+				} else if ( d < 0 && d % 10 == 0) {
 					return this.pattern[this.patternWidth - 1 - (d % this.patternWidth)]
 				} else {
 					return 1
@@ -767,7 +768,7 @@ var rake = {
 		} else {
 			handle = Math.floor((start.x + 1.) / 2. * 1000.)
 		}
-		backend.rakeLinear(d.x/w, d.y/h, len,rake.config.placement.getNails(1000, handle))
+		backend.rakeLinear(d.x/w, d.y/h, len,rake.config.placement.getNails(handle))
 	}
 };
 // snap line parallel to axisa
