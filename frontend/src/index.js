@@ -496,7 +496,7 @@ function drawline(ctx, start, end) {
 var dropper = {
 	circle: null,
 	active: false,
-	speed: 0.0002,
+	speed: 0.00002,
 	time: null,
 	lastdrop: null,
 	draw: function(canvas, x,y) {
@@ -511,7 +511,7 @@ var dropper = {
 				}
 				if (time - dropper.lastdrop > 0.05) {
 					dropper.lastdrop = time;
-					const r = (time - dropper.time) * dropper.speed;
+					const r = Math.sqrt((time - dropper.time) * dropper.speed);
 					backend.resizeDrop(dropper.circle, r);
 				}
 				window.requestAnimationFrame(dropper.drop);
