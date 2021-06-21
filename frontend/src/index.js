@@ -730,7 +730,7 @@ var rake = {
 				var x = r
 				const y = r
 				rake.config.placement.config.spacing.forEach( function(space) {
-					rake.ctx.moveTo(x,y)
+					rake.ctx.moveTo(x + r,y)
 					rake.ctx.ellipse(x, y, r, r, 0, 2 * Math.PI, false)
 					x += (1+space) * scale
 				})
@@ -751,7 +751,9 @@ var rake = {
 		const len = Math.sqrt((leftBound.x - rightBound.x)**2 + (leftBound.y - rightBound.y)**2);
 		const startBound = a.x > 0 || (a.x === 0 && a.y > 0) ? leftBound : rightBound;
 
-		const offset = -Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2) % rake.canvas.width;
+		const scale = ctx.canvas.width / 100
+		const d = Math.sqrt((start.x - startBound.x)**2 + (start.y - startBound.y)**2)
+		const offset = (- (d == NaN ? 0 : d) + this.placement.config.origin * scale) % rake.canvas.width;
 		ctx.lineWidth = 2*r;
 		ctx.beginPath();
 		ctx.translate(startBound.x, startBound.y);
