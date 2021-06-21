@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	sparkle_dropper.img = document.getElementById('img-color-sparkle');
 
 	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
-		div.style.maxHeight = div.scrollHeight;
+		div.style.maxHeight = div.scrollHeight + 3;
 	});
 	sidebar.options = {
 		rake: document.getElementById('sidebar-rake'),

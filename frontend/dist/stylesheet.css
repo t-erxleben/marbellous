@@ -298,6 +298,7 @@ input.slider:checked + span.slider:before {
   -webkit-transform: translateX(1em);
   -ms-transform: translateX(1em);
   transform: translateX(1em);
+}
 
 input:invalid {
 	border: red solid 3px;
