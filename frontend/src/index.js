@@ -86,21 +86,14 @@ window.Module = {
 function color2int(color) {
 	if(color.charAt(0) == '#')	
 		return int("0x" + color.substr(1));
-	console.log(color)
 	return color.match('rgb\\((\\d*), (\\d*), (\\d*)')
 		.slice(1,4).reduce(function(acc,el){return acc*256+int(el)}, 0)
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
 	backend.setBGColor(color2int(tool.image.style.backgroundColor));
-	console.log(color2int(tool.image.style.backgroundColor));
 	pallets[pallets.active].id = backend.addPallete(3);
 	backend.setActivePalette(pallets[pallets.active].id);
-	console.log(
-		color2int(pallets[pallets.active].A),
-		color2int(pallets[pallets.active].B),
-		color2int(pallets[pallets.active].C));
-	console.log(backend.setColorAt(0, color2int(pallets[pallets.active].A)),
 	backend.setColorAt(1, color2int(pallets[pallets.active].B)),
 	backend.setColorAt(2, color2int(pallets[pallets.active].C)));
 	backend.redraw();
@@ -406,12 +399,16 @@ document.addEventListener("DOMContentLoaded", function(){
 			backend.setActivePalette(pallets[pallets.active].id);
 		}
 		var {A, B, C} = pallets[pallets.active];
-		fetchAndSet(pallets.inputs.A, pallets.active + 'sidebar-pallet-color-1')
+		if(A == null) { fetchAndSet(pallets.inputs.A, pallets.active + 'sidebar-pallet-color-1') }
+		else { pallets.inputs.A.value = A }
+		if(B == null) { fetchAndSet(pallets.inputs.B, pallets.active + 'sidebar-pallet-color-2') }
+		else { pallets.inputs.B.value = B }
+		if(C == null) { fetchAndSet(pallets.inputs.C, pallets.active + 'sidebar-pallet-color-3') }
+		else { pallets.inputs.C.value = C }
 		A = pallets.inputs.A.value;
-		fetchAndSet(pallets.inputs.B, pallets.active + 'sidebar-pallet-color-2')
 		B = pallets.inputs.B.value;
-		fetchAndSet(pallets.inputs.C, pallets.active + 'sidebar-pallet-color-3')
 		C = pallets.inputs.C.value;
+		pallets[pallets.active] = {A, B, C}
 		backend.setPaletteColors(color2int(A), color2int(B), color2int(C));
 		backend.redraw();
 		updatePallet();
@@ -618,7 +615,6 @@ var rake_dropper = {
 			const r = 5;
 			this.size = {x: r, y: r};
 			this.pattern_size = {x: w * 2, y: h};
-			console.log(h,of,this.pattern_size);
 			const pattern_offset = {x: w, y: of};
 
 			rake_dropper.canvas.width = this.pattern_size.x;
@@ -735,7 +731,6 @@ var rake = {
 			rake.init();
 			const r = 5;
 			this.size = {x: r, y: r};
-			console.log(this.placement.patternWidth);
 			const of = ctx.canvas.width * this.placement.patternWidth / 1000;
 			rake.canvas.width = this.size.x * 2 + of;
 			rake.canvas.height = this.size.y * 2;
