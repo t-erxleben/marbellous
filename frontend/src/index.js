@@ -80,6 +80,7 @@ window.Module = {
 		backend.rakeLinear = Module.cwrap('rakeLinear',
 			'boolean', ['number', 'number', 'number', 'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
+		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.fn_bind = true;
 		init();
 	}
@@ -196,6 +197,9 @@ function handleClick(el) {
 		switch(el.id) {
 			case 'download':
 				downloadCanvas();
+				break;
+			case 'clear':
+				backend.clearCanvas()
 				break;
 			case 'color-1':
 				color = 'A';

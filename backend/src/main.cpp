@@ -168,12 +168,20 @@ extern "C"
         }
     }
 
+	// clear the canvas (delete all polygones and redraw scene)
+	void EMSCRIPTEN_KEEPALIVE clearCanvas() {
+		checkSetup();
+		scene->clear();
+		sceneRenderer->drawScene(*scene);
+	}
+
 	// execute a linear rake in direction <x,y> with speed <speed>. <nails> is an array of bool with
 	// are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
 	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, GLuint nails[1000]) {
 		// TODO: implement 
 		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
 	}
+
 
 	void EMSCRIPTEN_KEEPALIVE startRaking() {
 		// TODO: implement
