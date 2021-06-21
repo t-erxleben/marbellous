@@ -1,4 +1,4 @@
-tr.sub-row > td{
+tr.sub-row > td:first-of-type {
 	padding-left: 30px;
 }
 

@@ -380,19 +380,22 @@ document.addEventListener("DOMContentLoaded", function(){
 			} else {
 				backend.setActivePalette(pallets[pallets.active].id);
 			}
-			var {A, B, C} = pallets[pallets.active];
+			var {A, B, C, background} = pallets[pallets.active];
 			if(A == null) { fetchAndSet(pallets.inputs.A, pallets.active + 'sidebar-pallet-color-1') }
 			else { pallets.inputs.A.value = A }
 			if(B == null) { fetchAndSet(pallets.inputs.B, pallets.active + 'sidebar-pallet-color-2') }
 			else { pallets.inputs.B.value = B }
 			if(C == null) { fetchAndSet(pallets.inputs.C, pallets.active + 'sidebar-pallet-color-3') }
 			else { pallets.inputs.C.value = C }
+			if(background == null) { fetchAndSet(pallets.inputs.background, pallets.active + 'sidebar-pallet-background') }
+			else { pallets.inputs.background.value = background }
 			A = pallets.inputs.A.value;
 			B = pallets.inputs.B.value;
 			C = pallets.inputs.C.value;
-			pallets[pallets.active] = {A, B, C}
-			console.log('pallet: ', A, B, C);
+			background = pallets.inputs.background.value;
+			pallets[pallets.active] = {A, B, C, background}
 			backend.setPaletteColors(color2int(A), color2int(B), color2int(C));
+			backend.setBGColor(color2int(background))
 			backend.redraw();
 			updatePallet();
 		});
@@ -400,6 +403,20 @@ document.addEventListener("DOMContentLoaded", function(){
 		if(pallets[pallets.active] == undefined) {
 			pallets[pallets.active] = {}
 		}
+	}
+	{
+		const iid = 'sidebar-pallet-background'
+		const el = document.getElementById(iid)
+		const id = function() { return pallets.active + iid }
+		fetchAndSet(el, id())
+		pallets[pallets.active]['background'] = el.value
+		el.addEventListener("change", (ev)=>{pallets[pallets.active]['background'] = el.value;
+			storage.store(id(), el.value);
+			backend.setBGColor(color2int(el.value))
+			backend.redraw()
+		})
+		pallets.inputs.background = el
+		pallets[pallets.active].background = el.value
 	}
 	{
 		const iid = 'sidebar-pallet-color-1';
