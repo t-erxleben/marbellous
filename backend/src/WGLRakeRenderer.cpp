@@ -6,15 +6,15 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     int len = 720*720*4;
     sr.drawToBuffer(s, data, len);
 
+    // build shader
+    setupShaderProgram(vertex_source, rake_fragment_source, rakeShader);
+    setupShaderProgram(vertex_source, draw_fragment_source, drawShader);
+
     // set up the one triangle to draw
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     GLfloat singeTriangle[6] = {-1.0, -1.0, 3.0, -1.0, -1.0, 3.0};
-    glBufferData(GL_ARRAY_BUFFER, 6, singeTriangle, GL_STATIC_DRAW);
-
-    // build shader
-    setupShaderProgram(vertex_source, rake_fragment_source, rakeShader);
-    setupShaderProgram(vertex_source, draw_fragment_source, drawShader);
+    glBufferData(GL_ARRAY_BUFFER, 6*sizeof(GLfloat), singeTriangle, GL_STATIC_DRAW);
 
     // get all uniform locations
     colorLoc = glGetUniformLocation(drawShader, "c");
