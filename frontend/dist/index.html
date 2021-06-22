@@ -17,7 +17,13 @@
 					}
 				}
 				if(window.storage) {
-					window.storage = new window.Storage()
+					try {
+						window.storage = new window.Storage()
+					} catch (e) {
+						window.alert('Failed to enable storing!\nThis may caused by the Application is not fully loaded!')
+						console.error(e)
+						switchStore.input.checked = false
+					}
 				}
 			}
 			document.addEventListener('DOMContentLoaded', function() {
