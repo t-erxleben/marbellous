@@ -2,6 +2,10 @@
 
 WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 {
+    char* data = new char[720*720*4];
+    int len = 720*720*4;
+    sr.drawToBuffer(s, data, len);
+
     // set up the one triangle to draw
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -19,12 +23,6 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     strokeLoc = glGetUniformLocation(rakeShader, "stroke");
     scalingLoc = glGetUniformLocation(rakeShader, "scaling");
 
-
-    // get rendered scene 
-    std::vector<char> data(720*720*4);
-    int len = data.size();
-    sr.drawToBuffer(s, data.data(), len, false);
-
     //set attrib (should just work for both shader because layout is set in shader code)
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
@@ -36,6 +34,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     
     // init textures
     glGenTextures(2, tex);
+
     curr_tex = 1;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
@@ -45,7 +44,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
     curr_tex = 0;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, data.data());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
@@ -78,14 +77,14 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    delete[] data;
 }
 
 void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
 {
-    // get rendered scene
-    std::vector<char> data(720*720*4);
-    int len = data.size();
-    sr.drawToBuffer(s, data.data(), len);
+    char* data = new char[720*720*4];
+    int len = 720*720*4;
+    sr.drawToBuffer(s, data, len);
 
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     
@@ -98,12 +97,14 @@ void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
 
     curr_tex = 0;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, data.data());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
+    delete[] data;
 }
 
 void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
@@ -127,7 +128,6 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 
     glViewport(0, 0, 720, 720);
 
-
     // draw call
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -144,9 +144,11 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 void WGLRakeRenderer::draw()
 {
     printf("draw\n");
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
+
     glUseProgram(drawShader);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
     
     auto opt = Options::getInstance();
     std::vector<GLfloat> v;
@@ -155,7 +157,6 @@ void WGLRakeRenderer::draw()
     glUniform3fv(colorLoc, p.getSize()*3, v.data());
 
     glViewport(0, 0, 720, 720);
-
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
