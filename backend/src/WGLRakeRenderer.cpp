@@ -4,7 +4,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 {
     char* data = new char[720*720*4];
     int len = 720*720*4;
-    sr.drawToBuffer(s, data, len);
+    sr.drawToBuffer(s, data, len, false);
 
     // build shader
     setupShaderProgram(vertex_source, rake_fragment_source, rakeShader);
@@ -44,7 +44,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
     curr_tex = 0;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
@@ -57,8 +57,8 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     }
 
     // init screenshot fbo
-    glGenFramebuffers(1, &fbo_screenshot);
     GLuint colBuff;
+    glGenFramebuffers(1, &fbo_screenshot);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
     glGenTextures(1, &colBuff);
     glBindTexture(GL_TEXTURE_2D, colBuff);
