@@ -2,7 +2,7 @@ import * as parser from './rake_syntax.pegjs'
 
 
 const int = parseInt;
-
+const inputs = {}
 window.Storage =  class Storage {
 	constructor() {
 		const store = window.localStorage;
@@ -11,11 +11,17 @@ window.Storage =  class Storage {
 				return store.getItem(id)
 			}
 			this.store = function(id, value) {
+				inputs[id] = value
 				store.setItem(id, value)
 			}
+			Object.keys(inputs).forEach(function(key){
+				this.store(key, inputs[key])
+			}, this)
 		} else {
 			this.fetch = function() { return null; }
-			this.store = function() {}
+			this.store = function(id, value) {
+				inputs[id] = value
+			}
 		}
 	}
 }
