@@ -497,6 +497,8 @@ var dropper = {
 	circle: null,
 	active: false,
 	speed: 0.00002,
+	fnSwitch: 250, // time to switch between linear and sqrt
+	slope: 0.00028284, // sqrt(fnSwitch * dropper.speed) / fnSwitch
 	time: null,
 	lastdrop: null,
 	draw: function(canvas, x,y) {
@@ -507,13 +509,12 @@ var dropper = {
 			if (dropper.active) {
 				if (!dropper.time) {
 					dropper.time = time;
-					dropper.lastdrop = time;
 				}
-				if (time - dropper.lastdrop > 0.05) {
-					dropper.lastdrop = time;
-					const r = Math.sqrt((time - dropper.time) * dropper.speed);
-					backend.resizeDrop(dropper.circle, r);
+				var r = Math.sqrt((time - dropper.time) * dropper.speed);
+				if(time - dropper.time < dropper.fnSwitch) {
+					r = (time - dropper.time) * dropper.slope
 				}
+				backend.resizeDrop(dropper.circle, r);
 				window.requestAnimationFrame(dropper.drop);
 			} else {
 				backend.finishDrop(dropper.drop);
