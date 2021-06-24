@@ -142,7 +142,7 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 
 void WGLRakeRenderer::draw()
 {
-    printf("draw\n");
+    printf("draw %i\n", curr_tex);
 
     glUseProgram(drawShader);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -155,7 +155,7 @@ void WGLRakeRenderer::draw()
     std::vector<GLfloat> v;
     auto p = *opt->getActivePalette();
     buildColorBuffer(p, v);
-    glUniform3fv(colorLoc, p.getSize()*3, v.data());
+    glUniform3fv(colorLoc, p.getSize(), v.data());
 
     glViewport(0, 0, 720, 720);
 

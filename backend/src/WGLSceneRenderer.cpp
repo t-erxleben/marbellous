@@ -143,7 +143,7 @@ void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 	// set colors
 	std::vector<GLfloat> v;
 	buildColorBuffer(p, v);
-	glUniform3fv(colorLoc, p.getSize()*3, v.data());
+	glUniform3fv(colorLoc, p.getSize(), v.data());
 
 	// set draw mode
 	glUniform1i(drawColorLoc, drawColor);
