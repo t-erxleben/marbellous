@@ -24,8 +24,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     scalingLoc = glGetUniformLocation(rakeShader, "scaling");
 
     //set attrib (should just work for both shader because layout is set in shader code)
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(0);
+    
 
     // init fbo
     glGenFramebuffers(1, &fbo);
@@ -147,6 +146,8 @@ void WGLRakeRenderer::draw()
 
     glUseProgram(drawShader);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
 
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
     
