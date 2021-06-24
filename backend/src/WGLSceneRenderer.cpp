@@ -151,6 +151,7 @@ void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 	const auto& dis = scene.getDisplacement();
 	glUniform1f(locDisR2, dis.r*dis.r);
 	glUniform2f(locDisP, dis.p.x, dis.p.y);
+	if(!drawColor) glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
@@ -174,4 +175,6 @@ void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 
 	if(indices) { delete[] indices; }
 	if(vertices) { delete[] vertices; }
+	auto [r, g, b] = Options::getInstance()->getBGColor()->getRGB();
+	if(!drawColor) { glClearColor(r/256.f, g/256.f, b/256.f, 1.); }
 }

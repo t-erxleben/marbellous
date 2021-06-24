@@ -16,7 +16,14 @@ class WGLRakeRenderer: private WGLRenderer
                 layout (location = 0) in vec2 position;
                 out vec2 texCoord;
                 void main(){
-                    gl_Position = vec4(position, 0.0, 1.0);
+                    if(gl_VertexID== 0) {
+                        gl_Position=vec4(-1,-1,0,1);
+                    } else if(gl_VertexID == 1){
+                        gl_Position=vec4(-1.,3., 0., 1.);
+                    } else {
+                        gl_Position=vec4(3.,-1.,0.,1.);
+                    }
+                    // gl_Position = vec4(position, 0.0, 1.0);
                     texCoord = vec2((position.x+1.0)/2.0, (position.y+1.0)/2.0);
                 }
             )=="};
@@ -53,7 +60,7 @@ class WGLRakeRenderer: private WGLRenderer
                         }
                     }
                     vec2 orig = texCoord - shift;
-					fFragment = texture(tex, orig);
+					fFragment = vec4(0, 0, 0, 1); // texture(tex, orig);
                 }
             )=="};
 
@@ -66,12 +73,13 @@ class WGLRakeRenderer: private WGLRenderer
                 out vec4 fFragment;
 
                 void main() {
-                    vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
-                    int colID = int(texture(tex, texCoord).r);
-
-                    if(colID < c.length())
+                    vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
+                    int colID = int(texture(tex, texCoord).r*256.);
+                    if(colID == 0) {
+                        discard;
+                    } else if(colID < c.length())
                     {
-                        color = vec4(c[colID], 1.0);
+                        color = vec4(1,0,0,1); // vec4(c[colID-1], 1.0);
                     }
                     else
                     {

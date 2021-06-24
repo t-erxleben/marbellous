@@ -57,7 +57,7 @@ class WGLSceneRenderer: private WGLRenderer
                     else
                     {
                         // draw color codes in red channel, intended to be used to generate code maps for raking
-                        color = vec4(float(colID), 0.0, 0.0, 0.0);
+                        color = vec4(float(colID + uint(1)) / 256., 0.0, 0.0, 0.0);
                     }
 					fFragment = color;
                 }

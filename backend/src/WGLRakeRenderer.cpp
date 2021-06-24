@@ -39,13 +39,16 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex[curr_tex], 0);
 
     curr_tex = 0;
-    glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     // set drawing buffer
     GLenum drawBuffers[1] = {GL_COLOR_ATTACHMENT0};
@@ -112,8 +115,11 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 
     glUseProgram(rakeShader);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex[!curr_tex], 0);
 
     // copy for now
     GLuint* nailsi = new GLuint[1000];
@@ -128,10 +134,10 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
     glViewport(0, 0, 720, 720);
 
     // draw call
+    glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     // swap textures
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex[curr_tex], 0);
     curr_tex = !curr_tex;
 
     // unbind
@@ -142,6 +148,8 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 
 void WGLRakeRenderer::draw()
 {
+    glDisable(GL_STENCIL_TEST);
+    glDisable(GL_DEPTH_TEST);
     printf("draw %i\n", curr_tex);
 
     glUseProgram(drawShader);
