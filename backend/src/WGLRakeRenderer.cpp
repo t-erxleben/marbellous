@@ -18,6 +18,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
     // get all uniform locations
     colorLoc = glGetUniformLocation(drawShader, "c");
+	numColorsLoc = glGetUniformLocation(drawShader, "num_colors");
     nailsLoc = glGetUniformLocation(rakeShader, "nails");
     viscosityLoc = glGetUniformLocation(rakeShader, "viscosity");
     strokeLoc = glGetUniformLocation(rakeShader, "stroke");
@@ -44,6 +45,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex[curr_tex], 0);
 
     curr_tex = 0;
+	glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -164,6 +166,7 @@ void WGLRakeRenderer::draw()
     auto p = *opt->getActivePalette();
     buildColorBuffer(p, v);
     glUniform3fv(colorLoc, p.getSize(), v.data());
+	glUniform1i(numColorsLoc, static_cast<int>(p.getSize()));
 
     glViewport(0, 0, 720, 720);
 

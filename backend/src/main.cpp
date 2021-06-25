@@ -213,7 +213,7 @@ Init stuff:
         WGLRakeRenderer r{*sceneRenderer, *scene};
         bool nails[1000];
         for(int i = 0; i <1000; ++i) nails[i] = i % 50 == 0;
-        // r.rake(1.0, 0.0, 300.0, nails);
+        r.rake(1.0, 0.0, 300.0, nails);
         r.draw();
 
         // keep WASM module alive

@@ -16,14 +16,7 @@ class WGLRakeRenderer: private WGLRenderer
                 layout (location = 0) in vec2 position;
                 out vec2 texCoord;
                 void main(){
-                    if(gl_VertexID== 0) {
-                        gl_Position=vec4(-1,-1,0,1);
-                    } else if(gl_VertexID == 1){
-                        gl_Position=vec4(-1.,3., 0., 1.);
-                    } else {
-                        gl_Position=vec4(3.,-1.,0.,1.);
-                    }
-                    // gl_Position = vec4(position, 0.0, 1.0);
+                    gl_Position = vec4(position, 0.0, 1.0);
                     texCoord = vec2((position.x+1.0)/2.0, (position.y+1.0)/2.0);
                 }
             )=="};
@@ -60,7 +53,7 @@ class WGLRakeRenderer: private WGLRenderer
                         }
                     }
                     vec2 orig = texCoord - shift;
-					fFragment = vec4(0, 0, 0, 1); // texture(tex, orig);
+					fFragment = texture(tex, orig);
                 }
             )=="};
 
@@ -68,6 +61,7 @@ class WGLRakeRenderer: private WGLRenderer
             R"==(#version 300 es
                 precision mediump float;
                 uniform vec3 c[10];
+				uniform int num_colors;
                 uniform sampler2D tex;
                 in vec2 texCoord;
                 out vec4 fFragment;
@@ -77,9 +71,10 @@ class WGLRakeRenderer: private WGLRenderer
                     int colID = int(texture(tex, texCoord).r*256.);
                     if(colID == 0) {
                         discard;
-                    } else if(colID < c.length())
+                    }
+					else if(colID <= num_colors)
                     {
-                        color = vec4(1,0,0,1); // vec4(c[colID-1], 1.0);
+                        color = vec4(c[colID-1], 1.0);
                     }
                     else
                     {
@@ -107,6 +102,7 @@ class WGLRakeRenderer: private WGLRenderer
 
         // uniform locations
         GLint colorLoc;
+		GLint numColorsLoc;
         GLint nailsLoc;
         GLint strokeLoc;
         GLint viscosityLoc;
