@@ -33,4 +33,5 @@ You can play with the current version at [github pages](https://t-erxleben.githu
 
 ## Copyright notice
 
-We use [PEG.js](https://pegjs.org/) to parse syntax. Thank you for this great tooling
+We use [PEG.js](https://pegjs.org/) to parse syntax. Thank you for this great tooling.
+Also a shout out to [fast-png](https://github.com/image-js/fast-png) for that easy there easy to use png encoder.
