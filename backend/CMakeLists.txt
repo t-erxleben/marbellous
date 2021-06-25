@@ -12,8 +12,8 @@ configure_file(${FRONTEND_DIR}/webpack.config.js.in ${CMAKE_CURRENT_BINARY_DIR}/
 
 include_directories(include/)
 
-add_custom_command(OUTPUT npm.stamp COMMAND npm install WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-add_custom_command(OUTPUT dist/index.js COMMAND npx webpack WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS ${WEB_SOURCESS} npm.stamp)
+add_custom_command(OUTPUT npm.stamp COMMAND npm install WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS package.json)
+add_custom_command(OUTPUT dist/index.js COMMAND npx webpack && touch dist/index.js WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS ${WEB_SOURCESS} npm.stamp)
 
 # add the executable
 add_executable(Marbellous dist/index.js ${SOURCES})
@@ -22,8 +22,8 @@ set_target_properties(Marbellous Marbellous-debug PROPERTIES CXX_STANDARD 17)
 
 # emcc flags
 if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
-	set_target_properties(Marbellous PROPERTIES LINK_FLAGS "-s EXTRA_EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1  -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1")
-	set_target_properties(Marbellous-debug PROPERTIES LINK_FLAGS "-fsanitize=undefined,address -g4 -s ASSERTIONS=1 -s TOTAL_MEMORY=278790144  -s EXTRA_EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1  -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1 -s LLD_REPORT_UNDEFINED")
+	set_target_properties(Marbellous PROPERTIES LINK_FLAGS "-s EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1  -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1")
+	set_target_properties(Marbellous-debug PROPERTIES LINK_FLAGS "-fsanitize=undefined,address -g4 -s ASSERTIONS=1 -s TOTAL_MEMORY=278790144  -s EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1  -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1 -s LLD_REPORT_UNDEFINED")
 	set_target_properties(Marbellous-debug PROPERTIES COMPILE_FLAGS "-fsanitize=undefined,address -s ASSERTIONS=1 -g4")
 endif()
 

@@ -132,13 +132,12 @@ extern "C"
 		constexpr int X = 720;
 		constexpr int Y = 720;
         checkSetup(NULL);
-        constexpr char prefix[] = "P6\n720\n720\n255\n";
-        constexpr int prefix_len = sizeof(prefix) - 1;
-        static std::vector<char> data(X * Y * 4 + prefix_len + 1);
-        data[0] = prefix_len;
-        memcpy(data.data() + 1, prefix, prefix_len);
-        sceneRenderer->drawToBuffer(*scene, data.data() + prefix_len + 1, static_cast<int>(data.size() - prefix_len - 1));
-        char *ptr = data.data() + prefix_len + 1;
+        static std::vector<char> data(X * Y * 4 + sizeof(int)*2);
+		reinterpret_cast<int*>(data.data())[0] = X;
+		reinterpret_cast<int*>(data.data())[1] = Y;
+
+        sceneRenderer->drawToBuffer(*scene, data.data() + sizeof(int)*2, static_cast<int>(data.size() - sizeof(int)*2));
+        char *ptr = data.data() + sizeof(int)*2;
         for (int i = 0; i < X * Y; ++i)
         {
             ptr[3 * i] = ptr[4 * i];
