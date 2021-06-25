@@ -10,6 +10,8 @@
 		invert(16%) sepia(41%) saturate(1116%) hue-rotate(226deg) brightness(99%) contrast(95%);
 	--sidebar-width:
 		350px;
+	--tool-bar-margin:
+		30px;
 }
 
 h1 {
@@ -171,7 +173,7 @@ body {
 	margin: 0;
 	padding: 0;
 	vertical-align: middle;
-	padding-right: 100px;
+	padding-right: var(--tool-bar-margin);
 }
 
 .menu > li, .menu menu > li {
@@ -255,9 +257,13 @@ body {
 	display: none;
 }
 
+
+.menu input ~ label {
+	border: 2px solid transparent;
+}
 .menu input:checked ~ label,
 .menu input ~ label:hover {
-	border: 2px solid;
+	border-color: black;
 	opacity: 1;
 }
 
