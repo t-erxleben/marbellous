@@ -72,69 +72,28 @@
 				<input type="radio" name="sidebar" id="sidebar-help"/>
 				<label for="sidebar-help">Help</label>
 				<div>
-					Bla bla helpful
+					Bla bla helpful<br>
+					explain rake syntax (TODO)
 				</div>
-		</li>
-		<!-- rake dropper menu -->
-		<li>
-				<input type="radio" name="sidebar" id="sidebar-rake-dropper" checked/>
-				<label for="sidebar-rake-dropper">Rake-Dropper</label>
-				<div>
-			<table>
-				<tr>
-					<td><label
-							for="sidebar-rake-dropper-width"
-							title="Horizontal space between to rake columns."
-							>dx:</label></td>
-					<td><input id="sidebar-rake-dropper-width"
-						type="number" autocomplete="on"
-						size="5" min="0" max="1000" step="1" value="100"
-						title="Horizontal space between to rake columns.">‰</td>
-				</tr>
-				<tr>
-					<td><label
-							for="sidebar-rake-dropper-height"
-							title="Vertical space between to rake rows."
-							>dy:</label></td>
-					<td><input
-						id="sidebar-rake-dropper-height"
-						type="number" autocomplete="on"
-						size="5" min="0" max="1000" step="1" value="100"
-						title="Vertical space between to rake rows.">‰</td>
-				</tr>
-				<tr>
-					<td><label
-							for="sidebar-rake-dropper-offset"
-							title="Vertical Offset between every first and second column."
-							>offset:</label></td>
-					<td><input
-						id="sidebar-rake-dropper-offset"
-						type="number" autocomplete="on"
-						size="5" min="0" max="1000" step="1" value="25"
-						title="Vertical Offset between every first and second column.">‰</td>
-				</tr>
-			</table></div>
 		</li>
 		<!-- rake -->
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-rake"/>
 				<label for="sidebar-rake">Rake</label>
-				<div><table>
-					<tr>
-						<td><label
-							for="sidebar-rake-placement"
-							title="space between nails in rake">
-								placement:
-							</label></td>
-						<td><input
-								title="<offset>:<space>(,<space>)*"
-								id="sidebar-rake-placement"
-								type="text" autocomplete="on"
-								pattern="([0-9]*:)?([0-9]+,)*[0-9]+"
-								value="150">‰
-						</td>	
-					</tr>
-					</table></div>
+				<div>
+					<label
+						for="sidebar-rake-placement"
+						title="space between nails in rake">
+							placement:
+						</label>
+						<br>
+					<input
+							title="<offset>:<space>(,<space>)*"
+							id="sidebar-rake-placement"
+							type="text" autocomplete="on"
+							pattern="([0-9]*:)?([0-9]+,)*[0-9]+"
+							value="20">%
+				</div>
 		</li>
 		<!-- pallet -->
 		<li>
@@ -163,15 +122,20 @@
 							<td><label for="sidebar-pallet-color-3">C:</label></td>
 							<td><input id="sidebar-pallet-color-3" type="color"
 								value="#DC143C"></td>
+						</tr><tr>
+							<td><label for='sidebar-pallet-background'>Background:</label></td>
+						</tr><tr>
+							<td></td>
+							<td><input id="sidebar-pallet-background" type="color"
+								value="#F7E9CE"></td>
 						</tr>
 					</table>
 				</div>
-
 		</li>
 	</menu>
 	</menu>
-	<div style="height:100%"><menu class="menu">
-			<li><input type="radio" id="color-picker" name="menu">
+	<div id="content" style="height:100%"><menu class="menu">
+			<li class="draw state"><input type="radio" id="color-picker" name="menu">
 				<label for="color-picker" title="select a color to apply">
 					<img src="icons/palette-solid.svg" alt="color picker">
 				</label><!-- romves whitespaces
@@ -218,57 +182,23 @@
 				</label>
 			</li>
 
-			<li class="draw state"><input type="radio" id="color-rake" name="menu">
-				<label for="color-rake" title="Apply color in regulare pattern. Hold for larger drops.">
-					<img src="icons/regular-rake-solid.svg" alt="color rake">
-				</label><!-- removes whitespace
-				--><menu option="rake_dropper">
-					<li><input type="radio" id="color-rake-displaced" name="color-rake" checked>
-						<label for="color-rake-displaced" title="Apply color in a >regular< pattern.">
-							<img src="icons/regular-rake-solid.svg" alt="displaced">
-						</label>
-					</li>
-					<li><input type="radio" id="color-rake-square" name="color-rake">
-						<label for="color-rake-square" title="Apply color in grid like pattern.">
-							<img src="icons/square-rake-solid.svg" alt="grid">
-						</label>
-					</li>
-					<li><input type="radio" id="color-rake-custom" name="color-rake">
-						<label for="color-rake-custom" title="Customized color rake.">
-							<img src="icons/question-solid.svg" alt="custom">
-						</label>
-					</li>
-				</menu>
-			</li>
-
 			<li class="draw state"><input type="radio" id="color-sprinkler" name="menu">
 				<label for="color-sprinkler" title="Apply color in random pattern. Hold for more drops.">
 					<img src="icons/sparkle-solid.svg" alt="color sprinkler">
 				</label>
 			</li>
 
-			<li><input type="radio" id="history" name="menu">
-				<label for="history" title="Go for and back in different steps.">
-					<img src="icons/exchange-alt-solid.svg" alt="history">
-				</label><!-- removes whitespace
-				--><menu>
-					<li><input type="button" id="clear" name="history">
-						<label for="clear" title="Clear canvas">
-							<img src="icons/chalkboard-solid.svg" alt="clear canvas">
-						</label>
-					</li>
-					<li><input type="button" id="switch-state" name="history">
-						<label for="switch-state" title="Start rakeing!">
-							<img src="icons/arrow-right-solid.svg">
-						</label>
-					</li>
-					<li><input type="button" id="back" name="history">
-						<label for="back" title="reverse last step">
-							<img src="icons/undo-solid.svg" alt="undo">
-						</label>
-					</li>
-				</menu>
+			<li><input type="button" id="clear" name="history">
+				<label for="clear" title="Clear canvas">
+					<img src="icons/chalkboard-solid.svg" alt="clear canvas">
+				</label>
 			</li>
+			<li><input type="button" id="switch-state" name="history">
+				<label for="switch-state" title="Start rakeing!">
+					<img src="icons/arrow-right-solid.svg">
+				</label>
+			</li>
+
 			<li><input type="button" id="download">
 				<label for="download" title="Download current canvas state as image">
 					<img src="icons/file-download-solid.svg" alt="download">
@@ -280,7 +210,7 @@
 			<canvas width="720" height="720" id="image" style="background: #f7e9ce;"></canvas>
 			<canvas width="720" height="720" id="overlay"></canvas>
 		</div></div>
-		<p class="notice">The source code and legal notice can be found at the <a href="https://github.com/t-erxleben/marbellous">Marbellous</a> GitHub reposetory.</p>
+		<p class="notice">The source code and legal notice can be found at the <a href="https://github.com/t-erxleben/marbellous">Marbellous</a> GitHub repository.</p>
 		</div>
 		<img style="display: none" id="img-color-dropper" width="32" height="32" src="icons/eye-dropper-solid.png">
 		<img style="display: none" id="img-color-sparkle" width="32" height="32" src="icons/sparkle-solid.png">
