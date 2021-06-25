@@ -107,19 +107,25 @@ extern "C"
     int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius)
     {
         checkSetup(-1);
-        try
-        {
-			scene->setDisplacement(scene->getDisplacement().p, newRadius);
-        }
-        catch(const std::exception& e)
-        {
-            fprintf(stderr, "Tried to resize non existing drop!\n");
-            return -1;
-        }
+		if(dropID >= 0 && dropID != scene->getPolygonCount() - 1) {
+			fprintf(stderr, "Can only resize the last added drop!\n\tgot: %i, expected: %lu",
+					dropID,
+					scene->getPolygonCount() - 1);
+			return -1;
+		}
+		scene->setDisplacement(scene->getDisplacement().p, newRadius);
         sceneRenderer->drawScene(*scene);
     
         return 0;
     }
+
+	int EMSCRIPTEN_KEEPALIVE finishDrop(int dropID)
+	{
+		checkSetup(-1);
+		scene->applyDisplacement();
+		sceneRenderer->drawScene(*scene);
+		return 0;
+	}
 
     char *EMSCRIPTEN_KEEPALIVE getImage()
     {
@@ -162,12 +168,20 @@ extern "C"
         }
     }
 
+	// clear the canvas (delete all polygones and redraw scene)
+	void EMSCRIPTEN_KEEPALIVE clearCanvas() {
+		checkSetup();
+		scene->clear();
+		sceneRenderer->drawScene(*scene);
+	}
+
 	// execute a linear rake in direction <x,y> with speed <speed>. <nails> is an array of bool with
 	// are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
 	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, GLuint nails[1000]) {
 		// TODO: implement 
 		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
 	}
+
 
 	void EMSCRIPTEN_KEEPALIVE startRaking() {
 		// TODO: implement

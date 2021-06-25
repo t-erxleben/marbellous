@@ -65,6 +65,11 @@ public:
     {
         return polygons.size();
     }
+	
+	void clear() {
+		polygons.clear();
+		++generation;
+	}
 
     /**
      * @return Begin iterator over the polygons in the scene
