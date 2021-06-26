@@ -36,19 +36,21 @@ class WGLRakeRenderer: private WGLRenderer
                     const float eps = 0.000001;
                     int i;
                     int dim;
-                    float d;
                     float nailPos;
+                    float d;
                     vec2 shift = vec2(0.0, 0.0);
+                    vec2 str = vec2(0.0, 0.0);
 
                     // assuming only strokes in x and y direction
                     dim = (dot(stroke, vec2(1.0, 0.0)) < eps) ? 0 : 1;
+
+                    // for each nail
                     for(i = 0; i < nails.length(); ++i)
                     {
                         if(nails[i])
                         {
-                            // 2.0 is the side length of the canvas
-                            nailPos = float(i) * 2.0 / float(nails.length());
-                            d = abs(gl_FragCoord[dim] - nailPos);
+                            nailPos = float(i) / float(nails.length());
+                            d = abs(texCoord[dim] - nailPos);
                             shift += stroke * pow(viscosity, scaling * d);
                         }
                     }

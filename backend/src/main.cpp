@@ -2,6 +2,8 @@
 #include <cstdio>
 #include <cmath>
 
+#include <stdlib.h> 
+
 #include "WGLContext.hpp"
 #include "WGLSceneRenderer.hpp"
 #include "Scene.hpp"
@@ -191,30 +193,6 @@ Init stuff:
         scene = new Scene{};
 
         setupDone = true;
-
-
-        auto opt = Options::getInstance();
-        Palette p;
-        p.add(Color(0x8e1f1f));
-        p.add(Color(0x8e571f));
-        p.add(Color(0x8e1f57));
-        opt->setActivePalette(opt->addPalette(p));
-
-        for(int i = -5; i<=5; ++i)
-        {
-            for(int j = -5; j<=5; ++j)
-            {
-                addDrop(static_cast<float>(i)/5.0, static_cast<float>(j)/5.0, 0.07, abs((i*j)%3));
-            }
-        }
-        redraw();
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        WGLRakeRenderer r{*sceneRenderer, *scene};
-        bool nails[1000];
-        for(int i = 0; i <1000; ++i) nails[i] = i % 50 == 0;
-        r.rake(1.0, 0.0, 300.0, nails);
-        r.draw();
 
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);

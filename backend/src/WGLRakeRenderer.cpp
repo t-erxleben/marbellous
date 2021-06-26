@@ -113,8 +113,6 @@ void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
 
 void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 {
-    printf("rake\n");
-
     glUseProgram(rakeShader);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
@@ -130,7 +128,8 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
     // set uniforms
     glUniform1uiv(nailsLoc, 1000, nailsi);
     glUniform1f(viscosityLoc, 0.9);
-    glUniform1f(scalingLoc, 1.0);
+    // FIXME set scaling to some actually meaningful value
+    glUniform1f(scalingLoc, 200.0);
     glUniform2f(strokeLoc, x*speed, y*speed);
 
     glViewport(0, 0, 720, 720);
