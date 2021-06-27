@@ -240,11 +240,12 @@ extern "C"
         speed /= 5000.;
 
         // FIXME repair broken nails from front end
-        for(int i = 0; i <1000; ++i) nails[i] = i%150==0;
+        static GLuint n[1000];
+        for(int i = 0; i <1000; ++i) n[i] = i%150==0;
 
         printf("x: %f, y %f, s: %f\n", x,y, speed);
 
-        rakeRenderer->rake(x,y,speed, nails);
+        rakeRenderer->rake(x,y,speed, n);
         rakeRenderer->draw();
 	}
 
