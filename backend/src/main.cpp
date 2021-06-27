@@ -78,8 +78,7 @@ extern "C"
 		}
     }
 
-    // draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
-    int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color)
+    int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color) ///< draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
     {
         checkSetup(-1);
 
@@ -105,9 +104,7 @@ extern "C"
 		sceneRenderer->drawScene(*scene);
 	}
 
-    // resize drop of given ID (return val of addDrop(...))
-    // influence of resizeVal is not defined yet
-    int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius)
+    int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius) ///< resize drop of given ID (return val of addDrop(...))
     {
         checkSetup(-1);
 		if(dropID >= 0 && dropID != scene->getPolygonCount() - 1) {
@@ -160,8 +157,7 @@ extern "C"
         return data.data();
     }
   
-    // deprecated and only draws in color 0
-    void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color)
+    void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color) ///< deprecated and only draws in color 0
     {
         checkSetup();
         if (r > Polygon::MIN_R)
@@ -171,15 +167,15 @@ extern "C"
         }
     }
 
-	// clear the canvas (delete all polygones and redraw scene)
-	void EMSCRIPTEN_KEEPALIVE clearCanvas() {
+	void EMSCRIPTEN_KEEPALIVE clearCanvas() { ///< clear the canvas (delete all polygones and redraw scene)
 		checkSetup();
 		scene->clear();
 		sceneRenderer->drawScene(*scene);
 	}
 
-	// execute a linear rake in direction <x,y> with speed <speed>. <nails> is an array of bool with
-	// are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
+	/** execute a linear rake in direction <x,y> with speed <speed>. 
+    * <nails> is an array of bool with are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
+    */
 	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, GLuint nails[1000]) {
 		// TODO: implement 
 		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
