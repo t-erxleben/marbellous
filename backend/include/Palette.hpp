@@ -18,14 +18,11 @@ public:
     Palette();
     Palette(size_t colors);
 
-    // adds color to palette and returns its index
-    size_t add(Color const col);
+    size_t add(Color const col); ///< adds color to palette and returns its index
 
     size_t getSize() const;
 
-    // get or set the color at index
-    // might throw std::out_of_range
-    Color& operator[](size_t const index);
+    Color& operator[](size_t const index); ///< get or set the color at index, might throw std::out_of_range
     const Color& operator[](size_t const index) const;
 
     /**

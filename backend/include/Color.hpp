@@ -27,15 +27,12 @@ public:
     */
     Color(uint8_t const r, uint8_t const g, uint8_t const b);
 
-    // construct from color code
-    Color(unsigned const int);
+    
+    Color(unsigned const int); ///< construct from color code
 
-    // set either via color channels
-    void set(uint8_t const r, uint8_t const g, uint8_t const b);
+    void set(uint8_t const r, uint8_t const g, uint8_t const b); ///< set via color channels
 
-    // set via color code
-    void set(unsigned const int);
+    void set(unsigned const int); ///< set via color code
 
-    // get color channels
-   	rgb_t getRGB() const;
+   	rgb_t getRGB() const; ///< get color channels
 };
