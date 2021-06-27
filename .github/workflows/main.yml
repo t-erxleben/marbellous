@@ -28,7 +28,7 @@ jobs:
         uses: mattnotmitt/doxygen-action@v1
         with:
           working-directory: 'backend/'
-          doxyfile-path: 'backend/Doxyfile'
+          doxyfile-path: 'Doxyfile'
 
       - name: Run emCMake
         run: |
