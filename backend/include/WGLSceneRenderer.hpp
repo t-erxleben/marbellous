@@ -32,41 +32,44 @@ class WGLSceneRenderer: private WGLRenderer
                 }
             )=="};
     
-        // todo
         std::string const fragment_source{
             R"==(#version 300 es
                 precision mediump float;
                 flat in uint colID;
-                uniform vec3 c0;
-                uniform vec3 c1;
-                uniform vec3 c2;
-                uniform vec3 c3;
+                uniform bool drawColor;
+                uniform vec3 c[10];
                 out vec4 fFragment;
-                void colorMap(in uint cc, out vec4 color) {
-                    switch(cc) {
-                        case 0u: color = vec4(c0, 1.0f); break;
-                        case 1u: color = vec4(c1, 1.0f); break;
-                        case 2u: color = vec4(c2, 1.0f); break;
-                        case 3u: color = vec4(c3, 1.0f); break;
-                        default: color = vec4(1.0f, 0.0f, 0.5f, 1.0f);
-                    }
-                }
+                
                 void main() {
                     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
-                    colorMap(colID, color);
+                    if(drawColor)
+                    {
+                        if(int(colID) < c.length())
+                        {
+                            color = vec4(c[colID], 1.0);
+                        }
+                        else
+                        {
+                            // bright magenta for default color
+                            color = vec4(1.0, 0.0, 1.0, 1.0);
+                        }
+                    }
+                    else
+                    {
+                        // draw color codes in red channel, intended to be used to generate code maps for raking
+                        color = vec4(float(colID + uint(1)) / 256., 0.0, 0.0, 0.0);
+                    }
 					fFragment = color;
                 }
             )=="};
 
         GLint shaderProgram;
 
-        GLuint vao;
+        GLuint vbo;
         GLuint ebo;
 
-        GLint color0Loc;
-        GLint color1Loc;
-        GLint color2Loc;
-        GLint color3Loc;
+        GLint colorLoc;
+        GLint drawColorLoc;
 		GLint locDisR2;
 		GLint locDisP;
 
@@ -78,7 +81,7 @@ class WGLSceneRenderer: private WGLRenderer
         
     public:
         WGLSceneRenderer();
-		void drawToBuffer(const Scene& scene, char* data, int len);
-        void drawScene(Scene const & scene);
+		void drawToBuffer(const Scene& scene, char* data, int len, bool drawColor = true);
+        void drawScene(Scene const & scene, bool drawColor = true);
         void setActive() const;
 };
