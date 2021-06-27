@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - feature/#41-doxygen #test
+      - feature/#41-doxygen
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -26,9 +26,9 @@ jobs:
 
       - name: Doxygen
         uses: mattnotmitt/doxygen-action@v1
-          with:
-            working-directory: 'backend/'
-            doxyfile-path: 'backend/Doxyfile'
+        with:
+          working-directory: 'backend/'
+          doxyfile-path: 'backend/Doxyfile'
 
       - name: Run emCMake
         run: |
