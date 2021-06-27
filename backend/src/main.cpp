@@ -2,10 +2,13 @@
 #include <cstdio>
 #include <cmath>
 
+#include <stdlib.h> 
+
 #include "WGLContext.hpp"
 #include "WGLSceneRenderer.hpp"
 #include "Scene.hpp"
 #include "Options.hpp"
+#include "WGLRakeRenderer.hpp"
 
 #define checkSetup(RET) if (!setupDone) \
         { \
@@ -75,7 +78,7 @@ extern "C"
 		}
     }
 
-    // draw a circle at point (x,y) (should be normed to [0,1]^2) with radius r in the given color
+    // draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
     int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color)
     {
         checkSetup(-1);

@@ -4,21 +4,21 @@ WGLSceneRenderer::WGLSceneRenderer()
 {
     setupShaderProgram(vertex_source, fragment_source, shaderProgram);
 
-    // init vao
-    glGenBuffers(1, &vao);
-    glBindBuffer(GL_ARRAY_BUFFER, vao);
+    // init vbo
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
     // init ebo
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
-    // define attribs for vao
     // define position
     GLint pos = glGetAttribLocation(shaderProgram, "position");
     GLint col = glGetAttribLocation(shaderProgram, "colorCode");
 	GLint z   = glGetAttribLocation(shaderProgram, "z");
 	char* offset = 0;
 
+	//define attribs
     glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), offset);
     glEnableVertexAttribArray(pos);
 	offset += sizeof(WGLVertex::p);
@@ -35,10 +35,8 @@ WGLSceneRenderer::WGLSceneRenderer()
 	assert(offset == (char*)sizeof(WGLVertex));
 
     // lookup uniform location
-    color0Loc = glGetUniformLocation(shaderProgram, "c0");
-    color1Loc = glGetUniformLocation(shaderProgram, "c1");
-    color2Loc = glGetUniformLocation(shaderProgram, "c2");
-    color3Loc = glGetUniformLocation(shaderProgram, "c3");
+    colorLoc = glGetUniformLocation(shaderProgram, "c");
+	drawColorLoc = glGetUniformLocation(shaderProgram, "drawColor");
 	locDisR2  = glGetUniformLocation(shaderProgram, "disR2");
 	locDisP   = glGetUniformLocation(shaderProgram, "disP");
 
@@ -109,23 +107,23 @@ void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, 
 void WGLSceneRenderer::setActive() const
 {
     glUseProgram(shaderProgram);
-    glBindBuffer(GL_ARRAY_BUFFER, vao);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
     // Set the viewport
     glViewport(0, 0, 720, 720);
 }
 
-void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len)
+void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len, bool drawColor)
 {
     assert(len == 720 * 720 * 4);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     glViewport(0, 0, 720, 720);
-    drawScene(scene);
+    drawScene(scene, drawColor);
     glReadPixels(0, 0, 720, 720, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void WGLSceneRenderer::drawScene(Scene const &scene)
+void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 {
     setActive();
 
@@ -138,18 +136,22 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, i_size, indices, GL_DYNAMIC_DRAW);
 	}
 
-    // todo set uniforms
+    // set uniforms
     auto opt = Options::getInstance();
     const auto& p = *opt->getActivePalette();
-	GLint locs[] = {color0Loc, color1Loc, color2Loc, color3Loc};
-	for(size_t i = 0; i < p.getSize(); ++i) {
-		auto c = p[i].getRGB();
-		glUniform3f(locs[i], std::get<0>(c) / 255.0f, std::get<1>(c) / 255.0f, std::get<2>(c) / 255.0f);
-	}
 
+	// set colors
+	std::vector<GLfloat> v;
+	buildColorBuffer(p, v);
+	glUniform3fv(colorLoc, p.getSize(), v.data());
+
+	// set draw mode
+	glUniform1i(drawColorLoc, drawColor);
+	
 	const auto& dis = scene.getDisplacement();
 	glUniform1f(locDisR2, dis.r*dis.r);
 	glUniform2f(locDisP, dis.p.x, dis.p.y);
+	if(!drawColor) glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
@@ -173,4 +175,6 @@ void WGLSceneRenderer::drawScene(Scene const &scene)
 
 	if(indices) { delete[] indices; }
 	if(vertices) { delete[] vertices; }
+	auto [r, g, b] = Options::getInstance()->getBGColor()->getRGB();
+	if(!drawColor) { glClearColor(r/256.f, g/256.f, b/256.f, 1.); }
 }
