@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - feature/#41-doxygen
+      - feature/#41-doxygen #test
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
