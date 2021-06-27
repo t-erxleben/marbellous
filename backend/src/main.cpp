@@ -12,7 +12,7 @@
 
 #define checkSetup(RET) if (!setupDone) \
         { \
-            fprintf(stderr, "Backend is not initialized yet!\n"); \
+            fprintf(stderr, "%s: %s", __func__, ": Backend is not initialized yet!\n"); \
             return RET; \
         } \
 
@@ -180,9 +180,20 @@ extern "C"
 
 	// execute a linear rake in direction <x,y> with speed <speed>. <nails> is an array of bool with
 	// are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
-	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, GLuint nails[1000]) {
+	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, bool nails[1000]) {
 		// TODO: implement 
 		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
+		GLuint nail_uint[1000];
+		for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
+		int count = 0;
+        for(int i = 0; i <1000; ++i) {
+			if(nail_uint[i] == 0) { ++count; }
+			else {
+				std::cout << "<"<<count<<">"<< 1 << ", ";
+				count = 0;
+			}
+		}
+        std::cout << std::endl;
 	}
 
 
