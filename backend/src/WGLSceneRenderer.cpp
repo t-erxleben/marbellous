@@ -108,6 +108,34 @@ void WGLSceneRenderer::setActive() const
 {
     glUseProgram(shaderProgram);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+
+    // define position
+    GLint pos = glGetAttribLocation(shaderProgram, "position");
+    GLint col = glGetAttribLocation(shaderProgram, "colorCode");
+	GLint z   = glGetAttribLocation(shaderProgram, "z");
+	char* offset = 0;
+
+	//define attribs
+    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(pos);
+	offset += sizeof(WGLVertex::p);
+
+    glVertexAttribIPointer(z, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(z);
+	offset += sizeof(WGLVertex::z);
+
+    // define color
+    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(col);
+	offset += sizeof(WGLVertex::color);
+
+	assert(offset == (char*)sizeof(WGLVertex));
+
+	glClearDepthf(1.);
+	glClearStencil(0b10);
+	glEnable(GL_STENCIL_TEST);
+	glEnable(GL_DEPTH_TEST);
 
     // Set the viewport
     glViewport(0, 0, 720, 720);
@@ -125,8 +153,8 @@ void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len, boo
 
 void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 {
-    setActive();
-
+	setActive();
+	
 	WGLVertex* vertices = nullptr;
 	GLuint* indices = nullptr;
 	if (generation != scene.getGeneration()) {

@@ -2,16 +2,16 @@
 
 WGLContext* WGLContext::instance = nullptr;
 
-WGLContext::WGLContext(std::string canvasID, size_t x, size_t y): canvasSize{x,y}
+WGLContext::WGLContext(std::string canvasID, size_t x): canvasSize{x}
 {
-    emscripten_set_canvas_element_size(canvasID.c_str(), x, y);
+    emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
     EmscriptenWebGLContextAttributes attrs;
     emscripten_webgl_init_context_attributes(&attrs);
 
     attrs.explicitSwapControl = 0; 	// browser decide when to swap -> higher performance
     attrs.depth = 1;				// more polygone magic
     attrs.stencil = 1; 				// needed for polygone magic ^^
-    attrs.antialias = 0;			// we wan't to calculate high quality images, so no need for this
+    attrs.antialias = 0;			// we want to calculate high quality images so no need for this
     attrs.majorVersion = 2;
     attrs.minorVersion = 0;
 
@@ -19,7 +19,7 @@ WGLContext::WGLContext(std::string canvasID, size_t x, size_t y): canvasSize{x,y
 
     emscripten_webgl_make_context_current(context);
 
-    glViewport(0,0, x, y);
+    glViewport(0,0, x, x);
 
 	updateBGColor();
     glClear(GL_COLOR_BUFFER_BIT);
@@ -37,14 +37,13 @@ void WGLContext::updateBGColor() {
 }
 
 
-void WGLContext::setCanvasSize(size_t x, size_t y)
+void WGLContext::setCanvasSize(size_t x)
 {
-    canvasSize.first = x;
-    canvasSize.second = y;
+    canvasSize = x;
 }
 
 
-CanvasSize WGLContext::getCanvasSize()
+size_t WGLContext::getCanvasSize()
 {
     return canvasSize;
 }
@@ -61,3 +60,9 @@ WGLContext * const WGLContext::getContext()
         return instance;
     }
 }
+
+void WGLContext::canvasResize(size_t x)
+{
+    emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
+}
+
