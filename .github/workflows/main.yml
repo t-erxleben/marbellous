@@ -20,9 +20,14 @@ jobs:
           version: 2.0.16
           actions-cache-folder: emsdk-cache
 
-      #Following two just for info in case something goes wrong
       - name: Verify
         run: emcc -v
+
+      - name: Doxygen
+        uses: mattnotmitt/doxygen-action@v1
+        with:
+          working-directory: 'backend/'
+          doxyfile-path: 'Doxyfile'
 
       - name: Run emCMake
         run: |

@@ -111,8 +111,7 @@ public:
 		return polygons.rend();
 	}
 
-	// stores current state, advance generation
-	void applyDisplacement() {
+	void applyDisplacement() { ///< stores current state, advance generation
 		for(auto& p : *this) {
 			p.displace(displacement.p, displacement.r);
 		}
