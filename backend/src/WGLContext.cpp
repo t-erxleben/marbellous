@@ -11,7 +11,7 @@ WGLContext::WGLContext(std::string canvasID, size_t x): canvasSize{x}
     attrs.explicitSwapControl = 0; 	// browser decide when to swap -> higher performance
     attrs.depth = 1;				// more polygone magic
     attrs.stencil = 1; 				// needed for polygone magic ^^
-    attrs.antialias = 0;			// we want to calculate high quality images so no need for this
+    attrs.antialias = 1;			// we want to calculate high quality images so no need for this
     attrs.majorVersion = 2;
     attrs.minorVersion = 0;
 

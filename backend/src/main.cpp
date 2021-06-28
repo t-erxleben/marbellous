@@ -39,9 +39,9 @@ Interface to front end:
 
 extern "C"
 {
-    void initBackend(char *canvasID, size_t x)
+    void initBackend(char *canvasID, size_t dropRes, size_t rakeRes)
     {
-        _initWGLContext(canvasID, x);
+        _initWGLContext(canvasID, dropRes);
 
 		WGLContext::getContext()->updateBGColor();
 
@@ -229,7 +229,7 @@ extern "C"
 	// execute a linear rake in direction <x,y> with speed <speed>. <nails> is an array of bool with
 	// are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
 	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, GLuint nails[1000]) {
-        checkState(false,)
+        checkState(false,);
 
 		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
         constexpr float eps = 1e-9;
@@ -250,7 +250,7 @@ extern "C"
 	}
 
 	void EMSCRIPTEN_KEEPALIVE startRaking() {
-        checkState(true,)
+        checkState(true,);
 		std::cout << "start Raking\n";
         Options::getInstance()->setState(false);
         rakeRenderer->reset(*sceneRenderer, *scene);
@@ -258,11 +258,12 @@ extern "C"
 	}
 
     void EMSCRIPTEN_KEEPALIVE startDropping() {
-        checkState(false,)
+        checkState(false,);
 		std::cout << "start Dropping\n";
         Options::getInstance()->setState(true);
         sceneRenderer->drawScene(*scene);
 	}
+
 /*------------------------------------------
 Init stuff:
 --------------------------------------------*/
@@ -272,7 +273,7 @@ Init stuff:
         // setup
         // This needs to be done in the front end (init call should be after bg):
         char id[] = "#image";
-        initBackend(id, 720);
+        initBackend(id, 720, 720);
 
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);

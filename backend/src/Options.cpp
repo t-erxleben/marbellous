@@ -1,18 +1,16 @@
 #include "Options.hpp"
 #include <cstdio>
 
-Options::Options(): bgColor{0xf7e9ce}, dropState{true} /*, activePalette{0}, Palettes(1)*/
+Options::Options(): bgColor{0xf7e9ce}, dropState{true} , activePalette{0}, Palettes(1)
 {
     // FIXME defaults seem to break the way front end initializes the palette
-    /*
     // set default colors
     Palette tmp(3);
     // taken from @colours.cafe https://www.instagram.com/p/CKEJtrvAXVT/
-    tmp.add(Color{0x09382F});
-    tmp.add(Color{0xBE3D3D});
-    tmp.add(Color{0xC99910});
+    tmp.add(Color(0x09382F));
+    tmp.add(Color(0xBE3D3D));
+    tmp.add(Color(0xC99910));
     Palettes.push_back(tmp);
-    */
 }
 
 Options* const Options::getInstance()
