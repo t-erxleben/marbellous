@@ -147,7 +147,7 @@ extern "C"
 		for(int y = 0; y < Y/2; ++y) {
 			for(int x = 0; x < X; ++x) {
 				int i = y * X + x;
-				int j = (Y-y) * X + x;
+				int j = (Y - y - 1) * X + x;
 				std::swap(ptr[3* i], ptr[3*j]);
 				std::swap(ptr[3* i + 1], ptr[3*j + 1]);
 				std::swap(ptr[3* i + 2], ptr[3*j + 2]);
