@@ -294,6 +294,27 @@ body {
 	opacity: 1;
 }
 
+.menu input:checked ~ menu > li:first-child:nth-last-child(4):not(.hide) {
+	top: -55;
+	left: 55;
+	opacity: 1;
+}
+.menu input:checked ~ menu > li:first-child:nth-last-child(4):not(.hide) ~ li:nth-child(2):not(.hide){
+	top: -25;
+	left: 75;
+	opacity: 1;
+}
+.menu input:checked ~ menu > li:first-child:nth-last-child(4):not(.hide) ~ li:nth-child(3):not(.hide){
+	top: 25;
+	left: 75;
+	opacity: 1;
+}
+.menu input:checked ~ menu > li:first-child:nth-last-child(4) ~ li:nth-child(4):not(.hide) {
+	top: 55;
+	left: 55;
+	opacity: 1;
+}
+
 body > #content {
 	margin-left: -132px;
 }

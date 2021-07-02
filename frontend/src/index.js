@@ -67,7 +67,7 @@ var state = 'draw';
 var nodes = {};
 var backend = {fn_bind: false, dom_setup: false, init: false};
 var color = 0x228B22;
-var pallets = {}
+var pallets = { nodes: [] }
 window.Module = {
 	onRuntimeInitialized: function() {
 		backend.addPallete = Module.cwrap('addPalette',
@@ -103,11 +103,14 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
-	backend.setBGColor(color2int(tool.image.style.backgroundColor));
-	pallets[pallets.active].id = backend.addPallete(3);
-	const {A, B, C} = pallets[pallets.active]
-	backend.setPaletteColors(color2int(A), color2int(B), color2int(C))
+	backend.setBGColor(color2int(pallets[pallets.active].background));
+	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
+	console.log(pallets);
+	pallets[pallets.active].colors.forEach(function(x,i) {
+		backend.setColorAt(i, color2int(x))
+	})
+	color = 0
 	backend.redraw();
 	backend.init = true;
 }
@@ -119,10 +122,9 @@ function intersectRect(r1, r2) {
            r2.bottom < r1.top);
 }
 function updatePallet() {
-	const {A, B, C} = pallets[pallets.active];
-	pallets.nodes.A.style.background = A;
-	pallets.nodes.B.style.background = B;
-	pallets.nodes.C.style.background = C;
+	pallets.nodes.forEach(function(x,i){
+		x.style.background = pallets[pallets.active].colors[i]
+	})
 }
 var sidebar = {
 	rake_dropper: {},
@@ -227,15 +229,6 @@ function handleClick(el) {
 					}
 				}
 				break;
-			case 'color-1':
-				color = 'A';
-				break;
-			case 'color-2':
-				color = 'B';
-				break;
-			case 'color-3':
-				color = 'C';
-				break;
 			case 'color-dropper':
 				tool.tool[state] = dropper;
 				break;
@@ -283,6 +276,9 @@ function handleClick(el) {
 				switch(state) { case 'draw': state = 'rake'; break; case 'rake': state = 'draw'; break; }
 				switchState(oldState, state);
 				break;
+			default:
+				const cid = pallets.nodes.indexOf(el.labels[0])
+				if (cid >= 0) { color = cid }
 		}
 }
 
@@ -395,33 +391,38 @@ document.addEventListener("DOMContentLoaded", function(){
 		el.addEventListener("change", (ev)=>{pallets.active = el.value
 			storage.store(id, el.value);
 			if(pallets[pallets.active] === undefined) {
-				pallets[pallets.active] = {id: backend.addPallete(3), A: null, B: null, C: null};
-				backend.setActivePalette(pallets[pallets.active].id);
-			} else {
-				backend.setActivePalette(pallets[pallets.active].id);
+				pallets[pallets.active] = {id: backend.addPallete(pallets.inputs.length), colors: []};
 			}
-			var {A, B, C, background} = pallets[pallets.active];
-			if(A == null) { fetchAndSet(pallets.inputs.A, pallets.active + 'sidebar-pallet-color-1') }
-			else { pallets.inputs.A.value = A }
-			if(B == null) { fetchAndSet(pallets.inputs.B, pallets.active + 'sidebar-pallet-color-2') }
-			else { pallets.inputs.B.value = B }
-			if(C == null) { fetchAndSet(pallets.inputs.C, pallets.active + 'sidebar-pallet-color-3') }
-			else { pallets.inputs.C.value = C }
+			backend.setActivePalette(pallets[pallets.active].id);
+
+			var {colors, background} = pallets[pallets.active];
+			
+			pallets.inputs.forEach(function(x,i){
+				if(!colors[i]) {
+					fetchAndSet(x, pallets.active + 'sidebar-pallet-color-' + i.toString())
+				} else {
+					x.value = colors[i]
+				}
+			})
 			if(background == null) { fetchAndSet(pallets.inputs.background, pallets.active + 'sidebar-pallet-background') }
 			else { pallets.inputs.background.value = background }
-			A = pallets.inputs.A.value;
-			B = pallets.inputs.B.value;
-			C = pallets.inputs.C.value;
+
+
+			pallets.inputs.forEach(function(x,i) {
+				colors[i] = x.value;
+			});
 			background = pallets.inputs.background.value;
-			pallets[pallets.active] = {A, B, C, background}
-			backend.setPaletteColors(color2int(A), color2int(B), color2int(C));
+			pallets[pallets.active] = {colors, background}
+			pallets[pallets.active].colors.forEach(function(x,i){
+				backend.setColorAt(i, color2int(x))
+			})
 			backend.setBGColor(color2int(background))
 			backend.redraw();
 			updatePallet();
 		});
-		pallets.inputs = {};
+		pallets.inputs = [];
 		if(pallets[pallets.active] == undefined) {
-			pallets[pallets.active] = {}
+			pallets[pallets.active] = { colors: [] }
 		}
 	}
 	{
@@ -436,55 +437,33 @@ document.addEventListener("DOMContentLoaded", function(){
 			backend.redraw()
 		})
 		pallets.inputs.background = el
+		console.log('bg', el.value)
 		pallets[pallets.active].background = el.value
 	}
+	var i = 0
+	var sbc = null
+	while(sbc = document.getElementById('sidebar-pallet-color-' + i.toString()))
 	{
-		const iid = 'sidebar-pallet-color-1';
-		const el = document.getElementById(iid);
+		const el = sbc
+		const num = i
+		const iid = 'sidebar-pallet-color-' + num.toString();
 		const id = function() { return pallets.active + iid }
 		fetchAndSet(el, id());
-		pallets[pallets.active]['A'] = el.value;
-		el.addEventListener("change", (ev)=>{pallets[pallets.active]['A'] = el.value;
+		pallets[pallets.active].colors[i] = el.value;
+		el.addEventListener("change", (ev)=>{pallets[pallets.active].colors[num] = el.value;
 			storage.store(id(), el.value);
-			backend.setColorAt(0, color2int(el.value));
+			backend.setColorAt(num, color2int(el.value));
 			backend.redraw();
 			updatePallet();});
-		pallets.inputs.A = el;
-		pallets[pallets.active].A = el.value
+		pallets.inputs[num] = el;
+		pallets[pallets.active].colors[num] = el.value
+		i += 1
 	}
-	{
-		const iid = 'sidebar-pallet-color-2'
-		const el = document.getElementById(iid);
-		const id = function() { return pallets.active + iid }
-		fetchAndSet(el, id())
-		pallets[pallets.active]['B'] = el.value;
-		el.addEventListener("change", (ev)=>{pallets[pallets.active]['B'] = el.value;
-			storage.store(id(), el.value);
-			backend.setColorAt(1, color2int(el.value));
-			backend.redraw();
-			updatePallet();});
-		pallets.inputs.B = el;
-		pallets[pallets.active].B = el.value
-	}
-	{
-		const iid = 'sidebar-pallet-color-3'
-		const el = document.getElementById(iid);
-		const id = function() { return pallets.active + iid }
-		fetchAndSet(el, id())
-		pallets[pallets.active]['C'] = el.value;
-		el.addEventListener("change", (ev)=>{pallets[pallets.active]['C'] = el.value;
-			storage.store(id(), el.value)
-			backend.setColorAt(2, color2int(el.value));
-			backend.redraw();
-			updatePallet();});
-		pallets.inputs.C = el;
-		pallets[pallets.active].C = el.value
-	}
-	pallets.nodes = {
-		A: document.getElementById('color-1').labels[0],
-		B: document.getElementById('color-2').labels[0],
-		C: document.getElementById('color-3').labels[0],
-	};
+	
+	pallets.nodes = []
+	pallets.inputs.forEach(function(x,i){
+		pallets.nodes[i] = document.getElementById('color-' + i.toString()).labels[0]
+	})
 	updatePallet()
 
 	{	const id = 'sidebar-rake-placement'
@@ -543,14 +522,8 @@ var dropper = {
 			}
 		},
 	down: function(x,y,w,h) {
-		var cId = 0;
-		switch (color) {
-			case 'A': cId = 0; break;
-			case 'B': cId = 1; break;
-			case 'C': cId = 2; break;
-		}
 		const circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0};
-		dropper.circle = backend.addDrop(circle.x, circle.y, circle.r, cId);
+		dropper.circle = backend.addDrop(circle.x, circle.y, circle.r, color);
 
 		dropper.active = true;
 		window.requestAnimationFrame(dropper.drop);
