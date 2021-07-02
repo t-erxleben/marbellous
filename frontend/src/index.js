@@ -209,7 +209,10 @@ function handleClick(el) {
 				downloadCanvas();
 				break;
 			case 'clear':
-				backend.clearCanvas()
+				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you really clear the Canvas?'))
+				{
+					backend.clearCanvas()
+				}
 				break;
 			case 'color-1':
 				color = 'A';
@@ -257,9 +260,15 @@ function handleClick(el) {
 				rake.config.periode = 200;
 				break;
 			case 'switch-state':
+				const oldState = state;
+				if (oldState === 'rake') {
+					if(!window.confirm("This will go back before you make you're first rake stroke.\nThe stroke marked will all be removed, and there is NO way to restore then.\nWan't you go back to the color drop state?"))
+					{
+						break;
+					}
+				}
 				const label = el.parentNode.querySelector('label');
 				const img = label.querySelector('img');
-				const oldState = state;
 				switch(state) {
 					case 'draw':
 						state = 'rake';
@@ -272,6 +281,7 @@ function handleClick(el) {
 						img.src = 'icons/arrow-right-solid.svg'; break;
 				}
 				switchState(oldState, state);
+				break;
 		}
 }
 
