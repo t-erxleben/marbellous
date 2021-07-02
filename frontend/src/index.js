@@ -88,7 +88,7 @@ window.Module = {
 			'void', []);
 		backend.startRaking = Module.cwrap('startRaking', 'void', [])
 		backend.rakeLinear = Module.cwrap('rakeLinear',
-			'boolean', ['number', 'number', 'number', 'array'])
+			'boolean', ['number', 'number', 'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.fn_bind = true;
@@ -809,7 +809,7 @@ var rake = {
 		} else {
 			handle = Math.floor(start.x / w * 1000.)
 		}
-		backend.rakeLinear(d.x/w, d.y/h, len,rake.config.placement.getNails(handle))
+		backend.rakeLinear(d.x/w, d.y/h, rake.config.placement.getNails(handle))
 	}
 };
 // snap line parallel to axisa
