@@ -13,7 +13,7 @@
 
 #define checkSetup(RET) if (!setupDone) \
         { \
-            fprintf(stderr, "Backend is not initialized yet!\n"); \
+            fprintf(stderr, "%s: %s", __func__, ": Backend is not initialized yet!\n"); \
             return RET; \
         } \
 
@@ -93,8 +93,7 @@ extern "C"
 		context->updateBGColor();
     }
 
-    // draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
-    int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color)
+    int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color) ///< draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
     {
         checkSetup(-1);
         checkState(true, -1);
@@ -130,9 +129,7 @@ extern "C"
         }
 	}
 
-    // resize drop of given ID (return val of addDrop(...))
-    // influence of resizeVal is not defined yet
-    int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius)
+    int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius) ///< resize drop of given ID (return val of addDrop(...))
     {
         checkSetup(-1);
         checkState(true, -1);
@@ -199,8 +196,7 @@ extern "C"
         return data.data();
     }
   
-    // deprecated and only draws in color 0
-    void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color)
+    void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color) ///< deprecated and only draws in color 0
     {
         checkSetup();
         checkState(true,);
@@ -211,8 +207,7 @@ extern "C"
         }
     }
 
-	// clear the canvas (delete all polygones and redraw scene)
-	void EMSCRIPTEN_KEEPALIVE clearCanvas() {
+	void EMSCRIPTEN_KEEPALIVE clearCanvas() { ///< clear the canvas (delete all polygones and redraw scene)
 		checkSetup();
         
 		scene->clear();
@@ -226,27 +221,25 @@ extern "C"
         } 
     }
 
-	// execute a linear rake in direction <x,y> with speed <speed>. <nails> is an array of bool with
-	// are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
-	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, GLuint nails[1000]) {
-        checkState(false,);
+	/** execute a linear rake in direction <x,y> with speed <speed>. 
+    * <nails> is an array of bool with are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
+    */
+	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, bool nails[1000]) 
+    {
 
+		// TODO: implement 
 		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
-        constexpr float eps = 1e-9;
-
-        // FIXME normalize direction and rescale speed in front end
-        if(abs(x) > eps) x = (x < 0) ? -1. : 1.;
-        if(abs(y) > eps) y = (y < 0) ? 1. : -1.;
-        speed /= 5000.;
-
-        // FIXME repair broken nails from front end
-        static GLuint n[1000];
-        for(int i = 0; i <1000; ++i) n[i] = i%150==0;
-
-        printf("x: %f, y %f, s: %f\n", x,y, speed);
-
-        rakeRenderer->rake(x,y,speed, n);
-        rakeRenderer->draw();
+		GLuint nail_uint[1000];
+		for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
+		int count = 0;
+        for(int i = 0; i <1000; ++i) {
+			if(nail_uint[i] == 0) { ++count; }
+			else {
+				std::cout << "<"<<count<<">"<< 1 << ", ";
+				count = 0;
+			}
+		}
+        std::cout << std::endl;
 	}
 
 	void EMSCRIPTEN_KEEPALIVE startRaking() {

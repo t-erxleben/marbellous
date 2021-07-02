@@ -26,8 +26,6 @@ window.Storage =  class Storage {
 	}
 }
 
-
-
 class RakeConfig {
 	constructor(term) {
 		this.config = parser.parse(term);
@@ -43,17 +41,22 @@ class RakeConfig {
 		)
 		this.createPattern = function() {}
 		this.getNails = function(handle) {
-			const width = 1000
-			return new Array(width).map(function(x,i) {
-				const d = i - handle + origin
-				if(d > 0 && d % 10 == 0)  {
-					return this.pattern[d % this.patternWidth]
-				} else if ( d < 0 && d % 10 == 0) {
-					return this.pattern[this.patternWidth - 1 - (d % this.patternWidth)]
-				} else {
-					return 1
-				}
-			})
+			return [...new Array(1000).keys()]
+				.map(function(i) {
+					return i - (handle + this.config.origin * 10)}, this)
+				.map(function(d) {
+					if(Math.abs(d % 10) == 0) {
+						d = Math.floor(d/10)
+						if(d >= 0)  {
+							return d % this.patternWidth
+						} else {
+							return this.patternWidth - 1 + ((d+1) % this.patternWidth)
+						}
+					} else {
+						return -1
+					}
+				}, this)
+				.map(function(i) { return i == -1 ? 0 : this.pattern[i]}, this)
 		}
 	}
 }
@@ -804,10 +807,10 @@ var rake = {
 		const up = {x: -d.y, y: d.x};
 		var handle = 0;
 		// TODO: adopt for free form rakes!
-		if(Math.abs(d.y) > Math.abs(d.x)) {
-			handle = Math.floor((start.y + 1.) / 2. * 1000.)
+		if(Math.abs(d.x) > Math.abs(d.y)) {
+			handle = Math.floor(start.y / h * 1000.)
 		} else {
-			handle = Math.floor((start.x + 1.) / 2. * 1000.)
+			handle = Math.floor(start.x / w * 1000.)
 		}
 		backend.rakeLinear(d.x/w, d.y/h, len,rake.config.placement.getNails(handle))
 	}
