@@ -2,8 +2,9 @@
 
 WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 {
-    char* data = new char[720*720*4];
-    int len = 720*720*4;
+    auto rakeRes = WGLContext::getContext()->getRakeRes();
+    char* data = new char[rakeRes*rakeRes*4];
+    int len = rakeRes*rakeRes*4;
     sr.drawToBuffer(s, data, len, false);
 
     // build shader
@@ -34,7 +35,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
     curr_tex = 1;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, rakeRes, rakeRes, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -43,7 +44,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
     curr_tex = 0;
 	glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, rakeRes, rakeRes, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -63,7 +64,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
     glGenTextures(1, &colBuff);
     glBindTexture(GL_TEXTURE_2D, colBuff);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, rakeRes, rakeRes, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colBuff, 0);
@@ -83,8 +84,10 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
 void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
 {
-    char* data = new char[720*720*4];
-    int len = 720*720*4;
+    auto rakeRes = WGLContext::getContext()->getRakeRes();
+
+    char* data = new char[rakeRes*rakeRes*4];
+    int len = rakeRes*rakeRes*4;
     sr.drawToBuffer(s, data, len, false);
 
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
@@ -95,7 +98,7 @@ void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
 
     curr_tex = 0;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 720, 720, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, rakeRes, rakeRes, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -141,8 +144,6 @@ void WGLRakeRenderer::draw()
     glUniform3fv(colorLoc, p.getSize(), v.data());
 	glUniform1i(numColorsLoc, static_cast<int>(p.getSize()));
 
-    glViewport(0, 0, 720, 720);
-
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -152,15 +153,19 @@ void WGLRakeRenderer::draw()
 
 void WGLRakeRenderer::drawToBuffer(void* buf, size_t length)
 {
-    assert(length == 720 * 720 * 4);
+    auto rakeRes = WGLContext::getContext()->getRakeRes();
+
+    assert(length == rakeRes * rakeRes * 4);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
     draw();
-    glReadPixels(0, 0, 720, 720, GL_RGBA, GL_UNSIGNED_BYTE, buf);
+    glReadPixels(0, 0, rakeRes, rakeRes, GL_RGBA, GL_UNSIGNED_BYTE, buf);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void WGLRakeRenderer::setActive() const
 {
+    auto rakeRes = WGLContext::getContext()->getRakeRes();
+
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
     glDisable(GL_STENCIL_TEST);
@@ -171,5 +176,5 @@ void WGLRakeRenderer::setActive() const
 
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
 
-    glViewport(0, 0, 720, 720);
+    glViewport(0, 0, rakeRes, rakeRes);
 }

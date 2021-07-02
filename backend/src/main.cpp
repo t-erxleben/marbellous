@@ -98,6 +98,8 @@ extern "C"
         checkSetup(-1);
         checkState(true, -1);
 
+        auto dropRes = WGLContext::getContext()->getDropRes();
+
 		scene->applyDisplacement();
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
 		scene->setDisplacement({x,y}, r);
@@ -105,7 +107,7 @@ extern "C"
         sceneRenderer->drawScene(*scene);
 
 		uint8_t c[4];
-		glReadPixels((x+1.f)*720/2, (y+1.f)*720/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
+		glReadPixels((x+1.f)*dropRes/2, (y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
 		const auto& [cr,cg,cb] = (*Options::getInstance()->getActivePalette())[color].getRGB();
 		if(cr == c[0] && cg == c[1] && cb == c[2]) {
 			return -1;
@@ -158,12 +160,12 @@ extern "C"
 
     char *EMSCRIPTEN_KEEPALIVE getImage()
     {
-		constexpr int X = 720;
-		constexpr int Y = 720;
+        auto dropRes = WGLContext::getContext()->getDropRes();
+
         checkSetup(NULL);
         constexpr char prefix[] = "P6\n720\n720\n255\n";
         constexpr int prefix_len = sizeof(prefix) - 1;
-        static std::vector<char> data(X * Y * 4 + prefix_len + 1);
+        static std::vector<char> data(dropRes * dropRes * 4 + prefix_len + 1);
         data[0] = prefix_len;
         memcpy(data.data() + 1, prefix, prefix_len);
 
@@ -178,16 +180,16 @@ extern "C"
         }
 
         char *ptr = data.data() + prefix_len + 1;
-        for (int i = 0; i < X * Y; ++i)
+        for (int i = 0; i < dropRes * dropRes; ++i)
         {
             ptr[3 * i] = ptr[4 * i];
             ptr[3 * i + 1] = ptr[4 * i + 1];
             ptr[3 * i + 2] = ptr[4 * i + 2];
         }
-		for(int y = 0; y < Y/2; ++y) {
-			for(int x = 0; x < X; ++x) {
-				int i = y * X + x;
-				int j = (Y-y) * X + x;
+		for(int y = 0; y < dropRes/2; ++y) {
+			for(int x = 0; x < dropRes; ++x) {
+				int i = y * dropRes + x;
+				int j = (dropRes-y) * dropRes + x;
 				std::swap(ptr[3* i], ptr[3*j]);
 				std::swap(ptr[3* i + 1], ptr[3*j + 1]);
 				std::swap(ptr[3* i + 2], ptr[3*j + 2]);
@@ -226,12 +228,13 @@ extern "C"
     */
 	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, bool nails[1000]) 
     {
-
+        checkState(false,);
 		// TODO: implement 
 		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
 		GLuint nail_uint[1000];
 		for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
-		int count = 0;
+		
+        /*int count = 0;
         for(int i = 0; i <1000; ++i) {
 			if(nail_uint[i] == 0) { ++count; }
 			else {
@@ -239,7 +242,11 @@ extern "C"
 				count = 0;
 			}
 		}
-        std::cout << std::endl;
+        std::cout << std::endl;*/
+        speed/=1000.;
+
+        rakeRenderer->rake(x, y, speed, nail_uint);
+        rakeRenderer->draw();
 	}
 
 	void EMSCRIPTEN_KEEPALIVE startRaking() {
