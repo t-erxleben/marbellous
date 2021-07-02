@@ -180,10 +180,19 @@ function switchState(_old, _new) {
 	nodes[_old].forEach(function(e){
 		e.node.remove();
 	});
-	if(_new === 'rake') {
-		backend.startRaking()
+	const label = document.getElementById('switch-state').parentNode.querySelector('label');
+	const img = label.querySelector('img');
+	switch(_new) {
+		case 'rake':
+			img.src = 'icons/fast-backward-solid.svg';
+			label.title = 'Go to state before first rake strike.';
+			backend.startRaking()
+		break;
+		case 'draw':
+			label.title = 'Start raking.';
+			img.src = 'icons/arrow-right-solid.svg'; break;
+		break;
 	}
-
 }
 var download_side = null;
 function downloadCanvas() {
@@ -212,6 +221,10 @@ function handleClick(el) {
 				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you really clear the Canvas?'))
 				{
 					backend.clearCanvas()
+					// go back to draw when clearing in rake
+					if(state == 'rake') {
+						switchState('rake', 'draw');
+					}
 				}
 				break;
 			case 'color-1':
@@ -267,19 +280,7 @@ function handleClick(el) {
 						break;
 					}
 				}
-				const label = el.parentNode.querySelector('label');
-				const img = label.querySelector('img');
-				switch(state) {
-					case 'draw':
-						state = 'rake';
-						img.src = 'icons/fast-backward-solid.svg';
-						label.title = 'Go to state before first rake strike.';
-						break;
-					case 'rake':
-						state = 'draw';
-						label.title = 'Start rakeing.'; // TODO: fix spelling
-						img.src = 'icons/arrow-right-solid.svg'; break;
-				}
+				switch(state) { case 'draw': state = 'rake'; break; case 'rake': state = 'draw'; break; }
 				switchState(oldState, state);
 				break;
 		}
