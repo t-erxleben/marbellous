@@ -659,6 +659,7 @@ var rake_dropper = {
 };
 
 var rake = {
+	scale: 2.,
 	borderPoint: function(a, m, w, h, x) {
 		const y = a + m * x;
 		if(y < 0) {
@@ -695,6 +696,13 @@ var rake = {
 		ctx.lineWidth = 2;
 		ctx.strokeStyle = 'black';
 		ctx.fillStyle = 'black';
+		const d = {x: end.x - start.x, y: end.y - start.y};
+		console.log(d)
+		const len = Math.sqrt((d.x / w * rake.scale)**2 + (d.y / h * rake.scale)**2);
+		if( len > 1) {
+			end.x = start.x + d.x / len;
+			end.y = start.y + d.y / len;
+		}
 		drawArrow(ctx, start, end, 10);
 	},
 	curve: function(ctx, start, end, w, h) {
@@ -800,7 +808,6 @@ var rake = {
 	up: function(start, end, w, h) {
 		if(!start || !end) { return}
 		const d = {x: end.x - start.x, y: end.y - start.y} 
-		const len =  Math.sqrt(d.x*d.x+d.y*d.y)
 		const up = {x: -d.y, y: d.x};
 		var handle = 0;
 		// TODO: adopt for free form rakes!
@@ -809,7 +816,7 @@ var rake = {
 		} else {
 			handle = Math.floor(start.x / w * 1000.)
 		}
-		backend.rakeLinear(d.x/w, d.y/h, rake.config.placement.getNails(handle))
+		backend.rakeLinear(d.x/(w*rake.scale), d.y/(h*rake.scale), rake.config.placement.getNails(handle))
 	}
 };
 // snap line parallel to axisa
