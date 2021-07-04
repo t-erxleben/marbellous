@@ -42,7 +42,7 @@ class WGLRakeRenderer: private WGLRenderer
                     vec2 str = vec2(0.0, 0.0);
 
                     // assuming only strokes in x and y direction
-                    dim = (dot(stroke, vec2(1.0, 0.0)) < eps) ? 0 : 1;
+                    dim = (abs(dot(stroke, vec2(1.0, 0.0))) < eps) ? 0 : 1;
 
                     // for each nail
                     for(i = 0; i < nails.length(); ++i)

@@ -5,6 +5,7 @@ WGLContext* WGLContext::instance = nullptr;
 WGLContext::WGLContext(std::string canvasID, size_t x): dropRes{x}
 {
     emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
+    this->canvasID = canvasID;
     EmscriptenWebGLContextAttributes attrs;
     emscripten_webgl_init_context_attributes(&attrs);
 
@@ -40,6 +41,8 @@ void WGLContext::updateBGColor() {
 void WGLContext::setDropRes(size_t x)
 {
     dropRes = x;
+    // todo modify screenshot buffer
+    emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
 }
 
 
@@ -50,7 +53,10 @@ size_t WGLContext::getDropRes()
 
 void WGLContext::setRakeRes(size_t x)
 {
+    // todo implement for raking
     dropRes = x;
+    emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
+    // todo modify screenshot buffer, fbo, textures, ...
 }
 
 

@@ -163,7 +163,7 @@ extern "C"
         auto dropRes = WGLContext::getContext()->getDropRes();
 
         checkSetup(NULL);
-        constexpr char prefix[] = "P6\n720\n720\n255\n";
+        constexpr char prefix[18] = "P6\n720\n720\n255\n";
         constexpr int prefix_len = sizeof(prefix) - 1;
         static std::vector<char> data(dropRes * dropRes * 4 + prefix_len + 1);
         data[0] = prefix_len;
@@ -229,22 +229,20 @@ extern "C"
 	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, bool nails[1000]) 
     {
         checkState(false,);
-		// TODO: implement 
+		 constexpr float eps = 1e-9;
 		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
-		GLuint nail_uint[1000];
+		
+        GLuint nail_uint[1000];
 		for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
 		
-        /*int count = 0;
-        for(int i = 0; i <1000; ++i) {
-			if(nail_uint[i] == 0) { ++count; }
-			else {
-				std::cout << "<"<<count<<">"<< 1 << ", ";
-				count = 0;
-			}
-		}
-        std::cout << std::endl;*/
+        float signX = (x < -eps) ? -1. : 1.;
+        float signY = (y < -eps) ? 1. : -1.;
+        x = ((abs(x) < eps)? 0 : 1) * signX;
+        y = ((abs(y) < eps)? 0 : 1) * signY;
+
         speed/=1000.;
 
+        printf("x:%f y:%f s: %f\n", x, y, speed);
         rakeRenderer->rake(x, y, speed, nail_uint);
         rakeRenderer->draw();
 	}
@@ -274,6 +272,8 @@ Init stuff:
         // This needs to be done in the front end (init call should be after bg):
         char id[] = "#image";
         initBackend(id, 720, 720);
+
+        setupDone = true;
 
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);
