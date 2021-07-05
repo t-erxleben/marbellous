@@ -87,6 +87,7 @@ window.Module = {
 		backend.redraw = Module.cwrap('redraw',
 			'void', []);
 		backend.startRaking = Module.cwrap('startRaking', 'void', [])
+		backend.startDropping = Module.cwrap('startDropping', 'void', [])
 		backend.rakeLinear = Module.cwrap('rakeLinear',
 			'boolean', ['number', 'number', 'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
@@ -105,9 +106,9 @@ function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
 	backend.setBGColor(color2int(tool.image.style.backgroundColor));
 	pallets[pallets.active].id = backend.addPallete(3);
+	backend.setActivePalette(pallets[pallets.active].id);
 	const {A, B, C} = pallets[pallets.active]
 	backend.setPaletteColors(color2int(A), color2int(B), color2int(C))
-	backend.setActivePalette(pallets[pallets.active].id);
 	backend.redraw();
 	backend.init = true;
 }
@@ -182,6 +183,8 @@ function switchState(_old, _new) {
 	});
 	if(_new === 'rake') {
 		backend.startRaking()
+	} else if(_old === 'rake' && _new === 'draw') {
+		backend.startDropping()
 	}
 
 }

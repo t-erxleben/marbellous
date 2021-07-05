@@ -2,8 +2,9 @@
 
 WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 {
-    char* data = new char[720*720*4];
-    int len = 720*720*4;
+    auto rakeRes = WGLContext::getContext()->getRakeRes();
+    char* data = new char[rakeRes*rakeRes*4];
+    int len = rakeRes*rakeRes*4;
     sr.drawToBuffer(s, data, len, false);
 
     // build shader
@@ -24,9 +25,6 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     strokeLoc = glGetUniformLocation(rakeShader, "stroke");
     scalingLoc = glGetUniformLocation(rakeShader, "scaling");
 
-    //set attrib (should just work for both shader because layout is set in shader code)
-    
-
     // init fbo
     glGenFramebuffers(1, &fbo);
     
@@ -37,7 +35,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
     curr_tex = 1;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, rakeRes, rakeRes, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -46,7 +44,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
     curr_tex = 0;
 	glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, rakeRes, rakeRes, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -66,7 +64,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
     glGenTextures(1, &colBuff);
     glBindTexture(GL_TEXTURE_2D, colBuff);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, rakeRes, rakeRes, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colBuff, 0);
@@ -86,53 +84,40 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
 
 void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
 {
-    char* data = new char[720*720*4];
-    int len = 720*720*4;
-    sr.drawToBuffer(s, data, len);
+    auto rakeRes = WGLContext::getContext()->getRakeRes();
+
+    char* data = new char[rakeRes*rakeRes*4];
+    int len = rakeRes*rakeRes*4;
+    sr.drawToBuffer(s, data, len, false);
 
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     
     curr_tex = 1;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex[curr_tex], 0);
 
     curr_tex = 0;
     glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, rakeRes, rakeRes, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
     delete[] data;
 }
 
-void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
+void WGLRakeRenderer::rake(float x, float y, GLuint nails[1000])
 {
     glUseProgram(rakeShader);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(0);
+    setActive();
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex[!curr_tex], 0);
 
-    // copy for now
-    GLuint* nailsi = new GLuint[1000];
-    for(int i = 0; i < 1000; ++i) nailsi[i] = nails[i];
-
     // set uniforms
-    glUniform1uiv(nailsLoc, 1000, nailsi);
+    glUniform1uiv(nailsLoc, 1000, nails);
     glUniform1f(viscosityLoc, 0.9);
     // FIXME set scaling to some actually meaningful value
     glUniform1f(scalingLoc, 200.0);
-    glUniform2f(strokeLoc, x*speed, y*speed);
-
-    glViewport(0, 0, 720, 720);
+    glUniform2f(strokeLoc, x, y);
 
     // draw call
     glClear(GL_COLOR_BUFFER_BIT);
@@ -149,16 +134,8 @@ void WGLRakeRenderer::rake(float x, float y, float speed, bool nails[1000])
 
 void WGLRakeRenderer::draw()
 {
-    glDisable(GL_STENCIL_TEST);
-    glDisable(GL_DEPTH_TEST);
-    printf("draw %i\n", curr_tex);
-
     glUseProgram(drawShader);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(0);
-
-    glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
+    setActive();
     
     auto opt = Options::getInstance();
     std::vector<GLfloat> v;
@@ -167,19 +144,37 @@ void WGLRakeRenderer::draw()
     glUniform3fv(colorLoc, p.getSize(), v.data());
 	glUniform1i(numColorsLoc, static_cast<int>(p.getSize()));
 
-    glViewport(0, 0, 720, 720);
-
+    glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void WGLRakeRenderer::drawToBuffer(void* buf, size_t& length)
+void WGLRakeRenderer::drawToBuffer(void* buf, size_t length)
 {
-    assert(length == 720 * 720 * 4);
+    auto rakeRes = WGLContext::getContext()->getRakeRes();
+
+    assert(length == rakeRes * rakeRes * 4);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
     draw();
-    glReadPixels(0, 0, 720, 720, GL_RGBA, GL_UNSIGNED_BYTE, buf);
+    glReadPixels(0, 0, rakeRes, rakeRes, GL_RGBA, GL_UNSIGNED_BYTE, buf);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void WGLRakeRenderer::setActive() const
+{
+    auto rakeRes = WGLContext::getContext()->getRakeRes();
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    glDisable(GL_STENCIL_TEST);
+    glDisable(GL_DEPTH_TEST);
+    
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
+
+    glBindTexture(GL_TEXTURE_2D, tex[curr_tex]);
+
+    glViewport(0, 0, rakeRes, rakeRes);
 }

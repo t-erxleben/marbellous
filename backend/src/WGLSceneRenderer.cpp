@@ -2,6 +2,9 @@
 
 WGLSceneRenderer::WGLSceneRenderer()
 {
+	auto dropRes = WGLContext::getContext()->getDropRes();
+	
+
     setupShaderProgram(vertex_source, fragment_source, shaderProgram);
 
     // init vbo
@@ -44,14 +47,14 @@ WGLSceneRenderer::WGLSceneRenderer()
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     glGenTextures(1, &frameTexture);
     glBindTexture(GL_TEXTURE_2D, frameTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 720, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, dropRes, dropRes, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameTexture, 0);
 	
 	glGenTextures(1, &depthStencilTexture);
 	glBindTexture(GL_TEXTURE_2D, depthStencilTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 720, 720, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, dropRes, dropRes, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depthStencilTexture, 0);
@@ -106,27 +109,59 @@ void WGLSceneRenderer::constructBuffers(GLuint **indices, WGLVertex **vertices, 
 
 void WGLSceneRenderer::setActive() const
 {
+	auto dropRes = WGLContext::getContext()->getDropRes();
+
     glUseProgram(shaderProgram);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+
+    // define position
+    GLint pos = glGetAttribLocation(shaderProgram, "position");
+    GLint col = glGetAttribLocation(shaderProgram, "colorCode");
+	GLint z   = glGetAttribLocation(shaderProgram, "z");
+	char* offset = 0;
+
+	//define attribs
+    glVertexAttribPointer(pos, 2, GL_FLOAT, GL_FALSE, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(pos);
+	offset += sizeof(WGLVertex::p);
+
+    glVertexAttribIPointer(z, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(z);
+	offset += sizeof(WGLVertex::z);
+
+    // define color
+    glVertexAttribIPointer(col, 1, GL_UNSIGNED_INT, sizeof(WGLVertex), offset);
+    glEnableVertexAttribArray(col);
+	offset += sizeof(WGLVertex::color);
+
+	assert(offset == (char*)sizeof(WGLVertex));
+
+	glClearDepthf(1.);
+	glClearStencil(0b10);
+	glEnable(GL_STENCIL_TEST);
+	glEnable(GL_DEPTH_TEST);
 
     // Set the viewport
-    glViewport(0, 0, 720, 720);
+    glViewport(0, 0, dropRes, dropRes);
 }
 
 void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len, bool drawColor)
 {
-    assert(len == 720 * 720 * 4);
+	auto dropRes = WGLContext::getContext()->getDropRes();
+
+    assert(len == dropRes * dropRes * 4);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-    glViewport(0, 0, 720, 720);
+    glViewport(0, 0, dropRes, dropRes);
     drawScene(scene, drawColor);
-    glReadPixels(0, 0, 720, 720, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glReadPixels(0, 0, dropRes, dropRes, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 {
-    setActive();
-
+	setActive();
+	
 	WGLVertex* vertices = nullptr;
 	GLuint* indices = nullptr;
 	if (generation != scene.getGeneration()) {
