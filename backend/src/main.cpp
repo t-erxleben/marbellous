@@ -173,13 +173,14 @@ extern "C"
 		sceneRenderer->drawScene(*scene);
 	}
 
-	/** execute a linear rake in direction <x,y> with speed <speed>. 
+	/** execute a linear rake in direction <x,y> with speed = ||<x,y>||. 
     * <nails> is an array of bool with are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
     */
-	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, bool nails[1000]) {
+	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, bool nails[1000]) {
 
 		// TODO: implement 
-		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
+		float len = sqrt(x*x+y*y);
+		std::cerr << "Rake: dir(" << x/len << ", " << y/len << ") with " << len << "\n";
 		GLuint nail_uint[1000];
 		for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
 		int count = 0;
