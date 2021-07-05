@@ -163,7 +163,7 @@ extern "C"
         auto dropRes = WGLContext::getContext()->getDropRes();
 
         checkSetup(NULL);
-        constexpr char prefix[18] = "P6\n720\n720\n255\n";
+        constexpr char prefix[] = "P6\n720\n720\n255\n";
         constexpr int prefix_len = sizeof(prefix) - 1;
         static std::vector<char> data(dropRes * dropRes * 4 + prefix_len + 1);
         data[0] = prefix_len;
