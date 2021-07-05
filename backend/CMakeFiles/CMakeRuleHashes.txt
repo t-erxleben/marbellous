@@ -1,3 +1,3 @@
 # Hashes of file build rules.
-ba6e96ad6ab4d70d682d57d78523bfa6 dist/index.js
+146bc4cd9ab30af9f4ef7fa0f6310c4f dist/index.js
 2f4ae68b6bd338190ce97ea4ade7d027 npm.stamp

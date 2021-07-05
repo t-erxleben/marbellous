@@ -1,5 +1,5 @@
 import * as parser from './rake_syntax.pegjs'
-
+import * as png from 'fast-png'
 
 const int = parseInt;
 const inputs = {}
@@ -188,9 +188,14 @@ function switchState(_old, _new) {
 var download_side = null;
 function downloadCanvas() {
 	const ptr = Module.ccall("getImage", "number", [], []);	
-	const len = Module.HEAPU8[ptr] + 720*720*3 + 40;
-	const data = Module.HEAPU8.slice(ptr+1, ptr+len);
-	const blob = new Blob([data], {type: 'image/x-portable-pixmap'});
+	console.log('R: ', ptr % 4);
+	const width = Module.HEAP32[ptr/4]
+	const height = Module.HEAP32[ptr/4+1]
+	const len = width * height * 3
+
+	const data = Module.HEAPU8.slice(ptr + 8, ptr+len+8);
+	const pngData = png.encode({width, height, data, depth: 8, channels: 3})
+	const blob = new Blob([pngData], {type: 'image/png'});
 	if(!download_side) {
 		download_side = document.createElement('a');
 		document.body.appendChild(download_side);
@@ -198,7 +203,7 @@ function downloadCanvas() {
 	}
 	const url = window.URL.createObjectURL(blob);
 	download_side.href = url;
-	download_side.download = "marebllous-image.ppm";
+	download_side.download = "marebllous-image.png";
 	download_side.click();
 }
 

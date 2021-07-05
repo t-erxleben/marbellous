@@ -1,8 +1,8 @@
-This Licence is only for code written by us and published as this repository.
-The code in `frontend/src/parser.js` is generated from pegjs. Check there Licensing
-at https://pegjs.org/
+Package pegjs (c) 2017 Futago-za Ryuu, MIT license see: https://pegjs.org
+Package pegjs-loader (c) 2014–2015 Andrey Subbotin, MIT license see: https://github.com/eploko/pegjs-loader
+Package fast-png (c) 2015 Michaël Zasso, MIT license see: https://github.com/image-js/fast-png/
 
- 					 GNU GENERAL PUBLIC LICENSE
+					 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
