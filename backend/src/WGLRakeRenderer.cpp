@@ -105,7 +105,7 @@ void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
     delete[] data;
 }
 
-void WGLRakeRenderer::rake(float x, float y, float speed, GLuint nails[1000])
+void WGLRakeRenderer::rake(float x, float y, GLuint nails[1000])
 {
     glUseProgram(rakeShader);
     setActive();
@@ -117,7 +117,7 @@ void WGLRakeRenderer::rake(float x, float y, float speed, GLuint nails[1000])
     glUniform1f(viscosityLoc, 0.9);
     // FIXME set scaling to some actually meaningful value
     glUniform1f(scalingLoc, 200.0);
-    glUniform2f(strokeLoc, x*speed, y*speed);
+    glUniform2f(strokeLoc, x, y);
 
     // draw call
     glClear(GL_COLOR_BUFFER_BIT);

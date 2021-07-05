@@ -1,5 +1,5 @@
 import * as parser from './rake_syntax.pegjs'
-
+import * as png from 'fast-png'
 
 const int = parseInt;
 const inputs = {}
@@ -89,7 +89,7 @@ window.Module = {
 		backend.startRaking = Module.cwrap('startRaking', 'void', [])
 		backend.startDropping = Module.cwrap('startDropping', 'void', [])
 		backend.rakeLinear = Module.cwrap('rakeLinear',
-			'boolean', ['number', 'number', 'number', 'array'])
+			'boolean', ['number', 'number', 'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.fn_bind = true;
@@ -191,9 +191,14 @@ function switchState(_old, _new) {
 var download_side = null;
 function downloadCanvas() {
 	const ptr = Module.ccall("getImage", "number", [], []);	
-	const len = Module.HEAPU8[ptr] + 720*720*3 + 40;
-	const data = Module.HEAPU8.slice(ptr+1, ptr+len);
-	const blob = new Blob([data], {type: 'image/x-portable-pixmap'});
+	console.log('R: ', ptr % 4);
+	const width = Module.HEAP32[ptr/4]
+	const height = Module.HEAP32[ptr/4+1]
+	const len = width * height * 3
+
+	const data = Module.HEAPU8.slice(ptr + 8, ptr+len+8);
+	const pngData = png.encode({width, height, data, depth: 8, channels: 3})
+	const blob = new Blob([pngData], {type: 'image/png'});
 	if(!download_side) {
 		download_side = document.createElement('a');
 		document.body.appendChild(download_side);
@@ -201,7 +206,7 @@ function downloadCanvas() {
 	}
 	const url = window.URL.createObjectURL(blob);
 	download_side.href = url;
-	download_side.download = "marebllous-image.ppm";
+	download_side.download = "marebllous-image.png";
 	download_side.click();
 }
 
@@ -662,6 +667,7 @@ var rake_dropper = {
 };
 
 var rake = {
+	scale: 2.,
 	borderPoint: function(a, m, w, h, x) {
 		const y = a + m * x;
 		if(y < 0) {
@@ -798,12 +804,13 @@ var rake = {
 		ctx.setTransform(1,0,0,1,0,0);
 
 		ctx.strokeStyle = 'black';
+		clamp(start,end,w,h,rake.scale)
 		rake.config.line(ctx, start,end, w, h);
 	},
 	up: function(start, end, w, h) {
 		if(!start || !end) { return}
+		clamp(start, end, w,h, rake.scale)
 		const d = {x: end.x - start.x, y: end.y - start.y} 
-		const len =  Math.sqrt(d.x*d.x+d.y*d.y)
 		const up = {x: -d.y, y: d.x};
 		var handle = 0;
 		// TODO: adopt for free form rakes!
@@ -812,7 +819,7 @@ var rake = {
 		} else {
 			handle = Math.floor(start.x / w * 1000.)
 		}
-		backend.rakeLinear(d.x/w, d.y/h, len,rake.config.placement.getNails(handle))
+		backend.rakeLinear(d.x/w*rake.scale, d.y/h*rake.scale, rake.config.placement.getNails(handle))
 	}
 };
 // snap line parallel to axisa
@@ -824,6 +831,16 @@ function snap(start,end) {
 		a.x = 0;
 	}
 	return [start, {x: start.x + a.x, y: start.y + a.y}];
+}
+
+// clamp end to ||(end-start)/dim*scale|| <= 1
+function clamp(start,end,w,h,scale) {
+		const d = {x: end.x - start.x, y: end.y - start.y};
+		const len = Math.sqrt((d.x / w * scale)**2 + (d.y / h * scale)**2);
+		if( len > 1) {
+			end.x = start.x + d.x / len;
+			end.y = start.y + d.y / len;
+		}
 }
 
 var tool = {

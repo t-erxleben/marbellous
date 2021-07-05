@@ -115,7 +115,7 @@ class WGLRakeRenderer: private WGLRenderer
         WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s);
         void setActive() const override;
         void reset(WGLSceneRenderer& sr, Scene const & s);
-        void rake(float x, float y, float speed, GLuint nails[1000]);
+        void rake(float x, float y, GLuint nails[1000]);
         void draw();
         void drawToBuffer(void* buf, size_t length);
 };

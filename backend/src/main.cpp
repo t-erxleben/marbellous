@@ -160,36 +160,40 @@ extern "C"
 
     char *EMSCRIPTEN_KEEPALIVE getImage()
     {
-        auto dropRes = WGLContext::getContext()->getDropRes();
-
         checkSetup(NULL);
-        constexpr char prefix[] = "P6\n720\n720\n255\n";
-        constexpr int prefix_len = sizeof(prefix) - 1;
-        static std::vector<char> data(dropRes * dropRes * 4 + prefix_len + 1);
-        data[0] = prefix_len;
-        memcpy(data.data() + 1, prefix, prefix_len);
 
-        auto drop = Options::getInstance()->getState();
-        if(drop)
+        static std::vector<char> data;
+        size_t canvasRes;
+
+        if(Options::getInstance()->getState())
         {
-            sceneRenderer->drawToBuffer(*scene, data.data() + prefix_len + 1, static_cast<int>(data.size() - prefix_len - 1));
+            // drop
+            canvasRes = WGLContext::getContext()->getDropRes();
+            data.resize(canvasRes * canvasRes * 4 + 2*sizeof(int));
+            sceneRenderer->drawToBuffer(*scene, data.data() + sizeof(int)*2, static_cast<int>(data.size() - sizeof(int)*2));
         }
         else
         {
-            rakeRenderer->drawToBuffer(data.data() + prefix_len + 1, static_cast<size_t>(data.size() - prefix_len - 1));
+            // rake
+            canvasRes = WGLContext::getContext()->getRakeRes();
+            data.resize(canvasRes * canvasRes * 4 + 2*sizeof(int));
+            rakeRenderer->drawToBuffer(data.data() + sizeof(int)*2, static_cast<int>(data.size() - sizeof(int)*2));
         }
 
-        char *ptr = data.data() + prefix_len + 1;
-        for (int i = 0; i < dropRes * dropRes; ++i)
+		reinterpret_cast<int*>(data.data())[0] = canvasRes;
+		reinterpret_cast<int*>(data.data())[1] = canvasRes;
+
+        char *ptr = data.data() + sizeof(int)*2;
+        for (int i = 0; i < canvasRes * canvasRes; ++i)
         {
             ptr[3 * i] = ptr[4 * i];
             ptr[3 * i + 1] = ptr[4 * i + 1];
             ptr[3 * i + 2] = ptr[4 * i + 2];
         }
-		for(int y = 0; y < dropRes/2; ++y) {
-			for(int x = 0; x < dropRes; ++x) {
-				int i = y * dropRes + x;
-				int j = (dropRes-y) * dropRes + x;
+		for(int y = 0; y < canvasRes/2; ++y) {
+			for(int x = 0; x < canvasRes; ++x) {
+				int i = y * canvasRes + x;
+				int j = (canvasRes - y - 1) * canvasRes + x;
 				std::swap(ptr[3* i], ptr[3*j]);
 				std::swap(ptr[3* i + 1], ptr[3*j + 1]);
 				std::swap(ptr[3* i + 2], ptr[3*j + 2]);
@@ -223,27 +227,19 @@ extern "C"
         } 
     }
 
-	/** execute a linear rake in direction <x,y> with speed <speed>. 
+	/** execute a linear rake in direction <x,y> with speed = ||<x,y>||. 
     * <nails> is an array of bool with are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
     */
-	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, float speed, bool nails[1000]) 
-    {
+	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, bool nails[1000]) {
         checkState(false,);
-		 constexpr float eps = 1e-9;
-		std::cerr << "Rake: dir(" << x << ", " << y << ") with " << speed << "\n";
-		
-        GLuint nail_uint[1000];
+
+		float len = sqrt(x*x+y*y);
+		std::cerr << "Rake: dir(" << x/len << ", " << y/len << ") with " << len << "\n";
+
+		GLuint nail_uint[1000];
 		for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
-		
-        float signX = (x < -eps) ? -1. : 1.;
-        float signY = (y < -eps) ? 1. : -1.;
-        x = ((abs(x) < eps)? 0 : 1) * signX;
-        y = ((abs(y) < eps)? 0 : 1) * signY;
 
-        speed/=1000.;
-
-        printf("x:%f y:%f s: %f\n", x, y, speed);
-        rakeRenderer->rake(x, y, speed, nail_uint);
+        rakeRenderer->rake(x,y,nail_uint);
         rakeRenderer->draw();
 	}
 
@@ -271,7 +267,7 @@ Init stuff:
         // setup
         // This needs to be done in the front end (init call should be after bg):
         char id[] = "#image";
-        initBackend(id, 720, 720);
+        initBackend(id, 2000, 2000);
 
         setupDone = true;
 

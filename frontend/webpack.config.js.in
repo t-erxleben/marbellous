@@ -11,4 +11,7 @@ module.exports = {
 	entry: {
 		index: "${FRONTEND_DIR}/src/index.js"
 	},
+	resolve: {
+		modules: ['${CMAKE_CURRENT_BINARY_DIR}/node_modules', 'node_modules']
+	},
 }
