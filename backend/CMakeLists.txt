@@ -12,7 +12,7 @@ configure_file(${FRONTEND_DIR}/webpack.config.js.in ${CMAKE_CURRENT_BINARY_DIR}/
 
 include_directories(include/)
 
-add_custom_command(OUTPUT npm.stamp COMMAND npm install WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS package.json)
+add_custom_command(OUTPUT npm.stamp COMMAND npm install WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/package.json)
 add_custom_command(OUTPUT dist/index.js COMMAND npx webpack && touch dist/index.js WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} DEPENDS ${WEB_SOURCESS} npm.stamp)
 
 # add the executable
