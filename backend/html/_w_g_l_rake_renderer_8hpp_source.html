@@ -114,7 +114,7 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral">                    vec2 str = vec2(0.0, 0.0);</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="stringliteral">                    // assuming only strokes in x and y direction</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">                    dim = (dot(stroke, vec2(1.0, 0.0)) &lt; eps) ? 0 : 1;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">                    dim = (abs(dot(stroke, vec2(1.0, 0.0))) &lt; eps) ? 0 : 1;</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">                    // for each nail</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">                    for(i = 0; i &lt; nails.length(); ++i)</span></div>
@@ -185,11 +185,12 @@ $(function() {
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="class_w_g_l_rake_renderer.html">WGLRakeRenderer</a>(<a class="code" href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a>&amp; sr, <a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; s);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordtype">void</span> reset(<a class="code" href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a>&amp; sr, <a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; s);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">void</span> rake(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">float</span> speed, <span class="keywordtype">bool</span> nails[1000]);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">void</span> draw();</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">void</span> drawToBuffer(<span class="keywordtype">void</span>* buf, <span class="keywordtype">size_t</span>&amp; length);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;};</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordtype">void</span> setActive() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">void</span> reset(<a class="code" href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a>&amp; sr, <a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; s);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">void</span> rake(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, GLuint nails[1000]);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">void</span> draw();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">void</span> drawToBuffer(<span class="keywordtype">void</span>* buf, <span class="keywordtype">size_t</span> length);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;};</div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.hpp:12</div></div>
 <div class="ttc" id="aclass_w_g_l_rake_renderer_html"><div class="ttname"><a href="class_w_g_l_rake_renderer.html">WGLRakeRenderer</a></div><div class="ttdef"><b>Definition:</b> WGLRakeRenderer.hpp:10</div></div>
 <div class="ttc" id="aclass_w_g_l_renderer_html"><div class="ttname"><a href="class_w_g_l_renderer.html">WGLRenderer</a></div><div class="ttdef"><b>Definition:</b> WGLRenderer.hpp:10</div></div>
@@ -197,7 +198,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 5 2021 13:20:38 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Jul 5 2021 14:28:54 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -65,7 +65,6 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="class_w_g_l_context-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -87,18 +86,27 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a cla
 <tr class="memitem:a54adc4ff8e0c444022dd3825a11de6f3"><td class="memItemLeft" align="right" valign="top"><a id="a54adc4ff8e0c444022dd3825a11de6f3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>WGLContext</b> (<a class="el" href="class_w_g_l_context.html">WGLContext</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a54adc4ff8e0c444022dd3825a11de6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fa8f38e9fa058eed4f7c1ef520b98ad"><td class="memItemLeft" align="right" valign="top"><a id="a6fa8f38e9fa058eed4f7c1ef520b98ad"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCanvasSize</b> (size_t x, size_t y)</td></tr>
-<tr class="separator:a6fa8f38e9fa058eed4f7c1ef520b98ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a873a34d86b9617b8aaaae123f8ab9489"><td class="memItemLeft" align="right" valign="top"><a id="a873a34d86b9617b8aaaae123f8ab9489"></a>
-CanvasSize&#160;</td><td class="memItemRight" valign="bottom"><b>getCanvasSize</b> ()</td></tr>
-<tr class="separator:a873a34d86b9617b8aaaae123f8ab9489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f4c858266e7ba90e2852f4de591007f"><td class="memItemLeft" align="right" valign="top"><a id="a1f4c858266e7ba90e2852f4de591007f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setDropRes</b> (size_t x)</td></tr>
+<tr class="separator:a1f4c858266e7ba90e2852f4de591007f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a100d6bc9197ced38a5d83b0bb4ce6c9c"><td class="memItemLeft" align="right" valign="top"><a id="a100d6bc9197ced38a5d83b0bb4ce6c9c"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getDropRes</b> ()</td></tr>
+<tr class="separator:a100d6bc9197ced38a5d83b0bb4ce6c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e80c729fe26fd1dde76ec415a09ed61"><td class="memItemLeft" align="right" valign="top"><a id="a1e80c729fe26fd1dde76ec415a09ed61"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setRakeRes</b> (size_t x)</td></tr>
+<tr class="separator:a1e80c729fe26fd1dde76ec415a09ed61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77f700c2598a089ab7822cd46534f74c"><td class="memItemLeft" align="right" valign="top"><a id="a77f700c2598a089ab7822cd46534f74c"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getRakeRes</b> ()</td></tr>
+<tr class="separator:a77f700c2598a089ab7822cd46534f74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7a6ada0a1019095322342e55d547090"><td class="memItemLeft" align="right" valign="top"><a id="af7a6ada0a1019095322342e55d547090"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateBGColor</b> ()</td></tr>
 <tr class="separator:af7a6ada0a1019095322342e55d547090"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a181859abac8486988a909816702293e0"><td class="memItemLeft" align="right" valign="top"><a id="a181859abac8486988a909816702293e0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setBGColor</b> (const Color::rgb_t &amp;bg)</td></tr>
 <tr class="separator:a181859abac8486988a909816702293e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54bc41ac7f36e7fdc008f49bf7fc02f7"><td class="memItemLeft" align="right" valign="top"><a id="a54bc41ac7f36e7fdc008f49bf7fc02f7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>canvasResize</b> (size_t x)</td></tr>
+<tr class="separator:a54bc41ac7f36e7fdc008f49bf7fc02f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -106,17 +114,11 @@ Static Public Member Functions</h2></td></tr>
 static <a class="el" href="class_w_g_l_context.html">WGLContext</a> *const&#160;</td><td class="memItemRight" valign="bottom"><b>getContext</b> ()</td></tr>
 <tr class="separator:ae068c0f5c7835ff00ed935fb8f02e014"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a58e378680d7f5f13d1e2811323e6e136"><td class="memItemLeft" align="right" valign="top"><a id="a58e378680d7f5f13d1e2811323e6e136"></a>
-static <a class="el" href="class_w_g_l_context.html">WGLContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b> = nullptr</td></tr>
-<tr class="separator:a58e378680d7f5f13d1e2811323e6e136"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:ab4c3ba07c9e1a761de65c131b7995bbe"><td class="memItemLeft" align="right" valign="top"><a id="ab4c3ba07c9e1a761de65c131b7995bbe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_initWGLContext</b> (char *canvasID, size_t x, size_t y)</td></tr>
-<tr class="separator:ab4c3ba07c9e1a761de65c131b7995bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7f4e467df324b1a2fdae9ade8145de3"><td class="memItemLeft" align="right" valign="top"><a id="ac7f4e467df324b1a2fdae9ade8145de3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_initWGLContext</b> (char *canvasID, size_t x)</td></tr>
+<tr class="separator:ac7f4e467df324b1a2fdae9ade8145de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="_w_g_l_context_8hpp_source.html">WGLContext.hpp</a></li>
@@ -125,7 +127,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>_initWGLContext</b> (
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 5 2021 13:20:38 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Jul 5 2021 14:28:54 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

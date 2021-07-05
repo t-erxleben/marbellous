@@ -83,24 +83,25 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    GLuint compileShader(GLenum <span class="keyword">const</span> type, std::string <span class="keyword">const</span> shader) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">void</span> setupShaderProgram(std::string vert, std::string frag, GLint&amp; shader);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> buildColorBuffer(<a class="code" href="class_palette.html">Palette</a> <span class="keyword">const</span> &amp; p, std::vector&lt;GLfloat&gt;&amp; v)</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keywordflow">for</span>(<a class="code" href="class_color.html">Color</a> <span class="keyword">const</span> &amp; c: p)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                    v.push_back(<span class="keyword">static_cast&lt;</span>GLfloat<span class="keyword">&gt;</span>(std::get&lt;0&gt;(c.getRGB()))/255.0);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                    v.push_back(<span class="keyword">static_cast&lt;</span>GLfloat<span class="keyword">&gt;</span>(std::get&lt;1&gt;(c.getRGB()))/255.0);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                    v.push_back(<span class="keyword">static_cast&lt;</span>GLfloat<span class="keyword">&gt;</span>(std::get&lt;2&gt;(c.getRGB()))/255.0);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setActive() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> buildColorBuffer(<a class="code" href="class_palette.html">Palette</a> <span class="keyword">const</span> &amp; p, std::vector&lt;GLfloat&gt;&amp; v)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keywordflow">for</span>(<a class="code" href="class_color.html">Color</a> <span class="keyword">const</span> &amp; c: p)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                    v.push_back(<span class="keyword">static_cast&lt;</span>GLfloat<span class="keyword">&gt;</span>(std::get&lt;0&gt;(c.getRGB()))/255.0);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                    v.push_back(<span class="keyword">static_cast&lt;</span>GLfloat<span class="keyword">&gt;</span>(std::get&lt;1&gt;(c.getRGB()))/255.0);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                    v.push_back(<span class="keyword">static_cast&lt;</span>GLfloat<span class="keyword">&gt;</span>(std::get&lt;2&gt;(c.getRGB()))/255.0);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
 <div class="ttc" id="aclass_color_html"><div class="ttname"><a href="class_color.html">Color</a></div><div class="ttdef"><b>Definition:</b> Color.hpp:7</div></div>
 <div class="ttc" id="aclass_palette_html"><div class="ttname"><a href="class_palette.html">Palette</a></div><div class="ttdef"><b>Definition:</b> Palette.hpp:12</div></div>
 <div class="ttc" id="aclass_w_g_l_renderer_html"><div class="ttname"><a href="class_w_g_l_renderer.html">WGLRenderer</a></div><div class="ttdef"><b>Definition:</b> WGLRenderer.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 5 2021 13:20:38 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Jul 5 2021 14:28:54 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -10,8 +10,8 @@ class Options
         Options();
         std::vector<Palette> Palettes; ///< All saved palettes.
         size_t activePalette; ///< Index of currently active palette inside palettes vector.
-        Color bgColor{0xFFFFFF}; ///< Background color.
-
+        Color bgColor; ///< Background color.
+        bool dropState;
 
     public:
         Options(Options const &) = delete;
@@ -29,6 +29,9 @@ class Options
         size_t addPalette(Palette const & newPalette);
         Palette* getActivePalette();
         int setActivePalette(size_t id);
+
+        void setState(bool dropState);
+        bool getState();
 
         // handling BG color
         void setBGColor(Color const & col);

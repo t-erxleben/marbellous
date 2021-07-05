@@ -42,7 +42,7 @@ class WGLRakeRenderer: private WGLRenderer
                     vec2 str = vec2(0.0, 0.0);
 
                     // assuming only strokes in x and y direction
-                    dim = (dot(stroke, vec2(1.0, 0.0)) < eps) ? 0 : 1;
+                    dim = (abs(dot(stroke, vec2(1.0, 0.0))) < eps) ? 0 : 1;
 
                     // for each nail
                     for(i = 0; i < nails.length(); ++i)
@@ -113,8 +113,9 @@ class WGLRakeRenderer: private WGLRenderer
     public:
 
         WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s);
+        void setActive() const override;
         void reset(WGLSceneRenderer& sr, Scene const & s);
-        void rake(float x, float y, float speed, bool nails[1000]);
+        void rake(float x, float y, GLuint nails[1000]);
         void draw();
-        void drawToBuffer(void* buf, size_t& length);
+        void drawToBuffer(void* buf, size_t length);
 };
