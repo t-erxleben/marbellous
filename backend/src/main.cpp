@@ -239,7 +239,7 @@ extern "C"
 		GLuint nail_uint[1000];
 		for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
 
-        rakeRenderer->rake(x,y,nail_uint);
+        rakeRenderer->rake(x,-1.*y,nail_uint);
         rakeRenderer->draw();
 	}
 
