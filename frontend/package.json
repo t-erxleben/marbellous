@@ -16,6 +16,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "fast-png": "^5.0.4"
+    "fast-png": "^5.0.4",
+    "path": "^0.12.7"
   }
 }
