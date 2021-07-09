@@ -80,20 +80,20 @@
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-rake"/>
 				<label for="sidebar-rake">Rake</label>
-				<div>
-					<label
-						for="sidebar-rake-placement"
-						title="space between nails in rake">
-							placement:
-						</label>
-						<br>
-					<input
+				<div><div class="form_group field">
+					<input class="form_field"
+						   placeholder="placement"
 							title="<offset>:<space>(,<space>)*"
 							id="sidebar-rake-placement"
 							type="text" autocomplete="on"
 							pattern="([0-9]*:)?([0-9]+,)*[0-9]+"
-							value="20">%
-				</div>
+							value="">
+					<label class="form_label"
+						for="sidebar-rake-placement"
+						title="space between nails in rake">
+							placement
+					</label>
+					</div></div>
 		</li>
 		<!-- pallet -->
 		<li>

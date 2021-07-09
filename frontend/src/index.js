@@ -469,7 +469,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	{	const id = 'sidebar-rake-placement'
 		const el = document.getElementById(id);
 		fetchAndSet(el, id)
-		rake.config.placement = new RakeConfig(el.value);
+		rake.config.placement = new RakeConfig(el.value || '20');
 		el.addEventListener('change', (ev)=>{
 			try {
 				rake.config.placement = new RakeConfig(el.value);
