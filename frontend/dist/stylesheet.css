@@ -185,7 +185,7 @@ body {
 }
 
 .menu menu label {
-	opacity: 0.7;
+	opacity: 0.9;
 }
 
 .menu menu input[type="button"] ~ label {
