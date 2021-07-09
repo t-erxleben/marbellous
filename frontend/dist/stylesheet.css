@@ -18,7 +18,7 @@ h1 {
 	color: var(--accent-color-2);
 	max-height: 9vh;
 	margin: 0;
-	padding: 1vh;
+	padding: 2vh;
 }
 
 tr.sub-row > td:first-of-type {
@@ -29,11 +29,11 @@ tr.sub-row > td:first-of-type {
 	display: table;
 	margin: 0 auto;
 	position: relative;
-	width: 80vw;
-	height: 80vw;
+	width: 86vw;
+	height: 86vw;
 	/* 100/56.25 = 1.778 */
-	max-height: 82vh;
-	max-width: 82vh;
+	max-height: 86vh;
+	max-width: 86vh;
 	/* 16/9 = 1.778 */
 	top: 0;
 	bottom: 0;
@@ -332,7 +332,7 @@ p.notice {
 	width: 100%;
 	margin: 0;
 	padding: 3vh 0 0 0;
-	max-height: 9vh;
+	max-height: 5vh;
 }
 
 .switch {
