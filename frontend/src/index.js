@@ -819,6 +819,7 @@ var tool = {
 		if(tool.tool[state].up) {
 			tool.tool[state].up();
 		}
+		tool.start = null;
 	},
 	clear: function() {
 		if(tool.ctx) {
