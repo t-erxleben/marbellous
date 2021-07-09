@@ -90,7 +90,7 @@
 							title="<offset>:<space>(,<space>)*"
 							id="sidebar-rake-placement"
 							type="text" autocomplete="on"
-							pattern="([0-9]*:)?([0-9]+,)*[0-9]+"
+							pattern="([0-9]+:)?([0-9]+,)*[0-9]+"
 							value="">
 					<label class="form_label"
 						for="sidebar-rake-placement"
@@ -140,6 +140,42 @@
 						</tr>
 					</table>
 				</div>
+		</li>
+		<!-- sprinkler -->
+		<li>
+			<input type="radio" name="sidebar" id="sidebar-sprinkler"/>
+			<label for="sidebar-sprinkler">Sprinkler</label>
+			<div>
+				<table style="width: 75%">
+					<tr><td class="form_group field">
+						<input 	class="form_field"
+							   	placeholder="size min-max"
+							   	title="<min> - <max>"
+								id="sidebar-sprinkler-radius"
+ 							   	type="text" autocomplete="on"
+ 	 							pattern="[0-9]+-[0-9]+"
+								value="">
+						<label class="form_label"
+							   for="sidebar-sprinkler-radius"
+							   title="Size range for drops dropped by sprinkler tool.">
+							size min-max
+						</label>
+					</td></tr>
+					<tr><td class="form_group field">
+						<input 	class="form_field"
+								placeholder="drop frequence"
+								id="sidebar-sprinkler-frequence"
+								type="number" autocomplete="on"
+								value=""
+								min="0" step="1">
+						 <label class="form_label"
+							 	for="sidebar-sprinkler-frequence"
+								title="Drops per second placet by the sprinkler tool.">
+							 drop frequence
+						 </label>
+					</td></tr>
+				</table>
+			</div>
 		</li>
 	</menu>
 	</menu>

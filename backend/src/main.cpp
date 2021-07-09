@@ -1,6 +1,7 @@
 #include <emscripten.h>
 #include <cstdio>
 #include <cmath>
+#include <random>
 
 #include <stdlib.h> 
 
@@ -27,6 +28,7 @@ bool setupDone = false;
 WGLSceneRenderer *sceneRenderer;
 WGLRakeRenderer *rakeRenderer;
 Scene *scene;
+
 
 void _initWGLContext(char *canvasID, size_t x)
 {
@@ -213,6 +215,21 @@ extern "C"
         }
     }
 
+	void EMSCRIPTEN_KEEPALIVE sprinkle(int amt, float r_min, float r_max) {
+		checkSetup();
+		checkState(true,);
+		std::cout << "sp: min: " << r_min << ", max: " << r_max << std::endl;
+		static std::mt19937 rng(std::random_device{}());
+		static std::uniform_real_distribution<float> coord(-1.f, 1.f);
+		static constexpr unsigned int colorRoom = 10 * 9 * 8 * 7 * 6 * 5;
+		static std::uniform_int_distribution<int> color(0, colorRoom - 1);
+		static std::uniform_real_distribution<float> radius(r_min, r_max);
+		for(int i = 0; i < amt; ++i) {
+			addDrop(coord(rng), coord(rng), radius(rng), color(rng) % Options::getInstance()->getActivePalette()->getSize());
+			finishDrop(0);
+		}
+	}
+
 	void EMSCRIPTEN_KEEPALIVE clearCanvas() { ///< clear the canvas (delete all polygones and redraw scene)
 		checkSetup();
         
@@ -267,7 +284,7 @@ Init stuff:
         // setup
         // This needs to be done in the front end (init call should be after bg):
         char id[] = "#image";
-        initBackend(id, 2000, 2000);
+        initBackend(id, 720, 720);
 
         setupDone = true;
 

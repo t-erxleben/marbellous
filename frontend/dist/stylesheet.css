@@ -375,7 +375,7 @@ input.slider:checked + span.slider:before {
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
-  width: 50%;
+  width: 75%;
 }
 
 .form_field {
@@ -390,6 +390,17 @@ input.slider:checked + span.slider:before {
   background: transparent;
   transition: border-color 0.2s;
 }
+
+.form_field::-webkit-inner-spin-button,
+.form_field::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.form_field[type=number] {
+	-moz-appearance: textfield; 
+}
+
 .form_field::placeholder {
   color: transparent;
 }

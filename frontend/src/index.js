@@ -60,6 +60,17 @@ class RakeConfig {
 		}
 	}
 }
+function parseRadiusRange(str) {
+	const range = {};
+	range.min = int(str)
+	const p = range.min == 0 ? 1 : Math.ceil(Math.log10(range.min) + Number.EPSILON)
+	if(str[p] != '-') { throw "failed to parse!" }
+	range.max = int(str.slice(p+1))
+	if(range.max == 0) { throw "max to small!"}
+	range.min /= 100.
+	range.max /= 100.
+	return range;
+}
 
 var active = {};
 const states = ['draw','rake'];
@@ -91,6 +102,7 @@ window.Module = {
 		backend.rakeLinear = Module.cwrap('rakeLinear',
 			'boolean', ['number', 'number', 'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
+		backend.sprinkler = Module.cwrap('sprinkle', 'void', ['number', 'number', 'number'])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.fn_bind = true;
 		init();
@@ -491,6 +503,37 @@ function DomInit(){
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
+	{	const id = 'sidebar-sprinkler-radius'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		sparkle_dropper.range = parseRadiusRange(el.value || "5-10");
+		el.addEventListener('change', (ev)=>{
+			try {
+				sparkle_dropper.range = parseRadiusRange(el.value)
+				storage.store(id, el.value)
+			} catch(e) {
+				console.error("failed to parse radius range: ", e)
+				// TODO: error handling!
+			}
+		})
+		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}})
+	}
+	{	const id = 'sidebar-sprinkler-frequence'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		sparkle_dropper.rate = 1000. / int(el.value || "20") 
+		el.addEventListener('change', (ev)=> {
+			if (el.validity.valid) {
+				try {
+					sparkle_dropper.rate = 1000. / int(el.value)
+					storage.store(id, el.value)
+				}	catch(e) {
+					// TODO: error handling
+				}
+			}
+		})
+		el.addEventListener('keydown', (ev)=>{if (el.which == 13) {el.blur();}})
+	}
 	backend.dom_setup = true;
 	init();
 }
@@ -552,10 +595,34 @@ var dropper = {
 };
 
 var sparkle_dropper = {
+	rate: 50,
 	draw: function(canvas, x,y) {
 		const size = tool.translate({x: 32, y: 32});
 		canvas.drawImage(sparkle_dropper.img,x-size.x/2,y-size.y/2,size.x,size.y);
 		// canvas.drawImage(sparkle_dropper.img,y-size/2,x-size/2,size.x,size.y);
+	},
+	drop: function(time) {
+		if(! sparkle_dropper.active) { sparkle_dropper.time = null; return }
+		if(!sparkle_dropper.time) {
+			sparkle_dropper.time = time;
+			window.requestAnimationFrame(sparkle_dropper.drop);
+			return }
+		const d = time - sparkle_dropper.time
+		const n = int(d / sparkle_dropper.rate)
+		if(n > 0) {
+			backend.sprinkler(n, sparkle_dropper.range.min, sparkle_dropper.range.max)
+			sparkle_dropper.time = time - (d - (n * sparkle_dropper.rate))
+		}
+		window.requestAnimationFrame(sparkle_dropper.drop)
+	},
+	down: function() {
+		console.log("start sparklig")
+		sparkle_dropper.active = true;
+		window.requestAnimationFrame(sparkle_dropper.drop)
+	},
+	up: function() {
+		console.log("stop sprinkler");
+		sparkle_dropper.active = false;
 	}
 };
 
