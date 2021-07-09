@@ -11,7 +11,7 @@
 	--sidebar-width:
 		350px;
 	--tool-bar-margin:
-		30px;
+		70px;
 }
 
 h1 {
@@ -176,34 +176,15 @@ body {
 	padding-right: var(--tool-bar-margin);
 }
 
-.menu > li, .menu menu > li {
-	position: relative;
-	z-index: 3;
-	display: block;
-	padding: 1em 0 0 1em;
-	-webkit-user-select: none;  /* Chrome all / Safari all */
-	-moz-user-select: none;     /* Firefox all */
-	-ms-user-select: none;      /* IE 10+ */
-	user-select: none;          /* Likely future */ 
-	width: max-content;
-}
 
 .menu menu {
+	z-index: 1;
+	position: absolute;
 	display: inline-block;
 }
 
-.menu label {
-	position: inherit;
-	z-index: inherit;
-	-webkit-user-select: none;  /* Chrome all / Safari all */
-	-moz-user-select: none;     /* Firefox all */
-	-ms-user-select: none;      /* IE 10+ */
-	user-select: none;          /* Likely future */ 
-}
 
 .menu img {
-	position: inherit;
-	z-index: inherit;
 	-webkit-user-select: none;  /* Chrome all / Safari all */
 	-moz-user-select: none;     /* Firefox all */
 	-ms-user-select: none;      /* IE 10+ */
@@ -230,23 +211,32 @@ body {
 	-webkit-border-radius: 50%;
 	background: var(--background-color);
 	position: relative;
+
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
 }
 
+.menu li {
+	position: relative;
+	display: block;
+	padding: 1em 0 0 1em;
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;          /* Likely future */ 
+	width: max-content;
+}
 
 .menu menu > li {
 	display: inline;
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: -55;
 	opacity: 0;
+	padding: 0;
 	transition: left 0.5s, top 0.5s, opacity 0.5s;
-}
-
-.menu menu > li {
-	z-index: 2;
-}
-.menu menu menu > li {
-	z-index: 1;
 }
 
 .menu input[type="radio"] {
@@ -260,6 +250,8 @@ body {
 
 .menu input ~ label {
 	border: 2px solid transparent;
+	position: relative;
+	z-index: 2;
 }
 .menu input:checked ~ label,
 .menu input ~ label:hover {
@@ -267,51 +259,56 @@ body {
 	opacity: 1;
 }
 
+.menu input:checked ~ menu > li > label:hover
+{
+	z-index: 3;
+}
+
 .menu input:checked ~ menu > li:first-child:nth-last-child(2):not(.hide) {
 	top: -35;
-	left: 55;
+	left: -5;
 	opacity: 1;
 }
 .menu input:checked ~ menu > li:first-child:nth-last-child(2) ~ li:nth-child(2):not(.hide) {
 	top: 35;
-	left: 55;
+	left: -5;
 	opacity: 1;
 }
 
 .menu input:checked ~ menu > li:first-child:nth-last-child(3):not(.hide) {
 	top: -55;
-	left: 55;
+	left: -5;
 	opacity: 1;
 }
 .menu input:checked ~ menu > li:first-child:nth-last-child(3):not(.hide) ~ li:nth-child(2):not(.hide){
 	top: 0;
-	left: 75;
+	left: 15;
 	opacity: 1;
 }
 .menu input:checked ~ menu > li:first-child:nth-last-child(3) ~ li:nth-child(3):not(.hide) {
 	top: 55;
-	left: 55;
+	left: -5;
 	opacity: 1;
 }
 
 .menu input:checked ~ menu > li:first-child:nth-last-child(4):not(.hide) {
 	top: -55;
-	left: 55;
+	left: -5;
 	opacity: 1;
 }
 .menu input:checked ~ menu > li:first-child:nth-last-child(4):not(.hide) ~ li:nth-child(2):not(.hide){
-	top: -25;
-	left: 75;
+	top: -20;
+	left: 15;
 	opacity: 1;
 }
 .menu input:checked ~ menu > li:first-child:nth-last-child(4):not(.hide) ~ li:nth-child(3):not(.hide){
-	top: 25;
-	left: 75;
+	top: 20;
+	left: 15;
 	opacity: 1;
 }
 .menu input:checked ~ menu > li:first-child:nth-last-child(4) ~ li:nth-child(4):not(.hide) {
 	top: 55;
-	left: 55;
+	left: -5;
 	opacity: 1;
 }
 
