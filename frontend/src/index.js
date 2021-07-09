@@ -339,8 +339,15 @@ function fetchAndSet(element, id) {
 	const val = storage.fetch(id);
 	if (val) { element.value = val; }
 }
+
 window.storage = null
-document.addEventListener("DOMContentLoaded", function(){
+window.onload = function() {
+	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
+		div.style.maxHeight = div.scrollHeight + 3;
+	});
+}
+
+function DomInit(){
 	storage = new Storage()
 	document.querySelectorAll('menu input[type="radio"]').forEach(function(rad){
 		if (rad.checked) {
@@ -373,9 +380,6 @@ document.addEventListener("DOMContentLoaded", function(){
 	dropper.img = document.getElementById('img-color-dropper');
 	sparkle_dropper.img = document.getElementById('img-color-sparkle');
 
-	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
-		div.style.maxHeight = div.scrollHeight + 3;
-	});
 	sidebar.options = {
 		rake: document.getElementById('sidebar-rake'),
 		pallet: document.getElementById('sidebar-pallet'),
@@ -482,7 +486,12 @@ document.addEventListener("DOMContentLoaded", function(){
 	}
 	backend.dom_setup = true;
 	init();
-});
+}
+if(document.readyState === 'loading') {
+	document.addEventListener("DOMContentLoaded", DomInit);
+} else {
+	DomInit()
+}
 
 
 function drawline(ctx, start, end) {

@@ -4,6 +4,10 @@
 		<meta name="author" content="Timm,Denny,Julian" >
 		<meta name="description" content="A marebling tool">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.png" size="96x96" type="image/png">
+		<link rel="apple-touch-icon" size="180x180" href="apple-touch-icon.png">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="mstile-144x144x.png">
 		<link rel="stylesheet" href="stylesheet.css">
 		<script>
 			function switchStore() {
@@ -102,13 +106,16 @@
 				<div>
 					<table>
 						<tr>
-							<td><label for="sidebar-pallet-active-pallet" title="select current pallet">active:</label></td>
-							<td><select name="active-pallet" id="sidebar-pallet-active-pallet">
+							<td>
+								<label for="sidebar-pallet-active-pallet" title="select current pallet">
+								colorschema: </label>
+								</td>
+							<td>
+								<select class="form_field" name="active-pallet" id="sidebar-pallet-active-pallet">
 									<option value="pallet-1">default</option>
 									<option value="pallet-2">light</option>
 									<option value="pallet-3">funky</option>
-								</select></td>
-						</tr><tr>
+								</select></td>						</tr><tr>
 							<td>Colors:</td>
 						</tr><tr class ="sub-row">
 							<td><label for="sidebar-pallet-color-0">A:</label></td>
@@ -128,8 +135,6 @@
 								   value="#00FF00"></td>
 						</tr><tr>
 							<td><label for='sidebar-pallet-background'>Background:</label></td>
-						</tr><tr>
-							<td></td>
 							<td><input id="sidebar-pallet-background" type="color"
 								value="#F7E9CE"></td>
 						</tr>
