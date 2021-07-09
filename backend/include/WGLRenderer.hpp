@@ -11,6 +11,7 @@ class WGLRenderer
 public:
     GLuint compileShader(GLenum const type, std::string const shader) const;
     void setupShaderProgram(std::string vert, std::string frag, GLint& shader);
+	virtual void setActive() const = 0;
     
     void buildColorBuffer(Palette const & p, std::vector<GLfloat>& v)
     {

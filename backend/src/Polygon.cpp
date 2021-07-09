@@ -26,8 +26,8 @@ void Polygon::getDrawInfo(std::vector<WGLVertex>& vertices, GLuint z) const
 size_t Polygon::circleVertCount(float radius)
 {
     auto opt = WGLContext::getContext();
-    auto csize = opt->getCanvasSize();
-    size_t squareCanvasSize = csize.first;
+    auto csize = opt->getDropRes();
+    size_t squareCanvasSize = csize;
 
     size_t vert_count = static_cast<size_t>(M_PI * radius * squareCanvasSize);
     if (vert_count > 200) {
