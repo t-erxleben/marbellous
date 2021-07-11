@@ -146,8 +146,8 @@
 			<input type="radio" name="sidebar" id="sidebar-sprinkler"/>
 			<label for="sidebar-sprinkler">Sprinkler</label>
 			<div>
-				<table style="width: 75%">
-					<tr><td class="form_group field">
+				<menu style="width:75%;list-style:none;margin-left:-40px;">
+					<li class="form_group field">
 						<input 	class="form_field"
 							   	placeholder="size min-max"
 							   	title="<min> - <max>"
@@ -160,21 +160,43 @@
 							   title="Size range for drops dropped by sprinkler tool.">
 							size min-max
 						</label>
-					</td></tr>
-					<tr><td class="form_group field">
+					</li>
+					<li class="form_group field">
 						<input 	class="form_field"
 								placeholder="drop frequence"
 								id="sidebar-sprinkler-frequence"
 								type="number" autocomplete="on"
 								value=""
-								min="0" step="1">
+								min="1" step="1">
 						 <label class="form_label"
 							 	for="sidebar-sprinkler-frequence"
 								title="Drops per second placet by the sprinkler tool.">
 							 drop frequence
 						 </label>
-					</td></tr>
-				</table>
+					</li>
+					<li><label class="switch" title="Sparkle drops only around cursor. If disable drops will sparkle in the full area." style="margin-top:20px">
+							<input id="sidebar-sprinkler-local" class="slider" type="checkbox">
+							<span class="slider"></span>
+						</label>
+						sparkle around cursor
+						<menu style="list-style:none;margin-top:-10px">
+							<li class="form_group field">
+								<input class="form_field"
+									   placeholder="σ"
+									   disabled
+									   id="sidebar-sprinkler-sig"
+									   type="number" autocomplete="on"
+									   value=""
+									   min="1" step="">
+								<label class="form_label"
+									    for="sidebar-sprinkler-sig"
+										title="Standart deviation for dropps to be generated.">
+									σ
+								</label>
+							</li>
+						</menu>
+					</li>
+				</menu>
 			</div>
 		</li>
 	</menu>

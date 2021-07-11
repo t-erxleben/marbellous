@@ -49,8 +49,10 @@ void sprinkle(int amt, C& coord, R& radius)
 	static std::mt19937 rng(std::random_device{}());
 	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
 
+	std::cout << "amt: " << amt << std::endl;
 	for(int i = 0; i < amt; ++i) {
 		Point p = coord(rng);
+		std::cout << p.x << ", " << p.y << " r: " << radius(rng) << std::endl;
 		addDrop(
 				p.x,
 				p.y,
@@ -245,17 +247,17 @@ extern "C"
 	 * \param amt number of drops to create
 	 * \param r_min,r_max drop size range
 	 * \param x,y cursor position
-	 * \param mu for normal distribution for drop position
 	 * \param sig sigma for normal distribution for drop position
 	 */
 	void EMSCRIPTEN_KEEPALIVE sprinkleLocal(int amt, float r_min, float r_max,
-			float x, float y, float mu, float sig)
+			float x, float y, float sig)
 	{
 		checkSetup();
 		checkState(true,);
+		std::cout << "sig: " << sig << std::endl;
 
 		auto coord = [&](auto& prng) {
-			std::normal_distribution<float> dis(mu, sig);
+			std::normal_distribution<float> dis(0, sig);
 			return Point{ dis(prng) + x, dis(prng) + y };
 		};
 		std::uniform_real_distribution<float> radius(r_min, r_max);

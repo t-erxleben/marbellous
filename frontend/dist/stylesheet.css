@@ -444,6 +444,15 @@ input.slider:checked + span.slider:before {
 	color: red;
 }
 
+.form_field:disabled {
+	box-shadow: none;
+	color: var(--overlay-color);
+	border-bottom-color: var(--overlay-color);
+}
+
+.form_field:disabled ~ .form_label {
+	color: var(--overlay-color)
+}
 
 .sidebar input[type="color"] {
 	box-shadow: 2px 2px 3px #999;

@@ -1,6 +1,9 @@
 import * as parser from './rake_syntax.pegjs'
 import * as png from 'fast-png'
 
+// TODO: async download
+// TODO: call initBackend
+
 const int = parseInt;
 const inputs = {}
 window.Storage =  class Storage {
@@ -103,6 +106,7 @@ window.Module = {
 			'boolean', ['number', 'number', 'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
 		backend.sprinklerGlobal = Module.cwrap('sprinkleGlobal', 'void', ['number', 'number', 'number'])
+		backend.sprinklerLocal = Module.cwrap('sprinkleLocal', 'void', ['number', 'number', 'number', 'number', 'number', 'number'])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.fn_bind = true;
 		init();
@@ -357,6 +361,7 @@ function hideMenu() {
 }
 function fetchAndSet(element, id) {
 	const val = storage.fetch(id);
+	console.log(id, val)
 	if (val) { element.value = val; }
 }
 
@@ -535,6 +540,35 @@ function DomInit(){
 		})
 		el.addEventListener('keydown', (ev)=>{if (el.which == 13) {el.blur();}})
 	}
+	{	const id = 'sidebar-sprinkler-local'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		const sigId = 'sidebar-sprinkler-sig'
+		const sigEl = document.getElementById(sigId)
+		fetchAndSet(sigEl, sigId)
+
+		el.checked = el.value === 'true'
+		sparkle_dropper.local = el.checked
+		sigEl.disabled = !el.checked
+		el.addEventListener('change', (ev) => {
+			sparkle_dropper.local = el.checked
+			storage.store(id, el.checked)
+			sigEl.disabled = !el.checked
+		})
+		sparkle_dropper.sig = int(sigEl.value || '10' ) / 100.
+		console.log(sparkle_dropper.sig, '<-sig')
+		sigEl.addEventListener('change', (ev)=> {
+			if (el.validity.valid) {
+				try {
+					sparkle_dropper.sig = int(sigEl.value) / 100.
+					console.log(sparkle_dropper.sig, '<-sig')
+					storage.store(sigId, sigEl.value)
+				}	catch(e) {
+					// TODO: error handling
+				}
+			}
+		})
+	}
 	backend.dom_setup = true;
 	init();
 }
@@ -598,6 +632,7 @@ var dropper = {
 var sparkle_dropper = {
 	rate: 50,
 	draw: function(canvas, x,y) {
+		sparkle_dropper.pos =  {x: x / sparkle_dropper.dim.w, y: y/sparkle_dropper.dim.h}
 		const size = tool.translate({x: 32, y: 32});
 		canvas.drawImage(sparkle_dropper.img,x-size.x/2,y-size.y/2,size.x,size.y);
 		// canvas.drawImage(sparkle_dropper.img,y-size/2,x-size/2,size.x,size.y);
@@ -611,12 +646,23 @@ var sparkle_dropper = {
 		const d = time - sparkle_dropper.time
 		const n = int(d / sparkle_dropper.rate)
 		if(n > 0) {
-			backend.sprinklerGlobal(n, sparkle_dropper.range.min, sparkle_dropper.range.max)
+			if(sparkle_dropper.local === true) {
+				backend.sprinklerLocal(n, sparkle_dropper.range.min, sparkle_dropper.range.max,
+					sparkle_dropper.pos.x * 2 - 1,1 - sparkle_dropper.pos.y * 2,
+					sparkle_dropper.sig)
+			} else {
+				backend.sprinklerGlobal(n, sparkle_dropper.range.min, sparkle_dropper.range.max)
+			}
 			sparkle_dropper.time = time - (d - (n * sparkle_dropper.rate))
 		}
 		window.requestAnimationFrame(sparkle_dropper.drop)
 	},
-	down: function() {
+	down: function(x,y,w,h) {
+		sparkle_dropper.pos = {
+			x: x / w,
+			y: y /h
+		}
+		sparkle_dropper.dim = {w, h}
 		console.log("start sparklig")
 		sparkle_dropper.active = true;
 		window.requestAnimationFrame(sparkle_dropper.drop)
