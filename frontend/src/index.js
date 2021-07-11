@@ -102,7 +102,7 @@ window.Module = {
 		backend.rakeLinear = Module.cwrap('rakeLinear',
 			'boolean', ['number', 'number', 'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
-		backend.sprinkler = Module.cwrap('sprinkle', 'void', ['number', 'number', 'number'])
+		backend.sprinklerGlobal = Module.cwrap('sprinkleGlobal', 'void', ['number', 'number', 'number'])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.fn_bind = true;
 		init();
@@ -171,6 +171,7 @@ function getTopSubmenu(label) {
 }
 
 function switchState(_old, _new) {
+	console.log(`switch from ${_old} to ${_new}`)
 	nodes[_old] = []
 	Array.prototype.forEach.call(document.getElementsByClassName('state ' + _old), function (e){
 		var next = e;
@@ -205,8 +206,8 @@ function switchState(_old, _new) {
 		break;
 		case 'draw':
 			label.title = 'Start raking.';
-			img.src = 'icons/arrow-right-solid.svg'; break;
-			backend.startDropping()
+			img.src = 'icons/arrow-right-solid.svg';
+			if(backend.init) { backend.startDropping() }
 		break;
 	}
 }
@@ -610,7 +611,7 @@ var sparkle_dropper = {
 		const d = time - sparkle_dropper.time
 		const n = int(d / sparkle_dropper.rate)
 		if(n > 0) {
-			backend.sprinkler(n, sparkle_dropper.range.min, sparkle_dropper.range.max)
+			backend.sprinklerGlobal(n, sparkle_dropper.range.min, sparkle_dropper.range.max)
 			sparkle_dropper.time = time - (d - (n * sparkle_dropper.rate))
 		}
 		window.requestAnimationFrame(sparkle_dropper.drop)

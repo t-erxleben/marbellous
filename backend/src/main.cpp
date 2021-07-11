@@ -35,6 +35,30 @@ void _initWGLContext(char *canvasID, size_t x)
     WGLContext::instance = new WGLContext(canvasID, x);
 }
 
+extern "C" {
+	int EMSCRIPTEN_KEEPALIVE addDrop(float,float,float,unsigned);
+	int EMSCRIPTEN_KEEPALIVE finishDrop(int); }
+
+template<typename C, typename R>
+void sprinkle(int amt, C& coord, R& radius)
+{
+	checkSetup();
+	checkState(true,);
+
+	static constexpr unsigned int colorRoom = 10 * 9 * 8 * 7 * 6 * 5;
+	static std::mt19937 rng(std::random_device{}());
+	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
+
+	for(int i = 0; i < amt; ++i) {
+		addDrop(
+				coord(rng),
+				coord(rng),
+				radius(rng),
+				color(rng) % Options::getInstance()->getActivePalette()->getSize());
+		finishDrop(0);
+	}
+}
+
 /*------------------------------------------
 Interface to front end:
 --------------------------------------------*/
@@ -215,19 +239,33 @@ extern "C"
         }
     }
 
-	void EMSCRIPTEN_KEEPALIVE sprinkle(int amt, float r_min, float r_max) {
+	/// creates sprinkle in around cursor
+	/**
+	 * \param amt number of drops to create
+	 * \param r_min,r_max drop size range
+	 * \param x,y cursor position
+	 * \param mu for normal distribution for drop position
+	 * \param sig sigma for normal distribution for drop position
+	 */
+	void EMSCRIPTEN_KEEPALIVE sprinkleLocal(int amt, float r_min, float r_max,
+			float x, float y, float mu, float sig)
+	{
 		checkSetup();
 		checkState(true,);
-		std::cout << "sp: min: " << r_min << ", max: " << r_max << std::endl;
+
+		std::normal_distribution<float> coord(mu, sig);
+		std::uniform_real_distribution<float> radius(r_min, r_max);
+		sprinkle(amt, coord, radius);
+	}
+	void EMSCRIPTEN_KEEPALIVE sprinkleGlobal(int amt, float r_min, float r_max) {
+		checkSetup();
+		checkState(true,);
+
 		static std::mt19937 rng(std::random_device{}());
 		static std::uniform_real_distribution<float> coord(-1.f, 1.f);
-		static constexpr unsigned int colorRoom = 10 * 9 * 8 * 7 * 6 * 5;
-		static std::uniform_int_distribution<int> color(0, colorRoom - 1);
-		static std::uniform_real_distribution<float> radius(r_min, r_max);
-		for(int i = 0; i < amt; ++i) {
-			addDrop(coord(rng), coord(rng), radius(rng), color(rng) % Options::getInstance()->getActivePalette()->getSize());
-			finishDrop(0);
-		}
+
+		std::uniform_real_distribution<float> radius(r_min, r_max);
+		sprinkle(amt, coord, radius);
 	}
 
 	void EMSCRIPTEN_KEEPALIVE clearCanvas() { ///< clear the canvas (delete all polygones and redraw scene)
