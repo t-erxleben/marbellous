@@ -30,7 +30,7 @@ WGLRakeRenderer *rakeRenderer;
 Scene *scene;
 
 
-void _initWGLContext(char *canvasID, size_t x)
+void _initWGLContext(const char *canvasID, size_t x)
 {
     WGLContext::instance = new WGLContext(canvasID, x);
 }
@@ -68,7 +68,7 @@ Interface to front end:
 
 extern "C"
 {
-    void initBackend(char *canvasID, size_t dropRes, size_t rakeRes)
+    void EMSCRIPTEN_KEEPALIVE initBackend(const char canvasID[], size_t dropRes, size_t rakeRes)
     {
         _initWGLContext(canvasID, dropRes);
 
@@ -328,13 +328,6 @@ Init stuff:
 
     int EMSCRIPTEN_KEEPALIVE main()
     {
-        // setup
-        // This needs to be done in the front end (init call should be after bg):
-        char id[] = "#image";
-        initBackend(id, 720, 720);
-
-        setupDone = true;
-
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);
         return 0;

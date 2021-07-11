@@ -1,9 +1,6 @@
 import * as parser from './rake_syntax.pegjs'
 import * as png from 'fast-png'
 
-// TODO: async download
-// TODO: call initBackend
-
 const int = parseInt;
 const inputs = {}
 window.Storage =  class Storage {
@@ -108,6 +105,7 @@ window.Module = {
 		backend.sprinklerGlobal = Module.cwrap('sprinkleGlobal', 'void', ['number', 'number', 'number'])
 		backend.sprinklerLocal = Module.cwrap('sprinkleLocal', 'void', ['number', 'number', 'number', 'number', 'number', 'number'])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
+		backend.initBackend = Module.cwrap('initBackend', 'void', ['string', 'number', 'number'])
 		backend.fn_bind = true;
 		init();
 	}
@@ -120,6 +118,7 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
+	backend.initBackend('#image', 720, 720)
 	backend.setBGColor(color2int(pallets[pallets.active].background));
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
@@ -217,24 +216,26 @@ function switchState(_old, _new) {
 }
 var download_side = null;
 function downloadCanvas() {
-	const ptr = Module.ccall("getImage", "number", [], []);	
-	console.log('R: ', ptr % 4);
-	const width = Module.HEAP32[ptr/4]
-	const height = Module.HEAP32[ptr/4+1]
-	const len = width * height * 3
+	return new Promise((resolve, reject) => {
+		const ptr = Module.ccall("getImage", "number", [], []);	
+		const width = Module.HEAP32[ptr/4]
+		const height = Module.HEAP32[ptr/4+1]
+		const len = width * height * 3
 
-	const data = Module.HEAPU8.slice(ptr + 8, ptr+len+8);
-	const pngData = png.encode({width, height, data, depth: 8, channels: 3})
-	const blob = new Blob([pngData], {type: 'image/png'});
-	if(!download_side) {
-		download_side = document.createElement('a');
-		document.body.appendChild(download_side);
-		download_side.style.display = 'none';
-	}
-	const url = window.URL.createObjectURL(blob);
-	download_side.href = url;
-	download_side.download = "marebllous-image.png";
-	download_side.click();
+		const data = Module.HEAPU8.slice(ptr + 8, ptr+len+8);
+		const pngData = png.encode({width, height, data, depth: 8, channels: 3})
+		const blob = new Blob([pngData], {type: 'image/png'});
+		if(!download_side) {
+			download_side = document.createElement('a');
+			document.body.appendChild(download_side);
+			download_side.style.display = 'none';
+		}
+		const url = window.URL.createObjectURL(blob);
+		download_side.href = url;
+		download_side.download = "marebllous-image.png";
+		download_side.click();
+		resolve()
+	})
 }
 
 
@@ -541,7 +542,7 @@ function DomInit(){
 				}
 			}
 		})
-		el.addEventListener('keydown', (ev)=>{if (el.which == 13) {el.blur();}})
+		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur();}})
 	}
 	{	const id = 'sidebar-sprinkler-local'
 		const el = document.getElementById(id)
@@ -559,18 +560,17 @@ function DomInit(){
 			sigEl.disabled = !el.checked
 		})
 		sparkle_dropper.sig = int(sigEl.value || '10' ) / 100.
-		console.log(sparkle_dropper.sig, '<-sig')
 		sigEl.addEventListener('change', (ev)=> {
 			if (el.validity.valid) {
 				try {
 					sparkle_dropper.sig = int(sigEl.value) / 100.
-					console.log(sparkle_dropper.sig, '<-sig')
 					storage.store(sigId, sigEl.value)
 				}	catch(e) {
 					// TODO: error handling
 				}
 			}
 		})
+		sigEl.addEventListener('keydown', (ev)=>{if (ev.which == 13) {sigEl.blur();}})
 	}
 	backend.dom_setup = true;
 	init();
