@@ -522,7 +522,7 @@ function DomInit(){
 	{	const id = 'sidebar-sprinkler-frequence'
 		const el = document.getElementById(id)
 		fetchAndSet(el, id)
-		sparkle_dropper.rate = 1000. / int(el.value || "20") 
+		sparkle_dropper.rate = 1000. / int(el.value || "5") 
 		el.addEventListener('change', (ev)=> {
 			if (el.validity.valid) {
 				try {
