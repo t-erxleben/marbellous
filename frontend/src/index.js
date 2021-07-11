@@ -239,7 +239,7 @@ function handleClick(el) {
 				downloadCanvas();
 				break;
 			case 'clear':
-				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you really clear the Canvas?'))
+				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you clear the Canvas?'))
 				{
 					backend.clearCanvas()
 					// go back to draw when clearing in rake
@@ -287,7 +287,7 @@ function handleClick(el) {
 			case 'switch-state':
 				const oldState = state;
 				if (oldState === 'rake') {
-					if(!window.confirm("This will go back before you make you're first rake stroke.\nThe stroke marked will all be removed, and there is NO way to restore then.\nWan't you go back to the color drop state?"))
+					if(!window.confirm("This will go back before you make your first rake stroke. The stroke marked will all be removed, and there is NO way to restore them.\nWant you go back to the color drop state?"))
 					{
 						break;
 					}
