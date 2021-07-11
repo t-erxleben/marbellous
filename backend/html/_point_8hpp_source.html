@@ -70,15 +70,15 @@ $(function() {
 <div class="title">Point.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_point_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;GLES3/gl3.h&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;constexpr <span class="keywordtype">size_t</span> PRIMITIVE_RESTART = 4294967295;</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="_point_8hpp.html#a4a547b4da343815613004c6c0917e99f">    7</a></span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="_point_8hpp.html#aac01dbdf6a5cf1316f7c9fa0d864c7ee">PRIMITIVE_RESTART</a> = 4294967295;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span>__attribute__((packed)) Point</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span><a class="code" href="_point_8hpp.html#a4a547b4da343815613004c6c0917e99f">__attribute__</a>((packed)) Point</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    GLfloat x;</div>
@@ -135,7 +135,7 @@ $(function() {
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">float</span> distance2(<span class="keyword">const</span> Point&amp; a, <span class="keyword">const</span> Point&amp; b) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="_point_8hpp.html#ad39a7abbd5b7cbdf29e3a2edb15294e6">   83</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">float</span> <a class="code" href="_point_8hpp.html#ad39a7abbd5b7cbdf29e3a2edb15294e6">distance2</a>(<span class="keyword">const</span> Point&amp; a, <span class="keyword">const</span> Point&amp; b) {</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">float</span> dx = a.x - b.x;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordtype">float</span> dy = a.y - b.y;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> dx*dx + dy*dy;</div>
@@ -161,10 +161,13 @@ $(function() {
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">} </span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">}*/</span></div>
+<div class="ttc" id="a_point_8hpp_html_a4a547b4da343815613004c6c0917e99f"><div class="ttname"><a href="_point_8hpp.html#a4a547b4da343815613004c6c0917e99f">__attribute__</a></div><div class="ttdeci">class __attribute__((packed)) Point</div><div class="ttdef"><b>Definition:</b> Point.hpp:12</div></div>
+<div class="ttc" id="a_point_8hpp_html_aac01dbdf6a5cf1316f7c9fa0d864c7ee"><div class="ttname"><a href="_point_8hpp.html#aac01dbdf6a5cf1316f7c9fa0d864c7ee">PRIMITIVE_RESTART</a></div><div class="ttdeci">constexpr size_t PRIMITIVE_RESTART</div><div class="ttdef"><b>Definition:</b> Point.hpp:7</div></div>
+<div class="ttc" id="a_point_8hpp_html_ad39a7abbd5b7cbdf29e3a2edb15294e6"><div class="ttname"><a href="_point_8hpp.html#ad39a7abbd5b7cbdf29e3a2edb15294e6">distance2</a></div><div class="ttdeci">float distance2(const Point &amp;a, const Point &amp;b)</div><div class="ttdef"><b>Definition:</b> Point.hpp:83</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jul 10 2021 16:50:19 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Jul 11 2021 21:20:00 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

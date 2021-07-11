@@ -70,11 +70,11 @@ $(function() {
 <div class="title">WGLRakeRenderer.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_w_g_l_rake_renderer_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;WGLRenderer.hpp&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_w_g_l_renderer_8hpp.html">WGLRenderer.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;WGLSceneRenderer.hpp&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_w_g_l_scene_renderer_8hpp.html">WGLSceneRenderer.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
@@ -184,21 +184,29 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="class_w_g_l_rake_renderer.html">WGLRakeRenderer</a>(<a class="code" href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a>&amp; sr, <a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; s);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordtype">void</span> setActive() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">void</span> reset(<a class="code" href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a>&amp; sr, <a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; s);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">void</span> rake(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, GLuint nails[1000]);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">void</span> draw();</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">void</span> drawToBuffer(<span class="keywordtype">void</span>* buf, <span class="keywordtype">size_t</span> length);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49">WGLRakeRenderer</a>(<a class="code" href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a>&amp; sr, <a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; s);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48">setActive</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34">reset</a>(<a class="code" href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a>&amp; sr, <a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; s);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_rake_renderer.html#a1da919c6a62342ea3327f276b3b930a0">rake</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, GLuint nails[1000]);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_rake_renderer.html#a031ed2893ca2b60cf938e96594649eab">draw</a>();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72">drawToBuffer</a>(<span class="keywordtype">void</span>* buf, <span class="keywordtype">size_t</span> length);</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;};</div>
+<div class="ttc" id="a_w_g_l_renderer_8hpp_html"><div class="ttname"><a href="_w_g_l_renderer_8hpp.html">WGLRenderer.hpp</a></div></div>
+<div class="ttc" id="a_w_g_l_scene_renderer_8hpp_html"><div class="ttname"><a href="_w_g_l_scene_renderer_8hpp.html">WGLSceneRenderer.hpp</a></div></div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.hpp:12</div></div>
 <div class="ttc" id="aclass_w_g_l_rake_renderer_html"><div class="ttname"><a href="class_w_g_l_rake_renderer.html">WGLRakeRenderer</a></div><div class="ttdef"><b>Definition:</b> WGLRakeRenderer.hpp:10</div></div>
+<div class="ttc" id="aclass_w_g_l_rake_renderer_html_a031ed2893ca2b60cf938e96594649eab"><div class="ttname"><a href="class_w_g_l_rake_renderer.html#a031ed2893ca2b60cf938e96594649eab">WGLRakeRenderer::draw</a></div><div class="ttdeci">void draw()</div><div class="ttdef"><b>Definition:</b> WGLRakeRenderer.cpp:135</div></div>
+<div class="ttc" id="aclass_w_g_l_rake_renderer_html_a1da919c6a62342ea3327f276b3b930a0"><div class="ttname"><a href="class_w_g_l_rake_renderer.html#a1da919c6a62342ea3327f276b3b930a0">WGLRakeRenderer::rake</a></div><div class="ttdeci">void rake(float x, float y, GLuint nails[1000])</div><div class="ttdef"><b>Definition:</b> WGLRakeRenderer.cpp:108</div></div>
+<div class="ttc" id="aclass_w_g_l_rake_renderer_html_a2166e5102937f9580ee5d79282e1cb48"><div class="ttname"><a href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48">WGLRakeRenderer::setActive</a></div><div class="ttdeci">void setActive() const override</div><div class="ttdef"><b>Definition:</b> WGLRakeRenderer.cpp:165</div></div>
+<div class="ttc" id="aclass_w_g_l_rake_renderer_html_a6c155710ec8609268bf31a30e6c31f49"><div class="ttname"><a href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49">WGLRakeRenderer::WGLRakeRenderer</a></div><div class="ttdeci">WGLRakeRenderer(WGLSceneRenderer &amp;sr, Scene const &amp;s)</div><div class="ttdef"><b>Definition:</b> WGLRakeRenderer.cpp:3</div></div>
+<div class="ttc" id="aclass_w_g_l_rake_renderer_html_a73cacbaf976d27df48a0ad7d52541f34"><div class="ttname"><a href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34">WGLRakeRenderer::reset</a></div><div class="ttdeci">void reset(WGLSceneRenderer &amp;sr, Scene const &amp;s)</div><div class="ttdef"><b>Definition:</b> WGLRakeRenderer.cpp:85</div></div>
+<div class="ttc" id="aclass_w_g_l_rake_renderer_html_ae0f864fc5be5f80836907218cbaa3c72"><div class="ttname"><a href="class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72">WGLRakeRenderer::drawToBuffer</a></div><div class="ttdeci">void drawToBuffer(void *buf, size_t length)</div><div class="ttdef"><b>Definition:</b> WGLRakeRenderer.cpp:154</div></div>
 <div class="ttc" id="aclass_w_g_l_renderer_html"><div class="ttname"><a href="class_w_g_l_renderer.html">WGLRenderer</a></div><div class="ttdef"><b>Definition:</b> WGLRenderer.hpp:10</div></div>
 <div class="ttc" id="aclass_w_g_l_scene_renderer_html"><div class="ttname"><a href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a></div><div class="ttdef"><b>Definition:</b> WGLSceneRenderer.hpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jul 10 2021 16:50:19 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Jul 11 2021 21:20:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

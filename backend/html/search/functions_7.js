@@ -1,4 +1,19 @@
 var searchData=
 [
-  ['operator_5b_5d_47',['operator[]',['../class_palette.html#a8506b72557b8b04974689bd1876a3761',1,'Palette::operator[]()'],['../class_scene.html#a835d3f30ea40b16f4e11aa9a7e8e6bd8',1,'Scene::operator[](size_t const index)'],['../class_scene.html#a6effb360beebcdb58f5384d9d7f380f4',1,'Scene::operator[](size_t const index) const']]]
+  ['getactivepalette_158',['getActivePalette',['../class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c',1,'Options']]],
+  ['getbgcolor_159',['getBGColor',['../class_options.html#a1fe456ad2f76cc5df6ff4c167ec7fba8',1,'Options']]],
+  ['getcontext_160',['getContext',['../class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014',1,'WGLContext']]],
+  ['getcreationpoint_161',['getCreationPoint',['../class_polygon.html#a2f5bc5111907b04cc5e85afacceeb6e2',1,'Polygon']]],
+  ['getdisplacement_162',['getDisplacement',['../class_scene.html#a45cca662186b18afe921b0ca159c8529',1,'Scene']]],
+  ['getdrawinfo_163',['getDrawInfo',['../class_polygon.html#a6a29d611b7d3f8056a76dabc8319a198',1,'Polygon']]],
+  ['getdropres_164',['getDropRes',['../class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c',1,'WGLContext']]],
+  ['getgeneration_165',['getGeneration',['../class_scene.html#a0015860acf1b41173be6d3bff19ab6c9',1,'Scene']]],
+  ['getimage_166',['getImage',['../main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3',1,'main.cpp']]],
+  ['getinstance_167',['getInstance',['../class_options.html#afa26d7ecc68acacdda8e57603bdc94ea',1,'Options']]],
+  ['getpolygoncount_168',['getPolygonCount',['../class_scene.html#a0bc2671d164f0329314da6fb0b5a77bb',1,'Scene']]],
+  ['getrakeres_169',['getRakeRes',['../class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c',1,'WGLContext']]],
+  ['getrgb_170',['getRGB',['../class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225',1,'Color']]],
+  ['getsize_171',['getSize',['../class_palette.html#a3c55a74b231deff1d256fbd94251603a',1,'Palette']]],
+  ['getstate_172',['getState',['../class_options.html#a8cb8a1fe3c3fbfee9b02ed7926a58c15',1,'Options']]],
+  ['getvertcount_173',['getVertCount',['../class_polygon.html#a4cfcc27123e12eca73c4b9901d761820',1,'Polygon']]]
 ];

@@ -70,22 +70,22 @@ $(function() {
 <div class="title">WGLRenderer.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="_w_g_l_renderer_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;GLES3/gl3.h&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;EGL/egl.h&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Palette.hpp&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_palette_8hpp.html">Palette.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_w_g_l_renderer.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_w_g_l_renderer.html">WGLRenderer</a></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    GLuint compileShader(GLenum <span class="keyword">const</span> type, std::string <span class="keyword">const</span> shader) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">void</span> setupShaderProgram(std::string vert, std::string frag, GLint&amp; shader);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setActive() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    GLuint <a class="code" href="class_w_g_l_renderer.html#a865e294ae99d5191c6aeec84eda96ac6">compileShader</a>(GLenum <span class="keyword">const</span> type, std::string <span class="keyword">const</span> shader) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124">setupShaderProgram</a>(std::string vert, std::string frag, GLint&amp; shader);</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_w_g_l_renderer.html#ae496681edec5f304697e43a6933c934b">   14</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_renderer.html#ae496681edec5f304697e43a6933c934b">setActive</a>() <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> buildColorBuffer(<a class="code" href="class_palette.html">Palette</a> <span class="keyword">const</span> &amp; p, std::vector&lt;GLfloat&gt;&amp; v)</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0">buildColorBuffer</a>(<a class="code" href="class_palette.html">Palette</a> <span class="keyword">const</span> &amp; p, std::vector&lt;GLfloat&gt;&amp; v)</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keywordflow">for</span>(<a class="code" href="class_color.html">Color</a> <span class="keyword">const</span> &amp; c: p)</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            {</div>
@@ -95,13 +95,18 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            }</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="ttc" id="a_palette_8hpp_html"><div class="ttname"><a href="_palette_8hpp.html">Palette.hpp</a></div></div>
 <div class="ttc" id="aclass_color_html"><div class="ttname"><a href="class_color.html">Color</a></div><div class="ttdef"><b>Definition:</b> Color.hpp:7</div></div>
 <div class="ttc" id="aclass_palette_html"><div class="ttname"><a href="class_palette.html">Palette</a></div><div class="ttdef"><b>Definition:</b> Palette.hpp:12</div></div>
 <div class="ttc" id="aclass_w_g_l_renderer_html"><div class="ttname"><a href="class_w_g_l_renderer.html">WGLRenderer</a></div><div class="ttdef"><b>Definition:</b> WGLRenderer.hpp:10</div></div>
+<div class="ttc" id="aclass_w_g_l_renderer_html_a1e05c7f2fff34772a495a7dfbb77d124"><div class="ttname"><a href="class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124">WGLRenderer::setupShaderProgram</a></div><div class="ttdeci">void setupShaderProgram(std::string vert, std::string frag, GLint &amp;shader)</div><div class="ttdef"><b>Definition:</b> WGLRenderer.cpp:35</div></div>
+<div class="ttc" id="aclass_w_g_l_renderer_html_a865e294ae99d5191c6aeec84eda96ac6"><div class="ttname"><a href="class_w_g_l_renderer.html#a865e294ae99d5191c6aeec84eda96ac6">WGLRenderer::compileShader</a></div><div class="ttdeci">GLuint compileShader(GLenum const type, std::string const shader) const</div><div class="ttdef"><b>Definition:</b> WGLRenderer.cpp:4</div></div>
+<div class="ttc" id="aclass_w_g_l_renderer_html_ae496681edec5f304697e43a6933c934b"><div class="ttname"><a href="class_w_g_l_renderer.html#ae496681edec5f304697e43a6933c934b">WGLRenderer::setActive</a></div><div class="ttdeci">virtual void setActive() const =0</div></div>
+<div class="ttc" id="aclass_w_g_l_renderer_html_afca01cdb98219c15549e869472ed66a0"><div class="ttname"><a href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0">WGLRenderer::buildColorBuffer</a></div><div class="ttdeci">void buildColorBuffer(Palette const &amp;p, std::vector&lt; GLfloat &gt; &amp;v)</div><div class="ttdef"><b>Definition:</b> WGLRenderer.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jul 10 2021 16:50:19 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Jul 11 2021 21:20:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
