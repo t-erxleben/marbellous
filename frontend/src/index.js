@@ -122,7 +122,6 @@ function init() {
 	backend.setBGColor(color2int(pallets[pallets.active].background));
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
-	console.log(pallets);
 	pallets[pallets.active].colors.forEach(function(x,i) {
 		backend.setColorAt(i, color2int(x))
 	})
@@ -364,7 +363,6 @@ function hideMenu() {
 }
 function fetchAndSet(element, id) {
 	const val = storage.fetch(id);
-	console.log(id, val)
 	if (val) { element.value = val; }
 }
 
@@ -470,7 +468,6 @@ function DomInit(){
 			backend.redraw()
 		})
 		pallets.inputs.background = el
-		console.log('bg', el.value)
 		pallets[pallets.active].background = el.value
 	}
 	var i = 0
@@ -666,12 +663,10 @@ var sparkle_dropper = {
 			y: y /h
 		}
 		sparkle_dropper.dim = {w, h}
-		console.log("start sparklig")
 		sparkle_dropper.active = true;
 		window.requestAnimationFrame(sparkle_dropper.drop)
 	},
 	up: function() {
-		console.log("stop sprinkler");
 		sparkle_dropper.active = false;
 	}
 };
@@ -862,7 +857,6 @@ var rake = {
 	},
 	setPattern: function(ctx) {
 		if(this.placement !== rake.config.placement) {
-			console.log(rake.config.placement)
 			this.placement = rake.config.placement;
 			rake.init();
 			const r = 5;

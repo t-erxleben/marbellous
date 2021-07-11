@@ -49,10 +49,8 @@ void sprinkle(int amt, C& coord, R& radius)
 	static std::mt19937 rng(std::random_device{}());
 	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
 
-	std::cout << "amt: " << amt << std::endl;
 	for(int i = 0; i < amt; ++i) {
 		Point p = coord(rng);
-		std::cout << p.x << ", " << p.y << " r: " << radius(rng) << std::endl;
 		addDrop(
 				p.x,
 				p.y,
@@ -254,7 +252,6 @@ extern "C"
 	{
 		checkSetup();
 		checkState(true,);
-		std::cout << "sig: " << sig << std::endl;
 
 		auto coord = [&](auto& prng) {
 			std::normal_distribution<float> dis(0, sig);
