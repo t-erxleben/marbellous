@@ -276,10 +276,12 @@ function handleClick(el) {
 			case 'color-rake-custom':
 				rake_dropper.config = sidebar.rake_dropper;
 				sidebar.btn.checked = true;
-				sidebar.options.rake_dropper.checked = true
+				/* sidebar.options.rake_dropper.checked = true */
 				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
+				sidebar.btn.checked = true
+				sidebar.options.sprinkler.checked = true
 				break;
 			case 'rake-movement-linear':
 				rake.config.line = rake.straight;
@@ -408,6 +410,7 @@ function DomInit(){
 	sidebar.options = {
 		rake: document.getElementById('sidebar-rake'),
 		pallet: document.getElementById('sidebar-pallet'),
+		sprinkler: document.getElementById('sidebar-sprinkler')
 	};
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
