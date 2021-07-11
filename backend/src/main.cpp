@@ -50,9 +50,10 @@ void sprinkle(int amt, C& coord, R& radius)
 	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
 
 	for(int i = 0; i < amt; ++i) {
+		Point p = coord(rng);
 		addDrop(
-				coord(rng),
-				coord(rng),
+				p.x,
+				p.y,
 				radius(rng),
 				color(rng) % Options::getInstance()->getActivePalette()->getSize());
 		finishDrop(0);
@@ -253,7 +254,10 @@ extern "C"
 		checkSetup();
 		checkState(true,);
 
-		std::normal_distribution<float> coord(mu, sig);
+		auto coord = [&](auto& prng) {
+			std::normal_distribution<float> dis(mu, sig);
+			return Point{ dis(prng) + x, dis(prng) + y };
+		};
 		std::uniform_real_distribution<float> radius(r_min, r_max);
 		sprinkle(amt, coord, radius);
 	}
@@ -262,7 +266,10 @@ extern "C"
 		checkState(true,);
 
 		static std::mt19937 rng(std::random_device{}());
-		static std::uniform_real_distribution<float> coord(-1.f, 1.f);
+		static auto coord = [](auto& prng) {
+	 		std::uniform_real_distribution<float> dis(-1.f, 1.f);
+			return Point {dis(prng), dis(prng)};
+		};
 
 		std::uniform_real_distribution<float> radius(r_min, r_max);
 		sprinkle(amt, coord, radius);
