@@ -4,6 +4,7 @@
 	--accent-color-1: #FA8B60;
 	--accent-color-2: #EF6D3B;
 	--overlay-color: #7A9A95;
+	--overlay-opac-color: #7A9A9588;
 	--accent-color-1-filter:
 		invert(80%) sepia(22%) saturate(5763%) hue-rotate(318deg) brightness(99%) contrast(97%);
 	--font-color-filter:
@@ -143,6 +144,15 @@ label > img {
 	height: 32px;
 	padding: 10px 10px 10px 10px;
 	filter: var(--font-color-filter)
+}
+
+label > .spinner {
+	top: -2px;
+	left: -2px;
+	padding: 10px;
+	border-radius: 50%;
+	border: 2px solid transparent;
+	background-color: var(--overlay-opac-color);
 }
 
 html, body {
@@ -469,3 +479,97 @@ input.slider:checked + span.slider:before {
 /*input:invalid {
 	border: red solid 3px!important;
 }*/
+
+
+.spinner  > svg {
+  -webkit-animation: rotator 1.4s linear infinite;
+          animation: rotator 1.4s linear infinite;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+          animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+
+@keyframes colors {
+  0% {
+    stroke: var(--accent-color-1);
+  }
+  25% {
+    stroke: var(--font-color);
+  }
+  50% {
+    stroke: var(--accent-color-2);
+  }
+  75% {
+    stroke: var(--font-color);
+  }
+  100% {
+    stroke: var(--accent-color-1);
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
+  

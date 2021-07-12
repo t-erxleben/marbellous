@@ -241,7 +241,9 @@ function downloadCanvas() {
 function handleClick(el) {
 		switch(el.id) {
 			case 'download':
-				downloadCanvas();
+				const spinner = el.parentElement.getElementsByClassName('spinner')[0]
+				spinner.hidden = false
+				downloadCanvas().finally(()=>{spinner.hidden = true});
 				break;
 			case 'clear':
 				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you clear the Canvas?'))

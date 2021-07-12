@@ -271,8 +271,15 @@
 			</li>
 
 			<li><input type="button" id="download">
-				<label for="download" title="Download current canvas state as image">
-					<img src="icons/file-download-solid.svg" alt="download">
+				<label for="download" title="Download current canvas state as image" style="position:relative;">
+					<img src="icons/file-download-solid.svg" alt="download" >
+					<div class="spinner" style="position:absolute;" hidden>
+						<svg 
+							width="32px" height="32px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" hidden>
+							<circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30">
+							</circle>
+						</svg>
+					</div>
 				</label>
 			</li>
 
