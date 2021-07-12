@@ -49,15 +49,32 @@ void sprinkle(int amt, C& coord, R& radius)
 	static std::mt19937 rng(std::random_device{}());
 	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
 
+	auto dropRes = WGLContext::getContext()->getDropRes();
+
+	sceneRenderer->drawScene(*scene);
+
 	for(int i = 0; i < amt; ++i) {
 		Point p = coord(rng);
-		addDrop(
-				p.x,
-				p.y,
-				radius(rng),
-				color(rng) % Options::getInstance()->getActivePalette()->getSize());
-		finishDrop(0);
+		float r = radius(rng);
+		GLuint col = static_cast<GLuint>(color(rng)
+				% Options::getInstance()->getActivePalette()->getSize());
+
+		scene->applyDisplacement();
+        r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
+		scene->setDisplacement({p.x,p.y}, r);
+
+		uint8_t c[4];
+		glReadPixels((p.x+1.f)*dropRes/2, (p.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
+		const auto& [cr,cg,cb] = (*Options::getInstance()->getActivePalette())[col].getRGB();
+		if(cr == c[0] && cg == c[1] && cb == c[2]) {
+			continue;
+		}
+
+        int handle = scene->addPolygon(Polygon{p, Polygon::MIN_R,
+				col});
 	}
+	scene->applyDisplacement();
+	sceneRenderer->drawScene(*scene);
 }
 
 /*------------------------------------------

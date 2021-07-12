@@ -631,8 +631,9 @@ var dropper = {
 
 var sparkle_dropper = {
 	rate: 50,
-	draw: function(canvas, x,y) {
-		sparkle_dropper.pos =  {x: x / sparkle_dropper.dim.w, y: y/sparkle_dropper.dim.h}
+	draw: function(canvas, x,y, w, h) {
+		sparkle_dropper.pos =  {x: x / w, y: y/h}
+		sparkle_dropper.dim = {w, h}
 		const size = tool.translate({x: 32, y: 32});
 		canvas.drawImage(sparkle_dropper.img,x-size.x/2,y-size.y/2,size.x,size.y);
 		// canvas.drawImage(sparkle_dropper.img,y-size/2,x-size/2,size.x,size.y);
