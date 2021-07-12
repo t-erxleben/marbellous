@@ -118,7 +118,7 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
-	backend.initBackend('#image', 720, 720)
+	backend.initBackend('#image', 2880, 2880)
 	backend.setBGColor(color2int(pallets[pallets.active].background));
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
@@ -242,8 +242,10 @@ function handleClick(el) {
 		switch(el.id) {
 			case 'download':
 				const spinner = el.parentElement.getElementsByClassName('spinner')[0]
-				spinner.hidden = false
-				downloadCanvas().finally(()=>{spinner.hidden = true});
+				if(spinner.hidden) {
+					spinner.hidden = false
+					downloadCanvas().finally(()=>{spinner.hidden = true});
+				}
 				break;
 			case 'clear':
 				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you clear the Canvas?'))
