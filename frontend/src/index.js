@@ -213,30 +213,28 @@ function switchState(_old, _new) {
 		break;
 	}
 }
+
 var download_side = null;
-function downloadCanvas() {
-	return new Promise((resolve, reject) => {
-		const ptr = Module.ccall("getImage", "number", [], []);	
-		const width = Module.HEAP32[ptr/4]
-		const height = Module.HEAP32[ptr/4+1]
-		const len = width * height * 3
+function downloadCanvas(el) {
+	const ptr = Module.ccall("getImage", "number", [], []);	
+	const width = Module.HEAP32[ptr/4]
+	const height = Module.HEAP32[ptr/4+1]
+	const len = width * height * 3
 
-		const data = Module.HEAPU8.slice(ptr + 8, ptr+len+8);
-		const pngData = png.encode({width, height, data, depth: 8, channels: 3})
-		const blob = new Blob([pngData], {type: 'image/png'});
-		if(!download_side) {
-			download_side = document.createElement('a');
-			document.body.appendChild(download_side);
-			download_side.style.display = 'none';
-		}
-		const url = window.URL.createObjectURL(blob);
-		download_side.href = url;
-		download_side.download = "marebllous-image.png";
-		download_side.click();
-		resolve()
-	})
+	const data = Module.HEAPU8.slice(ptr + 8, ptr+len+8);
+	const pngData = png.encode({width, height, data, depth: 8, channels: 3})
+	const blob = new Blob([pngData], {type: 'image/png'});
+	if(!download_side) {
+		download_side = document.createElement('a');
+		document.body.appendChild(download_side);
+		download_side.style.display = 'none';
+	}
+	const url = window.URL.createObjectURL(blob);
+	download_side.href = url;
+	download_side.download = "marebllous-image.png";
+	download_side.click();
+	el.hidden = true;
 }
-
 
 function handleClick(el) {
 		switch(el.id) {
@@ -244,7 +242,7 @@ function handleClick(el) {
 				const spinner = el.parentElement.getElementsByClassName('spinner')[0]
 				if(spinner.hidden) {
 					spinner.hidden = false
-					downloadCanvas().finally(()=>{spinner.hidden = true});
+					setTimeout(()=>downloadCanvas(spinner), 100)
 				}
 				break;
 			case 'clear':
