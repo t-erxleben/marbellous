@@ -29,9 +29,9 @@ class WGLSceneRenderer: private WGLRenderer
 						for(int i = 0; i < count; ++i) {
 							vec2 d = position.xy - dis[i].xy;
 							float s = sqrt(1. + dis[i].z*dis[i].z/dot(d,d));
-							pos += dis[i].xy + d*s;
+							pos += dis[i].xy + d*s - position.xy;
 						}
-						pos /= float(count);
+						pos += position.xy;
 					}
 					// depth buffer has a resolution from >=16bit
                     gl_Position = vec4(pos , float(z) / 65530.f, 1.0);
