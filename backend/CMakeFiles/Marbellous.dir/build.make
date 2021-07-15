@@ -72,6 +72,7 @@ include CMakeFiles/Marbellous.dir/flags.make
 dist/index.js: /home/runner/work/marbellous/marbellous/frontend/src/index.js
 dist/index.js: /home/runner/work/marbellous/marbellous/frontend/src/rake_syntax.pegjs
 dist/index.js: npm.stamp
+dist/index.js: webpack.config.js
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/runner/work/marbellous/marbellous/backend/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating dist/index.js"
 	npx webpack && touch dist/index.js
 

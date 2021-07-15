@@ -92,7 +92,7 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;       </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="comment">// part of interface to front end (will be called by interface function since extern C functions can not have friends :-( )</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="comment">// may be used to init context at actual canvas</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_context.html#ac7f4e467df324b1a2fdae9ade8145de3">_initWGLContext</a>(<span class="keywordtype">char</span>* canvasID, <span class="keywordtype">size_t</span> x);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_context.html#aae3a2f77d1a59abbea8e55939bb322f7">_initWGLContext</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* canvasID, <span class="keywordtype">size_t</span> x);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="comment">// Context object without actual context would be quite useless</span></div>
@@ -129,7 +129,7 @@ $(function() {
 <div class="ttc" id="aclass_w_g_l_context_html_a54bc41ac7f36e7fdc008f49bf7fc02f7"><div class="ttname"><a href="class_w_g_l_context.html#a54bc41ac7f36e7fdc008f49bf7fc02f7">WGLContext::canvasResize</a></div><div class="ttdeci">void canvasResize(size_t x)</div><div class="ttdef"><b>Definition:</b> WGLContext.cpp:81</div></div>
 <div class="ttc" id="aclass_w_g_l_context_html_a77f700c2598a089ab7822cd46534f74c"><div class="ttname"><a href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c">WGLContext::getRakeRes</a></div><div class="ttdeci">size_t getRakeRes()</div><div class="ttdef"><b>Definition:</b> WGLContext.cpp:63</div></div>
 <div class="ttc" id="aclass_w_g_l_context_html_a99c7ab4e109dfc640c1966172afc763b"><div class="ttname"><a href="class_w_g_l_context.html#a99c7ab4e109dfc640c1966172afc763b">WGLContext::operator=</a></div><div class="ttdeci">WGLContext &amp; operator=(WGLContext &amp;&amp;)=delete</div></div>
-<div class="ttc" id="aclass_w_g_l_context_html_ac7f4e467df324b1a2fdae9ade8145de3"><div class="ttname"><a href="class_w_g_l_context.html#ac7f4e467df324b1a2fdae9ade8145de3">WGLContext::_initWGLContext</a></div><div class="ttdeci">friend void _initWGLContext(char *canvasID, size_t x)</div><div class="ttdef"><b>Definition:</b> main.cpp:31</div></div>
+<div class="ttc" id="aclass_w_g_l_context_html_aae3a2f77d1a59abbea8e55939bb322f7"><div class="ttname"><a href="class_w_g_l_context.html#aae3a2f77d1a59abbea8e55939bb322f7">WGLContext::_initWGLContext</a></div><div class="ttdeci">friend void _initWGLContext(const char *canvasID, size_t x)</div><div class="ttdef"><b>Definition:</b> main.cpp:33</div></div>
 <div class="ttc" id="aclass_w_g_l_context_html_ae068c0f5c7835ff00ed935fb8f02e014"><div class="ttname"><a href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014">WGLContext::getContext</a></div><div class="ttdeci">static WGLContext *const getContext()</div><div class="ttdef"><b>Definition:</b> WGLContext.cpp:68</div></div>
 <div class="ttc" id="aclass_w_g_l_context_html_aeb82c846b1f81f86789f7546e6ab637b"><div class="ttname"><a href="class_w_g_l_context.html#aeb82c846b1f81f86789f7546e6ab637b">WGLContext::WGLContext</a></div><div class="ttdeci">WGLContext(WGLContext const &amp;)=delete</div></div>
 <div class="ttc" id="aclass_w_g_l_context_html_af6c5b0e9d70954a5881c2fcc9f5313a5"><div class="ttname"><a href="class_w_g_l_context.html#af6c5b0e9d70954a5881c2fcc9f5313a5">WGLContext::operator=</a></div><div class="ttdeci">void operator=(WGLContext const &amp;)=delete</div></div>
@@ -137,7 +137,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 11 2021 21:20:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Jul 15 2021 16:45:40 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

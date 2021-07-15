@@ -1,6 +1,7 @@
 #include <emscripten.h>
 #include <cstdio>
 #include <cmath>
+#include <random>
 
 #include <stdlib.h> 
 
@@ -28,9 +29,52 @@ WGLSceneRenderer *sceneRenderer;
 WGLRakeRenderer *rakeRenderer;
 Scene *scene;
 
-void _initWGLContext(char *canvasID, size_t x)
+
+void _initWGLContext(const char *canvasID, size_t x)
 {
     WGLContext::instance = new WGLContext(canvasID, x);
+}
+
+extern "C" {
+	int EMSCRIPTEN_KEEPALIVE addDrop(float,float,float,unsigned);
+	int EMSCRIPTEN_KEEPALIVE finishDrop(int); }
+
+template<typename C, typename R>
+void sprinkle(int amt, C& coord, R& radius)
+{
+	checkSetup();
+	checkState(true,);
+
+	static constexpr unsigned int colorRoom = 10 * 9 * 8 * 7 * 6 * 5;
+	static std::mt19937 rng(std::random_device{}());
+	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
+
+	auto dropRes = WGLContext::getContext()->getDropRes();
+
+	sceneRenderer->drawScene(*scene);
+
+	for(int i = 0; i < amt; ++i) {
+		Point p = coord(rng);
+		float r = radius(rng);
+		GLuint col = static_cast<GLuint>(color(rng)
+				% Options::getInstance()->getActivePalette()->getSize());
+
+		scene->applyDisplacement();
+        r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
+		scene->setDisplacement({p.x,p.y}, r);
+
+		uint8_t c[4];
+		glReadPixels((p.x+1.f)*dropRes/2, (p.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
+		const auto& [cr,cg,cb] = (*Options::getInstance()->getActivePalette())[col].getRGB();
+		if(cr == c[0] && cg == c[1] && cb == c[2]) {
+			continue;
+		}
+
+        int handle = scene->addPolygon(Polygon{p, Polygon::MIN_R,
+				col});
+	}
+	scene->applyDisplacement();
+	sceneRenderer->drawScene(*scene);
 }
 
 /*------------------------------------------
@@ -39,7 +83,7 @@ Interface to front end:
 
 extern "C"
 {
-    void initBackend(char *canvasID, size_t dropRes, size_t rakeRes)
+    void EMSCRIPTEN_KEEPALIVE initBackend(const char canvasID[], size_t dropRes, size_t rakeRes)
     {
         _initWGLContext(canvasID, dropRes);
 
@@ -213,6 +257,40 @@ extern "C"
         }
     }
 
+	/// creates sprinkle in around cursor
+	/**
+	 * \param amt number of drops to create
+	 * \param r_min,r_max drop size range
+	 * \param x,y cursor position
+	 * \param sig sigma for normal distribution for drop position
+	 */
+	void EMSCRIPTEN_KEEPALIVE sprinkleLocal(int amt, float r_min, float r_max,
+			float x, float y, float sig)
+	{
+		checkSetup();
+		checkState(true,);
+
+		auto coord = [&](auto& prng) {
+			std::normal_distribution<float> dis(0, sig);
+			return Point{ dis(prng) + x, dis(prng) + y };
+		};
+		std::uniform_real_distribution<float> radius(r_min, r_max);
+		sprinkle(amt, coord, radius);
+	}
+	void EMSCRIPTEN_KEEPALIVE sprinkleGlobal(int amt, float r_min, float r_max) {
+		checkSetup();
+		checkState(true,);
+
+		static std::mt19937 rng(std::random_device{}());
+		static auto coord = [](auto& prng) {
+	 		std::uniform_real_distribution<float> dis(-1.f, 1.f);
+			return Point {dis(prng), dis(prng)};
+		};
+
+		std::uniform_real_distribution<float> radius(r_min, r_max);
+		sprinkle(amt, coord, radius);
+	}
+
 	void EMSCRIPTEN_KEEPALIVE clearCanvas() { ///< clear the canvas (delete all polygones and redraw scene)
 		checkSetup();
         
@@ -264,13 +342,6 @@ Init stuff:
 
     int EMSCRIPTEN_KEEPALIVE main()
     {
-        // setup
-        // This needs to be done in the front end (init call should be after bg):
-        char id[] = "#image";
-        initBackend(id, 2000, 2000);
-
-        setupDone = true;
-
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);
         return 0;

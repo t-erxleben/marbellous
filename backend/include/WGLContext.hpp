@@ -20,7 +20,7 @@ class WGLContext
        
         // part of interface to front end (will be called by interface function since extern C functions can not have friends :-( )
         // may be used to init context at actual canvas
-        friend void _initWGLContext(char* canvasID, size_t x);
+        friend void _initWGLContext(const char* canvasID, size_t x);
 
     public:
         // Context object without actual context would be quite useless

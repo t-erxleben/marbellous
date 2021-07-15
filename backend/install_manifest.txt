@@ -1,6 +1,10 @@
 /home/runner/work/marbellous/marbellous/backend/page/Marbellous.js
 /home/runner/work/marbellous/marbellous/backend/page/Marbellous.wasm
+/home/runner/work/marbellous/marbellous/backend/page//favicon.png
+/home/runner/work/marbellous/marbellous/backend/page//mstile-144x144.png
 /home/runner/work/marbellous/marbellous/backend/page//index.html
+/home/runner/work/marbellous/marbellous/backend/page//apple-touch-icon.png
+/home/runner/work/marbellous/marbellous/backend/page//fav-raw.png
 /home/runner/work/marbellous/marbellous/backend/page//stylesheet.css
 /home/runner/work/marbellous/marbellous/backend/page//icons/chalkboard-solid.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/question-solid.svg

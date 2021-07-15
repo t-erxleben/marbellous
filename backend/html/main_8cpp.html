@@ -77,6 +77,7 @@ $(function() {
 <div class="textblock"><code>#include &lt;emscripten.h&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;random&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_w_g_l_context_8hpp_source.html">WGLContext.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_w_g_l_scene_renderer_8hpp_source.html">WGLSceneRenderer.hpp</a>&quot;</code><br />
@@ -88,36 +89,37 @@ Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp__incl.png" border="0" usemap="#asrc_2main_8cpp" alt=""/></div>
 <map name="asrc_2main_8cpp" id="asrc_2main_8cpp">
-<area shape="rect" title=" " alt="" coords="344,5,440,32"/>
+<area shape="rect" title=" " alt="" coords="399,5,495,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,101,107"/>
 <area shape="rect" title=" " alt="" coords="126,80,183,107"/>
 <area shape="rect" title=" " alt="" coords="208,80,267,107"/>
-<area shape="rect" title=" " alt="" coords="291,80,354,107"/>
-<area shape="rect" href="_w_g_l_context_8hpp.html" title=" " alt="" coords="781,379,901,405"/>
-<area shape="rect" href="_options_8hpp.html" title=" " alt="" coords="377,453,468,480"/>
-<area shape="rect" href="_w_g_l_scene_renderer_8hpp.html" title=" " alt="" coords="547,155,712,181"/>
-<area shape="rect" href="_scene_8hpp.html" title=" " alt="" coords="996,229,1079,256"/>
-<area shape="rect" href="_w_g_l_rake_renderer_8hpp.html" title=" " alt="" coords="430,80,589,107"/>
-<area shape="rect" title=" " alt="" coords="697,453,751,480"/>
-<area shape="rect" title=" " alt="" coords="1004,528,1076,555"/>
-<area shape="rect" title=" " alt="" coords="775,453,907,480"/>
-<area shape="rect" title=" " alt="" coords="885,528,979,555"/>
-<area shape="rect" title=" " alt="" coords="391,528,443,555"/>
-<area shape="rect" href="_palette_8hpp.html" title=" " alt="" coords="467,528,554,555"/>
-<area shape="rect" title=" " alt="" coords="912,603,971,629"/>
-<area shape="rect" title=" " alt="" coords="525,603,590,629"/>
-<area shape="rect" href="_color_8hpp.html" title=" " alt="" coords="425,603,501,629"/>
-<area shape="rect" title=" " alt="" coords="397,677,448,704"/>
-<area shape="rect" title=" " alt="" coords="472,677,533,704"/>
-<area shape="rect" title=" " alt="" coords="571,229,632,256"/>
-<area shape="rect" href="_w_g_l_renderer_8hpp.html" title=" " alt="" coords="524,379,652,405"/>
-<area shape="rect" title=" " alt="" coords="481,229,546,256"/>
-<area shape="rect" title=" " alt="" coords="594,453,673,480"/>
-<area shape="rect" title=" " alt="" coords="1108,304,1183,331"/>
-<area shape="rect" href="_polygon_8hpp.html" title=" " alt="" coords="991,304,1083,331"/>
-<area shape="rect" href="_point_8hpp.html" title=" " alt="" coords="1085,453,1161,480"/>
-<area shape="rect" href="_w_g_l_vertex_8hpp.html" title=" " alt="" coords="981,379,1094,405"/>
-<area shape="rect" title=" " alt="" coords="1100,528,1161,555"/>
+<area shape="rect" title=" " alt="" coords="291,80,357,107"/>
+<area shape="rect" title=" " alt="" coords="381,80,443,107"/>
+<area shape="rect" href="_w_g_l_context_8hpp.html" title=" " alt="" coords="521,379,641,405"/>
+<area shape="rect" href="_options_8hpp.html" title=" " alt="" coords="1009,453,1100,480"/>
+<area shape="rect" href="_w_g_l_scene_renderer_8hpp.html" title=" " alt="" coords="569,155,735,181"/>
+<area shape="rect" href="_scene_8hpp.html" title=" " alt="" coords="365,229,448,256"/>
+<area shape="rect" href="_w_g_l_rake_renderer_8hpp.html" title=" " alt="" coords="679,80,838,107"/>
+<area shape="rect" title=" " alt="" coords="775,453,830,480"/>
+<area shape="rect" title=" " alt="" coords="341,528,413,555"/>
+<area shape="rect" title=" " alt="" coords="619,453,751,480"/>
+<area shape="rect" title=" " alt="" coords="438,528,533,555"/>
+<area shape="rect" title=" " alt="" coords="977,528,1029,555"/>
+<area shape="rect" href="_palette_8hpp.html" title=" " alt="" coords="1053,528,1139,555"/>
+<area shape="rect" title=" " alt="" coords="365,603,424,629"/>
+<area shape="rect" title=" " alt="" coords="1110,603,1175,629"/>
+<area shape="rect" href="_color_8hpp.html" title=" " alt="" coords="1010,603,1086,629"/>
+<area shape="rect" title=" " alt="" coords="983,677,1033,704"/>
+<area shape="rect" title=" " alt="" coords="1057,677,1119,704"/>
+<area shape="rect" title=" " alt="" coords="620,229,681,256"/>
+<area shape="rect" href="_w_g_l_renderer_8hpp.html" title=" " alt="" coords="801,379,929,405"/>
+<area shape="rect" title=" " alt="" coords="757,229,822,256"/>
+<area shape="rect" title=" " alt="" coords="906,453,985,480"/>
+<area shape="rect" title=" " alt="" coords="369,304,444,331"/>
+<area shape="rect" href="_polygon_8hpp.html" title=" " alt="" coords="253,304,345,331"/>
+<area shape="rect" href="_point_8hpp.html" title=" " alt="" coords="315,453,391,480"/>
+<area shape="rect" href="_w_g_l_vertex_8hpp.html" title=" " alt="" coords="330,379,443,405"/>
+<area shape="rect" title=" " alt="" coords="256,528,317,555"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -130,10 +132,17 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac7f4e467df324b1a2fdae9ade8145de3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ac7f4e467df324b1a2fdae9ade8145de3">_initWGLContext</a> (char *canvasID, size_t x)</td></tr>
-<tr class="separator:ac7f4e467df324b1a2fdae9ade8145de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa130b20408bf6de6206f078002249e06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa130b20408bf6de6206f078002249e06">initBackend</a> (char *canvasID, size_t dropRes, size_t rakeRes)</td></tr>
-<tr class="separator:aa130b20408bf6de6206f078002249e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae3a2f77d1a59abbea8e55939bb322f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aae3a2f77d1a59abbea8e55939bb322f7">_initWGLContext</a> (const char *canvasID, size_t x)</td></tr>
+<tr class="separator:aae3a2f77d1a59abbea8e55939bb322f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e7dbcd960b144648754d9a04c04402"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a29e7dbcd960b144648754d9a04c04402">addDrop</a> (float, float, float, unsigned)</td></tr>
+<tr class="separator:a29e7dbcd960b144648754d9a04c04402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16e1ff4de15a972bc1b34b50d042cc54"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54">finishDrop</a> (int)</td></tr>
+<tr class="separator:a16e1ff4de15a972bc1b34b50d042cc54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d56c68697f035817a8d576e2552f2c2"><td class="memTemplParams" colspan="2">template&lt;typename C , typename R &gt; </td></tr>
+<tr class="memitem:a7d56c68697f035817a8d576e2552f2c2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2">sprinkle</a> (int amt, C &amp;coord, R &amp;radius)</td></tr>
+<tr class="separator:a7d56c68697f035817a8d576e2552f2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8710d7ad22d50a8befcf59b7d4eb35b"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b">initBackend</a> (const char canvasID[], size_t dropRes, size_t rakeRes)</td></tr>
+<tr class="separator:ad8710d7ad22d50a8befcf59b7d4eb35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bf79a0535581b7580865f40eca43208"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0bf79a0535581b7580865f40eca43208">addPalette</a> (size_t num_colors)</td></tr>
 <tr class="separator:a0bf79a0535581b7580865f40eca43208"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47514aeb6ba7b6d105f9e2342e562917"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a47514aeb6ba7b6d105f9e2342e562917">setActivePalette</a> (int const id)</td></tr>
@@ -150,12 +159,15 @@ Functions</h2></td></tr>
 <tr class="separator:a93bbd3db8037452b0dfb9587be449586"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac170bb498a7d244b8f5c5c7a1d9c4017"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ac170bb498a7d244b8f5c5c7a1d9c4017">resizeDrop</a> (int const dropID, float const newRadius)</td></tr>
 <tr class="separator:ac170bb498a7d244b8f5c5c7a1d9c4017"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2cf4c896bf25231b61c1cdd3128f310"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae2cf4c896bf25231b61c1cdd3128f310">finishDrop</a> (int dropID)</td></tr>
-<tr class="separator:ae2cf4c896bf25231b61c1cdd3128f310"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8dcacd97325cade8a2db1d6de4b5ae3"><td class="memItemLeft" align="right" valign="top">char *EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3">getImage</a> ()</td></tr>
 <tr class="separator:af8dcacd97325cade8a2db1d6de4b5ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72fca71a0de4d36b58be2a1a4128d8e1"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1">dropColor</a> (float const x, float const y, float const r, unsigned int const color)</td></tr>
 <tr class="separator:a72fca71a0de4d36b58be2a1a4128d8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4df20e610fee8d6a8bee2388640a08a5"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5">sprinkleLocal</a> (int amt, float r_min, float r_max, float x, float y, float sig)</td></tr>
+<tr class="memdesc:a4df20e610fee8d6a8bee2388640a08a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates sprinkle in around cursor  <a href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5">More...</a><br /></td></tr>
+<tr class="separator:a4df20e610fee8d6a8bee2388640a08a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad53ec54d7a98c61fc51cfff7109e4bea"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea">sprinkleGlobal</a> (int amt, float r_min, float r_max)</td></tr>
+<tr class="separator:ad53ec54d7a98c61fc51cfff7109e4bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89af8d1d1b6f81830962b153a96d23b3"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3">clearCanvas</a> ()</td></tr>
 <tr class="separator:a89af8d1d1b6f81830962b153a96d23b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa150c0e8e4f5217d8d0907c061a7917c"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa150c0e8e4f5217d8d0907c061a7917c">rakeLinear</a> (float x, float y, bool nails[1000])</td></tr>
@@ -199,7 +211,7 @@ Variables</h2></td></tr>
 <div class="line">            fprintf(stderr, <span class="stringliteral">&quot;%s: %s&quot;</span>, __func__, <span class="stringliteral">&quot;: Backend is not initialized yet!\n&quot;</span>); \</div>
 <div class="line">            return RET; \</div>
 <div class="line">        } \</div>
-<div class="ttc" id="amain_8cpp_html_a063b033095d66a781d7ecd123ca4aa30"><div class="ttname"><a href="main_8cpp.html#a063b033095d66a781d7ecd123ca4aa30">setupDone</a></div><div class="ttdeci">bool setupDone</div><div class="ttdef"><b>Definition:</b> main.cpp:26</div></div>
+<div class="ttc" id="amain_8cpp_html_a063b033095d66a781d7ecd123ca4aa30"><div class="ttname"><a href="main_8cpp.html#a063b033095d66a781d7ecd123ca4aa30">setupDone</a></div><div class="ttdeci">bool setupDone</div><div class="ttdef"><b>Definition:</b> main.cpp:27</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -238,8 +250,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ac7f4e467df324b1a2fdae9ade8145de3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7f4e467df324b1a2fdae9ade8145de3">&#9670;&nbsp;</a></span>_initWGLContext()</h2>
+<a id="aae3a2f77d1a59abbea8e55939bb322f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae3a2f77d1a59abbea8e55939bb322f7">&#9670;&nbsp;</a></span>_initWGLContext()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,7 +259,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void _initWGLContext </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>canvasID</em>, </td>
         </tr>
         <tr>
@@ -266,18 +278,17 @@ Variables</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="main_8cpp_ac7f4e467df324b1a2fdae9ade8145de3_icgraph.png" border="0" usemap="#amain_8cpp_ac7f4e467df324b1a2fdae9ade8145de3_icgraph" alt=""/></div>
-<map name="amain_8cpp_ac7f4e467df324b1a2fdae9ade8145de3_icgraph" id="amain_8cpp_ac7f4e467df324b1a2fdae9ade8145de3_icgraph">
-<area shape="rect" title=" " alt="" coords="243,5,363,32"/>
-<area shape="rect" href="main_8cpp.html#aa130b20408bf6de6206f078002249e06" title=" " alt="" coords="104,5,195,32"/>
-<area shape="rect" href="main_8cpp.html#a0af0ef384682f2be6baa856713051ac8" title=" " alt="" coords="5,5,56,32"/>
+<div class="center"><img src="main_8cpp_aae3a2f77d1a59abbea8e55939bb322f7_icgraph.png" border="0" usemap="#amain_8cpp_aae3a2f77d1a59abbea8e55939bb322f7_icgraph" alt=""/></div>
+<map name="amain_8cpp_aae3a2f77d1a59abbea8e55939bb322f7_icgraph" id="amain_8cpp_aae3a2f77d1a59abbea8e55939bb322f7_icgraph">
+<area shape="rect" title=" " alt="" coords="144,5,264,32"/>
+<area shape="rect" href="main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b" title=" " alt="" coords="5,5,96,32"/>
 </map>
 </div>
 
 </div>
 </div>
 <a id="a59f7cfce85003d6b839f1d68fb1919e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59f7cfce85003d6b839f1d68fb1919e7">&#9670;&nbsp;</a></span>addDrop()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a59f7cfce85003d6b839f1d68fb1919e7">&#9670;&nbsp;</a></span>addDrop() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -343,6 +354,46 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="384,411,587,437"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a29e7dbcd960b144648754d9a04c04402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29e7dbcd960b144648754d9a04c04402">&#9670;&nbsp;</a></span>addDrop() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EMSCRIPTEN_KEEPALIVE addDrop </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -482,8 +533,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ae2cf4c896bf25231b61c1cdd3128f310"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2cf4c896bf25231b61c1cdd3128f310">&#9670;&nbsp;</a></span>finishDrop()</h2>
+<a id="a16e1ff4de15a972bc1b34b50d042cc54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16e1ff4de15a972bc1b34b50d042cc54">&#9670;&nbsp;</a></span>finishDrop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -500,8 +551,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="main_8cpp_ae2cf4c896bf25231b61c1cdd3128f310_cgraph.png" border="0" usemap="#amain_8cpp_ae2cf4c896bf25231b61c1cdd3128f310_cgraph" alt=""/></div>
-<map name="amain_8cpp_ae2cf4c896bf25231b61c1cdd3128f310_cgraph" id="amain_8cpp_ae2cf4c896bf25231b61c1cdd3128f310_cgraph">
+<div class="center"><img src="main_8cpp_a16e1ff4de15a972bc1b34b50d042cc54_cgraph.png" border="0" usemap="#amain_8cpp_a16e1ff4de15a972bc1b34b50d042cc54_cgraph" alt=""/></div>
+<map name="amain_8cpp_a16e1ff4de15a972bc1b34b50d042cc54_cgraph" id="amain_8cpp_a16e1ff4de15a972bc1b34b50d042cc54_cgraph">
 <area shape="rect" title=" " alt="" coords="5,157,84,184"/>
 <area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="151,56,325,83"/>
 <area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="132,233,344,260"/>
@@ -561,17 +612,17 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="aa130b20408bf6de6206f078002249e06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa130b20408bf6de6206f078002249e06">&#9670;&nbsp;</a></span>initBackend()</h2>
+<a id="ad8710d7ad22d50a8befcf59b7d4eb35b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8710d7ad22d50a8befcf59b7d4eb35b">&#9670;&nbsp;</a></span>initBackend()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void initBackend </td>
+          <td class="memname">void EMSCRIPTEN_KEEPALIVE initBackend </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>canvasID</em>, </td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>canvasID</em>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -595,23 +646,14 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="main_8cpp_aa130b20408bf6de6206f078002249e06_cgraph.png" border="0" usemap="#amain_8cpp_aa130b20408bf6de6206f078002249e06_cgraph" alt=""/></div>
-<map name="amain_8cpp_aa130b20408bf6de6206f078002249e06_cgraph" id="amain_8cpp_aa130b20408bf6de6206f078002249e06_cgraph">
+<div class="center"><img src="main_8cpp_ad8710d7ad22d50a8befcf59b7d4eb35b_cgraph.png" border="0" usemap="#amain_8cpp_ad8710d7ad22d50a8befcf59b7d4eb35b_cgraph" alt=""/></div>
+<map name="amain_8cpp_ad8710d7ad22d50a8befcf59b7d4eb35b_cgraph" id="amain_8cpp_ad8710d7ad22d50a8befcf59b7d4eb35b_cgraph">
 <area shape="rect" title=" " alt="" coords="5,56,96,83"/>
-<area shape="rect" href="main_8cpp.html#ac7f4e467df324b1a2fdae9ade8145de3" title=" " alt="" coords="179,5,299,32"/>
+<area shape="rect" href="main_8cpp.html#aae3a2f77d1a59abbea8e55939bb322f7" title=" " alt="" coords="179,5,299,32"/>
 <area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="157,56,321,83"/>
 <area shape="rect" href="class_w_g_l_context.html#af7a6ada0a1019095322342e55d547090" title=" " alt="" coords="144,107,335,133"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="397,81,538,108"/>
 <area shape="rect" href="class_w_g_l_context.html#a181859abac8486988a909816702293e0" title=" " alt="" coords="383,132,552,159"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_aa130b20408bf6de6206f078002249e06_icgraph.png" border="0" usemap="#amain_8cpp_aa130b20408bf6de6206f078002249e06_icgraph" alt=""/></div>
-<map name="amain_8cpp_aa130b20408bf6de6206f078002249e06_icgraph" id="amain_8cpp_aa130b20408bf6de6206f078002249e06_icgraph">
-<area shape="rect" title=" " alt="" coords="104,5,195,32"/>
-<area shape="rect" href="main_8cpp.html#a0af0ef384682f2be6baa856713051ac8" title=" " alt="" coords="5,5,56,32"/>
 </map>
 </div>
 
@@ -631,20 +673,6 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a0af0ef384682f2be6baa856713051ac8_cgraph.png" border="0" usemap="#amain_8cpp_a0af0ef384682f2be6baa856713051ac8_cgraph" alt=""/></div>
-<map name="amain_8cpp_a0af0ef384682f2be6baa856713051ac8_cgraph" id="amain_8cpp_a0af0ef384682f2be6baa856713051ac8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,56,56,83"/>
-<area shape="rect" href="main_8cpp.html#aa130b20408bf6de6206f078002249e06" title=" " alt="" coords="104,56,195,83"/>
-<area shape="rect" href="main_8cpp.html#ac7f4e467df324b1a2fdae9ade8145de3" title=" " alt="" coords="278,5,398,32"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="256,56,420,83"/>
-<area shape="rect" href="class_w_g_l_context.html#af7a6ada0a1019095322342e55d547090" title=" " alt="" coords="243,107,433,133"/>
-<area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="495,81,637,108"/>
-<area shape="rect" href="class_w_g_l_context.html#a181859abac8486988a909816702293e0" title=" " alt="" coords="481,132,651,159"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -949,6 +977,226 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="a7d56c68697f035817a8d576e2552f2c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d56c68697f035817a8d576e2552f2c2">&#9670;&nbsp;</a></span>sprinkle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename R &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void sprinkle </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>amt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&#160;</td>
+          <td class="paramname"><em>coord</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">R &amp;&#160;</td>
+          <td class="paramname"><em>radius</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8cpp_a7d56c68697f035817a8d576e2552f2c2_cgraph.png" border="0" usemap="#amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_cgraph" alt=""/></div>
+<map name="amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_cgraph" id="amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,461,72,488"/>
+<area shape="rect" href="class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="160,5,292,32"/>
+<area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="139,56,313,83"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="120,335,332,361"/>
+<area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="411,461,552,488"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="634,373,798,400"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="631,449,801,476"/>
+<area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="141,563,311,589"/>
+<area shape="rect" href="class_palette.html#a3c55a74b231deff1d256fbd94251603a" title=" " alt="" coords="170,613,282,640"/>
+<area shape="rect" href="class_scene.html#ab6212abe1575299362392f7bce226abc" title=" " alt="" coords="145,664,307,691"/>
+<area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="433,5,529,32"/>
+<area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="438,56,525,83"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="381,309,582,336"/>
+<area shape="rect" href="class_options.html#a1fe456ad2f76cc5df6ff4c167ec7fba8" title=" " alt="" coords="411,360,551,387"/>
+<area shape="rect" href="class_scene.html#a45cca662186b18afe921b0ca159c8529" title=" " alt="" coords="400,157,563,184"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="408,208,555,235"/>
+<area shape="rect" href="class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225" title="get color channels" alt="" coords="429,259,533,285"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="380,411,583,437"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8cpp_a7d56c68697f035817a8d576e2552f2c2_icgraph.png" border="0" usemap="#amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_icgraph" alt=""/></div>
+<map name="amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_icgraph" id="amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_icgraph">
+<area shape="rect" title=" " alt="" coords="157,31,224,57"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,5,109,32"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,56,107,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad53ec54d7a98c61fc51cfff7109e4bea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad53ec54d7a98c61fc51cfff7109e4bea">&#9670;&nbsp;</a></span>sprinkleGlobal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EMSCRIPTEN_KEEPALIVE sprinkleGlobal </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>amt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>r_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>r_max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8cpp_ad53ec54d7a98c61fc51cfff7109e4bea_cgraph.png" border="0" usemap="#amain_8cpp_ad53ec54d7a98c61fc51cfff7109e4bea_cgraph" alt=""/></div>
+<map name="amain_8cpp_ad53ec54d7a98c61fc51cfff7109e4bea_cgraph" id="amain_8cpp_ad53ec54d7a98c61fc51cfff7109e4bea_cgraph">
+<area shape="rect" title=" " alt="" coords="5,461,109,488"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="157,461,224,488"/>
+<area shape="rect" href="class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="312,5,444,32"/>
+<area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="291,56,465,83"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="272,335,484,361"/>
+<area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="563,461,704,488"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="786,373,950,400"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="783,449,953,476"/>
+<area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="293,563,463,589"/>
+<area shape="rect" href="class_palette.html#a3c55a74b231deff1d256fbd94251603a" title=" " alt="" coords="322,613,434,640"/>
+<area shape="rect" href="class_scene.html#ab6212abe1575299362392f7bce226abc" title=" " alt="" coords="297,664,459,691"/>
+<area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="585,5,681,32"/>
+<area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="590,56,677,83"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="533,309,734,336"/>
+<area shape="rect" href="class_options.html#a1fe456ad2f76cc5df6ff4c167ec7fba8" title=" " alt="" coords="563,360,703,387"/>
+<area shape="rect" href="class_scene.html#a45cca662186b18afe921b0ca159c8529" title=" " alt="" coords="552,157,715,184"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="560,208,707,235"/>
+<area shape="rect" href="class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225" title="get color channels" alt="" coords="581,259,685,285"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="532,411,735,437"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4df20e610fee8d6a8bee2388640a08a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4df20e610fee8d6a8bee2388640a08a5">&#9670;&nbsp;</a></span>sprinkleLocal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EMSCRIPTEN_KEEPALIVE sprinkleLocal </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>amt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>r_min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>r_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>sig</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>creates sprinkle in around cursor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">amt</td><td>number of drops to create </td></tr>
+    <tr><td class="paramname">r_min,r_max</td><td>drop size range </td></tr>
+    <tr><td class="paramname">x,y</td><td>cursor position </td></tr>
+    <tr><td class="paramname">sig</td><td>sigma for normal distribution for drop position </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8cpp_a4df20e610fee8d6a8bee2388640a08a5_cgraph.png" border="0" usemap="#amain_8cpp_a4df20e610fee8d6a8bee2388640a08a5_cgraph" alt=""/></div>
+<map name="amain_8cpp_a4df20e610fee8d6a8bee2388640a08a5_cgraph" id="amain_8cpp_a4df20e610fee8d6a8bee2388640a08a5_cgraph">
+<area shape="rect" title="creates sprinkle in around cursor" alt="" coords="5,461,104,488"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="152,461,219,488"/>
+<area shape="rect" href="class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="307,5,439,32"/>
+<area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="285,56,460,83"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="267,335,479,361"/>
+<area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="557,461,699,488"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="781,373,945,400"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="777,449,948,476"/>
+<area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="288,563,457,589"/>
+<area shape="rect" href="class_palette.html#a3c55a74b231deff1d256fbd94251603a" title=" " alt="" coords="317,613,429,640"/>
+<area shape="rect" href="class_scene.html#ab6212abe1575299362392f7bce226abc" title=" " alt="" coords="291,664,454,691"/>
+<area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="580,5,676,32"/>
+<area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="585,56,671,83"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="527,309,729,336"/>
+<area shape="rect" href="class_options.html#a1fe456ad2f76cc5df6ff4c167ec7fba8" title=" " alt="" coords="558,360,698,387"/>
+<area shape="rect" href="class_scene.html#a45cca662186b18afe921b0ca159c8529" title=" " alt="" coords="547,157,709,184"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="555,208,701,235"/>
+<area shape="rect" href="class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225" title="get color channels" alt="" coords="576,259,680,285"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="527,411,729,437"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a799b5f11d1ed618fa2fe44febc509b3a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a799b5f11d1ed618fa2fe44febc509b3a">&#9670;&nbsp;</a></span>startDropping()</h2>
 
@@ -1086,7 +1334,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 11 2021 21:20:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Thu Jul 15 2021 16:45:40 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

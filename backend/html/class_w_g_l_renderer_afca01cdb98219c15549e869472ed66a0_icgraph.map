@@ -1,19 +1,22 @@
 <map id="WGLRenderer::buildColorBuffer" name="WGLRenderer::buildColorBuffer">
-<area shape="rect" id="node1" title=" " alt="" coords="921,251,1123,278"/>
+<area shape="rect" id="node1" title=" " alt="" coords="921,276,1123,303"/>
 <area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a031ed2893ca2b60cf938e96594649eab" title=" " alt="" coords="683,116,851,143"/>
-<area shape="rect" id="node9" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="661,360,873,387"/>
+<area shape="rect" id="node9" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="661,386,873,412"/>
 <area shape="rect" id="node3" href="$main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="5,192,100,219"/>
 <area shape="rect" id="node4" href="$class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title=" " alt="" coords="396,142,613,168"/>
 <area shape="rect" id="node6" href="$main_8cpp.html#aa150c0e8e4f5217d8d0907c061a7917c" title=" " alt="" coords="463,40,546,67"/>
 <area shape="rect" id="node7" href="$main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="474,192,535,219"/>
 <area shape="rect" id="node8" href="$main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="9,66,97,92"/>
 <area shape="rect" id="node5" href="$main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="210,142,286,168"/>
-<area shape="rect" id="node10" href="$main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="469,462,540,488"/>
+<area shape="rect" id="node10" href="$main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="469,512,540,539"/>
 <area shape="rect" id="node11" href="$class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="409,244,600,285"/>
-<area shape="rect" id="node14" href="$main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="466,563,543,590"/>
-<area shape="rect" id="node15" href="$main_8cpp.html#ae2cf4c896bf25231b61c1cdd3128f310" title=" " alt="" coords="465,310,544,336"/>
+<area shape="rect" id="node14" href="$main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="466,614,543,640"/>
+<area shape="rect" id="node15" href="$main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54" title=" " alt="" coords="465,310,544,336"/>
 <area shape="rect" id="node16" href="$main_8cpp.html#ac170bb498a7d244b8f5c5c7a1d9c4017" title=" " alt="" coords="463,360,546,387"/>
-<area shape="rect" id="node17" href="$main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="455,411,554,438"/>
+<area shape="rect" id="node17" href="$main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="471,411,538,438"/>
+<area shape="rect" id="node20" href="$main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="455,462,554,488"/>
 <area shape="rect" id="node12" href="$class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="163,192,333,219"/>
 <area shape="rect" id="node13" href="$class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="148,244,348,285"/>
+<area shape="rect" id="node18" href="$main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="196,386,300,412"/>
+<area shape="rect" id="node19" href="$main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="199,436,297,463"/>
 </map>

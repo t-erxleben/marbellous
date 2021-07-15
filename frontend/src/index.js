@@ -60,6 +60,17 @@ class RakeConfig {
 		}
 	}
 }
+function parseRadiusRange(str) {
+	const range = {};
+	range.min = int(str)
+	const p = range.min == 0 ? 1 : Math.ceil(Math.log10(range.min) + Number.EPSILON)
+	if(str[p] != '-') { throw "failed to parse!" }
+	range.max = int(str.slice(p+1))
+	if(range.max == 0) { throw "max to small!"}
+	range.min /= 100.
+	range.max /= 100.
+	return range;
+}
 
 var active = {};
 const states = ['draw','rake'];
@@ -67,7 +78,7 @@ var state = 'draw';
 var nodes = {};
 var backend = {fn_bind: false, dom_setup: false, init: false};
 var color = 0x228B22;
-var pallets = {}
+var pallets = { nodes: [] }
 window.Module = {
 	onRuntimeInitialized: function() {
 		backend.addPallete = Module.cwrap('addPalette',
@@ -91,7 +102,10 @@ window.Module = {
 		backend.rakeLinear = Module.cwrap('rakeLinear',
 			'boolean', ['number', 'number', 'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
+		backend.sprinklerGlobal = Module.cwrap('sprinkleGlobal', 'void', ['number', 'number', 'number'])
+		backend.sprinklerLocal = Module.cwrap('sprinkleLocal', 'void', ['number', 'number', 'number', 'number', 'number', 'number'])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
+		backend.initBackend = Module.cwrap('initBackend', 'void', ['string', 'number', 'number'])
 		backend.fn_bind = true;
 		init();
 	}
@@ -104,11 +118,14 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
-	backend.setBGColor(color2int(tool.image.style.backgroundColor));
-	pallets[pallets.active].id = backend.addPallete(3);
+	backend.initBackend('#image', 2000, 2000)
+	backend.setBGColor(color2int(pallets[pallets.active].background));
+	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
-	const {A, B, C} = pallets[pallets.active]
-	backend.setPaletteColors(color2int(A), color2int(B), color2int(C))
+	pallets[pallets.active].colors.forEach(function(x,i) {
+		backend.setColorAt(i, color2int(x))
+	})
+	color = 0
 	backend.redraw();
 	backend.init = true;
 }
@@ -120,10 +137,9 @@ function intersectRect(r1, r2) {
            r2.bottom < r1.top);
 }
 function updatePallet() {
-	const {A, B, C} = pallets[pallets.active];
-	pallets.nodes.A.style.background = A;
-	pallets.nodes.B.style.background = B;
-	pallets.nodes.C.style.background = C;
+	pallets.nodes.forEach(function(x,i){
+		x.style.background = pallets[pallets.active].colors[i]
+	})
 }
 var sidebar = {
 	rake_dropper: {},
@@ -157,6 +173,7 @@ function getTopSubmenu(label) {
 }
 
 function switchState(_old, _new) {
+	console.log(`switch from ${_old} to ${_new}`)
 	nodes[_old] = []
 	Array.prototype.forEach.call(document.getElementsByClassName('state ' + _old), function (e){
 		var next = e;
@@ -181,17 +198,25 @@ function switchState(_old, _new) {
 	nodes[_old].forEach(function(e){
 		e.node.remove();
 	});
-	if(_new === 'rake') {
-		backend.startRaking()
-	} else if(_old === 'rake' && _new === 'draw') {
-		backend.startDropping()
+	const label = document.getElementById('switch-state').parentNode.querySelector('label');
+	const img = label.querySelector('img');
+	switch(_new) {
+		case 'rake':
+			img.src = 'icons/fast-backward-solid.svg';
+			label.title = 'Go to state before first rake strike.';
+			backend.startRaking()
+		break;
+		case 'draw':
+			label.title = 'Start raking.';
+			img.src = 'icons/arrow-right-solid.svg';
+			if(backend.init) { backend.startDropping() }
+		break;
 	}
-
 }
+
 var download_side = null;
-function downloadCanvas() {
+function downloadCanvas(el) {
 	const ptr = Module.ccall("getImage", "number", [], []);	
-	console.log('R: ', ptr % 4);
 	const width = Module.HEAP32[ptr/4]
 	const height = Module.HEAP32[ptr/4+1]
 	const len = width * height * 3
@@ -208,25 +233,27 @@ function downloadCanvas() {
 	download_side.href = url;
 	download_side.download = "marebllous-image.png";
 	download_side.click();
+	el.hidden = true;
 }
-
 
 function handleClick(el) {
 		switch(el.id) {
 			case 'download':
-				downloadCanvas();
+				const spinner = el.parentElement.getElementsByClassName('spinner')[0]
+				if(spinner.hidden) {
+					spinner.hidden = false
+					setTimeout(()=>downloadCanvas(spinner), 100)
+				}
 				break;
 			case 'clear':
-				backend.clearCanvas()
-				break;
-			case 'color-1':
-				color = 'A';
-				break;
-			case 'color-2':
-				color = 'B';
-				break;
-			case 'color-3':
-				color = 'C';
+				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you clear the Canvas?'))
+				{
+					backend.clearCanvas()
+					// go back to draw when clearing in rake
+					if(state == 'rake') {
+						switchState('rake', 'draw');
+					}
+				}
 				break;
 			case 'color-dropper':
 				tool.tool[state] = dropper;
@@ -251,10 +278,12 @@ function handleClick(el) {
 			case 'color-rake-custom':
 				rake_dropper.config = sidebar.rake_dropper;
 				sidebar.btn.checked = true;
-				sidebar.options.rake_dropper.checked = true
+				/* sidebar.options.rake_dropper.checked = true */
 				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
+				sidebar.btn.checked = true
+				sidebar.options.sprinkler.checked = true
 				break;
 			case 'rake-movement-linear':
 				rake.config.line = rake.straight;
@@ -265,21 +294,19 @@ function handleClick(el) {
 				rake.config.periode = 200;
 				break;
 			case 'switch-state':
-				const label = el.parentNode.querySelector('label');
-				const img = label.querySelector('img');
 				const oldState = state;
-				switch(state) {
-					case 'draw':
-						state = 'rake';
-						img.src = 'icons/fast-backward-solid.svg';
-						label.title = 'Go to state before first rake strike.';
+				if (oldState === 'rake') {
+					if(!window.confirm("This will go back before you make your first rake stroke. The stroke marked will all be removed, and there is NO way to restore them.\nWant you go back to the color drop state?"))
+					{
 						break;
-					case 'rake':
-						state = 'draw';
-						label.title = 'Start rakeing.'; // TODO: fix spelling
-						img.src = 'icons/arrow-right-solid.svg'; break;
+					}
 				}
+				switch(state) { case 'draw': state = 'rake'; break; case 'rake': state = 'draw'; break; }
 				switchState(oldState, state);
+				break;
+			default:
+				const cid = pallets.nodes.indexOf(el.labels[0])
+				if (cid >= 0) { color = cid }
 		}
 }
 
@@ -340,8 +367,15 @@ function fetchAndSet(element, id) {
 	const val = storage.fetch(id);
 	if (val) { element.value = val; }
 }
+
 window.storage = null
-document.addEventListener("DOMContentLoaded", function(){
+window.onload = function() {
+	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
+		div.style.maxHeight = div.scrollHeight + 3;
+	});
+}
+
+function DomInit(){
 	storage = new Storage()
 	document.querySelectorAll('menu input[type="radio"]').forEach(function(rad){
 		if (rad.checked) {
@@ -374,12 +408,10 @@ document.addEventListener("DOMContentLoaded", function(){
 	dropper.img = document.getElementById('img-color-dropper');
 	sparkle_dropper.img = document.getElementById('img-color-sparkle');
 
-	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
-		div.style.maxHeight = div.scrollHeight + 3;
-	});
 	sidebar.options = {
 		rake: document.getElementById('sidebar-rake'),
 		pallet: document.getElementById('sidebar-pallet'),
+		sprinkler: document.getElementById('sidebar-sprinkler')
 	};
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
@@ -392,33 +424,38 @@ document.addEventListener("DOMContentLoaded", function(){
 		el.addEventListener("change", (ev)=>{pallets.active = el.value
 			storage.store(id, el.value);
 			if(pallets[pallets.active] === undefined) {
-				pallets[pallets.active] = {id: backend.addPallete(3), A: null, B: null, C: null};
-				backend.setActivePalette(pallets[pallets.active].id);
-			} else {
-				backend.setActivePalette(pallets[pallets.active].id);
+				pallets[pallets.active] = {id: backend.addPallete(pallets.inputs.length), colors: []};
 			}
-			var {A, B, C, background} = pallets[pallets.active];
-			if(A == null) { fetchAndSet(pallets.inputs.A, pallets.active + 'sidebar-pallet-color-1') }
-			else { pallets.inputs.A.value = A }
-			if(B == null) { fetchAndSet(pallets.inputs.B, pallets.active + 'sidebar-pallet-color-2') }
-			else { pallets.inputs.B.value = B }
-			if(C == null) { fetchAndSet(pallets.inputs.C, pallets.active + 'sidebar-pallet-color-3') }
-			else { pallets.inputs.C.value = C }
+			backend.setActivePalette(pallets[pallets.active].id);
+
+			var {colors, background} = pallets[pallets.active];
+			
+			pallets.inputs.forEach(function(x,i){
+				if(!colors[i]) {
+					fetchAndSet(x, pallets.active + 'sidebar-pallet-color-' + i.toString())
+				} else {
+					x.value = colors[i]
+				}
+			})
 			if(background == null) { fetchAndSet(pallets.inputs.background, pallets.active + 'sidebar-pallet-background') }
 			else { pallets.inputs.background.value = background }
-			A = pallets.inputs.A.value;
-			B = pallets.inputs.B.value;
-			C = pallets.inputs.C.value;
+
+
+			pallets.inputs.forEach(function(x,i) {
+				colors[i] = x.value;
+			});
 			background = pallets.inputs.background.value;
-			pallets[pallets.active] = {A, B, C, background}
-			backend.setPaletteColors(color2int(A), color2int(B), color2int(C));
+			pallets[pallets.active] = {colors, background}
+			pallets[pallets.active].colors.forEach(function(x,i){
+				backend.setColorAt(i, color2int(x))
+			})
 			backend.setBGColor(color2int(background))
 			backend.redraw();
 			updatePallet();
 		});
-		pallets.inputs = {};
+		pallets.inputs = [];
 		if(pallets[pallets.active] == undefined) {
-			pallets[pallets.active] = {}
+			pallets[pallets.active] = { colors: [] }
 		}
 	}
 	{
@@ -435,59 +472,36 @@ document.addEventListener("DOMContentLoaded", function(){
 		pallets.inputs.background = el
 		pallets[pallets.active].background = el.value
 	}
+	var i = 0
+	var sbc = null
+	while(sbc = document.getElementById('sidebar-pallet-color-' + i.toString()))
 	{
-		const iid = 'sidebar-pallet-color-1';
-		const el = document.getElementById(iid);
+		const el = sbc
+		const num = i
+		const iid = 'sidebar-pallet-color-' + num.toString();
 		const id = function() { return pallets.active + iid }
 		fetchAndSet(el, id());
-		pallets[pallets.active]['A'] = el.value;
-		el.addEventListener("change", (ev)=>{pallets[pallets.active]['A'] = el.value;
+		pallets[pallets.active].colors[i] = el.value;
+		el.addEventListener("change", (ev)=>{pallets[pallets.active].colors[num] = el.value;
 			storage.store(id(), el.value);
-			backend.setColorAt(0, color2int(el.value));
+			backend.setColorAt(num, color2int(el.value));
 			backend.redraw();
 			updatePallet();});
-		pallets.inputs.A = el;
-		pallets[pallets.active].A = el.value
+		pallets.inputs[num] = el;
+		pallets[pallets.active].colors[num] = el.value
+		i += 1
 	}
-	{
-		const iid = 'sidebar-pallet-color-2'
-		const el = document.getElementById(iid);
-		const id = function() { return pallets.active + iid }
-		fetchAndSet(el, id())
-		pallets[pallets.active]['B'] = el.value;
-		el.addEventListener("change", (ev)=>{pallets[pallets.active]['B'] = el.value;
-			storage.store(id(), el.value);
-			backend.setColorAt(1, color2int(el.value));
-			backend.redraw();
-			updatePallet();});
-		pallets.inputs.B = el;
-		pallets[pallets.active].B = el.value
-	}
-	{
-		const iid = 'sidebar-pallet-color-3'
-		const el = document.getElementById(iid);
-		const id = function() { return pallets.active + iid }
-		fetchAndSet(el, id())
-		pallets[pallets.active]['C'] = el.value;
-		el.addEventListener("change", (ev)=>{pallets[pallets.active]['C'] = el.value;
-			storage.store(id(), el.value)
-			backend.setColorAt(2, color2int(el.value));
-			backend.redraw();
-			updatePallet();});
-		pallets.inputs.C = el;
-		pallets[pallets.active].C = el.value
-	}
-	pallets.nodes = {
-		A: document.getElementById('color-1').labels[0],
-		B: document.getElementById('color-2').labels[0],
-		C: document.getElementById('color-3').labels[0],
-	};
+	
+	pallets.nodes = []
+	pallets.inputs.forEach(function(x,i){
+		pallets.nodes[i] = document.getElementById('color-' + i.toString()).labels[0]
+	})
 	updatePallet()
 
 	{	const id = 'sidebar-rake-placement'
 		const el = document.getElementById(id);
 		fetchAndSet(el, id)
-		rake.config.placement = new RakeConfig(el.value);
+		rake.config.placement = new RakeConfig(el.value || '20');
 		el.addEventListener('change', (ev)=>{
 			try {
 				rake.config.placement = new RakeConfig(el.value);
@@ -498,9 +512,73 @@ document.addEventListener("DOMContentLoaded", function(){
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
 	}
+	{	const id = 'sidebar-sprinkler-radius'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		sparkle_dropper.range = parseRadiusRange(el.value || "5-10");
+		el.addEventListener('change', (ev)=>{
+			try {
+				sparkle_dropper.range = parseRadiusRange(el.value)
+				storage.store(id, el.value)
+			} catch(e) {
+				console.error("failed to parse radius range: ", e)
+				// TODO: error handling!
+			}
+		})
+		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}})
+	}
+	{	const id = 'sidebar-sprinkler-frequence'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		sparkle_dropper.rate = 1000. / int(el.value || "5") 
+		el.addEventListener('change', (ev)=> {
+			if (el.validity.valid) {
+				try {
+					sparkle_dropper.rate = 1000. / int(el.value)
+					storage.store(id, el.value)
+				}	catch(e) {
+					// TODO: error handling
+				}
+			}
+		})
+		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur();}})
+	}
+	{	const id = 'sidebar-sprinkler-local'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		const sigId = 'sidebar-sprinkler-sig'
+		const sigEl = document.getElementById(sigId)
+		fetchAndSet(sigEl, sigId)
+
+		el.checked = el.value === 'true'
+		sparkle_dropper.local = el.checked
+		sigEl.disabled = !el.checked
+		el.addEventListener('change', (ev) => {
+			sparkle_dropper.local = el.checked
+			storage.store(id, el.checked)
+			sigEl.disabled = !el.checked
+		})
+		sparkle_dropper.sig = int(sigEl.value || '10' ) / 100.
+		sigEl.addEventListener('change', (ev)=> {
+			if (el.validity.valid) {
+				try {
+					sparkle_dropper.sig = int(sigEl.value) / 100.
+					storage.store(sigId, sigEl.value)
+				}	catch(e) {
+					// TODO: error handling
+				}
+			}
+		})
+		sigEl.addEventListener('keydown', (ev)=>{if (ev.which == 13) {sigEl.blur();}})
+	}
 	backend.dom_setup = true;
 	init();
-});
+}
+if(document.readyState === 'loading') {
+	document.addEventListener("DOMContentLoaded", DomInit);
+} else {
+	DomInit()
+}
 
 
 function drawline(ctx, start, end) {
@@ -540,14 +618,8 @@ var dropper = {
 			}
 		},
 	down: function(x,y,w,h) {
-		var cId = 0;
-		switch (color) {
-			case 'A': cId = 0; break;
-			case 'B': cId = 1; break;
-			case 'C': cId = 2; break;
-		}
 		const circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0};
-		dropper.circle = backend.addDrop(circle.x, circle.y, circle.r, cId);
+		dropper.circle = backend.addDrop(circle.x, circle.y, circle.r, color);
 
 		dropper.active = true;
 		window.requestAnimationFrame(dropper.drop);
@@ -560,10 +632,45 @@ var dropper = {
 };
 
 var sparkle_dropper = {
-	draw: function(canvas, x,y) {
+	rate: 50,
+	draw: function(canvas, x,y, w, h) {
+		sparkle_dropper.pos =  {x: x / w, y: y/h}
+		sparkle_dropper.dim = {w, h}
 		const size = tool.translate({x: 32, y: 32});
 		canvas.drawImage(sparkle_dropper.img,x-size.x/2,y-size.y/2,size.x,size.y);
 		// canvas.drawImage(sparkle_dropper.img,y-size/2,x-size/2,size.x,size.y);
+	},
+	drop: function(time) {
+		if(! sparkle_dropper.active) { sparkle_dropper.time = null; return }
+		if(!sparkle_dropper.time) {
+			sparkle_dropper.time = time;
+			window.requestAnimationFrame(sparkle_dropper.drop);
+			return }
+		const d = time - sparkle_dropper.time
+		const n = int(d / sparkle_dropper.rate)
+		if(n > 0) {
+			if(sparkle_dropper.local === true) {
+				backend.sprinklerLocal(n, sparkle_dropper.range.min, sparkle_dropper.range.max,
+					sparkle_dropper.pos.x * 2 - 1,1 - sparkle_dropper.pos.y * 2,
+					sparkle_dropper.sig)
+			} else {
+				backend.sprinklerGlobal(n, sparkle_dropper.range.min, sparkle_dropper.range.max)
+			}
+			sparkle_dropper.time = time - (d - (n * sparkle_dropper.rate))
+		}
+		window.requestAnimationFrame(sparkle_dropper.drop)
+	},
+	down: function(x,y,w,h) {
+		sparkle_dropper.pos = {
+			x: x / w,
+			y: y /h
+		}
+		sparkle_dropper.dim = {w, h}
+		sparkle_dropper.active = true;
+		window.requestAnimationFrame(sparkle_dropper.drop)
+	},
+	up: function() {
+		sparkle_dropper.active = false;
 	}
 };
 
@@ -753,7 +860,6 @@ var rake = {
 	},
 	setPattern: function(ctx) {
 		if(this.placement !== rake.config.placement) {
-			console.log(rake.config.placement)
 			this.placement = rake.config.placement;
 			rake.init();
 			const r = 5;
@@ -855,6 +961,7 @@ var tool = {
 		if(tool.tool[state].up) {
 			tool.tool[state].up();
 		}
+		tool.start = null;
 	},
 	clear: function() {
 		if(tool.ctx) {
