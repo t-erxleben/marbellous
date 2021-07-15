@@ -91,8 +91,8 @@ window.Module = {
 			'void', ['number']);
 		backend.addDrop = Module.cwrap('addDrop',
 			'void', ['number', 'number', 'number', 'number']);
-		backend.addGridDrops = Module.cwrap('addGridDrops',
-			'void', ['number', 'number', 'number', 'number', 'number', 'number'])
+		backend.addDrops = Module.cwrap('addDrops',
+			'void', ['number', 'array']);
 		backend.resizeDrops = Module.cwrap('resizeDrops',
 			'number', ['number']);
 		backend.setColorAt = Module.cwrap('setColorAt',
@@ -700,7 +700,7 @@ var rake_dropper = {
 	config: {
 		w: 30,
 		h: 30,
-		of: 15,
+		of: 10,
 	},
 	init: function() {
 		if (!rake_dropper.canvas && !rake_dropper.ctx) {
@@ -755,12 +755,49 @@ var rake_dropper = {
 	},
 	down: function(x,y,w,h) {
 		if(dropper.active) { return }
+		const p = {x: x/w*2, y: y/h*2}
+		const dim = {w: rake_dropper.config.w / 50, h: rake_dropper.config.h / 50,
+			of: rake_dropper.config.of / 50}
+		const max_w = Math.ceil(2/dim.w)
+		const max_h = Math.ceil(2/dim.h)
+		const max_count =  max_w * max_h 
+		console.log(dim, max_w, max_h, max_count)
+		console.log('max_count', max_count)
+		if (max_count > 100) { console.error('Max count exceeds 100'); return }
+		let count = 0
+		const data = new Float32Array(max_count * 4)
+		const space = {
+			l: Math.floor(p.x / dim.w),
+			r: Math.floor((2 - p.x) / dim.w),
+			t: Math.ceil(p.y / dim.h - dim.of/dim.h),
+			b: Math.floor((2 - p.y) / dim.h)
+		}
+		console.log(`tada: ${p.y / dim.of}`)
+		console.log(`t: ${p.y/dim.h}, b: ${(2-p.x)/dim.h}`)
+		console.log(space)
+		console.log(`dimw: ${dim.w}, px: ${p.x} -> ${dim.w*(-space.l) + p.x}`)
+		tool.ctx.strokeStyle = 'blue'
+		tool.ctx.beginPath()
+		for(let i = -space.l; i <= space.r; i += 1) {
+			for(let j = -space.t; j <= space.b; j += 1) {
+				const ex = ((i*dim.w + p.x))/2.*w
+				const ey = (j*dim.h + p.y + Math.abs(i % 2) * dim.of)/2.*h
+				console.log(ex,ey)
+				tool.ctx.moveTo(ex,ey)
+				tool.ctx.ellipse(ex, ey, 7, 7, 0, 2*Math.PI, false)
+				data[count*4] = (i * dim.w + p.x) - 1
+				data[count*4 + 1] = 1 - (j * dim.h + p.y + Math.abs(i%2) * dim.of)
+				data[count*4 + 2] = 0
+				data[count*4 + 3] = 0
+				count += 1
+			}
+		}
+		tool.ctx.stroke()
+		tool.ctx.strokeStyle = 'black'
+		backend.addDrops(count, new Int8Array(data.buffer))
 
-		const positions = rake_dropper.positions.map(function(p) {return {x: p.x + rx, y: p.y + ry}})
-		backend.addGridDrops(2*x/w - 1, 1 - 1*y/h, rake_dropper.config.w/200, rake_dropper.config.h/200, rake_dropper.config.of/200, 0)
-
-		dropper.active = true
-		window.requestAnimationFrame(dropper.drop)
+		/* dropper.active = true
+		window.requestAnimationFrame(dropper.drop)*/
 	},
 	up: function() {
 		dropper.time = null;
