@@ -187,24 +187,19 @@ extern "C"
         redraw();
     }
 
-    int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius) ///< resize drop of given ID (return val of addDrop(...))
+    int EMSCRIPTEN_KEEPALIVE resizeDrops(float const newRadius) ///< resize all drops
     {
         checkSetup(-1);
         checkState(true, -1);
 
-		if(dropID >= 0 && dropID != scene->getPolygonCount() - 1) {
-			fprintf(stderr, "Can only resize the last added drop!\n\tgot: %i, expected: %lu",
-					dropID,
-					scene->getPolygonCount() - 1);
-			return -1;
-		}
 		scene->setDisplacement(scene->getDisplacement().p, newRadius);
         sceneRenderer->drawScene(*scene);
     
         return 0;
     }
 
-	int EMSCRIPTEN_KEEPALIVE finishDrop(int dropID)
+	/// finalize all current growing drops
+	int EMSCRIPTEN_KEEPALIVE finishDrops()
 	{
 		checkSetup(-1);
         checkState(true, -1);
@@ -213,6 +208,17 @@ extern "C"
 		sceneRenderer->drawScene(*scene);
 		return 0;
 	}
+
+	/// create drops in grid pattern
+	/**
+	 * \param x,y handle position on canvas
+	 * \param colorId of color of drops
+	 * \param w,h width and height of one pattern cell
+	 * \param of offset betwen two columns of the pattern
+	 */
+	void EMSCRIPTEN_KEEPALIVE addGridDrops(float x, float y,
+			float w, float h, float of, unsigned colorId)
+	{}
 
     char *EMSCRIPTEN_KEEPALIVE getImage()
     {

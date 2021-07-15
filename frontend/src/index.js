@@ -90,9 +90,11 @@ window.Module = {
 		backend.setBGColor = Module.cwrap('setBGColor',
 			'void', ['number']);
 		backend.addDrop = Module.cwrap('addDrop',
-			'number', ['number', 'number', 'number', 'number']);
-		backend.resizeDrop = Module.cwrap('resizeDrop',
-			'number', ['number', 'number']);
+			'void', ['number', 'number', 'number', 'number']);
+		backend.addGridDrops = Module.cwrap('addGridDrops',
+			'void', ['number', 'number', 'number', 'number', 'number', 'number'])
+		backend.resizeDrops = Module.cwrap('resizeDrops',
+			'number', ['number']);
 		backend.setColorAt = Module.cwrap('setColorAt',
 			'number', ['number', 'number']);
 		backend.redraw = Module.cwrap('redraw',
@@ -103,9 +105,9 @@ window.Module = {
 			'void', [	'number', 'number',
 						'number', 'number', 'number',
 						'array'])
-		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
 		backend.sprinklerGlobal = Module.cwrap('sprinkleGlobal', 'void', ['number', 'number', 'number'])
 		backend.sprinklerLocal = Module.cwrap('sprinkleLocal', 'void', ['number', 'number', 'number', 'number', 'number', 'number'])
+		backend.finishDrops = Module.cwrap('finishDrops', 'number', [])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.initBackend = Module.cwrap('initBackend', 'void', ['string', 'number', 'number'])
 		backend.fn_bind = true;
@@ -263,25 +265,6 @@ function handleClick(el) {
 			case 'color-rake':
 				tool.tool[state] = rake_dropper;
 				break;
-			case 'color-rake-displaced':
-				rake_dropper.config = {
-					w: 150,
-					h: 150,
-					of: 75,
-				};
-				break;
-			case 'color-rake-square':
-				rake_dropper.config = {
-					w: 150,
-					h: 150,
-					of: 0,
-				};
-				break;
-			case 'color-rake-custom':
-				rake_dropper.config = sidebar.rake_dropper;
-				sidebar.btn.checked = true;
-				/* sidebar.options.rake_dropper.checked = true */
-				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
 				sidebar.btn.checked = true
@@ -309,7 +292,6 @@ function handleClick(el) {
 				if (cid >= 0) { color = cid }
 		}
 }
-
 
 document.addEventListener("click", function(evnt){
 	var el = evnt.target;
@@ -637,15 +619,15 @@ var dropper = {
 				if(time - dropper.time < dropper.fnSwitch * dropper.slowF ) {
 					r = (time - dropper.time) * dropper.slope / dropper.slowF
 				}
-				backend.resizeDrop(dropper.circle, r);
+				backend.resizeDrops(r);
 				window.requestAnimationFrame(dropper.drop);
 			} else {
-				backend.finishDrop(dropper.drop);
+				backend.finishDrops();
 			}
 		},
 	down: function(x,y,w,h) {
 		const circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0};
-		dropper.circle = backend.addDrop(circle.x, circle.y, circle.r, color);
+		backend.addDrop(circle.x, circle.y, circle.r, color);
 
 		dropper.active = true;
 		window.requestAnimationFrame(dropper.drop);
@@ -767,9 +749,9 @@ var rake_dropper = {
 		if (diffs) {
 			rake_dropper.init();
 
-			const w = ctx.canvas.width * this.config.w / 1000;
-			const h = ctx.canvas.height * this.config.h / 1000;
-			const of =(ctx.canvas.height * this.config.of / 1000) % h;
+			const w = ctx.canvas.width * this.config.w / 100;
+			const h = ctx.canvas.height * this.config.h / 100;
+			const of =(ctx.canvas.height * this.config.of / 100) % h;
 			const r = 5;
 			this.size = {x: r, y: r};
 			this.pattern_size = {x: w * 2, y: h};
@@ -797,6 +779,19 @@ var rake_dropper = {
 		ctx.fillRect(-x,-y,w+x,h+y);
 		ctx.setTransform(1,0,0,1,0,0);
 	},
+	down: function(x,y,w,h) {
+		if(dropper.active) { return }
+
+		const positions = rake_dropper.positions.map(function(p) {return {x: p.x + rx, y: p.y + ry}})
+		backend.addGridDrops(2*x/w - 1, 1 - 1*y/h, rake_dropper.config.w/200, rake_dropper.config.h/200, rake_dropper.config.of/200, 0)
+
+		dropper.active = true
+		window.requestAnimationFrame(dropper.drop)
+	},
+	up: function() {
+		dropper.time = null;
+		dropper.active = false;
+	}
 };
 
 var rake = {
