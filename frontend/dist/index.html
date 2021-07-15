@@ -4,6 +4,10 @@
 		<meta name="author" content="Timm,Denny,Julian" >
 		<meta name="description" content="A marebling tool">
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.png" size="96x96" type="image/png">
+		<link rel="apple-touch-icon" size="180x180" href="apple-touch-icon.png">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="mstile-144x144x.png">
 		<link rel="stylesheet" href="stylesheet.css">
 		<script>
 			function switchStore() {
@@ -80,20 +84,20 @@
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-rake"/>
 				<label for="sidebar-rake">Rake</label>
-				<div>
-					<label
-						for="sidebar-rake-placement"
-						title="space between nails in rake">
-							placement:
-						</label>
-						<br>
-					<input
+				<div><div class="form_group field">
+					<input class="form_field"
+						   placeholder="placement"
 							title="<offset>:<space>(,<space>)*"
 							id="sidebar-rake-placement"
 							type="text" autocomplete="on"
-							pattern="([0-9]*:)?([0-9]+,)*[0-9]+"
-							value="20">%
-				</div>
+							pattern="([0-9]+:)?([0-9]+,)*[0-9]+"
+							value="">
+					<label class="form_label"
+						for="sidebar-rake-placement"
+						title="space between nails in rake">
+							placement
+					</label>
+					</div></div>
 		</li>
 		<!-- pallet -->
 		<li>
@@ -102,35 +106,98 @@
 				<div>
 					<table>
 						<tr>
-							<td><label for="sidebar-pallet-active-pallet" title="select current pallet">active:</label></td>
-							<td><select name="active-pallet" id="sidebar-pallet-active-pallet">
+							<td>
+								<label for="sidebar-pallet-active-pallet" title="select current pallet">
+								colorschema: </label>
+								</td>
+							<td>
+								<select class="form_field" name="active-pallet" id="sidebar-pallet-active-pallet">
 									<option value="pallet-1">default</option>
 									<option value="pallet-2">light</option>
 									<option value="pallet-3">funky</option>
-								</select></td>
-						</tr><tr>
+								</select></td>						</tr><tr>
 							<td>Colors:</td>
 						</tr><tr class ="sub-row">
-							<td><label for="sidebar-pallet-color-1">A:</label></td>
+							<td><label for="sidebar-pallet-color-0">A:</label></td>
+							<td><input id="sidebar-pallet-color-0" type="color"
+								value="#3E1404"></td>
+						</tr><tr class="sub-row">
+							<td><label for="sidebar-pallet-color-1">B:</label></td>
 							<td><input id="sidebar-pallet-color-1" type="color"
-								value="#228B22"></td>
+								value="#6A2B05"></td>
 						</tr><tr class="sub-row">
-							<td><label for="sidebar-pallet-color-2">B:</label></td>
+							<td><label for="sidebar-pallet-color-2">C:</label></td>
 							<td><input id="sidebar-pallet-color-2" type="color"
-								value="#FFD700"></td>
+								value="#964315"></td>
 						</tr><tr class="sub-row">
-							<td><label for="sidebar-pallet-color-3">C:</label></td>
+							<td><label for="sidebar-pallet-color-3">D:</label></td>
 							<td><input id="sidebar-pallet-color-3" type="color"
-								value="#DC143C"></td>
+								   value="#BB6B24"></td>
 						</tr><tr>
 							<td><label for='sidebar-pallet-background'>Background:</label></td>
-						</tr><tr>
-							<td></td>
 							<td><input id="sidebar-pallet-background" type="color"
 								value="#F7E9CE"></td>
 						</tr>
 					</table>
 				</div>
+		</li>
+		<!-- sprinkler -->
+		<li>
+			<input type="radio" name="sidebar" id="sidebar-sprinkler"/>
+			<label for="sidebar-sprinkler">Sprinkler</label>
+			<div>
+				<menu style="width:75%;list-style:none;margin-left:-40px;">
+					<li class="form_group field">
+						<input 	class="form_field"
+							   	placeholder="size min-max"
+							   	title="<min> - <max>"
+								id="sidebar-sprinkler-radius"
+ 							   	type="text" autocomplete="on"
+ 	 							pattern="[0-9]+-[0-9]+"
+								value="">
+						<label class="form_label"
+							   for="sidebar-sprinkler-radius"
+							   title="Size range for drops dropped by sprinkler tool.">
+							size min-max
+						</label>
+					</li>
+					<li class="form_group field">
+						<input 	class="form_field"
+								placeholder="drop frequence"
+								id="sidebar-sprinkler-frequence"
+								type="number" autocomplete="on"
+								value=""
+								min="1" step="1">
+						 <label class="form_label"
+							 	for="sidebar-sprinkler-frequence"
+								title="Drops per second placet by the sprinkler tool.">
+							 drop frequence
+						 </label>
+					</li>
+					<li><label class="switch" title="Sparkle drops only around cursor. If disable drops will sparkle in the full area." style="margin-top:20px">
+							<input id="sidebar-sprinkler-local" class="slider" type="checkbox">
+							<span class="slider"></span>
+						</label>
+						sparkle around cursor
+						<menu style="list-style:none;margin-top:-10px">
+							<li class="form_group field">
+								<input class="form_field"
+									   placeholder="σ"
+									   disabled
+									   id="sidebar-sprinkler-sig"
+									   type="number" autocomplete="on"
+									   value=""
+									   min="1" step="">
+								<label class="form_label"
+									    for="sidebar-sprinkler-sig"
+										title="Standart deviation for dropps to be generated.">
+									σ
+								</label>
+							</li>
+						</menu>
+					</li>
+				</menu>
+			</div>
 		</li>
 	</menu>
 	</menu>
@@ -140,13 +207,18 @@
 					<img src="icons/palette-solid.svg" alt="color picker">
 				</label><!-- romves whitespaces
 				--><menu option="pallet">
-					<li><input type="radio" id="color-1" name="color-picker" checked>
-						<label for="color-1" title="change to color 1">
+					<li><input type="radio" id="color-0" name="color-picker" checked>
+						<label for="color-0" title="change to color 1">
+							<img src="icons/empty.svg" alt="color-0">
+						</label>
+					</li>
+					<li><input type="radio" id="color-1" name="color-picker">
+						<label for="color-1" title="change to color 2">
 							<img src="icons/empty.svg" alt="color-1">
 						</label>
 					</li>
 					<li><input type="radio" id="color-2" name="color-picker">
-						<label for="color-2" title="change to color 2">
+						<label for="color-2" title="change to color 3">
 							<img src="icons/empty.svg" alt="color-2">
 						</label>
 					</li>
@@ -154,7 +226,6 @@
 						<label for="color-3" title="change to color 3">
 							<img src="icons/empty.svg" alt="color-3">
 						</label>
-					</li>
 				</menu>
 			</li>
 
@@ -200,17 +271,24 @@
 			</li>
 
 			<li><input type="button" id="download">
-				<label for="download" title="Download current canvas state as image">
-					<img src="icons/file-download-solid.svg" alt="download">
+				<label for="download" title="Download current canvas state as image" style="position:relative;">
+					<img src="icons/file-download-solid.svg" alt="download" >
+					<div class="spinner" style="position:absolute" hidden>
+						<svg 
+							width="32px" height="32px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" >
+							<circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30">
+							</circle>
+						</svg>
+					</div>
 				</label>
 			</li>
 
 		</menu><!-- removes whitespace
-			--><div style="display:inline-block"><h1 style="text-align:center">Marbellous</h1><div class="page">
+			--><div style="display:table-cell"><h1 style="text-align:center">Marbellous</h1><div class="page">
 			<canvas width="720" height="720" id="image" style="background: #f7e9ce;"></canvas>
 			<canvas width="720" height="720" id="overlay"></canvas>
-		</div></div>
-		<p class="notice">The source code and legal notice can be found at the <a href="https://github.com/t-erxleben/marbellous">Marbellous</a> GitHub repository.</p>
+		</div>
+		<p class="notice">The source code and legal notice can be found at the <a href="https://github.com/t-erxleben/marbellous">Marbellous</a> GitHub repository.</p></div>
 		</div>
 		<img style="display: none" id="img-color-dropper" width="32" height="32" src="icons/eye-dropper-solid.png">
 		<img style="display: none" id="img-color-sparkle" width="32" height="32" src="icons/sparkle-solid.png">
