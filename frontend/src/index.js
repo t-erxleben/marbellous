@@ -698,9 +698,9 @@ var rake_dropper = {
 	canvas: undefined,
 	ctx: undefined,
 	config: {
-		w: 30,
-		h: 30,
-		of: 10,
+		w: 11,
+		h: 11,
+		of: 0,
 	},
 	init: function() {
 		if (!rake_dropper.canvas && !rake_dropper.ctx) {

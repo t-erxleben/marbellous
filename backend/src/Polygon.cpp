@@ -41,14 +41,13 @@ size_t Polygon::circleVertCount(float radius)
 /** displace a point in place
  */
 Point& displacePoint(Point& p, const std::vector<Displacement>& displacements) {
-	Point sum{0, 0};
+	Point move{0, 0};
 	for(const auto& dis : displacements) {
 		Point d = p - dis.p;
 		d *= sqrtf(1 + dis.r*dis.r/ (d*d) );
-		sum += dis.p + d;
+		move += dis.p + d - p;
 	}
-	sum /= static_cast<float>(displacements.size());
-	p = sum;
+	p += move;
 	return p;
 }
 
