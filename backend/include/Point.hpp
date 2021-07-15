@@ -91,7 +91,7 @@ inline float distance2(const Point& a, const Point& b) {
 	return dx*dx + dy*dy;
 }
 
-struct Displacement {
+struct __attribute__((packed)) Displacement {
 	Point p;
 	float r;
 };
