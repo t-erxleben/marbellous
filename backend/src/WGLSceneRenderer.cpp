@@ -160,9 +160,15 @@ void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 	// set draw mode
 	glUniform1i(drawColorLoc, drawColor);
 	
-	const auto& dis = scene.getDisplacement();
-	glUniform1f(locDisR2, dis.r*dis.r);
-	glUniform2f(locDisP, dis.p.x, dis.p.y);
+	const auto& diss = scene.getDisplacements(); // TODO
+	if(diss.empty()) {
+		glUniform1f(locDisR2, 0);
+		glUniform2f(locDisP, 0, 0);
+	} else {
+		const auto& dis = diss[0];
+		glUniform1f(locDisR2, dis.r*dis.r);
+		glUniform2f(locDisP, dis.p.x, dis.p.y);
+	}
 	if(!drawColor) glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 

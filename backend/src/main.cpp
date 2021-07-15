@@ -60,7 +60,7 @@ void sprinkle(int amt, C& coord, R& radius)
 
 		scene->applyDisplacement();
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
-		scene->setDisplacement({p.x,p.y}, r);
+		scene->addDisplacement({p.x,p.y}, r);
 
 		uint8_t c[4];
 		glReadPixels((p.x+1.f)*dropRes/2, (p.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
@@ -152,7 +152,7 @@ extern "C"
 
 		scene->applyDisplacement();
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
-		scene->setDisplacement({x,y}, r);
+		scene->addDisplacement({x,y}, r);
 
         sceneRenderer->drawScene(*scene);
 
@@ -208,7 +208,7 @@ extern "C"
         checkSetup(-1);
         checkState(true, -1);
 
-		scene->setDisplacement(scene->getDisplacement().p, newRadius);
+		scene->setDisplacementRadius(newRadius);
         sceneRenderer->drawScene(*scene);
     
         return 0;
