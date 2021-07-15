@@ -169,10 +169,23 @@ extern "C"
 
 	void EMSCRIPTEN_KEEPALIVE addDrops(int count, DropData drops[])
 	{
-		printf("Amount of drops: %i\n", count);
+		checkSetup();
+		checkState(true, );
+
+		auto dropRes = WGLContext::getContext()->getDropRes();
+
+		scene->applyDisplacement();
+		sceneRenderer->drawScene(*scene);
+
+		uint8_t c[4];
 		for(int i = 0; i < count; ++i) {
 			DropData& drop = drops[i];
-			printf("\t(%f|%f): %f in color %i\n", drop.x, drop.y, drop.r, static_cast<int>(drop.colorId));
+			scene->addDisplacement({drop.x,drop.y}, std::max(Polygon::MIN_R, drop.r));
+			GLuint color = static_cast<GLuint>(drop.colorId);
+			glReadPixels((drop.x+1.f)*dropRes/2, (drop.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
+			const auto& [cr, cg, cb] = (*Options::getInstance()->getActivePalette())[color].getRGB();
+			if(cr == c[0] && cg == c[1] && cb == c[2]) { continue; }
+			scene->addPolygon({{drop.x,drop.y}, Polygon::MIN_R, color});
 		}
 	}
 

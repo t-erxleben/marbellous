@@ -796,8 +796,8 @@ var rake_dropper = {
 		tool.ctx.strokeStyle = 'black'
 		backend.addDrops(count, new Int8Array(data.buffer))
 
-		/* dropper.active = true
-		window.requestAnimationFrame(dropper.drop)*/
+		dropper.active = true
+		window.requestAnimationFrame(dropper.drop)
 	},
 	up: function() {
 		dropper.time = null;

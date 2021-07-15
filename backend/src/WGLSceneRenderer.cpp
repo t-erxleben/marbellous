@@ -40,8 +40,8 @@ WGLSceneRenderer::WGLSceneRenderer()
     // lookup uniform location
     colorLoc = glGetUniformLocation(shaderProgram, "c");
 	drawColorLoc = glGetUniformLocation(shaderProgram, "drawColor");
-	locDisR2  = glGetUniformLocation(shaderProgram, "disR2");
-	locDisP   = glGetUniformLocation(shaderProgram, "disP");
+	locDis   =    glGetUniformLocation(shaderProgram, "dis");
+	locDisCount = glGetUniformLocation(shaderProgram, "count");
 
     glGenFramebuffers(1, &frameBuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
@@ -183,14 +183,12 @@ void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 	// set draw mode
 	glUniform1i(drawColorLoc, drawColor);
 	
-	const auto& diss = scene.getDisplacements(); // TODO
+	const auto& diss = scene.getDisplacements();
 	if(diss.empty()) {
-		glUniform1f(locDisR2, 0);
-		glUniform2f(locDisP, 0, 0);
+		glUniform1i(locDisCount, 0);
 	} else {
-		const auto& dis = diss[0];
-		glUniform1f(locDisR2, dis.r*dis.r);
-		glUniform2f(locDisP, dis.p.x, dis.p.y);
+		glUniform3fv(locDis, diss.size(), reinterpret_cast<const float*>(diss.data()));
+		glUniform1i(locDisCount, diss.size());
 	}
 	if(!drawColor) glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
