@@ -14,15 +14,12 @@ private:
     std::vector<Polygon> polygons; ///<Internal vector to store all polygons
     size_t vertCount;
 	unsigned generation = 0; ///< generation of polygons, needed to reduce buffer updates on GPU
-	struct {
-		Point p;
-		float r;
-	} displacement;
+	std::vector<Displacement> displacements;
 
 public:
 
-	const auto& getDisplacement() const {
-		return displacement;
+	const auto& getDisplacements() const {
+		return displacements;
 	}
 
 	unsigned getGeneration() const {
@@ -112,8 +109,10 @@ public:
 	}
 
 	void applyDisplacement() { ///< stores current state, advance generation
+		if(displacements.empty()) { return; }
+
 		for(auto& p : *this) {
-			p.displace(displacement.p, displacement.r);
+			p.displace(displacements);
 		}
 
 		// remove polygons with less then 3 vertices
@@ -123,12 +122,17 @@ public:
 			}),
 			end());
 
-		displacement.r = 0;
+		displacements.clear();
 		++generation;
 	}
 
-	void setDisplacement(Point p, float newRadius) {
-		displacement.p = p;
-		displacement.r = newRadius;
+	void addDisplacement(Point p, float newRadius) {
+		displacements.push_back({p, newRadius});
+	}
+
+	void setDisplacementRadius(float rad) {
+		for(auto& dis : displacements) {
+			dis.r = rad;
+		}
 	}
 };
