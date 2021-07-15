@@ -80,6 +80,13 @@ void sprinkle(int amt, C& coord, R& radius)
 Interface to front end:
 --------------------------------------------*/
 
+struct DropData {
+	float x;
+	float y;
+	float r;
+	float colorId;
+};
+
 extern "C"
 {
     void EMSCRIPTEN_KEEPALIVE initBackend(const char canvasID[], size_t dropRes, size_t rakeRes)
@@ -159,6 +166,15 @@ extern "C"
         return handle;
     }
 
+	void EMSCRIPTEN_KEEPALIVE addDrops(int count, DropData drops[])
+	{
+		printf("Amount of drops: %i\n", count);
+		for(int i = 0; i < count; ++i) {
+			DropData& drop = drops[i];
+			printf("\t(%f|%f): %f in color %i\n", drop.x, drop.y, drop.r, static_cast<int>(drop.colorId));
+		}
+	}
+
 	void EMSCRIPTEN_KEEPALIVE redraw()
 	{
 		checkSetup();
@@ -208,17 +224,6 @@ extern "C"
 		sceneRenderer->drawScene(*scene);
 		return 0;
 	}
-
-	/// create drops in grid pattern
-	/**
-	 * \param x,y handle position on canvas
-	 * \param colorId of color of drops
-	 * \param w,h width and height of one pattern cell
-	 * \param of offset betwen two columns of the pattern
-	 */
-	void EMSCRIPTEN_KEEPALIVE addGridDrops(float x, float y,
-			float w, float h, float of, unsigned colorId)
-	{}
 
     char *EMSCRIPTEN_KEEPALIVE getImage()
     {
