@@ -842,21 +842,20 @@ var rake_dropper = {
 		const dim = {w: rake_dropper.config.w / 50, h: rake_dropper.config.h / 50,
 			of: rake_dropper.config.of / 50}
 		const max_w = Math.ceil(2/dim.w)
-		const max_h = Math.ceil(2/dim.h)
+		const max_h = Math.ceil(2/dim.h) + 2 // bonus row top and bottom
 		const max_count =  max_w * max_h 
 		console.log(dim, max_w, max_h, max_count)
 		console.log('max_count', max_count)
-		if (max_count > 100) { console.error('Max count exceeds 100'); return }
 		let count = 0
 		const data = new Float32Array(max_count * 4)
 		const space = {
 			l: Math.floor(p.x / dim.w),
 			r: Math.floor((2 - p.x) / dim.w),
-			t: Math.ceil(p.y / dim.h - dim.of/dim.h),
-			b: Math.floor((2 - p.y) / dim.h)
+			t: Math.ceil(p.y / dim.h),
+			b: Math.floor((2 - p.y) / dim.h + dim.of/dim.h)
 		}
-		console.log(`tada: ${p.y / dim.of}`)
-		console.log(`t: ${p.y/dim.h}, b: ${(2-p.x)/dim.h}`)
+		console.log(`tada: ${dim.of/dim.h}`)
+		console.log(`t: ${p.y/dim.h - dim.of/dim.h}, b: ${(2-p.x)/dim.h + dim.of/dim.h}`)
 		console.log(space)
 		console.log(`dimw: ${dim.w}, px: ${p.x} -> ${dim.w*(-space.l) + p.x}`)
 		tool.ctx.strokeStyle = 'blue'
@@ -876,6 +875,7 @@ var rake_dropper = {
 			}
 		}
 		console.log('count: ', count)
+		if (count > 100) { console.error('Max count exceeds 100'); return }
 		tool.ctx.stroke()
 		tool.ctx.strokeStyle = 'black'
 		backend.addDrops(count, new Int8Array(data.buffer))
