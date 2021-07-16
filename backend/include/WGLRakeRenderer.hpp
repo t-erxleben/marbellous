@@ -28,8 +28,8 @@ class WGLRakeRenderer: private WGLRenderer
                 uniform vec2 stroke;
                 uniform float viscosity;
                 uniform float scaling;
-                uniform float period;
-                uniform float amplitude;
+                //uniform float period;
+                //uniform float amplitude;
                 uniform sampler2D tex;
                 in vec2 texCoord;
                 out vec4 fFragment;
@@ -39,6 +39,15 @@ class WGLRakeRenderer: private WGLRenderer
                     if(abs(x-y) > 0.5)
                         return 1. - abs(x-y);
                     return abs(x-y);
+                }
+
+                // scaled to period length and amplitude
+                float scaled_sin(float x)
+                {
+                    const float pi = 3.1415926535897932384626433832795;
+                    float period = 1.;
+                    float amplitude = 0.1;
+                    return sin(x * 2. * pi * period) * amplitude;
                 }
  
                 void main() {
@@ -56,12 +65,17 @@ class WGLRakeRenderer: private WGLRenderer
                         if(nails[i])
                         {
                             nailPos = float(i) / float(nails.length());
-                            d = distance(texCoord[dim], nailPos);
+                            d = distance(texCoord[dim] - scaled_sin(texCoord[1-dim]), nailPos);
                             shift += stroke * pow(viscosity, scaling * d);
                         }
                     }
 
+                    // linear origin position
                     vec2 orig = texCoord - shift;
+                    
+                    // correct for waviness of lookup point
+                    orig[dim] = orig[dim] + scaled_sin(orig[1-dim]) - scaled_sin(texCoord[1-dim]);
+
 					fFragment = texture(tex, orig);
                 }
             )=="};
