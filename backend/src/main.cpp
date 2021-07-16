@@ -38,15 +38,19 @@ extern "C" {
 	int EMSCRIPTEN_KEEPALIVE addDrop(float,float,float,unsigned);
 	int EMSCRIPTEN_KEEPALIVE finishDrop(int); }
 
+unsigned getRandomColor() {
+	static constexpr unsigned int colorRoom = 10 * 9 * 8 * 7 * 6 * 5;
+	static std::mt19937 rng(std::random_device{}());
+	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
+	return color(rng) % Options::getInstance()->getActivePalette()->getSize();
+}
 template<typename C, typename R>
 void sprinkle(int amt, C& coord, R& radius)
 {
 	checkSetup();
 	checkState(true,);
 
-	static constexpr unsigned int colorRoom = 10 * 9 * 8 * 7 * 6 * 5;
 	static std::mt19937 rng(std::random_device{}());
-	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
 
 	auto dropRes = WGLContext::getContext()->getDropRes();
 
@@ -55,8 +59,7 @@ void sprinkle(int amt, C& coord, R& radius)
 	for(int i = 0; i < amt; ++i) {
 		Point p = coord(rng);
 		float r = radius(rng);
-		GLuint col = static_cast<GLuint>(color(rng)
-				% Options::getInstance()->getActivePalette()->getSize());
+		GLuint col = static_cast<GLuint>(getRandomColor());
 
 		scene->applyDisplacement();
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
@@ -180,7 +183,9 @@ extern "C"
 		for(int i = 0; i < count; ++i) {
 			DropData& drop = drops[i];
 			scene->addDisplacement({drop.x,drop.y}, std::max(Polygon::MIN_R, drop.r));
-			GLuint color = static_cast<GLuint>(drop.colorId);
+			GLuint color = drop.colorId >= 0
+				? static_cast<GLuint>(drop.colorId)
+				: getRandomColor();
 			glReadPixels((drop.x+1.f)*dropRes/2, (drop.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
 			const auto& [cr, cg, cb] = (*Options::getInstance()->getActivePalette())[color].getRGB();
 			if(cr == c[0] && cg == c[1] && cb == c[2]) { continue; }

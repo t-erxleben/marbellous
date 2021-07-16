@@ -8,9 +8,11 @@ window.Storage =  class Storage {
 		const store = window.localStorage;
 		if(store.getItem('store-active'))	{
 			this.fetch = function(id) {
+				console.log('fetch: ', id, store.getItem(id))
 				return store.getItem(id)
 			}
 			this.store = function(id, value) {
+				console.log('store: ', id, value)
 				inputs[id] = value
 				store.setItem(id, value)
 			}
@@ -535,6 +537,39 @@ function DomInit(){
 		})
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}})
 	}
+	const sidebar_fn = function(obj, key, config, value){
+		const id ="sidebar-colorgrid-" + config
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		obj[key] = int(el.value || value)	
+		el.addEventListener('change', (ev)=> {
+			if(el.validity.valid) {
+				try {
+					console.log(el.value)
+					obj[key] = int(el.value || value)
+					storage.store(id, el.value)
+				} catch(e) { console.error(e) }
+			}
+			console.log(rake_dropper.config)
+		})
+		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur()}})
+	}
+	sidebar_fn(rake_dropper.config, 'w',  "width",  "30")
+	sidebar_fn(rake_dropper.config, 'h',  "height", "30")
+	sidebar_fn(rake_dropper.config, 'of', "offset", "10")
+	{
+		const id ="sidebar-colorgrid-random_color"
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+
+		el.checked = el.value === 'true'
+		rake_dropper.config.random_color = el.checked
+		el.addEventListener('change', (ev) => {
+			rake_dropper.config.random_color = el.checked
+			storage.store(id, el.checked)
+		})
+	}
+
 	{	const id = 'sidebar-sprinkler-frequence'
 		const el = document.getElementById(id)
 		fetchAndSet(el, id)
@@ -544,9 +579,7 @@ function DomInit(){
 				try {
 					sparkle_dropper.rate = 1000. / int(el.value)
 					storage.store(id, el.value)
-				}	catch(e) {
-					// TODO: error handling
-				}
+				}	catch(e) { /* TODO: error handling */ }
 			}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur();}})
@@ -724,9 +757,9 @@ var rake_dropper = {
 	canvas: undefined,
 	ctx: undefined,
 	config: {
-		w: 11,
-		h: 11,
-		of: 0,
+		w: 30,
+		h: 30,
+		of: 10,
 	},
 	init: function() {
 		if (!rake_dropper.canvas && !rake_dropper.ctx) {
@@ -804,20 +837,21 @@ var rake_dropper = {
 		console.log(`dimw: ${dim.w}, px: ${p.x} -> ${dim.w*(-space.l) + p.x}`)
 		tool.ctx.strokeStyle = 'blue'
 		tool.ctx.beginPath()
+		console.log('config', rake_dropper.config)
 		for(let i = -space.l; i <= space.r; i += 1) {
 			for(let j = -space.t; j <= space.b; j += 1) {
 				const ex = ((i*dim.w + p.x))/2.*w
 				const ey = (j*dim.h + p.y + Math.abs(i % 2) * dim.of)/2.*h
-				console.log(ex,ey)
 				tool.ctx.moveTo(ex,ey)
 				tool.ctx.ellipse(ex, ey, 7, 7, 0, 2*Math.PI, false)
 				data[count*4] = (i * dim.w + p.x) - 1
 				data[count*4 + 1] = 1 - (j * dim.h + p.y + Math.abs(i%2) * dim.of)
 				data[count*4 + 2] = 0
-				data[count*4 + 3] = 0
+				data[count*4 + 3] = rake_dropper.config.random_color ? -1 : color
 				count += 1
 			}
 		}
+		console.log('count: ', count)
 		tool.ctx.stroke()
 		tool.ctx.strokeStyle = 'black'
 		backend.addDrops(count, new Int8Array(data.buffer))

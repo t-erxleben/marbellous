@@ -169,6 +169,56 @@
 					</table>
 				</div>
 		</li>
+		<!-- color grid -->
+		<li>
+			<input type="radio" name="sidebar" id="sidebar-colorgrid">
+			<label for="sidebar-colorgrid">Colorgrid</label>
+			<div>
+				<menu style="width:75%;list-style:none;margin-left:-40px">
+					<li class="form_group field">
+						<input	class="form_field"
+								placeholder="cell width"
+								title="<cell width in % canvas size>"
+								id="sidebar-colorgrid-width"
+								type="number" min="1" step="1" value="">
+						<label for="sidebar-colorgrid-width"
+								title="Determines the width of an grid cell.\nHorizontel space between to columns"
+								class="form_label">
+							cell width
+							</label>
+					</li>
+					<li class="form_group field">
+						<input	class="form_field"
+								placeholder="cell height"
+								title="<cell height in % canvas size>"
+								id="sidebar-colorgrid-height"
+								type="number" min="1">
+						<label class="form_label"
+							   title="Determines the verticaal space between grid cells in the same column.">
+							cell height
+						</label>
+					</li>
+					<li class="form_group field">
+						<input	class="form_field"
+								placeholder="cell offset"
+								title="<cell offset in % canvas size>"
+								id="sidebar-colorgrid-offset"
+								type="number" step="1" value="">
+						<label for="sidebar-colorgrid-offset"
+							   title="Shift between two adjenten columns.\nApplied alternating positive and negative"
+							   class="form_label">
+							cell offset
+						</label>
+					</li>
+					<li>
+						<label class="switch" title="Colorgrid drops are in random color." style="margin-top:20px">
+							<input id="sidebar-colorgrid-random_color" class="slider" type="checkbox">
+							<span class="slider"></span>
+						</label>
+					</li>
+				</menu>
+			</div>
+		</li>
 		<!-- sprinkler -->
 		<li>
 			<input type="radio" name="sidebar" id="sidebar-sprinkler"/>
