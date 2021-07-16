@@ -3,6 +3,7 @@ import * as png from 'fast-png'
 
 const int = parseInt;
 var inputs = {}
+var dirty = false;
 window.Storage =  class Storage {
 	constructor() {
 		const store = window.localStorage;
@@ -17,7 +18,6 @@ window.Storage =  class Storage {
 				store.setItem(id, value)
 			}
 			this.backup = function() {
-				inputs = {}
 				for(var i = 0; i < store.length; i++) {
 					inputs[store.key(i)] = store.getItem(store.key(i))
 				}
@@ -25,8 +25,9 @@ window.Storage =  class Storage {
 			Object.keys(inputs).forEach(function(key){
 				this.store(key, inputs[key])
 			}, this)
+			inputs = {}
 		} else {
-			this.fetch = function() { return inputs[id] }
+			this.fetch = function(id) { return inputs[id] }
 			this.store = function(id, value) {
 				inputs[id] = value
 			}
@@ -246,6 +247,7 @@ function downloadCanvas(el) {
 	download_side.href = url;
 	download_side.download = "marebllous-image.png";
 	download_side.click();
+	dirty = false
 	el.hidden = true;
 }
 
@@ -267,23 +269,29 @@ function handleClick(el) {
 						switchState('rake', 'draw');
 					}
 				}
+				dirty = false
 				break;
 			case 'color-dropper':
+				dirty = true
 				tool.tool[state] = dropper;
 				break;
 			case 'color-rake':
+				dirty = true
 				tool.tool[state] = rake_dropper;
 				sidebar.options.colorgrid.checked = true
 				break;
 			case 'color-sprinkler':
+				dirty = true
 				tool.tool[state] = sparkle_dropper;
 				sidebar.btn.checked = true
 				sidebar.options.sprinkler.checked = true
 				break;
 			case 'rake-movement-linear':
+				dirty = true
 				rake.config.line = rake.straight;
 				break;
 			case 'rake-movement-wave':
+				dirty = true
 				rake.config.line = rake.curve;
 				rake.config.magnitude = 50;
 				rake.config.periode = 200;
@@ -364,6 +372,13 @@ function fetchAndSet(element, id) {
 
 window.storage = null
 window.onload = function() {
+    window.addEventListener("beforeunload", function (e) {
+		if(!dirty && (window.localStorage.getItem('store-active') || Object.keys(inputs).length != 0))
+			return undefined
+
+		e.preventDefault()
+        return e.returnValue = 'You have changed the picture since the last download or changed settings without stoering them persistent. If you now leave the side this will be lost.\nDo you realy want to leave this side?';
+    })
 	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
 		div.style.maxHeight = div.scrollHeight + 3;
 	});
