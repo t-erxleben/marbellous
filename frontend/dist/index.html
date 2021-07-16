@@ -15,6 +15,7 @@
 					window.localStorage.setItem('store-active', '1');
 				} else {
 					if(window.confirm('When you disable browser storage all stored options will be cleared.\nThere is no way to undo this!')) {
+						window.storage.backup()
 						window.localStorage.clear();
 					} else {
 						switchStore.input.checked = true
@@ -116,23 +117,35 @@
 									<option value="pallet-2">light</option>
 									<option value="pallet-3">funky</option>
 								</select></td>						</tr><tr>
-							<td>Colors:</td>
+									<td>Colors</td><td></td><td>Ratio</td>
 						</tr><tr class ="sub-row">
 							<td><label for="sidebar-pallet-color-0">A:</label></td>
 							<td><input id="sidebar-pallet-color-0" type="color"
 								value="#3E1404"></td>
+							<td><input class="form_field"
+									   id="sidebar-pallet-ratio-0" type="number" value="1"
+									   min="0" step="1" max="999" size="2"></td>
 						</tr><tr class="sub-row">
 							<td><label for="sidebar-pallet-color-1">B:</label></td>
 							<td><input id="sidebar-pallet-color-1" type="color"
 								value="#6A2B05"></td>
+							<td><input class="form_field"
+									   id="sidebar-pallet-ratio-1" type="number" value="1"
+									   min="0" step="1" max="999" size="2"></td>
 						</tr><tr class="sub-row">
 							<td><label for="sidebar-pallet-color-2">C:</label></td>
 							<td><input id="sidebar-pallet-color-2" type="color"
 								value="#964315"></td>
+							<td><input class="form_field"
+									   id="sidebar-pallet-ratio-2" type="number" value="1"
+									   min="0" step="1" max="999" size="2"></td>
 						</tr><tr class="sub-row">
 							<td><label for="sidebar-pallet-color-3">D:</label></td>
 							<td><input id="sidebar-pallet-color-3" type="color"
 								   value="#BB6B24"></td>
+							<td><input class="form_field"
+									   id="sidebar-pallet-ratio-3" type="number" value="1"
+									   min="0" step="1" max="999" size="2"></td>
 						</tr><tr>
 							<td><label for='sidebar-pallet-background'>Background:</label></td>
 							<td><input id="sidebar-pallet-background" type="color"
@@ -140,6 +153,63 @@
 						</tr>
 					</table>
 				</div>
+		</li>
+		<!-- color grid -->
+		<li>
+			<input type="radio" name="sidebar" id="sidebar-colorgrid">
+			<label for="sidebar-colorgrid">Colorgrid</label>
+			<div>
+				<menu style="width:75%;list-style:none;margin-left:-40px">
+					<li class="form_group field">
+						<input	class="form_field"
+								placeholder="cell width"
+								title="<cell width in % canvas size>"
+								id="sidebar-colorgrid-width"
+								type="number" min="1" step="1" value="">
+						<label for="sidebar-colorgrid-width"
+								title="Determines the width of an grid cell.\nHorizontel space between to columns"
+								class="form_label">
+							cell width
+							</label>
+					</li>
+					<li class="form_group field">
+						<input	class="form_field"
+								placeholder="cell height"
+								title="<cell height in % canvas size>"
+								id="sidebar-colorgrid-height"
+								type="number" min="1">
+						<label class="form_label"
+							   title="Determines the verticaal space between grid cells in the same column.">
+							cell height
+						</label>
+					</li>
+					<li class="form_group field">
+						<input	class="form_field"
+								placeholder="cell offset"
+								title="<cell offset in % canvas size>"
+								id="sidebar-colorgrid-offset"
+								type="number" step="1" value="">
+						<label for="sidebar-colorgrid-offset"
+							   title="Shift between two adjenten columns.\nApplied alternating positive and negative"
+							   class="form_label">
+							cell offset
+						</label>
+					</li>
+					<li>
+						<table style="margin-top:20px">
+							<tr>
+								<td>
+						<label class="switch" title="Colorgrid drops are in random color.">
+							<input id="sidebar-colorgrid-random_color" class="slider" type="checkbox">
+							<span class="slider"></span>
+						</label>
+						</td>
+						<td><p>random color for each drop</p></td>
+						</tr>
+						</table>
+					</li>
+				</menu>
+			</div>
 		</li>
 		<!-- sprinkler -->
 		<li>
@@ -256,6 +326,12 @@
 			<li class="draw state"><input type="radio" id="color-sprinkler" name="menu">
 				<label for="color-sprinkler" title="Apply color in random pattern. Hold for more drops.">
 					<img src="icons/sparkle-solid.svg" alt="color sprinkler">
+				</label>
+			</li>
+
+			<li class="draw state"><input type="radio" id="color-rake" name="menu">
+				<label for="color-rake" title="Apply color in regular pattern. Hold for larger drops.">
+					<img src="icons/regular-rake-solid.svg">
 				</label>
 			</li>
 

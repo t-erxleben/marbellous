@@ -45,9 +45,7 @@ void sprinkle(int amt, C& coord, R& radius)
 	checkSetup();
 	checkState(true,);
 
-	static constexpr unsigned int colorRoom = 10 * 9 * 8 * 7 * 6 * 5;
 	static std::mt19937 rng(std::random_device{}());
-	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
 
 	auto dropRes = WGLContext::getContext()->getDropRes();
 
@@ -56,12 +54,11 @@ void sprinkle(int amt, C& coord, R& radius)
 	for(int i = 0; i < amt; ++i) {
 		Point p = coord(rng);
 		float r = radius(rng);
-		GLuint col = static_cast<GLuint>(color(rng)
-				% Options::getInstance()->getActivePalette()->getSize());
+		GLuint col = static_cast<GLuint>(Options::getInstance()->getActivePalette()->getRandomColorId());
 
 		scene->applyDisplacement();
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
-		scene->setDisplacement({p.x,p.y}, r);
+		scene->addDisplacement({p.x,p.y}, r);
 
 		uint8_t c[4];
 		glReadPixels((p.x+1.f)*dropRes/2, (p.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
@@ -80,6 +77,13 @@ void sprinkle(int amt, C& coord, R& radius)
 /*------------------------------------------
 Interface to front end:
 --------------------------------------------*/
+
+struct DropData {
+	float x;
+	float y;
+	float r;
+	float colorId;
+};
 
 extern "C"
 {
@@ -110,9 +114,18 @@ extern "C"
     {
         Palette* p = Options::getInstance()->getActivePalette();
         if(p->getSize() <= colorNumber) return -1;
-        (*p)[colorNumber] = Color{color};
+
+		p->setColorAt(colorNumber, Color(color));
         return 0;        
     }
+
+	int EMSCRIPTEN_KEEPALIVE setColorRatioAt(size_t const colorNumber, unsigned const ratio)
+	{
+		Palette& p = *Options::getInstance()->getActivePalette();
+		if(p.getSize() <= colorNumber) { return -1; }
+		p.setRatioAt(colorNumber, ratio);
+		return 0;
+	}
 
     int EMSCRIPTEN_KEEPALIVE setPaletteColors(unsigned int const c0, unsigned int const c1, unsigned int const c2, unsigned int const c3)
     {
@@ -146,7 +159,7 @@ extern "C"
 
 		scene->applyDisplacement();
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
-		scene->setDisplacement({x,y}, r);
+		scene->addDisplacement({x,y}, r);
 
         sceneRenderer->drawScene(*scene);
 
@@ -159,6 +172,30 @@ extern "C"
         int handle = scene->addPolygon(Polygon{Point{x,y}, Polygon::MIN_R, color});
         return handle;
     }
+
+	void EMSCRIPTEN_KEEPALIVE addDrops(int count, DropData drops[])
+	{
+		checkSetup();
+		checkState(true, );
+
+		auto dropRes = WGLContext::getContext()->getDropRes();
+
+		scene->applyDisplacement();
+		sceneRenderer->drawScene(*scene);
+
+		uint8_t c[4];
+		for(int i = 0; i < count; ++i) {
+			DropData& drop = drops[i];
+			scene->addDisplacement({drop.x,drop.y}, std::max(Polygon::MIN_R, drop.r));
+			GLuint color = drop.colorId >= 0
+				? static_cast<GLuint>(drop.colorId)
+				: Options::getInstance()->getActivePalette()->getRandomColorId();
+			glReadPixels((drop.x+1.f)*dropRes/2, (drop.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
+			const auto& [cr, cg, cb] = (*Options::getInstance()->getActivePalette())[color].getRGB();
+			if(cr == c[0] && cg == c[1] && cb == c[2]) { continue; }
+			scene->addPolygon({{drop.x,drop.y}, Polygon::MIN_R, color});
+		}
+	}
 
 	void EMSCRIPTEN_KEEPALIVE redraw()
 	{
@@ -175,24 +212,19 @@ extern "C"
         }
 	}
 
-    int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius) ///< resize drop of given ID (return val of addDrop(...))
+    int EMSCRIPTEN_KEEPALIVE resizeDrops(float const newRadius) ///< resize all drops
     {
         checkSetup(-1);
         checkState(true, -1);
 
-		if(dropID >= 0 && dropID != scene->getPolygonCount() - 1) {
-			fprintf(stderr, "Can only resize the last added drop!\n\tgot: %i, expected: %lu",
-					dropID,
-					scene->getPolygonCount() - 1);
-			return -1;
-		}
-		scene->setDisplacement(scene->getDisplacement().p, newRadius);
+		scene->setDisplacementRadius(newRadius);
         sceneRenderer->drawScene(*scene);
     
         return 0;
     }
 
-	int EMSCRIPTEN_KEEPALIVE finishDrop(int dropID)
+	/// finalize all current growing drops
+	int EMSCRIPTEN_KEEPALIVE finishDrops()
 	{
 		checkSetup(-1);
         checkState(true, -1);

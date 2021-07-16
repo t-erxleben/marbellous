@@ -19,15 +19,22 @@ class WGLSceneRenderer: private WGLRenderer
                 in vec2 position;
                 in uint colorCode;
 				in uint z;
-				uniform float disR2;
-				uniform vec2 disP;
+				uniform vec3[100] dis;
+				uniform int count;
                 flat out uint colID;
                 void main(){
-					vec2 d = position.xy - disP;
-					float s = sqrt(1. + disR2/dot(d,d));
-					d = disP + d*s;
+					vec2 pos = position.xy;
+					if( count > 0 ) {
+						pos = vec2(0, 0);
+						for(int i = 0; i < count; ++i) {
+							vec2 d = position.xy - dis[i].xy;
+							float s = sqrt(1. + dis[i].z*dis[i].z/dot(d,d));
+							pos += dis[i].xy + d*s - position.xy;
+						}
+						pos += position.xy;
+					}
 					// depth buffer has a resolution from >=16bit
-                    gl_Position = vec4(d, float(z) / 65530.f, 1.0);
+                    gl_Position = vec4(pos , float(z) / 65530.f, 1.0);
                     colID = colorCode;
                 }
             )=="};
@@ -36,13 +43,13 @@ class WGLSceneRenderer: private WGLRenderer
             R"==(#version 300 es
                 precision mediump float;
                 flat in uint colID;
-                uniform bool drawColor;
+                uniform int drawColor;
                 uniform vec3 c[10];
                 out vec4 fFragment;
                 
                 void main() {
                     vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
-                    if(drawColor)
+                    if(drawColor != 0)
                     {
                         if(int(colID) < c.length())
                         {
@@ -70,8 +77,8 @@ class WGLSceneRenderer: private WGLRenderer
 
         GLint colorLoc;
         GLint drawColorLoc;
-		GLint locDisR2;
-		GLint locDisP;
+		GLint locDis;
+		GLint locDisCount;
 
 		GLuint frameBuffer;
 		GLuint frameTexture;

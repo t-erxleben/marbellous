@@ -2,23 +2,32 @@ import * as parser from './rake_syntax.pegjs'
 import * as png from 'fast-png'
 
 const int = parseInt;
-const inputs = {}
+var inputs = {}
+var dirty = false;
 window.Storage =  class Storage {
 	constructor() {
 		const store = window.localStorage;
 		if(store.getItem('store-active'))	{
 			this.fetch = function(id) {
+				console.log('fetch: ', id, store.getItem(id))
 				return store.getItem(id)
 			}
 			this.store = function(id, value) {
+				console.log('store: ', id, value)
 				inputs[id] = value
 				store.setItem(id, value)
+			}
+			this.backup = function() {
+				for(var i = 0; i < store.length; i++) {
+					inputs[store.key(i)] = store.getItem(store.key(i))
+				}
 			}
 			Object.keys(inputs).forEach(function(key){
 				this.store(key, inputs[key])
 			}, this)
+			inputs = {}
 		} else {
-			this.fetch = function() { return null; }
+			this.fetch = function(id) { return inputs[id] }
 			this.store = function(id, value) {
 				inputs[id] = value
 			}
@@ -90,20 +99,24 @@ window.Module = {
 		backend.setBGColor = Module.cwrap('setBGColor',
 			'void', ['number']);
 		backend.addDrop = Module.cwrap('addDrop',
-			'number', ['number', 'number', 'number', 'number']);
-		backend.resizeDrop = Module.cwrap('resizeDrop',
-			'number', ['number', 'number']);
+			'void', ['number', 'number', 'number', 'number']);
+		backend.addDrops = Module.cwrap('addDrops',
+			'void', ['number', 'array']);
+		backend.resizeDrops = Module.cwrap('resizeDrops',
+			'number', ['number']);
 		backend.setColorAt = Module.cwrap('setColorAt',
 			'number', ['number', 'number']);
+		backend.setColorRatioAt = Module.cwrap('setColorRatioAt',
+			'number', ['number', 'number'])
 		backend.redraw = Module.cwrap('redraw',
 			'void', []);
 		backend.startRaking = Module.cwrap('startRaking', 'void', [])
 		backend.startDropping = Module.cwrap('startDropping', 'void', [])
 		backend.rakeLinear = Module.cwrap('rakeLinear',
 			'boolean', ['number', 'number', 'array'])
-		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
 		backend.sprinklerGlobal = Module.cwrap('sprinkleGlobal', 'void', ['number', 'number', 'number'])
 		backend.sprinklerLocal = Module.cwrap('sprinkleLocal', 'void', ['number', 'number', 'number', 'number', 'number', 'number'])
+		backend.finishDrops = Module.cwrap('finishDrops', 'number', [])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.initBackend = Module.cwrap('initBackend', 'void', ['string', 'number', 'number'])
 		backend.fn_bind = true;
@@ -118,12 +131,13 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
-	backend.initBackend('#image', 2000, 2000)
+	backend.initBackend('#image', 1080, 1080)
 	backend.setBGColor(color2int(pallets[pallets.active].background));
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
 	pallets[pallets.active].colors.forEach(function(x,i) {
-		backend.setColorAt(i, color2int(x))
+		backend.setColorAt(i, color2int(x.color))
+		backend.setColorRatioAt(i, int(x.ratio))
 	})
 	color = 0
 	backend.redraw();
@@ -138,7 +152,7 @@ function intersectRect(r1, r2) {
 }
 function updatePallet() {
 	pallets.nodes.forEach(function(x,i){
-		x.style.background = pallets[pallets.active].colors[i]
+		x.style.background = pallets[pallets.active].colors[i].color
 	})
 }
 var sidebar = {
@@ -233,6 +247,7 @@ function downloadCanvas(el) {
 	download_side.href = url;
 	download_side.download = "marebllous-image.png";
 	download_side.click();
+	dirty = false
 	el.hidden = true;
 }
 
@@ -254,41 +269,29 @@ function handleClick(el) {
 						switchState('rake', 'draw');
 					}
 				}
+				dirty = false
 				break;
 			case 'color-dropper':
+				dirty = true
 				tool.tool[state] = dropper;
 				break;
 			case 'color-rake':
+				dirty = true
 				tool.tool[state] = rake_dropper;
-				break;
-			case 'color-rake-displaced':
-				rake_dropper.config = {
-					w: 150,
-					h: 150,
-					of: 75,
-				};
-				break;
-			case 'color-rake-square':
-				rake_dropper.config = {
-					w: 150,
-					h: 150,
-					of: 0,
-				};
-				break;
-			case 'color-rake-custom':
-				rake_dropper.config = sidebar.rake_dropper;
-				sidebar.btn.checked = true;
-				/* sidebar.options.rake_dropper.checked = true */
+				sidebar.options.colorgrid.checked = true
 				break;
 			case 'color-sprinkler':
+				dirty = true
 				tool.tool[state] = sparkle_dropper;
 				sidebar.btn.checked = true
 				sidebar.options.sprinkler.checked = true
 				break;
 			case 'rake-movement-linear':
+				dirty = true
 				rake.config.line = rake.straight;
 				break;
 			case 'rake-movement-wave':
+				dirty = true
 				rake.config.line = rake.curve;
 				rake.config.magnitude = 50;
 				rake.config.periode = 200;
@@ -309,7 +312,6 @@ function handleClick(el) {
 				if (cid >= 0) { color = cid }
 		}
 }
-
 
 document.addEventListener("click", function(evnt){
 	var el = evnt.target;
@@ -370,6 +372,13 @@ function fetchAndSet(element, id) {
 
 window.storage = null
 window.onload = function() {
+    window.addEventListener("beforeunload", function (e) {
+		if(!dirty && (window.localStorage.getItem('store-active') || Object.keys(inputs).length != 0))
+			return undefined
+
+		e.preventDefault()
+        return e.returnValue = 'You have changed the picture since the last download or changed settings without stoering them persistent. If you now leave the side this will be lost.\nDo you realy want to leave this side?';
+    })
 	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
 		div.style.maxHeight = div.scrollHeight + 3;
 	});
@@ -411,7 +420,8 @@ function DomInit(){
 	sidebar.options = {
 		rake: document.getElementById('sidebar-rake'),
 		pallet: document.getElementById('sidebar-pallet'),
-		sprinkler: document.getElementById('sidebar-sprinkler')
+		sprinkler: document.getElementById('sidebar-sprinkler'),
+		colorgrid: document.getElementById('sidebar-colorgrid'),
 	};
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
@@ -432,9 +442,11 @@ function DomInit(){
 			
 			pallets.inputs.forEach(function(x,i){
 				if(!colors[i]) {
-					fetchAndSet(x, pallets.active + 'sidebar-pallet-color-' + i.toString())
+					fetchAndSet(x.color, pallets.active + 'sidebar-pallet-color-' + i.toString())
+					fetchAndSet(x.ratio, pallets.active + 'sidebar-pallet-ratio-' + i.toString())
 				} else {
-					x.value = colors[i]
+					x.color.value = colors[i].color
+					x.ratio.value = colors[i].ratio
 				}
 			})
 			if(background == null) { fetchAndSet(pallets.inputs.background, pallets.active + 'sidebar-pallet-background') }
@@ -442,12 +454,14 @@ function DomInit(){
 
 
 			pallets.inputs.forEach(function(x,i) {
-				colors[i] = x.value;
+				colors[i].color = x.color.value;
+				colors[i].ratio = x.ratio.value;
 			});
 			background = pallets.inputs.background.value;
 			pallets[pallets.active] = {colors, background}
 			pallets[pallets.active].colors.forEach(function(x,i){
-				backend.setColorAt(i, color2int(x))
+				backend.setColorAt(i, color2int(x.color))
+				backend.setColorRatioAt(i, int(x.ratio))
 			})
 			backend.setBGColor(color2int(background))
 			backend.redraw();
@@ -479,16 +493,36 @@ function DomInit(){
 		const el = sbc
 		const num = i
 		const iid = 'sidebar-pallet-color-' + num.toString();
+		const riid = 'sidebar-pallet-ratio-' + num.toString()
+		const rel = document.getElementById(riid);
 		const id = function() { return pallets.active + iid }
+		const rid = function() { return pallets.active + riid }
 		fetchAndSet(el, id());
-		pallets[pallets.active].colors[i] = el.value;
-		el.addEventListener("change", (ev)=>{pallets[pallets.active].colors[num] = el.value;
+		fetchAndSet(rel, rid());
+		pallets[pallets.active].colors[i] = {
+			color: el.value,
+			ratio: rel.value
+		}
+		el.addEventListener("change", (ev)=>{
+			pallets[pallets.active].colors[num].color = el.value;
 			storage.store(id(), el.value);
 			backend.setColorAt(num, color2int(el.value));
 			backend.redraw();
 			updatePallet();});
-		pallets.inputs[num] = el;
-		pallets[pallets.active].colors[num] = el.value
+		rel.addEventListener('change', (ev)=>{
+			pallets[pallets.active].colors[num].ratio = rel.value
+			storage.store(rid(), rel.value)
+			backend.setColorRatioAt(num, int(rel.value))
+		})
+		rel.addEventListener('keydown', (ev) => { if(ev.which === 13) { rel.blur() } })
+		pallets.inputs[num] = {
+			color: el,
+			ratio: rel
+		}
+		pallets[pallets.active].colors[num] = {
+			color: el.value,
+			ratio: rel.value
+		}
 		i += 1
 	}
 	
@@ -527,6 +561,39 @@ function DomInit(){
 		})
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}})
 	}
+	const sidebar_fn = function(obj, key, config, value){
+		const id ="sidebar-colorgrid-" + config
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		obj[key] = int(el.value || value)	
+		el.addEventListener('change', (ev)=> {
+			if(el.validity.valid) {
+				try {
+					console.log(el.value)
+					obj[key] = int(el.value || value)
+					storage.store(id, el.value)
+				} catch(e) { console.error(e) }
+			}
+			console.log(rake_dropper.config)
+		})
+		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur()}})
+	}
+	sidebar_fn(rake_dropper.config, 'w',  "width",  "30")
+	sidebar_fn(rake_dropper.config, 'h',  "height", "30")
+	sidebar_fn(rake_dropper.config, 'of', "offset", "10")
+	{
+		const id ="sidebar-colorgrid-random_color"
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+
+		el.checked = el.value === 'true'
+		rake_dropper.config.random_color = el.checked
+		el.addEventListener('change', (ev) => {
+			rake_dropper.config.random_color = el.checked
+			storage.store(id, el.checked)
+		})
+	}
+
 	{	const id = 'sidebar-sprinkler-frequence'
 		const el = document.getElementById(id)
 		fetchAndSet(el, id)
@@ -536,9 +603,7 @@ function DomInit(){
 				try {
 					sparkle_dropper.rate = 1000. / int(el.value)
 					storage.store(id, el.value)
-				}	catch(e) {
-					// TODO: error handling
-				}
+				}	catch(e) { /* TODO: error handling */ }
 			}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur();}})
@@ -611,15 +676,15 @@ var dropper = {
 				if(time - dropper.time < dropper.fnSwitch * dropper.slowF ) {
 					r = (time - dropper.time) * dropper.slope / dropper.slowF
 				}
-				backend.resizeDrop(dropper.circle, r);
+				backend.resizeDrops(r);
 				window.requestAnimationFrame(dropper.drop);
 			} else {
-				backend.finishDrop(dropper.drop);
+				backend.finishDrops();
 			}
 		},
 	down: function(x,y,w,h) {
 		const circle = {x: 2*x/w - 1, y: 1 - 2 * y / h, r: 0.0};
-		dropper.circle = backend.addDrop(circle.x, circle.y, circle.r, color);
+		backend.addDrop(circle.x, circle.y, circle.r, color);
 
 		dropper.active = true;
 		window.requestAnimationFrame(dropper.drop);
@@ -718,7 +783,7 @@ var rake_dropper = {
 	config: {
 		w: 30,
 		h: 30,
-		of: 15,
+		of: 10,
 	},
 	init: function() {
 		if (!rake_dropper.canvas && !rake_dropper.ctx) {
@@ -741,9 +806,9 @@ var rake_dropper = {
 		if (diffs) {
 			rake_dropper.init();
 
-			const w = ctx.canvas.width * this.config.w / 1000;
-			const h = ctx.canvas.height * this.config.h / 1000;
-			const of =(ctx.canvas.height * this.config.of / 1000) % h;
+			const w = ctx.canvas.width * this.config.w / 100;
+			const h = ctx.canvas.height * this.config.h / 100;
+			const of =(ctx.canvas.height * this.config.of / 100) % h;
 			const r = 5;
 			this.size = {x: r, y: r};
 			this.pattern_size = {x: w * 2, y: h};
@@ -771,6 +836,57 @@ var rake_dropper = {
 		ctx.fillRect(-x,-y,w+x,h+y);
 		ctx.setTransform(1,0,0,1,0,0);
 	},
+	down: function(x,y,w,h) {
+		if(dropper.active) { return }
+		const p = {x: x/w*2, y: y/h*2}
+		const dim = {w: rake_dropper.config.w / 50, h: rake_dropper.config.h / 50,
+			of: rake_dropper.config.of / 50}
+		const max_w = Math.ceil(2/dim.w)
+		const max_h = Math.ceil(2/dim.h) + 2 // bonus row top and bottom
+		const max_count =  max_w * max_h 
+		console.log(dim, max_w, max_h, max_count)
+		console.log('max_count', max_count)
+		let count = 0
+		const data = new Float32Array(max_count * 4)
+		const space = {
+			l: Math.floor(p.x / dim.w),
+			r: Math.floor((2 - p.x) / dim.w),
+			t: Math.ceil(p.y / dim.h),
+			b: Math.floor((2 - p.y) / dim.h + dim.of/dim.h)
+		}
+		console.log(`tada: ${dim.of/dim.h}`)
+		console.log(`t: ${p.y/dim.h - dim.of/dim.h}, b: ${(2-p.x)/dim.h + dim.of/dim.h}`)
+		console.log(space)
+		console.log(`dimw: ${dim.w}, px: ${p.x} -> ${dim.w*(-space.l) + p.x}`)
+		tool.ctx.strokeStyle = 'blue'
+		tool.ctx.beginPath()
+		console.log('config', rake_dropper.config)
+		for(let i = -space.l; i <= space.r; i += 1) {
+			for(let j = -space.t; j <= space.b; j += 1) {
+				const ex = ((i*dim.w + p.x))/2.*w
+				const ey = (j*dim.h + p.y + Math.abs(i % 2) * dim.of)/2.*h
+				tool.ctx.moveTo(ex,ey)
+				tool.ctx.ellipse(ex, ey, 7, 7, 0, 2*Math.PI, false)
+				data[count*4] = (i * dim.w + p.x) - 1
+				data[count*4 + 1] = 1 - (j * dim.h + p.y + Math.abs(i%2) * dim.of)
+				data[count*4 + 2] = 0
+				data[count*4 + 3] = rake_dropper.config.random_color ? -1 : color
+				count += 1
+			}
+		}
+		console.log('count: ', count)
+		if (count > 100) { console.error('Max count exceeds 100'); return }
+		tool.ctx.stroke()
+		tool.ctx.strokeStyle = 'black'
+		backend.addDrops(count, new Int8Array(data.buffer))
+
+		dropper.active = true
+		window.requestAnimationFrame(dropper.drop)
+	},
+	up: function() {
+		dropper.time = null;
+		dropper.active = false;
+	}
 };
 
 var rake = {
