@@ -266,6 +266,7 @@ function handleClick(el) {
 				break;
 			case 'color-rake':
 				tool.tool[state] = rake_dropper;
+				sidebar.options.colorgrid.checked = true
 				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
@@ -395,7 +396,8 @@ function DomInit(){
 	sidebar.options = {
 		rake: document.getElementById('sidebar-rake'),
 		pallet: document.getElementById('sidebar-pallet'),
-		sprinkler: document.getElementById('sidebar-sprinkler')
+		sprinkler: document.getElementById('sidebar-sprinkler'),
+		colorgrid: document.getElementById('sidebar-colorgrid'),
 	};
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
