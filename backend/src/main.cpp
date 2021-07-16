@@ -39,12 +39,6 @@ extern "C" {
 	int EMSCRIPTEN_KEEPALIVE addDrop(float,float,float,unsigned);
 	int EMSCRIPTEN_KEEPALIVE finishDrop(int); }
 
-unsigned getRandomColor() {
-	static constexpr unsigned int colorRoom = 10 * 9 * 8 * 7 * 6 * 5;
-	static std::mt19937 rng(std::random_device{}());
-	static std::uniform_int_distribution<int> color(0, colorRoom - 1);
-	return color(rng) % Options::getInstance()->getActivePalette()->getSize();
-}
 template<typename C, typename R>
 void sprinkle(int amt, C& coord, R& radius)
 {
@@ -60,7 +54,7 @@ void sprinkle(int amt, C& coord, R& radius)
 	for(int i = 0; i < amt; ++i) {
 		Point p = coord(rng);
 		float r = radius(rng);
-		GLuint col = static_cast<GLuint>(getRandomColor());
+		GLuint col = static_cast<GLuint>(Options::getInstance()->getActivePalette()->getRandomColorId());
 
 		scene->applyDisplacement();
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
@@ -120,9 +114,18 @@ extern "C"
     {
         Palette* p = Options::getInstance()->getActivePalette();
         if(p->getSize() <= colorNumber) return -1;
-        (*p)[colorNumber] = Color{color};
+
+		p->setColorAt(colorNumber, Color(color));
         return 0;        
     }
+
+	int EMSCRIPTEN_KEEPALIVE setColorRatioAt(size_t const colorNumber, unsigned const ratio)
+	{
+		Palette& p = *Options::getInstance()->getActivePalette();
+		if(p.getSize() <= colorNumber) { return -1; }
+		p.setRatioAt(colorNumber, ratio);
+		return 0;
+	}
 
     int EMSCRIPTEN_KEEPALIVE setPaletteColors(unsigned int const c0, unsigned int const c1, unsigned int const c2, unsigned int const c3)
     {
@@ -186,7 +189,7 @@ extern "C"
 			scene->addDisplacement({drop.x,drop.y}, std::max(Polygon::MIN_R, drop.r));
 			GLuint color = drop.colorId >= 0
 				? static_cast<GLuint>(drop.colorId)
-				: getRandomColor();
+				: Options::getInstance()->getActivePalette()->getRandomColorId();
 			glReadPixels((drop.x+1.f)*dropRes/2, (drop.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
 			const auto& [cr, cg, cb] = (*Options::getInstance()->getActivePalette())[color].getRGB();
 			if(cr == c[0] && cg == c[1] && cb == c[2]) { continue; }
