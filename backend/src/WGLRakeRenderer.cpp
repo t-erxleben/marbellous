@@ -10,6 +10,7 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     // build shader
     setupShaderProgram(vertex_source, rake_fragment_source, rakeShader);
     setupShaderProgram(vertex_source, draw_fragment_source, drawShader);
+    setupShaderProgram(vertex_source, draw_post_proc_fragment_source, postShader);
 
     // set up the one triangle to draw
     glGenBuffers(1, &vbo);
@@ -59,15 +60,14 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     }
 
     // init screenshot fbo
-    GLuint colBuff;
     glGenFramebuffers(1, &fbo_screenshot);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
-    glGenTextures(1, &colBuff);
-    glBindTexture(GL_TEXTURE_2D, colBuff);
+    glGenTextures(1, &tex_screenshot);
+    glBindTexture(GL_TEXTURE_2D, tex_screenshot);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, rakeRes, rakeRes, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colBuff, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex_screenshot, 0);
 
     glDrawBuffers(1, drawBuffers);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -143,6 +143,19 @@ void WGLRakeRenderer::draw()
     buildColorBuffer(p, v);
     glUniform3fv(colorLoc, p.getSize(), v.data());
 	glUniform1i(numColorsLoc, static_cast<int>(p.getSize()));
+
+    // draw to hidden buffer
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    // draw to canvas
+    // it would be possible to do more preprocessing, just modify the shader
+    // for now we only use linear interpolation
+    glUseProgram(postShader);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindTexture(GL_TEXTURE_2D, tex_screenshot);
 
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 3);

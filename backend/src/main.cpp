@@ -311,13 +311,23 @@ extern "C"
 	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, bool nails[1000]) {
         checkState(false,);
 
-		float len = sqrt(x*x+y*y);
-		std::cerr << "Rake: dir(" << x/len << ", " << y/len << ") with " << len << "\n";
-
 		GLuint nail_uint[1000];
-		for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
 
-        rakeRenderer->rake(x,-1.*y,nail_uint);
+        // account for different defintions of origin
+        if(abs(y) < 1e-9)
+        {
+		    for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[999 - i] ? 1 : 0; }
+        }
+        else
+        {
+		    for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
+        }
+
+
+        float xs =  0.5f * x;
+        float ys = -0.5f * y;
+
+        rakeRenderer->rake(x, -1.*y, nail_uint);
         rakeRenderer->draw();
 	}
 
