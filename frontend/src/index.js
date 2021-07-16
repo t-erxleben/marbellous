@@ -2,7 +2,7 @@ import * as parser from './rake_syntax.pegjs'
 import * as png from 'fast-png'
 
 const int = parseInt;
-const inputs = {}
+var inputs = {}
 window.Storage =  class Storage {
 	constructor() {
 		const store = window.localStorage;
@@ -16,11 +16,17 @@ window.Storage =  class Storage {
 				inputs[id] = value
 				store.setItem(id, value)
 			}
+			this.backup = function() {
+				inputs = {}
+				for(var i = 0; i < store.length; i++) {
+					inputs[store.key(i)] = store.getItem(store.key(i))
+				}
+			}
 			Object.keys(inputs).forEach(function(key){
 				this.store(key, inputs[key])
 			}, this)
 		} else {
-			this.fetch = function() { return null; }
+			this.fetch = function() { return inputs[id] }
 			this.store = function(id, value) {
 				inputs[id] = value
 			}
@@ -99,6 +105,8 @@ window.Module = {
 			'number', ['number']);
 		backend.setColorAt = Module.cwrap('setColorAt',
 			'number', ['number', 'number']);
+		backend.setColorRatioAt = Module.cwrap('setColorRatioAt',
+			'number', ['number', 'number'])
 		backend.redraw = Module.cwrap('redraw',
 			'void', []);
 		backend.startRaking = Module.cwrap('startRaking', 'void', [])
@@ -129,7 +137,8 @@ function init() {
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
 	pallets[pallets.active].colors.forEach(function(x,i) {
-		backend.setColorAt(i, color2int(x))
+		backend.setColorAt(i, color2int(x.color))
+		backend.setColorRatioAt(i, int(x.ratio))
 	})
 	color = 0
 	backend.redraw();
@@ -144,7 +153,7 @@ function intersectRect(r1, r2) {
 }
 function updatePallet() {
 	pallets.nodes.forEach(function(x,i){
-		x.style.background = pallets[pallets.active].colors[i]
+		x.style.background = pallets[pallets.active].colors[i].color
 	})
 }
 var sidebar = {
@@ -418,9 +427,11 @@ function DomInit(){
 			
 			pallets.inputs.forEach(function(x,i){
 				if(!colors[i]) {
-					fetchAndSet(x, pallets.active + 'sidebar-pallet-color-' + i.toString())
+					fetchAndSet(x.color, pallets.active + 'sidebar-pallet-color-' + i.toString())
+					fetchAndSet(x.ratio, pallets.active + 'sidebar-pallet-ratio-' + i.toString())
 				} else {
-					x.value = colors[i]
+					x.color.value = colors[i].color
+					x.ratio.value = colors[i].ratio
 				}
 			})
 			if(background == null) { fetchAndSet(pallets.inputs.background, pallets.active + 'sidebar-pallet-background') }
@@ -428,12 +439,14 @@ function DomInit(){
 
 
 			pallets.inputs.forEach(function(x,i) {
-				colors[i] = x.value;
+				colors[i].color = x.color.value;
+				colors[i].ratio = x.ratio.value;
 			});
 			background = pallets.inputs.background.value;
 			pallets[pallets.active] = {colors, background}
 			pallets[pallets.active].colors.forEach(function(x,i){
-				backend.setColorAt(i, color2int(x))
+				backend.setColorAt(i, color2int(x.color))
+				backend.setColorRatioAt(i, int(x.ratio))
 			})
 			backend.setBGColor(color2int(background))
 			backend.redraw();
@@ -465,16 +478,36 @@ function DomInit(){
 		const el = sbc
 		const num = i
 		const iid = 'sidebar-pallet-color-' + num.toString();
+		const riid = 'sidebar-pallet-ratio-' + num.toString()
+		const rel = document.getElementById(riid);
 		const id = function() { return pallets.active + iid }
+		const rid = function() { return pallets.active + riid }
 		fetchAndSet(el, id());
-		pallets[pallets.active].colors[i] = el.value;
-		el.addEventListener("change", (ev)=>{pallets[pallets.active].colors[num] = el.value;
+		fetchAndSet(rel, rid());
+		pallets[pallets.active].colors[i] = {
+			color: el.value,
+			ratio: rel.value
+		}
+		el.addEventListener("change", (ev)=>{
+			pallets[pallets.active].colors[num].color = el.value;
 			storage.store(id(), el.value);
 			backend.setColorAt(num, color2int(el.value));
 			backend.redraw();
 			updatePallet();});
-		pallets.inputs[num] = el;
-		pallets[pallets.active].colors[num] = el.value
+		rel.addEventListener('change', (ev)=>{
+			pallets[pallets.active].colors[num].ratio = rel.value
+			storage.store(rid(), rel.value)
+			backend.setColorRatioAt(num, int(rel.value))
+		})
+		rel.addEventListener('keydown', (ev) => { if(ev.which === 13) { rel.blur() } })
+		pallets.inputs[num] = {
+			color: el,
+			ratio: rel
+		}
+		pallets[pallets.active].colors[num] = {
+			color: el.value,
+			ratio: rel.value
+		}
 		i += 1
 	}
 	
