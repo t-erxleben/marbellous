@@ -170,6 +170,10 @@ body {
 	color: var(--font-color);
 }
 
+table > tbody > tr > td {
+	vertical-align: middle;
+}
+
 .menu {
 	display: table-cell;
 	list-style: none;
