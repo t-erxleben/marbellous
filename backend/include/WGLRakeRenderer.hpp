@@ -112,12 +112,22 @@ class WGLRakeRenderer: private WGLRenderer
             R"==(#version 300 es
                 precision mediump float;
                 uniform sampler2D tex;
+                uniform int dim;
+                uniform uint canvasSize;
                 in vec2 texCoord;
                 out vec4 fFragment;
 
                 void main() 
                 {
-                    fFragment = texture(tex, texCoord);
+                    // calculate a 1D Convolution along dim
+                    float stepSize = 1./float(canvasSize);
+                    vec2 left = vec2(0.,0.);
+                    vec2 right = vec2(0.,0.);
+                    left[dim] = -stepSize;
+                    right[dim] = stepSize;       
+
+                    // binom filter
+                    fFragment = 0.25 * texture(tex, texCoord + left) + 0.5*texture(tex, texCoord) + 0.25 * texture(tex, texCoord + right);
                 }
 
             )=="};
@@ -153,6 +163,8 @@ class WGLRakeRenderer: private WGLRenderer
         GLint amplitudeLoc;
         GLint periodLoc;
         GLint phaseLoc;
+        GLint dimLoc;
+        GLint canvasSizeLoc;
 
     public:
 
