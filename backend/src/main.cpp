@@ -305,10 +305,17 @@ extern "C"
         } 
     }
 
-	/** execute a linear rake in direction <x,y> with speed = ||<x,y>||. 
-    * <nails> is an array of bool with are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
-    */
-	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, bool nails[1000]) {
+    /**
+     * Rake paint on the canvas. Wraps around all edges.
+     * 
+     * \param x Stroke strength in x direction.
+     * \param y Stroke strength in y direction.
+     * \param period Period length of waves given as factor for canvas size.
+     * \param amplitude Amplitude of waves given as factor for canvas size.
+     * \param phase Phase shift of waves given as factor for canvas size.
+     * \param nails Boolean array which describes the rake.
+     */
+    void EMSCRIPTEN_KEEPALIVE rake(float x, float y, float period, float amplitude, float phase, bool nails[1000]) {
         checkState(false,);
 
 		GLuint nail_uint[1000];
@@ -327,9 +334,20 @@ extern "C"
         float xs =  0.5f * x;
         float ys = -0.5f * y;
 
-        rakeRenderer->rake(x, -1.*y, nail_uint);
+        rakeRenderer->rake(x, -1.*y, period, amplitude, phase, nail_uint);
         rakeRenderer->draw();
 	}
+    
+	/** execute a linear rake in direction <x,y> with speed = ||<x,y>||. 
+    * <nails> is an array of bool with are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
+    * \todo remove this function
+    */
+	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, bool nails[1000]) {
+        checkState(false,);
+
+		rake(x,y,0,0,0,nails);
+	}
+
 
 	void EMSCRIPTEN_KEEPALIVE startRaking() {
         checkState(true,);

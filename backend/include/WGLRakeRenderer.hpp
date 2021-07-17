@@ -28,8 +28,9 @@ class WGLRakeRenderer: private WGLRenderer
                 uniform vec2 stroke;
                 uniform float viscosity;
                 uniform float scaling;
-                //uniform float period;
-                //uniform float amplitude;
+                uniform float period;
+                uniform float amplitude;
+                uniform float phase;
                 uniform sampler2D tex;
                 in vec2 texCoord;
                 out vec4 fFragment;
@@ -45,9 +46,7 @@ class WGLRakeRenderer: private WGLRenderer
                 float scaled_sin(float x)
                 {
                     const float pi = 3.1415926535897932384626433832795;
-                    float period = 1.;
-                    float amplitude = 0.1;
-                    return sin(x * 2. * pi * period) * amplitude;
+                    return sin(x * 2. * pi * period + phase) * amplitude;
                 }
  
                 void main() {
@@ -65,6 +64,7 @@ class WGLRakeRenderer: private WGLRenderer
                         if(nails[i])
                         {
                             nailPos = float(i) / float(nails.length());
+                            // wavines corrected distance to rake nail
                             d = distance(texCoord[dim] - scaled_sin(texCoord[1-dim]), nailPos);
                             shift += stroke * pow(viscosity, scaling * d);
                         }
@@ -134,8 +134,9 @@ class WGLRakeRenderer: private WGLRenderer
         GLint rakeShader;
 
         // Frame buffer with to textures; one to load from and one to draw to
-        GLuint fbo, fbo_screenshot;
+        GLuint fbo[2], fbo_post[2], fbo_screenshot;
         GLuint tex_screenshot;
+        GLuint tex_post[2];
         GLuint tex[2];
         uint8_t curr_tex;
         
@@ -149,13 +150,16 @@ class WGLRakeRenderer: private WGLRenderer
         GLint strokeLoc;
         GLint viscosityLoc;
         GLint scalingLoc;
+        GLint amplitudeLoc;
+        GLint periodLoc;
+        GLint phaseLoc;
 
     public:
 
         WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s);
         void setActive() const override;
         void reset(WGLSceneRenderer& sr, Scene const & s);
-        void rake(float x, float y, GLuint nails[1000]);
-        void draw();
+        void rake(float x, float y, float period, float amplitude, float phase,  GLuint nails[1000]);
+        void draw(GLuint target_fbo = 0);
         void drawToBuffer(void* buf, size_t length);
 };
