@@ -292,8 +292,6 @@ function handleClick(el) {
 				break;
 			case 'rake-movement-wave':
 				rake.config.line = rake.curve;
-				rake.config.magnitude = 50;
-				rake.config.periode = 200;
 				break;
 			case 'switch-state':
 				const oldState = state;
@@ -513,6 +511,32 @@ function DomInit(){
 			}
 		});
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}});
+	}
+	{
+		const id = 'sidebar-rake-periode'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		rake.config.periode = int(el.value || '20') / 100
+		el.addEventListener('change', (ev)=>{
+			try {
+				rake.config.periode = int(el.value) / 100
+				storage.store(id, el.value)
+			} catch(e) {}
+		})
+		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur()}})
+	}
+	{
+		const id = 'sidebar-rake-magnitude'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		rake.config.magnitude = int(el.value || '5') / 100
+		el.addEventListener('change', (ev)=>{
+			try {
+				rake.config.magnitude = int(el.value) / 100
+				storage.store(id, el.value)
+			} catch(e) {}
+		})
+		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur()}})
 	}
 	{	const id = 'sidebar-sprinkler-radius'
 		const el = document.getElementById(id)
@@ -835,7 +859,7 @@ var rake = {
 		const step = 20;
 		{
 			const i = - rake.config.periode / 4 - step;
-			const mag = Math.sin((i-phaseOff) / rake.config.periode * Math.PI) * rake.config.magnitude;
+			const mag = Math.sin((i-phaseOff) / (rake.config.periode * w) * Math.PI) * rake.config.magnitude * w;
 			const x = startBound.x + i / len * a.x;
 			const y = startBound.y + i / len * a.y;
 			ctx.moveTo(x + up.x * mag, y + up.y * mag);
@@ -843,7 +867,7 @@ var rake = {
 		for(i = -rake.config.periode/4; i <= len + rake.config.periode / 4 + step; i += step) {
 			const x = startBound.x + i / len * a.x;
 			const y = startBound.y + i / len * a.y;
-			const mag = Math.sin((i-phaseOff) / rake.config.periode * Math.PI) * rake.config.magnitude;
+			const mag = Math.sin((i-phaseOff) / (rake.config.periode * w) * Math.PI) * rake.config.magnitude * w;
 			ctx.lineTo(x + up.x * mag ,y + up.y * mag);
 		}
 		ctx.stroke();
@@ -934,8 +958,6 @@ var rake = {
 				rake.config.placement.getNails(handle) // pattern
 			)
 		} else if (rake.config.line === rake.curve) {
-				rake.config.magnitude = 50;
-				rake.config.periode = 200;
 			const {leftBound, rightBound} = rake.lrBound(start, end, w, h)
 			var offset;
 			if (end.x - start.x > 0 || (end.x === start.x && start.y < end.y)) 
@@ -953,8 +975,8 @@ var rake = {
 			if(w != h) { console.error('only works on squares!') }
 			backend.rake(
 				d.x/w*rake.scale, d.y/h*rake.scale, // direction
-				rake.config.periode / w,
-				rake.config.magnitude / w,
+				rake.config.periode,
+				rake.config.magnitude,
 				d.x != 0 ? offset : 1. -offset,
 				rake.config.placement.getNails(handle) // rake pattern
 			)
