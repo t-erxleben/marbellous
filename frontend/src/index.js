@@ -99,8 +99,10 @@ window.Module = {
 			'void', []);
 		backend.startRaking = Module.cwrap('startRaking', 'void', [])
 		backend.startDropping = Module.cwrap('startDropping', 'void', [])
-		backend.rakeLinear = Module.cwrap('rakeLinear',
-			'boolean', ['number', 'number', 'array'])
+		backend.rake = Module.cwrap('rake',
+			'void', [	'number', 'number',
+						'number', 'number', 'number',
+						'array'])
 		backend.finishDrop = Module.cwrap('finishDrop', 'number', ['number'])
 		backend.sprinklerGlobal = Module.cwrap('sprinkleGlobal', 'void', ['number', 'number', 'number'])
 		backend.sprinklerLocal = Module.cwrap('sprinkleLocal', 'void', ['number', 'number', 'number', 'number', 'number', 'number'])
@@ -118,7 +120,7 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
-	backend.initBackend('#image', 2000, 2000)
+	backend.initBackend('#image', 1000, 1000)
 	backend.setBGColor(color2int(pallets[pallets.active].background));
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
@@ -925,7 +927,40 @@ var rake = {
 		} else {
 			handle = Math.floor(start.x / w * 1000.)
 		}
-		backend.rakeLinear(d.x/w*rake.scale, d.y/h*rake.scale, rake.config.placement.getNails(handle))
+		if(rake.config.line === rake.straight) {
+			backend.rake(
+				d.x/w*rake.scale, d.y/h*rake.scale, // direction
+				1, 0, 0,  // wave descritpion <- flat line
+				rake.config.placement.getNails(handle) // pattern
+			)
+		} else if (rake.config.line === rake.curve) {
+				rake.config.magnitude = 50;
+				rake.config.periode = 200;
+			const {leftBound, rightBound} = rake.lrBound(start, end, w, h)
+			var offset;
+			if (end.x - start.x > 0 || (end.x === start.x && start.y < end.y)) 
+			{
+				const startBound = leftBound;
+				offset = Math.sqrt(
+					(start.x - startBound.x)**2
+					+ (start.y - startBound.y)**2) / w
+			} else {
+				const startBound = rightBound;
+				offset = 1. - Math.sqrt(
+					(start.x - startBound.x)**2
+					+ (start.y - startBound.y)**2) / w
+			}
+			if(w != h) { console.error('only works on squares!') }
+			backend.rake(
+				d.x/w*rake.scale, d.y/h*rake.scale, // direction
+				rake.config.periode / w,
+				rake.config.magnitude / w,
+				d.x != 0 ? offset : 1. -offset,
+				rake.config.placement.getNails(handle) // rake pattern
+			)
+		} else {
+			console.error('Failed to find correct rake type!')
+		}
 	}
 };
 // snap line parallel to axisa

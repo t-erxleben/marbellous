@@ -337,16 +337,6 @@ extern "C"
         rakeRenderer->rake(x, -1.*y, period, amplitude, phase, nail_uint);
         rakeRenderer->draw();
 	}
-    
-	/** execute a linear rake in direction <x,y> with speed = ||<x,y>||. 
-    * <nails> is an array of bool with are the nails from begin to end of the rake. a 1 means there is a nail, 0 means thar is not.
-    * \todo remove this function
-    */
-	void EMSCRIPTEN_KEEPALIVE rakeLinear(float x, float y, bool nails[1000]) {
-        checkState(false,);
-
-		rake(x,y,0,0,0,nails);
-	}
 
 
 	void EMSCRIPTEN_KEEPALIVE startRaking() {

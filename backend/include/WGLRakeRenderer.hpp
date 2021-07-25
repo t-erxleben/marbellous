@@ -35,7 +35,8 @@ class WGLRakeRenderer: private WGLRenderer
                 in vec2 texCoord;
                 out vec4 fFragment;
 
-                float distance(float x, float y)
+				// distance is an opengl function and should not be overwitten
+                float dis(float x, float y)
                 {
                     if(abs(x-y) > 0.5)
                         return 1. - abs(x-y);
@@ -46,7 +47,7 @@ class WGLRakeRenderer: private WGLRenderer
                 float scaled_sin(float x)
                 {
                     const float pi = 3.1415926535897932384626433832795;
-                    return sin(x * 2. * pi * period + phase) * amplitude;
+                    return sin((x - phase) * pi / period) * amplitude;
                 }
  
                 void main() {
@@ -57,6 +58,7 @@ class WGLRakeRenderer: private WGLRenderer
 
                     // assuming only strokes in x and y direction
                     dim = (abs(dot(stroke, vec2(1.0, 0.0))) < eps) ? 0 : 1;
+					float up = dim == 0 ? 1. : -1.;
 
                     // for each nail
                     for(i = 0; i < 1000; ++i)
@@ -65,7 +67,10 @@ class WGLRakeRenderer: private WGLRenderer
                         {
                             nailPos = float(i) / float(nails.length());
                             // wavines corrected distance to rake nail
-                            d = distance(texCoord[dim] - scaled_sin(texCoord[1-dim]), nailPos);
+                            d = dis(
+								texCoord[dim] - scaled_sin(texCoord[1-dim]) * up,
+								nailPos
+							);
                             shift += stroke * pow(viscosity, scaling * d);
                         }
                     }
@@ -74,7 +79,7 @@ class WGLRakeRenderer: private WGLRenderer
                     vec2 orig = texCoord - shift;
                     
                     // correct for waviness of lookup point
-                    orig[dim] = orig[dim] + scaled_sin(orig[1-dim]) - scaled_sin(texCoord[1-dim]);
+                    orig[dim] = orig[dim] + (scaled_sin(orig[1-dim]) - scaled_sin(texCoord[1-dim]))*up;
 
 					fFragment = texture(tex, orig);
                 }
