@@ -16,8 +16,8 @@ class WGLRakeRenderer: private WGLRenderer
                 layout (location = 0) in vec2 position;
                 out vec2 texCoord;
                 void main(){
-                    gl_Position = vec4(position, 0.0, 1.0);
-                    texCoord = vec2((position.x+1.0)/2.0, (position.y+1.0)/2.0);
+                    gl_Position = vec4(position, 0., 1.);
+                    texCoord = (position + vec2(1.,1.))/2.;
                 }
             )=="};
     
@@ -28,33 +28,59 @@ class WGLRakeRenderer: private WGLRenderer
                 uniform vec2 stroke;
                 uniform float viscosity;
                 uniform float scaling;
+                uniform float period;
+                uniform float amplitude;
+                uniform float phase;
                 uniform sampler2D tex;
                 in vec2 texCoord;
                 out vec4 fFragment;
+
+				// distance is an opengl function and should not be overwitten
+                float dis(float x, float y)
+                {
+                    if(abs(x-y) > 0.5)
+                        return 1. - abs(x-y);
+                    return abs(x-y);
+                }
+
+                // scaled to period length and amplitude
+                float scaled_sin(float x)
+                {
+                    const float pi = 3.1415926535897932384626433832795;
+                    return sin((x - phase) * pi / period) * amplitude;
+                }
  
                 void main() {
                     const float eps = 0.000001;
-                    int i;
-                    int dim;
-                    float nailPos;
-                    float d;
+                    int i, dim;
+                    float nailPos, d;
                     vec2 shift = vec2(0.0, 0.0);
-                    vec2 str = vec2(0.0, 0.0);
 
                     // assuming only strokes in x and y direction
                     dim = (abs(dot(stroke, vec2(1.0, 0.0))) < eps) ? 0 : 1;
+					float up = dim == 0 ? 1. : -1.;
 
                     // for each nail
-                    for(i = 0; i < nails.length(); ++i)
+                    for(i = 0; i < 1000; ++i)
                     {
                         if(nails[i])
                         {
                             nailPos = float(i) / float(nails.length());
-                            d = abs(texCoord[dim] - nailPos);
+                            // wavines corrected distance to rake nail
+                            d = dis(
+								texCoord[dim] - scaled_sin(texCoord[1-dim]) * up,
+								nailPos
+							);
                             shift += stroke * pow(viscosity, scaling * d);
                         }
                     }
+
+                    // linear origin position
                     vec2 orig = texCoord - shift;
+                    
+                    // correct for waviness of lookup point
+                    orig[dim] = orig[dim] + (scaled_sin(orig[1-dim]) - scaled_sin(texCoord[1-dim]))*up;
+
 					fFragment = texture(tex, orig);
                 }
             )=="};
@@ -87,15 +113,45 @@ class WGLRakeRenderer: private WGLRenderer
                 }
             )=="};
 
-        // should be used to draw the texture to the canvas
+        std::string const draw_post_proc_fragment_source{
+            R"==(#version 300 es
+                precision mediump float;
+                uniform sampler2D tex;
+                uniform int dim;
+                uniform uint canvasSize;
+                in vec2 texCoord;
+                out vec4 fFragment;
+
+                void main() 
+                {
+                    // calculate a 1D Convolution along dim
+                    float stepSize = 1./float(canvasSize);
+                    vec2 left = vec2(0.,0.);
+                    vec2 right = vec2(0.,0.);
+                    left[dim] = -stepSize;
+                    right[dim] = stepSize;       
+
+                    // binom filter
+                    fFragment = 0.25 * texture(tex, texCoord + left) + 0.5*texture(tex, texCoord) + 0.25 * texture(tex, texCoord + right);
+                }
+
+            )=="};
+
+        // should be used to draw the texture to the canvas or another buffer
         // substitutes color codes for actual colors
         // expects to be used to draw exactly one triangle defined by (-1, -1), (-1, 3), (3, -1)
         GLint drawShader;
 
+        // same loke drawShader but expects to read real colors instead of color codes
+        // used for post processing
+        GLint postShader;
+
         GLint rakeShader;
 
         // Frame buffer with to textures; one to load from and one to draw to
-        GLuint fbo, fbo_screenshot;
+        GLuint fbo[2], fbo_post[2], fbo_screenshot;
+        GLuint tex_screenshot;
+        GLuint tex_post[2];
         GLuint tex[2];
         uint8_t curr_tex;
         
@@ -109,13 +165,18 @@ class WGLRakeRenderer: private WGLRenderer
         GLint strokeLoc;
         GLint viscosityLoc;
         GLint scalingLoc;
+        GLint amplitudeLoc;
+        GLint periodLoc;
+        GLint phaseLoc;
+        GLint dimLoc;
+        GLint canvasSizeLoc;
 
     public:
 
         WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s);
         void setActive() const override;
         void reset(WGLSceneRenderer& sr, Scene const & s);
-        void rake(float x, float y, GLuint nails[1000]);
-        void draw();
+        void rake(float x, float y, float period, float amplitude, float phase,  GLuint nails[1000]);
+        void draw(GLuint target_fbo = 0);
         void drawToBuffer(void* buf, size_t length);
 };

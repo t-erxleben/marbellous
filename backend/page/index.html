@@ -84,20 +84,48 @@
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-rake"/>
 				<label for="sidebar-rake">Rake</label>
-				<div><div class="form_group field">
-					<input class="form_field"
-						   placeholder="placement"
-							title="<offset>:<space>(,<space>)*"
-							id="sidebar-rake-placement"
-							type="text" autocomplete="on"
-							pattern="([0-9]+:)?([0-9]+,)*[0-9]+"
-							value="">
-					<label class="form_label"
-						for="sidebar-rake-placement"
-						title="space between nails in rake">
-							placement
-					</label>
-					</div></div>
+				<div><menu style="width:75%;list-style:none;margin-left:-40px;">
+						<li class="form_group field">
+							<input class="form_field"
+								   placeholder="placement"
+								   title="<offset>:<space>(,<space>)*"
+								   id="sidebar-rake-placement"
+								   type="text" autocomplete="on"
+											   pattern="([0-9]+:)?([0-9]+,)*[0-9]+"
+											   value=""/>
+							<label class="form_label"
+								   for="sidebar-rake-placement"
+								   title="space between nails in rake">
+								placement
+							</label>
+						</li>
+						<li class="form_group field">
+							<input class="form_field"
+								   placeholder="periode"
+								   title="<periode in %>"
+								   id="sidebar-rake-periode"
+								   type="number" min="0" max="100" step="1"
+																   value=""/>
+							<label class="form_label"
+								   for="sidebar-rake-periode"
+								   title="periode of wave rake movment">
+								periode
+							</label>
+						</li>
+						<li class="form_group field">
+							<input class="form_field"
+								   placeholder="magnitude"
+								   title="<magnitude in %>"
+								   id="sidebar-rake-magnitude"
+								   type="number" min="0" max="100" step="1"
+																   value="">
+							<label class="form_label"
+								   for="sidebar-rake-magnitude"
+								   title="magnitude of wave rake movement">
+								magnitude
+							</label>
+						</li>
+					</menu></div>
 		</li>
 		<!-- pallet -->
 		<li>
