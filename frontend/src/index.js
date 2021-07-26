@@ -120,7 +120,7 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
-	backend.initBackend('#image', 1000, 1000)
+	backend.initBackend('#image', 2000, 2000)
 	backend.setBGColor(color2int(pallets[pallets.active].background));
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
