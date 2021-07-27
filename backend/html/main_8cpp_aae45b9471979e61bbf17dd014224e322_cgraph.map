@@ -1,10 +1,10 @@
 <map id="rake" name="rake">
-<area shape="rect" id="node1" title=" " alt="" coords="5,57,52,84"/>
-<area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="100,95,268,121"/>
-<area shape="rect" id="node8" href="$class_w_g_l_rake_renderer.html#af04c696e15e31e955ffe5891416d5361" title=" " alt="" coords="101,19,267,45"/>
-<area shape="rect" id="node3" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="316,157,517,184"/>
-<area shape="rect" id="node4" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="570,31,734,57"/>
-<area shape="rect" id="node5" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="346,107,487,133"/>
-<area shape="rect" id="node6" href="$class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="565,132,739,159"/>
-<area shape="rect" id="node7" href="$class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="319,5,514,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,52,108"/>
+<area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="100,56,268,83"/>
+<area shape="rect" id="node8" href="$class_w_g_l_rake_renderer.html#af04c696e15e31e955ffe5891416d5361" title=" " alt="" coords="101,107,267,133"/>
+<area shape="rect" id="node3" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="316,5,517,32"/>
+<area shape="rect" id="node4" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="346,56,487,83"/>
+<area shape="rect" id="node5" href="$class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="319,107,514,133"/>
+<area shape="rect" id="node6" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="570,81,734,108"/>
+<area shape="rect" id="node7" href="$class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="565,132,739,159"/>
 </map>
