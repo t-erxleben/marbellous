@@ -31,7 +31,6 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s)
     periodLoc = glGetUniformLocation(rakeShader, "period");
     phaseLoc = glGetUniformLocation(rakeShader, "phase");
     dimLoc = glGetUniformLocation(postShader, "dim");
-    canvasSizeLoc = glGetUniformLocation(postShader, "canvasSize");
 
     // init fbo and textures
     glGenFramebuffers(2, fbo);
@@ -171,12 +170,10 @@ void WGLRakeRenderer::draw(GLuint target_fbo)
 
     // draw to canvas
     // this is where post processing might happen
-    auto size = WGLContext::getContext()->getRakeRes();
     glUseProgram(postShader);
 
     // perform conv along x axis
     glUniform1i(dimLoc, 0);
-    glUniform1ui(canvasSizeLoc, size);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo_post[1]);
     glBindTexture(GL_TEXTURE_2D, tex_post[0]);
 
@@ -185,7 +182,6 @@ void WGLRakeRenderer::draw(GLuint target_fbo)
 
     // perform conv along y axis
     glUniform1i(dimLoc, 1);
-    glUniform1ui(canvasSizeLoc, size);
     glBindFramebuffer(GL_FRAMEBUFFER, target_fbo);
     glBindTexture(GL_TEXTURE_2D, tex_post[1]);
 
