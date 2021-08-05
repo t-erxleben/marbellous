@@ -164,14 +164,11 @@ void WGLRakeRenderer::draw(GLuint target_fbo)
 	glUniform1i(numColorsLoc, static_cast<int>(p.getSize()));
 
     // draw to hidden buffer
-    //glBindFramebuffer(GL_FRAMEBUFFER, fbo_post[0]);
-
-    glBindFramebuffer(GL_FRAMEBUFFER, target_fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo_post[0]);
 
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    /*
     // draw to canvas
     // this is where post processing might happen
     auto size = WGLContext::getContext()->getRakeRes();
@@ -194,7 +191,6 @@ void WGLRakeRenderer::draw(GLuint target_fbo)
 
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 3);
-    */
 
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
