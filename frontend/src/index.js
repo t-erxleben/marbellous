@@ -849,7 +849,7 @@ var rake_dropper = {
 		const dim = {w: rake_dropper.config.w / 50, h: rake_dropper.config.h / 50,
 			of: rake_dropper.config.of / 50}
 		const max_w = Math.ceil(2/dim.w)
-		const max_h = Math.ceil(2/dim.h)
+		const max_h = Math.ceil(2/dim.h) + 3
 		const max_count =  max_w * max_h 
 
 		if (max_count > 100) { console.error('Max count exceeds 100'); return }
@@ -871,6 +871,7 @@ var rake_dropper = {
 				count += 1
 			}
 		}
+		if(count > 100 || count > max_count) { console.error("Failed to set drops for grid(to many drops on screen!)") }
 		backend.addDrops(count, new Int8Array(data.buffer))
 
 		dropper.active = true
