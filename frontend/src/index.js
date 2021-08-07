@@ -24,7 +24,7 @@ window.Storage =  class Storage {
 				this.store(key, inputs[key])
 			}, this)
 		} else {
-			this.fetch = function() { return inputs[id] }
+			this.fetch = function(id) { return inputs[id] }
 			this.store = function(id, value) {
 				inputs[id] = value
 			}
