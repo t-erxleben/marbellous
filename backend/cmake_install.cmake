@@ -46,7 +46,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page" TYPE FILE FILES
+  file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page" TYPE FILE FILES
     "/home/runner/work/marbellous/marbellous/backend/Marbellous.js"
     "/home/runner/work/marbellous/marbellous/backend/Marbellous.wasm"
     )
@@ -61,7 +61,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xMarbellous-debugx")
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page" TYPE FILE RENAME "Marbellous.js" FILES "/home/runner/work/marbellous/marbellous/backend/Marbellous-debug.js")
+  file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page" TYPE FILE RENAME "Marbellous.js" FILES "/home/runner/work/marbellous/marbellous/backend/Marbellous-debug.js")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xMarbellous-debugx")
@@ -73,7 +73,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xMarbellous-debugx")
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page" TYPE FILE FILES
+  file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page" TYPE FILE FILES
     "/home/runner/work/marbellous/marbellous/backend/Marbellous-debug.wasm"
     "/home/runner/work/marbellous/marbellous/backend/Marbellous-debug.wasm.map"
     )
@@ -88,7 +88,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xMarbellous-debugx" OR NOT CMAKE_INS
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page/" TYPE DIRECTORY FILES "/home/runner/work/marbellous/marbellous/backend/../frontend//dist/")
+  file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page/" TYPE DIRECTORY FILES "/home/runner/work/marbellous/marbellous/backend/../frontend//dist/")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xMarbellous-debugx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -100,7 +100,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xMarbellous-debugx" OR NOT CMAKE_INS
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page/" TYPE DIRECTORY FILES "/home/runner/work/marbellous/marbellous/backend/dist/")
+  file(INSTALL DESTINATION "/home/runner/work/marbellous/marbellous/backend/page/" TYPE DIRECTORY FILES "/home/runner/work/marbellous/marbellous/backend/dist/")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
