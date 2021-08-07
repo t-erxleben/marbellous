@@ -8,11 +8,9 @@ window.Storage =  class Storage {
 		const store = window.localStorage;
 		if(store.getItem('store-active'))	{
 			this.fetch = function(id) {
-				console.log('fetch: ', id, store.getItem(id))
 				return store.getItem(id)
 			}
 			this.store = function(id, value) {
-				console.log('store: ', id, value)
 				inputs[id] = value
 				store.setItem(id, value)
 			}
@@ -580,12 +578,10 @@ function DomInit(){
 		el.addEventListener('change', (ev)=> {
 			if(el.validity.valid) {
 				try {
-					console.log(el.value)
 					obj[key] = int(el.value || value)
 					storage.store(id, el.value)
 				} catch(e) { console.error(e) }
 			}
-			console.log(rake_dropper.config)
 		})
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur()}})
 	}
@@ -855,8 +851,7 @@ var rake_dropper = {
 		const max_w = Math.ceil(2/dim.w)
 		const max_h = Math.ceil(2/dim.h)
 		const max_count =  max_w * max_h 
-		console.log(dim, max_w, max_h, max_count)
-		console.log('max_count', max_count)
+
 		if (max_count > 100) { console.error('Max count exceeds 100'); return }
 		let count = 0
 		const data = new Float32Array(max_count * 4)
@@ -866,19 +861,9 @@ var rake_dropper = {
 			t: Math.ceil(p.y / dim.h - dim.of/dim.h),
 			b: Math.floor((2 - p.y) / dim.h)
 		}
-		console.log(`tada: ${p.y / dim.of}`)
-		console.log(`t: ${p.y/dim.h}, b: ${(2-p.x)/dim.h}`)
-		console.log(space)
-		console.log(`dimw: ${dim.w}, px: ${p.x} -> ${dim.w*(-space.l) + p.x}`)
-		tool.ctx.strokeStyle = 'blue'
-		tool.ctx.beginPath()
-		console.log('config', rake_dropper.config)
+
 		for(let i = -space.l; i <= space.r; i += 1) {
 			for(let j = -space.t; j <= space.b; j += 1) {
-				const ex = ((i*dim.w + p.x))/2.*w
-				const ey = (j*dim.h + p.y + Math.abs(i % 2) * dim.of)/2.*h
-				tool.ctx.moveTo(ex,ey)
-				tool.ctx.ellipse(ex, ey, 7, 7, 0, 2*Math.PI, false)
 				data[count*4] = (i * dim.w + p.x) - 1
 				data[count*4 + 1] = 1 - (j * dim.h + p.y + Math.abs(i%2) * dim.of)
 				data[count*4 + 2] = 0
@@ -886,9 +871,6 @@ var rake_dropper = {
 				count += 1
 			}
 		}
-		console.log('count: ', count)
-		tool.ctx.stroke()
-		tool.ctx.strokeStyle = 'black'
 		backend.addDrops(count, new Int8Array(data.buffer))
 
 		dropper.active = true
