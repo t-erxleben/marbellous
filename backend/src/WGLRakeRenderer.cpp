@@ -162,3 +162,21 @@ void WGLRakeRenderer::setActive() const
 
     glViewport(0, 0, rakeRes, rakeRes);
 }
+
+void WGLRakeRenderer::resize()
+{
+    glDeleteFramebuffers(2, fbo);
+    glDeleteFramebuffers(2, fbo_post);
+    glDeleteFramebuffers(1, &fbo_screenshot);
+    glDeleteTextures(2, tex);
+    glDeleteTextures(2, tex_post);
+    glDeleteTextures(1, &tex_screenshot);
+
+    size_t rakeRes = WGLContext::getContext()->getRakeRes();
+
+    constructFBO(rakeRes, false, fbo[0], tex[0]);
+    constructFBO(rakeRes, false, fbo[1], tex[1]);
+    constructFBO(rakeRes, false, fbo_post[0], tex_post[0]);
+    constructFBO(rakeRes, false, fbo_post[1], tex_post[1]);
+    constructFBO(rakeRes, false, fbo_screenshot, tex_screenshot);
+}

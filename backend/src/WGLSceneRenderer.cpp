@@ -190,3 +190,12 @@ void WGLSceneRenderer::drawScene(Scene const &scene, bool drawColor)
 	auto [r, g, b] = Options::getInstance()->getBGColor()->getRGB();
 	if(!drawColor) { glClearColor(r/256.f, g/256.f, b/256.f, 1.); }
 }
+
+void WGLSceneRenderer::resize()
+{
+    glDeleteFramebuffers(1, &frameBuffer);
+    glDeleteTextures(1, &frameTexture);
+
+	auto dropRes = WGLContext::getContext()->getDropRes();
+	constructFBO(dropRes, true, frameBuffer, frameTexture);
+}

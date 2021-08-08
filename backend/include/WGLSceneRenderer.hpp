@@ -84,4 +84,5 @@ class WGLSceneRenderer: private WGLRenderer
 		void drawToBuffer(const Scene& scene, char* data, int len, bool drawColor = true);
         void drawScene(Scene const & scene, bool drawColor = true);
         void setActive() const override;
+        void resize() override;
 };
