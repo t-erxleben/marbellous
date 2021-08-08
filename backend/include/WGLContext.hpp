@@ -14,6 +14,7 @@ class WGLContext
         // realize singleton pattern
         static WGLContext* instance;
         size_t dropRes; ///< Canvas size in pixels.
+        size_t rakeRes;
         std::string canvasID; ///< CSS identifier of the canvas, needed for resize
         EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context;
         WGLContext(std::string canvasID, size_t dropRes);
@@ -42,6 +43,4 @@ class WGLContext
 
 		void updateBGColor();
 		void setBGColor(const Color::rgb_t& bg);
-
-        void canvasResize(size_t x);
 };
