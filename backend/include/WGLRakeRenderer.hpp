@@ -118,14 +118,13 @@ class WGLRakeRenderer: private WGLRenderer
                 precision mediump float;
                 uniform sampler2D tex;
                 uniform int dim;
-                uniform uint canvasSize;
                 in vec2 texCoord;
                 out vec4 fFragment;
 
                 void main() 
                 {
                     // calculate a 1D Convolution along dim
-                    float stepSize = 1./float(canvasSize);
+                    float stepSize = 1./float(textureSize(tex, 0)[dim]);
                     vec2 left = vec2(0.,0.);
                     vec2 right = vec2(0.,0.);
                     left[dim] = -stepSize;
@@ -169,7 +168,6 @@ class WGLRakeRenderer: private WGLRenderer
         GLint periodLoc;
         GLint phaseLoc;
         GLint dimLoc;
-        GLint canvasSizeLoc;
 
     public:
 
