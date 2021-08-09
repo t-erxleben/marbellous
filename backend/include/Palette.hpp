@@ -14,6 +14,8 @@ private:
     
     std::vector<Color> colors{};
 
+	void updateP();
+
 public:
     Palette();
     Palette(size_t colors);
@@ -25,13 +27,10 @@ public:
     Color& operator[](size_t const index); ///< get or set the color at index, might throw std::out_of_range
     const Color& operator[](size_t const index) const;
 
-    /**
-     * @return Begin iterator over colors
-    */
-    std::vector<Color>::iterator begin()
-    {
-        return colors.begin();
-    }
+	unsigned getRandomColorId() const; ///< returns a random color of that pallet based on the ratios
+	void setRatioAt(size_t index, unsigned ratio); ///< updates a ratio
+	void setColorAt(size_t index, const Color& color); ///< set new color and update ratios
+
 
     /**
      * @return Begin const_iterator over colors
@@ -39,14 +38,6 @@ public:
     std::vector<Color>::const_iterator begin() const
     {
         return colors.begin();
-    }
-
-    /**
-     * @return End iterator over colors
-    */
-    std::vector<Color>::iterator end()
-    {
-        return colors.end();
     }
 
     /**

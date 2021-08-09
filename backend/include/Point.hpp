@@ -70,6 +70,11 @@ public:
 		return *this;
 	}
 
+	Point& operator+=(const Point& rh) {
+		translate(rh.x, rh.y);
+		return *this;
+	}
+
 	friend std::ostream& operator<<(std::ostream& out, const Point& p) {
 		out << "(" << p.x << "," << p.y << ")";
 		return out;
@@ -85,6 +90,11 @@ inline float distance2(const Point& a, const Point& b) {
 	float dy = a.y - b.y;
 	return dx*dx + dy*dy;
 }
+
+struct __attribute__((packed)) Displacement {
+	Point p;
+	float r;
+};
 
 
 /*// Add specialized template function to use our custom point in the earcutting lib

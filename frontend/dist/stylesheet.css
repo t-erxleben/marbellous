@@ -170,6 +170,10 @@ body {
 	color: var(--font-color);
 }
 
+table > tbody > tr > td {
+	vertical-align: middle;
+}
+
 .menu {
 	display: table-cell;
 	list-style: none;
@@ -391,7 +395,7 @@ input.slider:checked + span.slider:before {
 
 .form_field {
   font-family: inherit;
-  width: 100%;
+  /* width: 100%; */
   border: 0;
   border-bottom: 2px solid var(--font-color);
   outline: 0;
