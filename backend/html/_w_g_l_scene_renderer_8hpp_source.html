@@ -91,73 +91,80 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">                in vec2 position;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">                in uint colorCode;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral">                                in uint z;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">                                uniform float disR2;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">                                uniform vec2 disP;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">                                uniform vec3[100] dis;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">                                uniform int count;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">                flat out uint colID;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral">                void main(){</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">                                        vec2 d = position.xy - disP;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">                                        float s = sqrt(1. + disR2/dot(d,d));</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">                                        d = disP + d*s;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral">                                        // depth buffer has a resolution from &gt;=16bit</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">                    gl_Position = vec4(d, float(z) / 65530.f, 1.0);</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">                    colID = colorCode;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">                }</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">            )==&quot;};</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">    </span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">        std::string </span><span class="keyword">const</span> fragment_source{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            R<span class="stringliteral">&quot;==(#version 300 es</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">                precision mediump float;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">                flat in uint colID;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">                uniform bool drawColor;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">                uniform vec3 c[10];</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">                out vec4 fFragment;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral">                </span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="stringliteral">                void main() {</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="stringliteral">                    vec4 color = vec4(0.0, 0.0, 0.0, 0.0);</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">                    if(drawColor)</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral">                    {</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">                        if(int(colID) &lt; c.length())</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">                        {</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="stringliteral">                            color = vec4(c[colID], 1.0);</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="stringliteral">                        }</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="stringliteral">                        else</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="stringliteral">                        {</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="stringliteral">                            // bright magenta for default color</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="stringliteral">                            color = vec4(1.0, 0.0, 1.0, 1.0);</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="stringliteral">                        }</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="stringliteral">                    }</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="stringliteral">                    else</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="stringliteral">                    {</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="stringliteral">                        // draw color codes in red channel, intended to be used to generate code maps for raking</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="stringliteral">                        color = vec4(float(colID + uint(1)) / 256., 0.0, 0.0, 0.0);</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="stringliteral">                    }</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="stringliteral">                                        fFragment = color;</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="stringliteral">                }</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral">            )==&quot;};</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="stringliteral">        GLint shaderProgram;</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="stringliteral">        GLuint vbo;</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="stringliteral">        GLuint ebo;</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="stringliteral">        GLint colorLoc;</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral">        GLint drawColorLoc;</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="stringliteral">                GLint locDisR2;</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="stringliteral">                GLint locDisP;</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="stringliteral">                GLuint frameBuffer;</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral">                GLuint frameTexture;</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral">                GLuint depthStencilTexture;</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="stringliteral">                </span><span class="keywordtype">unsigned</span> generation = ~0;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b">WGLSceneRenderer</a>();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27">drawToBuffer</a>(<span class="keyword">const</span> <a class="code" href="class_scene.html">Scene</a>&amp; <a class="code" href="main_8cpp.html#a6de66f9ad116ce1d596c7f4edc40c521">scene</a>, <span class="keywordtype">char</span>* data, <span class="keywordtype">int</span> len, <span class="keywordtype">bool</span> drawColor = <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa">drawScene</a>(<a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; <a class="code" href="main_8cpp.html#a6de66f9ad116ce1d596c7f4edc40c521">scene</a>, <span class="keywordtype">bool</span> drawColor = <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5">setActive</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049">resize</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">                                        vec2 pos = position.xy;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">                                        if( count &gt; 0 ) {</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">                                                pos = vec2(0, 0);</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral">                                                for(int i = 0; i &lt; count; ++i) {</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">                                                        vec2 d = position.xy - dis[i].xy;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">                                                        float s = sqrt(1. + dis[i].z*dis[i].z/dot(d,d));</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">                                                        pos += dis[i].xy + d*s - position.xy;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">                                                }</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">                                                pos += position.xy;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">                                        }</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">                                        // depth buffer has a resolution from &gt;=16bit</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">                    gl_Position = vec4(pos , float(z) / 65530.f, 1.0);</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">                    colID = colorCode;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">                }</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">            )==&quot;};</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">    </span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral">        std::string </span><span class="keyword">const</span> fragment_source{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            R<span class="stringliteral">&quot;==(#version 300 es</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="stringliteral">                precision mediump float;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">                flat in uint colID;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral">                uniform int drawColor;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">                uniform vec3 c[10];</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">                out vec4 fFragment;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="stringliteral">                </span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="stringliteral">                void main() {</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="stringliteral">                    vec4 color = vec4(0.0, 0.0, 0.0, 0.0);</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="stringliteral">                    if(drawColor != 0)</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="stringliteral">                    {</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="stringliteral">                        if(int(colID) &lt; c.length())</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="stringliteral">                        {</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="stringliteral">                            color = vec4(c[colID], 1.0);</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="stringliteral">                        }</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="stringliteral">                        else</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="stringliteral">                        {</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="stringliteral">                            // bright magenta for default color</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="stringliteral">                            color = vec4(1.0, 0.0, 1.0, 1.0);</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="stringliteral">                        }</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="stringliteral">                    }</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral">                    else</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="stringliteral">                    {</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="stringliteral">                        // draw color codes in red channel, intended to be used to generate code maps for raking</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="stringliteral">                        color = vec4(float(colID + uint(1)) / 256., 0.0, 0.0, 0.0);</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="stringliteral">                    }</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="stringliteral">                                        fFragment = color;</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="stringliteral">                }</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="stringliteral">            )==&quot;};</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="stringliteral">        GLint shaderProgram;</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral">        GLuint vbo;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="stringliteral">        GLuint ebo;</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral">        GLint colorLoc;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="stringliteral">        GLint drawColorLoc;</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="stringliteral">                GLint locDis;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="stringliteral">                GLint locDisCount;</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="stringliteral">                GLuint frameBuffer;</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="stringliteral">                GLuint frameTexture;</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="stringliteral">                GLuint depthStencilTexture;</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="stringliteral">                </span><span class="keywordtype">unsigned</span> generation = ~0;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b">WGLSceneRenderer</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27">drawToBuffer</a>(<span class="keyword">const</span> <a class="code" href="class_scene.html">Scene</a>&amp; <a class="code" href="main_8cpp.html#a6de66f9ad116ce1d596c7f4edc40c521">scene</a>, <span class="keywordtype">char</span>* data, <span class="keywordtype">int</span> len, <span class="keywordtype">bool</span> drawColor = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa">drawScene</a>(<a class="code" href="class_scene.html">Scene</a> <span class="keyword">const</span> &amp; <a class="code" href="main_8cpp.html#a6de66f9ad116ce1d596c7f4edc40c521">scene</a>, <span class="keywordtype">bool</span> drawColor = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5">setActive</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049">resize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
 <div class="ttc" id="a_scene_8hpp_html"><div class="ttname"><a href="_scene_8hpp.html">Scene.hpp</a></div></div>
 <div class="ttc" id="a_w_g_l_renderer_8hpp_html"><div class="ttname"><a href="_w_g_l_renderer_8hpp.html">WGLRenderer.hpp</a></div></div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.hpp:12</div></div>
@@ -167,12 +174,12 @@ $(function() {
 <div class="ttc" id="aclass_w_g_l_scene_renderer_html_a68425af41d1ecab966935efdf2ea2c27"><div class="ttname"><a href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27">WGLSceneRenderer::drawToBuffer</a></div><div class="ttdeci">void drawToBuffer(const Scene &amp;scene, char *data, int len, bool drawColor=true)</div><div class="ttdef"><b>Definition:</b> WGLSceneRenderer.cpp:126</div></div>
 <div class="ttc" id="aclass_w_g_l_scene_renderer_html_aa96828c9022b8ce4397da029b51bf0e5"><div class="ttname"><a href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5">WGLSceneRenderer::setActive</a></div><div class="ttdeci">void setActive() const override</div><div class="ttdef"><b>Definition:</b> WGLSceneRenderer.cpp:87</div></div>
 <div class="ttc" id="aclass_w_g_l_scene_renderer_html_ad54f67166489cbfe94258ae2f171c7aa"><div class="ttname"><a href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa">WGLSceneRenderer::drawScene</a></div><div class="ttdeci">void drawScene(Scene const &amp;scene, bool drawColor=true)</div><div class="ttdef"><b>Definition:</b> WGLSceneRenderer.cpp:138</div></div>
-<div class="ttc" id="aclass_w_g_l_scene_renderer_html_ae7082c5f4a3875c5ed451edb98c5b049"><div class="ttname"><a href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049">WGLSceneRenderer::resize</a></div><div class="ttdeci">void resize() override</div><div class="ttdef"><b>Definition:</b> WGLSceneRenderer.cpp:194</div></div>
+<div class="ttc" id="aclass_w_g_l_scene_renderer_html_ae7082c5f4a3875c5ed451edb98c5b049"><div class="ttname"><a href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049">WGLSceneRenderer::resize</a></div><div class="ttdeci">void resize() override</div><div class="ttdef"><b>Definition:</b> WGLSceneRenderer.cpp:198</div></div>
 <div class="ttc" id="amain_8cpp_html_a6de66f9ad116ce1d596c7f4edc40c521"><div class="ttname"><a href="main_8cpp.html#a6de66f9ad116ce1d596c7f4edc40c521">scene</a></div><div class="ttdeci">Scene * scene</div><div class="ttdef"><b>Definition:</b> main.cpp:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 9 2021 15:10:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Aug 9 2021 19:53:47 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['p_214',['p',['../class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89',1,'Scene']]],
-  ['primitive_5frestart_215',['PRIMITIVE_RESTART',['../_point_8hpp.html#aac01dbdf6a5cf1316f7c9fa0d864c7ee',1,'Point.hpp']]]
+  ['min_5fr_228',['MIN_R',['../class_polygon.html#a80eb0b3f461f048684308042e2d72419',1,'Polygon']]]
 ];

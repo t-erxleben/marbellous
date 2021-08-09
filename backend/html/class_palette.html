@@ -76,7 +76,7 @@ Collaboration diagram for Palette:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_palette__coll__graph.png" border="0" usemap="#a_palette_coll__map" alt="Collaboration graph"/></div>
 <map name="a_palette_coll__map" id="a_palette_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,101,215"/>
+<area shape="rect" title=" " alt="" coords="5,5,153,229"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -96,12 +96,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8506b72557b8b04974689bd1876a3761"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7c2e4d6864e6299bb4ec04290f80650"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_color.html">Color</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_palette.html#aa7c2e4d6864e6299bb4ec04290f80650">operator[]</a> (size_t const index) const</td></tr>
 <tr class="separator:aa7c2e4d6864e6299bb4ec04290f80650"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af285140f3b268e2223484968c3c675ba"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_color.html">Color</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_palette.html#af285140f3b268e2223484968c3c675ba">begin</a> ()</td></tr>
-<tr class="separator:af285140f3b268e2223484968c3c675ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4b3ca79b7739e09c6afb40e216644fb"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb">getRandomColorId</a> () const</td></tr>
+<tr class="memdesc:ac4b3ca79b7739e09c6afb40e216644fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns a random color of that pallet based on the ratios  <a href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb">More...</a><br /></td></tr>
+<tr class="separator:ac4b3ca79b7739e09c6afb40e216644fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2342ab3b67a800ce0aad96dae586613"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_palette.html#ae2342ab3b67a800ce0aad96dae586613">setRatioAt</a> (size_t index, unsigned ratio)</td></tr>
+<tr class="memdesc:ae2342ab3b67a800ce0aad96dae586613"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates a ratio  <a href="class_palette.html#ae2342ab3b67a800ce0aad96dae586613">More...</a><br /></td></tr>
+<tr class="separator:ae2342ab3b67a800ce0aad96dae586613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab69a88042a065da8d0e8301e2f1aeeb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_palette.html#ab69a88042a065da8d0e8301e2f1aeeb6">setColorAt</a> (size_t index, const <a class="el" href="class_color.html">Color</a> &amp;color)</td></tr>
+<tr class="memdesc:ab69a88042a065da8d0e8301e2f1aeeb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">set new color and update ratios  <a href="class_palette.html#ab69a88042a065da8d0e8301e2f1aeeb6">More...</a><br /></td></tr>
+<tr class="separator:ab69a88042a065da8d0e8301e2f1aeeb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbf890cdc477fd81de358a686bfde3f4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_color.html">Color</a> &gt;::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_palette.html#acbf890cdc477fd81de358a686bfde3f4">begin</a> () const</td></tr>
 <tr class="separator:acbf890cdc477fd81de358a686bfde3f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a408239a3358fc6c3efd7e2111bd5223b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_color.html">Color</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_palette.html#a408239a3358fc6c3efd7e2111bd5223b">end</a> ()</td></tr>
-<tr class="separator:a408239a3358fc6c3efd7e2111bd5223b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cec5f23de2b0dd659c945f70b194f78"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_color.html">Color</a> &gt;::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_palette.html#a5cec5f23de2b0dd659c945f70b194f78">end</a> () const</td></tr>
 <tr class="separator:a5cec5f23de2b0dd659c945f70b194f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -173,34 +178,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="af285140f3b268e2223484968c3c675ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af285140f3b268e2223484968c3c675ba">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="class_color.html">Color</a>&gt;::iterator Palette::begin </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Begin iterator over colors </dd></dl>
-
-</div>
-</div>
 <a id="acbf890cdc477fd81de358a686bfde3f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbf890cdc477fd81de358a686bfde3f4">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acbf890cdc477fd81de358a686bfde3f4">&#9670;&nbsp;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,34 +204,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a408239a3358fc6c3efd7e2111bd5223b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a408239a3358fc6c3efd7e2111bd5223b">&#9670;&nbsp;</a></span>end() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="class_color.html">Color</a>&gt;::iterator Palette::end </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>End iterator over colors </dd></dl>
-
-</div>
-</div>
 <a id="a5cec5f23de2b0dd659c945f70b194f78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5cec5f23de2b0dd659c945f70b194f78">&#9670;&nbsp;</a></span>end() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cec5f23de2b0dd659c945f70b194f78">&#9670;&nbsp;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -277,6 +230,37 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="ac4b3ca79b7739e09c6afb40e216644fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4b3ca79b7739e09c6afb40e216644fb">&#9670;&nbsp;</a></span>getRandomColorId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Palette::getRandomColorId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>returns a random color of that pallet based on the ratios </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_palette_ac4b3ca79b7739e09c6afb40e216644fb_icgraph.png" border="0" usemap="#aclass_palette_ac4b3ca79b7739e09c6afb40e216644fb_icgraph" alt=""/></div>
+<map name="aclass_palette_ac4b3ca79b7739e09c6afb40e216644fb_icgraph" id="aclass_palette_ac4b3ca79b7739e09c6afb40e216644fb_icgraph">
+<area shape="rect" title="returns a random color of that pallet based on the ratios" alt="" coords="283,31,459,57"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="157,5,235,32"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,56,229,83"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,31,109,57"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,81,107,108"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a3c55a74b231deff1d256fbd94251603a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c55a74b231deff1d256fbd94251603a">&#9670;&nbsp;</a></span>getSize()</h2>
 
@@ -296,12 +280,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_palette_a3c55a74b231deff1d256fbd94251603a_icgraph.png" border="0" usemap="#aclass_palette_a3c55a74b231deff1d256fbd94251603a_icgraph" alt=""/></div>
 <map name="aclass_palette_a3c55a74b231deff1d256fbd94251603a_icgraph" id="aclass_palette_a3c55a74b231deff1d256fbd94251603a_icgraph">
-<area shape="rect" title=" " alt="" coords="303,56,415,83"/>
-<area shape="rect" href="main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="172,5,255,32"/>
-<area shape="rect" href="main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec" title=" " alt="" coords="5,19,124,45"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="180,107,247,133"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="13,81,117,108"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="15,132,114,159"/>
+<area shape="rect" title=" " alt="" coords="333,56,445,83"/>
+<area shape="rect" href="main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="187,5,270,32"/>
+<area shape="rect" href="main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec" title=" " alt="" coords="5,31,124,57"/>
+<area shape="rect" href="main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7" title=" " alt="" coords="172,107,285,133"/>
 </map>
 </div>
 
@@ -345,6 +327,85 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="ab69a88042a065da8d0e8301e2f1aeeb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab69a88042a065da8d0e8301e2f1aeeb6">&#9670;&nbsp;</a></span>setColorAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Palette::setColorAt </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_color.html">Color</a> &amp;&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set new color and update ratios </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_palette_ab69a88042a065da8d0e8301e2f1aeeb6_icgraph.png" border="0" usemap="#aclass_palette_ab69a88042a065da8d0e8301e2f1aeeb6_icgraph" alt=""/></div>
+<map name="aclass_palette_ab69a88042a065da8d0e8301e2f1aeeb6_icgraph" id="aclass_palette_ab69a88042a065da8d0e8301e2f1aeeb6_icgraph">
+<area shape="rect" title="set new color and update ratios" alt="" coords="303,5,433,32"/>
+<area shape="rect" href="main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="172,5,255,32"/>
+<area shape="rect" href="main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec" title=" " alt="" coords="5,5,124,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae2342ab3b67a800ce0aad96dae586613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2342ab3b67a800ce0aad96dae586613">&#9670;&nbsp;</a></span>setRatioAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Palette::setRatioAt </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>ratio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>updates a ratio </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_palette_ae2342ab3b67a800ce0aad96dae586613_icgraph.png" border="0" usemap="#aclass_palette_ae2342ab3b67a800ce0aad96dae586613_icgraph" alt=""/></div>
+<map name="aclass_palette_ae2342ab3b67a800ce0aad96dae586613_icgraph" id="aclass_palette_ae2342ab3b67a800ce0aad96dae586613_icgraph">
+<area shape="rect" title="updates a ratio" alt="" coords="167,5,297,32"/>
+<area shape="rect" href="main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7" title=" " alt="" coords="5,5,119,32"/>
+</map>
+</div>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="_palette_8hpp_source.html">Palette.hpp</a></li>
 <li>src/<a class="el" href="_palette_8cpp.html">Palette.cpp</a></li>
@@ -352,7 +413,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 9 2021 15:10:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Aug 9 2021 19:53:48 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

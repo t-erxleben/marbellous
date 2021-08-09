@@ -83,121 +83,125 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    std::vector&lt;Polygon&gt; polygons; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">size_t</span> vertCount;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">unsigned</span> generation = 0; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">   18</a></span>&#160;                Point <a class="code" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">p</a>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_scene.html#a602f42bcfed94a39a752fca4b9964a03">   19</a></span>&#160;                <span class="keywordtype">float</span> <a class="code" href="class_scene.html#a602f42bcfed94a39a752fca4b9964a03">r</a>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        } displacement;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_scene.html#a45cca662186b18afe921b0ca159c8529">   24</a></span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code" href="class_scene.html#a45cca662186b18afe921b0ca159c8529">getDisplacement</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <span class="keywordflow">return</span> displacement;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">   28</a></span>&#160;        <span class="keywordtype">unsigned</span> <a class="code" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">getGeneration</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordflow">return</span> generation;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_scene.html#a1557dfc7914440e06198552e213267e7">   36</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scene.html#a1557dfc7914440e06198552e213267e7">addPolygon</a>(<a class="code" href="class_polygon.html">Polygon</a> <span class="keyword">const</span> &amp;pol)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        polygons.push_back(pol);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                ++generation;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> polygons.size() - 1;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_scene.html#a835d3f30ea40b16f4e11aa9a7e8e6bd8">   47</a></span>&#160;    <a class="code" href="class_polygon.html">Polygon</a> &amp;<a class="code" href="class_scene.html#a835d3f30ea40b16f4e11aa9a7e8e6bd8">operator[]</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> index)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">return</span> polygons.at(index);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_scene.html#a6effb360beebcdb58f5384d9d7f380f4">   56</a></span>&#160;    <a class="code" href="class_polygon.html">Polygon</a> <span class="keyword">const</span> &amp; <a class="code" href="class_scene.html#a6effb360beebcdb58f5384d9d7f380f4">operator[]</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> index)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">return</span> polygons.at(index);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_scene.html#a0bc2671d164f0329314da6fb0b5a77bb">   64</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="class_scene.html#a0bc2671d164f0329314da6fb0b5a77bb">getPolygonCount</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> polygons.size();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        </div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9">   69</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9">clear</a>() {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                polygons.clear();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                ++generation;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">   77</a></span>&#160;    std::vector&lt;Polygon&gt;::iterator <a class="code" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">begin</a>()</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> polygons.begin();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_scene.html#ab51ba72c14d8bee244f2cc872a36f072">   85</a></span>&#160;    std::vector&lt;Polygon&gt;::const_iterator <a class="code" href="class_scene.html#ab51ba72c14d8bee244f2cc872a36f072">begin</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">return</span> polygons.begin();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="class_scene.html#ae375ece8da0f5b33ee9178ba20e969fc">   89</a></span>&#160;        std::vector&lt;Polygon&gt;::const_reverse_iterator <a class="code" href="class_scene.html#ae375ece8da0f5b33ee9178ba20e969fc">rbegin</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="keywordflow">return</span> polygons.rbegin();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">   97</a></span>&#160;    std::vector&lt;Polygon&gt;::iterator <a class="code" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">end</a>()</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">return</span> polygons.end();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="class_scene.html#a5157269627ff8312905c9aaf7c5f5f09">  105</a></span>&#160;    std::vector&lt;Polygon&gt;::const_iterator <a class="code" href="class_scene.html#a5157269627ff8312905c9aaf7c5f5f09">end</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> polygons.end();</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="class_scene.html#ac708e7f8fbb9fcb065bb3272788ceff4">  109</a></span>&#160;        std::vector&lt;Polygon&gt;::const_reverse_iterator <a class="code" href="class_scene.html#ac708e7f8fbb9fcb065bb3272788ceff4">rend</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                <span class="keywordflow">return</span> polygons.rend();</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        std::vector&lt;Displacement&gt; displacements;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca">   21</a></span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca">getDisplacements</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                <span class="keywordflow">return</span> displacements;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">   25</a></span>&#160;        <span class="keywordtype">unsigned</span> <a class="code" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">getGeneration</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <span class="keywordflow">return</span> generation;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_scene.html#a1557dfc7914440e06198552e213267e7">   33</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scene.html#a1557dfc7914440e06198552e213267e7">addPolygon</a>(<a class="code" href="class_polygon.html">Polygon</a> <span class="keyword">const</span> &amp;pol)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        polygons.push_back(pol);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                ++generation;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> polygons.size() - 1;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_scene.html#a835d3f30ea40b16f4e11aa9a7e8e6bd8">   44</a></span>&#160;    <a class="code" href="class_polygon.html">Polygon</a> &amp;<a class="code" href="class_scene.html#a835d3f30ea40b16f4e11aa9a7e8e6bd8">operator[]</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> index)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">return</span> polygons.at(index);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_scene.html#a6effb360beebcdb58f5384d9d7f380f4">   53</a></span>&#160;    <a class="code" href="class_polygon.html">Polygon</a> <span class="keyword">const</span> &amp; <a class="code" href="class_scene.html#a6effb360beebcdb58f5384d9d7f380f4">operator[]</a>(<span class="keywordtype">size_t</span> <span class="keyword">const</span> index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">return</span> polygons.at(index);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_scene.html#a0bc2671d164f0329314da6fb0b5a77bb">   61</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="class_scene.html#a0bc2671d164f0329314da6fb0b5a77bb">getPolygonCount</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">return</span> polygons.size();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9">   66</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9">clear</a>() {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                polygons.clear();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                ++generation;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">   74</a></span>&#160;    std::vector&lt;Polygon&gt;::iterator <a class="code" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">begin</a>()</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">return</span> polygons.begin();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="class_scene.html#ab51ba72c14d8bee244f2cc872a36f072">   82</a></span>&#160;    std::vector&lt;Polygon&gt;::const_iterator <a class="code" href="class_scene.html#ab51ba72c14d8bee244f2cc872a36f072">begin</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> polygons.begin();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="class_scene.html#ae375ece8da0f5b33ee9178ba20e969fc">   86</a></span>&#160;        std::vector&lt;Polygon&gt;::const_reverse_iterator <a class="code" href="class_scene.html#ae375ece8da0f5b33ee9178ba20e969fc">rbegin</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="keywordflow">return</span> polygons.rbegin();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">   94</a></span>&#160;    std::vector&lt;Polygon&gt;::iterator <a class="code" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">end</a>()</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> polygons.end();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="class_scene.html#a5157269627ff8312905c9aaf7c5f5f09">  102</a></span>&#160;    std::vector&lt;Polygon&gt;::const_iterator <a class="code" href="class_scene.html#a5157269627ff8312905c9aaf7c5f5f09">end</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">return</span> polygons.end();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="class_scene.html#ac708e7f8fbb9fcb065bb3272788ceff4">  106</a></span>&#160;        std::vector&lt;Polygon&gt;::const_reverse_iterator <a class="code" href="class_scene.html#ac708e7f8fbb9fcb065bb3272788ceff4">rend</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="keywordflow">return</span> polygons.rend();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54">  111</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54">applyDisplacement</a>() { </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordflow">if</span>(displacements.empty()) { <span class="keywordflow">return</span>; }</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54">  114</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54">applyDisplacement</a>() { </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; <a class="code" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">p</a> : *<span class="keyword">this</span>) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                        <a class="code" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">p</a>.displace(displacement.p, displacement.r);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <span class="comment">// remove polygons with less then 3 vertices</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                polygons.erase(</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                        std::remove_if(<a class="code" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">begin</a>(), <a class="code" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">end</a>(), [](<span class="keyword">const</span> <a class="code" href="class_polygon.html">Polygon</a>&amp; <a class="code" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">p</a>){</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                                <span class="keywordflow">return</span> <a class="code" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">p</a>.getVertCount() &lt; 3;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                        }),</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                        <a class="code" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">end</a>());</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                displacement.r = 0;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                ++generation;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="class_scene.html#ab6212abe1575299362392f7bce226abc">  130</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_scene.html#ab6212abe1575299362392f7bce226abc">setDisplacement</a>(Point <a class="code" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">p</a>, <span class="keywordtype">float</span> newRadius) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                displacement.p = <a class="code" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">p</a>;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                displacement.r = newRadius;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;};</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; p : *<span class="keyword">this</span>) {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        p.displace(displacements);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                <span class="comment">// remove polygons with less then 3 vertices</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                polygons.erase(</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                        std::remove_if(<a class="code" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">begin</a>(), <a class="code" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">end</a>(), [](<span class="keyword">const</span> <a class="code" href="class_polygon.html">Polygon</a>&amp; p){</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                                <span class="keywordflow">return</span> p.<a class="code" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820">getVertCount</a>() &lt; 3;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                        }),</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                        <a class="code" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">end</a>());</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                displacements.clear();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                ++generation;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf">  129</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf">addDisplacement</a>(Point p, <span class="keywordtype">float</span> newRadius) {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                displacements.push_back({p, newRadius});</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="class_scene.html#a650b57a9405c6b74bc60fe55d419fd0c">  133</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a650b57a9405c6b74bc60fe55d419fd0c">setDisplacementRadius</a>(<span class="keywordtype">float</span> rad) {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; dis : displacements) {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                        dis.r = rad;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                }</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;};</div>
 <div class="ttc" id="a_polygon_8hpp_html"><div class="ttname"><a href="_polygon_8hpp.html">Polygon.hpp</a></div></div>
 <div class="ttc" id="aclass_polygon_html"><div class="ttname"><a href="class_polygon.html">Polygon</a></div><div class="ttdef"><b>Definition:</b> Polygon.hpp:13</div></div>
+<div class="ttc" id="aclass_polygon_html_a4cfcc27123e12eca73c4b9901d761820"><div class="ttname"><a href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820">Polygon::getVertCount</a></div><div class="ttdeci">size_t getVertCount() const</div><div class="ttdef"><b>Definition:</b> Polygon.cpp:13</div></div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.hpp:12</div></div>
-<div class="ttc" id="aclass_scene_html_a0015860acf1b41173be6d3bff19ab6c9"><div class="ttname"><a href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">Scene::getGeneration</a></div><div class="ttdeci">unsigned getGeneration() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:28</div></div>
-<div class="ttc" id="aclass_scene_html_a080226df8abd8a89e1c8aa48e02b4d01"><div class="ttname"><a href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">Scene::begin</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::iterator begin()</div><div class="ttdef"><b>Definition:</b> Scene.hpp:77</div></div>
-<div class="ttc" id="aclass_scene_html_a0bc2671d164f0329314da6fb0b5a77bb"><div class="ttname"><a href="class_scene.html#a0bc2671d164f0329314da6fb0b5a77bb">Scene::getPolygonCount</a></div><div class="ttdeci">size_t getPolygonCount() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:64</div></div>
-<div class="ttc" id="aclass_scene_html_a1557dfc7914440e06198552e213267e7"><div class="ttname"><a href="class_scene.html#a1557dfc7914440e06198552e213267e7">Scene::addPolygon</a></div><div class="ttdeci">int addPolygon(Polygon const &amp;pol)</div><div class="ttdef"><b>Definition:</b> Scene.hpp:36</div></div>
-<div class="ttc" id="aclass_scene_html_a45cca662186b18afe921b0ca159c8529"><div class="ttname"><a href="class_scene.html#a45cca662186b18afe921b0ca159c8529">Scene::getDisplacement</a></div><div class="ttdeci">const auto &amp; getDisplacement() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:24</div></div>
-<div class="ttc" id="aclass_scene_html_a5157269627ff8312905c9aaf7c5f5f09"><div class="ttname"><a href="class_scene.html#a5157269627ff8312905c9aaf7c5f5f09">Scene::end</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::const_iterator end() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:105</div></div>
-<div class="ttc" id="aclass_scene_html_a602f42bcfed94a39a752fca4b9964a03"><div class="ttname"><a href="class_scene.html#a602f42bcfed94a39a752fca4b9964a03">Scene::r</a></div><div class="ttdeci">float r</div><div class="ttdef"><b>Definition:</b> Scene.hpp:19</div></div>
-<div class="ttc" id="aclass_scene_html_a6ca9d5e53f030f2857df6c0d92b50c89"><div class="ttname"><a href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">Scene::p</a></div><div class="ttdeci">Point p</div><div class="ttdef"><b>Definition:</b> Scene.hpp:18</div></div>
-<div class="ttc" id="aclass_scene_html_a6effb360beebcdb58f5384d9d7f380f4"><div class="ttname"><a href="class_scene.html#a6effb360beebcdb58f5384d9d7f380f4">Scene::operator[]</a></div><div class="ttdeci">Polygon const  &amp; operator[](size_t const index) const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:56</div></div>
-<div class="ttc" id="aclass_scene_html_a70e5b1218abb729d70d9f41b107017f9"><div class="ttname"><a href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9">Scene::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> Scene.hpp:69</div></div>
-<div class="ttc" id="aclass_scene_html_a835d3f30ea40b16f4e11aa9a7e8e6bd8"><div class="ttname"><a href="class_scene.html#a835d3f30ea40b16f4e11aa9a7e8e6bd8">Scene::operator[]</a></div><div class="ttdeci">Polygon &amp; operator[](size_t const index)</div><div class="ttdef"><b>Definition:</b> Scene.hpp:47</div></div>
-<div class="ttc" id="aclass_scene_html_ab51ba72c14d8bee244f2cc872a36f072"><div class="ttname"><a href="class_scene.html#ab51ba72c14d8bee244f2cc872a36f072">Scene::begin</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::const_iterator begin() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:85</div></div>
-<div class="ttc" id="aclass_scene_html_ab6212abe1575299362392f7bce226abc"><div class="ttname"><a href="class_scene.html#ab6212abe1575299362392f7bce226abc">Scene::setDisplacement</a></div><div class="ttdeci">void setDisplacement(Point p, float newRadius)</div><div class="ttdef"><b>Definition:</b> Scene.hpp:130</div></div>
-<div class="ttc" id="aclass_scene_html_ac708e7f8fbb9fcb065bb3272788ceff4"><div class="ttname"><a href="class_scene.html#ac708e7f8fbb9fcb065bb3272788ceff4">Scene::rend</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::const_reverse_iterator rend() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:109</div></div>
-<div class="ttc" id="aclass_scene_html_ad3e6be79363fe85e92c0f7e472b1e0c5"><div class="ttname"><a href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">Scene::end</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::iterator end()</div><div class="ttdef"><b>Definition:</b> Scene.hpp:97</div></div>
-<div class="ttc" id="aclass_scene_html_adbecca99ac51d843e8cffbc1bd6adb54"><div class="ttname"><a href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54">Scene::applyDisplacement</a></div><div class="ttdeci">void applyDisplacement()</div><div class="ttdef"><b>Definition:</b> Scene.hpp:114</div></div>
-<div class="ttc" id="aclass_scene_html_ae375ece8da0f5b33ee9178ba20e969fc"><div class="ttname"><a href="class_scene.html#ae375ece8da0f5b33ee9178ba20e969fc">Scene::rbegin</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::const_reverse_iterator rbegin() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:89</div></div>
+<div class="ttc" id="aclass_scene_html_a0015860acf1b41173be6d3bff19ab6c9"><div class="ttname"><a href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">Scene::getGeneration</a></div><div class="ttdeci">unsigned getGeneration() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:25</div></div>
+<div class="ttc" id="aclass_scene_html_a080226df8abd8a89e1c8aa48e02b4d01"><div class="ttname"><a href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">Scene::begin</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::iterator begin()</div><div class="ttdef"><b>Definition:</b> Scene.hpp:74</div></div>
+<div class="ttc" id="aclass_scene_html_a0bc2671d164f0329314da6fb0b5a77bb"><div class="ttname"><a href="class_scene.html#a0bc2671d164f0329314da6fb0b5a77bb">Scene::getPolygonCount</a></div><div class="ttdeci">size_t getPolygonCount() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:61</div></div>
+<div class="ttc" id="aclass_scene_html_a1557dfc7914440e06198552e213267e7"><div class="ttname"><a href="class_scene.html#a1557dfc7914440e06198552e213267e7">Scene::addPolygon</a></div><div class="ttdeci">int addPolygon(Polygon const &amp;pol)</div><div class="ttdef"><b>Definition:</b> Scene.hpp:33</div></div>
+<div class="ttc" id="aclass_scene_html_a483d6b3587d4c2c07b9e71e38d770baf"><div class="ttname"><a href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf">Scene::addDisplacement</a></div><div class="ttdeci">void addDisplacement(Point p, float newRadius)</div><div class="ttdef"><b>Definition:</b> Scene.hpp:129</div></div>
+<div class="ttc" id="aclass_scene_html_a5157269627ff8312905c9aaf7c5f5f09"><div class="ttname"><a href="class_scene.html#a5157269627ff8312905c9aaf7c5f5f09">Scene::end</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::const_iterator end() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:102</div></div>
+<div class="ttc" id="aclass_scene_html_a650b57a9405c6b74bc60fe55d419fd0c"><div class="ttname"><a href="class_scene.html#a650b57a9405c6b74bc60fe55d419fd0c">Scene::setDisplacementRadius</a></div><div class="ttdeci">void setDisplacementRadius(float rad)</div><div class="ttdef"><b>Definition:</b> Scene.hpp:133</div></div>
+<div class="ttc" id="aclass_scene_html_a6effb360beebcdb58f5384d9d7f380f4"><div class="ttname"><a href="class_scene.html#a6effb360beebcdb58f5384d9d7f380f4">Scene::operator[]</a></div><div class="ttdeci">Polygon const  &amp; operator[](size_t const index) const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:53</div></div>
+<div class="ttc" id="aclass_scene_html_a70e5b1218abb729d70d9f41b107017f9"><div class="ttname"><a href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9">Scene::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> Scene.hpp:66</div></div>
+<div class="ttc" id="aclass_scene_html_a835d3f30ea40b16f4e11aa9a7e8e6bd8"><div class="ttname"><a href="class_scene.html#a835d3f30ea40b16f4e11aa9a7e8e6bd8">Scene::operator[]</a></div><div class="ttdeci">Polygon &amp; operator[](size_t const index)</div><div class="ttdef"><b>Definition:</b> Scene.hpp:44</div></div>
+<div class="ttc" id="aclass_scene_html_a8f2c54c17ebc3cce7d6b60651613d9ca"><div class="ttname"><a href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca">Scene::getDisplacements</a></div><div class="ttdeci">const auto &amp; getDisplacements() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:21</div></div>
+<div class="ttc" id="aclass_scene_html_ab51ba72c14d8bee244f2cc872a36f072"><div class="ttname"><a href="class_scene.html#ab51ba72c14d8bee244f2cc872a36f072">Scene::begin</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::const_iterator begin() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:82</div></div>
+<div class="ttc" id="aclass_scene_html_ac708e7f8fbb9fcb065bb3272788ceff4"><div class="ttname"><a href="class_scene.html#ac708e7f8fbb9fcb065bb3272788ceff4">Scene::rend</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::const_reverse_iterator rend() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:106</div></div>
+<div class="ttc" id="aclass_scene_html_ad3e6be79363fe85e92c0f7e472b1e0c5"><div class="ttname"><a href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">Scene::end</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::iterator end()</div><div class="ttdef"><b>Definition:</b> Scene.hpp:94</div></div>
+<div class="ttc" id="aclass_scene_html_adbecca99ac51d843e8cffbc1bd6adb54"><div class="ttname"><a href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54">Scene::applyDisplacement</a></div><div class="ttdeci">void applyDisplacement()</div><div class="ttdef"><b>Definition:</b> Scene.hpp:111</div></div>
+<div class="ttc" id="aclass_scene_html_ae375ece8da0f5b33ee9178ba20e969fc"><div class="ttname"><a href="class_scene.html#ae375ece8da0f5b33ee9178ba20e969fc">Scene::rbegin</a></div><div class="ttdeci">std::vector&lt; Polygon &gt;::const_reverse_iterator rbegin() const</div><div class="ttdef"><b>Definition:</b> Scene.hpp:86</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 9 2021 15:10:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Aug 9 2021 19:53:47 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

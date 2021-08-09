@@ -7,7 +7,10 @@ class Color
 {
 private:
     uint8_t r,g,b;
+	unsigned m_ratio;
+	float m_p;
 
+	friend class Palette;
 public:
 	using rgb_t = std::tuple<uint8_t, uint8_t, uint8_t>;
 

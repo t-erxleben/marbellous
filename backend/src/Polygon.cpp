@@ -40,16 +40,20 @@ size_t Polygon::circleVertCount(float radius)
 
 /** displace a point in place
  */
-Point& displacePoint(Point& p, const Point& c, float r) {
-	Point d = p - c;
-	d *= sqrtf(1 + r*r/ (d*d) );
-	p = c + d;
+Point& displacePoint(Point& p, const std::vector<Displacement>& displacements) {
+	Point move{0, 0};
+	for(const auto& dis : displacements) {
+		Point d = p - dis.p;
+		d *= sqrtf(1 + dis.r*dis.r/ (d*d) );
+		move += dis.p + d - p;
+	}
+	p += move;
 	return p;
 }
 
-Point displacePoint(const Point& p, const Point& c, float r) {
+Point displacePoint(const Point& p, const std::vector<Displacement>& displacements) {
 	Point ret(p);
-	return displacePoint(ret, c, r);
+	return displacePoint(ret, displacements);
 }
 
 // p = c + d
@@ -65,7 +69,7 @@ Point displacePoint(const Point& p, const Point& c, float r) {
 // 1/(1-r^2/<d2,d2>) = s^2
 // s = sqrt(1/(1-r^2/<d2,d2>))
 // d = d2 * 1/s
-Point reverseDisplacementPoint(const Point& p, const Point& c, float r) {
+/*Point reverseDisplacementPoint(const Point& p, const Point& c, float r) {
 	Point d = p - c;
 	float det = 1.f - r*r/(d*d);
 	if(det <= 0.f) {
@@ -75,7 +79,7 @@ Point reverseDisplacementPoint(const Point& p, const Point& c, float r) {
 		d /= sqrtf(1.f/(1.f-r*r/(d*d)));
 	}
 	return c + d;
-}
+}*/
 
 int Polygon::calcInsertion(const Point& start, const Point& end) {
 		float d2 = distance2(start, end);
@@ -88,17 +92,19 @@ int Polygon::calcInsertion(const Point& start, const Point& end) {
 		return 0;
 }
 
-void Polygon::displace(Point c, float r)
+void Polygon::displace(const std::vector<Displacement>& displacements)
 {
 	assert(vertices.size() > 2);
     isCircle = false;
-	displacePoint(vertices[0].pos, c, r);
+	vertices[0].last = vertices[0].pos;
+	displacePoint(vertices[0].pos, displacements);
 	int size_diff = 0;
 	size_t lastId = 0;
 	for(std::size_t i = 1; i < vertices.size(); ++i) {
 		Point& p = vertices[i].pos;
-		Point copy = p;
-		displacePoint(p, c, r);
+		vertices[i].last = p;
+
+		displacePoint(p, displacements);
 		vertices[i].insertion = calcInsertion(vertices[lastId].pos, p);
 
 		if (vertices[i].insertion >= 0) {lastId = i; }
@@ -123,9 +129,9 @@ void Polygon::displace(Point c, float r)
 	}
 
 	// insert new vertices
-	if(size_diff > 0) { vertices.resize(vertices.size() + size_diff); }
-	auto dst = vertices.rbegin() + std::max(0, -size_diff);
-	auto src = vertices.rbegin() + del + std::max(0, size_diff);
+	vertices.resize(vertices.size() + size_diff);
+	auto dst = vertices.rbegin();
+	auto src = vertices.rbegin() + del + size_diff;
 	int insertion = 0;
 	float fraction = 0.f;
 	Point last{};
@@ -133,7 +139,7 @@ void Polygon::displace(Point c, float r)
 	while(dst != vertices.rend()) {
 		if(insertion) {
 			float x = fraction * insertion;
-			dst->pos = displacePoint(Point::mix(last, next, x), c, r);
+			dst->pos = displacePoint(Point::mix(last, next, x), displacements);
 			++dst;
 			--insertion;
 		} else if(src->insertion >= 0) {
@@ -141,18 +147,18 @@ void Polygon::displace(Point c, float r)
 			*dst = *src;
 			insertion = src->insertion;
 			fraction = 1.f / static_cast<float>(insertion+1);
-			last = reverseDisplacementPoint(src->pos, c, r);
+			last = src->last;
 			++dst;
 			++src;
 			next = src != vertices.rend()
-				? reverseDisplacementPoint(src->pos, c, r)
-				: reverseDisplacementPoint(vertices.back().pos, c, r);
+				? src->last
+				: vertices.back().last;
 		} else {
 			++src;
 		}
 		assert(src >= dst);
 	}
-	if(size_diff < 0) { vertices.resize(vertices.size() + size_diff);}
+	assert(src == vertices.rend());
 }
 
 void Polygon::makeCircle(Point mid, float radius)

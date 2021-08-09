@@ -1,19 +1,20 @@
 <map id="addDrop" name="addDrop">
 <area shape="rect" id="node1" title=" " alt="" coords="5,380,76,407"/>
-<area shape="rect" id="node2" href="$class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="164,5,296,32"/>
-<area shape="rect" id="node3" href="$class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="143,56,317,83"/>
-<area shape="rect" id="node6" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="124,335,336,361"/>
-<area shape="rect" id="node11" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="415,461,556,488"/>
-<area shape="rect" id="node14" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="638,373,802,400"/>
-<area shape="rect" id="node15" href="$class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="635,449,805,476"/>
-<area shape="rect" id="node16" href="$class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="145,563,315,589"/>
-<area shape="rect" id="node17" href="$class_scene.html#ab6212abe1575299362392f7bce226abc" title=" " alt="" coords="149,613,311,640"/>
-<area shape="rect" id="node4" href="$class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="437,5,533,32"/>
-<area shape="rect" id="node5" href="$class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="442,56,529,83"/>
-<area shape="rect" id="node7" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="385,309,586,336"/>
-<area shape="rect" id="node8" href="$class_options.html#a1fe456ad2f76cc5df6ff4c167ec7fba8" title=" " alt="" coords="415,360,555,387"/>
-<area shape="rect" id="node9" href="$class_scene.html#a45cca662186b18afe921b0ca159c8529" title=" " alt="" coords="404,157,567,184"/>
-<area shape="rect" id="node10" href="$class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="412,208,559,235"/>
-<area shape="rect" id="node12" href="$class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225" title="get color channels" alt="" coords="433,259,537,285"/>
-<area shape="rect" id="node13" href="$class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="384,411,587,437"/>
+<area shape="rect" id="node2" href="$class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf" title=" " alt="" coords="147,95,313,121"/>
+<area shape="rect" id="node3" href="$class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="164,145,296,172"/>
+<area shape="rect" id="node4" href="$class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="143,196,317,223"/>
+<area shape="rect" id="node8" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="124,335,336,361"/>
+<area shape="rect" id="node13" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="415,461,556,488"/>
+<area shape="rect" id="node16" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="638,436,802,463"/>
+<area shape="rect" id="node17" href="$class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="635,512,805,539"/>
+<area shape="rect" id="node18" href="$class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="145,613,315,640"/>
+<area shape="rect" id="node5" href="$class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="437,5,533,32"/>
+<area shape="rect" id="node6" href="$class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="442,56,529,83"/>
+<area shape="rect" id="node7" href="$class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="410,107,561,133"/>
+<area shape="rect" id="node9" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="385,157,586,184"/>
+<area shape="rect" id="node10" href="$class_options.html#a1fe456ad2f76cc5df6ff4c167ec7fba8" title=" " alt="" coords="415,208,555,235"/>
+<area shape="rect" id="node11" href="$class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="401,259,570,285"/>
+<area shape="rect" id="node12" href="$class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="412,309,559,336"/>
+<area shape="rect" id="node14" href="$class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225" title="get color channels" alt="" coords="433,360,537,387"/>
+<area shape="rect" id="node15" href="$class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="384,411,587,437"/>
 </map>

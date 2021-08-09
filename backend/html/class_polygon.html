@@ -94,8 +94,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6a29d611b7d3f8056a76dabc8319a198"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f5bc5111907b04cc5e85afacceeb6e2"><td class="memItemLeft" align="right" valign="top">Point const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_polygon.html#a2f5bc5111907b04cc5e85afacceeb6e2">getCreationPoint</a> ()</td></tr>
 <tr class="separator:a2f5bc5111907b04cc5e85afacceeb6e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51b659954a4868469da1c3b92c40db62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_polygon.html#a51b659954a4868469da1c3b92c40db62">displace</a> (Point mid, float radius)</td></tr>
-<tr class="separator:a51b659954a4868469da1c3b92c40db62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf0a0ddcdbd2329fa6a2f7803b125074"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_polygon.html#aaf0a0ddcdbd2329fa6a2f7803b125074">displace</a> (const std::vector&lt; Displacement &gt; &amp;displacements)</td></tr>
+<tr class="separator:aaf0a0ddcdbd2329fa6a2f7803b125074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bfbed451183bf48f3ab8ddd2511c9fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_polygon.html#a1bfbed451183bf48f3ab8ddd2511c9fb">makeCircle</a> (Point mid, float radius)</td></tr>
 <tr class="separator:a1bfbed451183bf48f3ab8ddd2511c9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -176,8 +176,8 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a51b659954a4868469da1c3b92c40db62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51b659954a4868469da1c3b92c40db62">&#9670;&nbsp;</a></span>displace()</h2>
+<a id="aaf0a0ddcdbd2329fa6a2f7803b125074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf0a0ddcdbd2329fa6a2f7803b125074">&#9670;&nbsp;</a></span>displace()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -185,37 +185,25 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void Polygon::displace </td>
           <td>(</td>
-          <td class="paramtype">Point&#160;</td>
-          <td class="paramname"><em>mid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const std::vector&lt; Displacement &gt; &amp;&#160;</td>
+          <td class="paramname"><em>displacements</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>radius</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Displace a polygon as a result of a new circle appearing. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mid</td><td>Middle point of the new circle causing displacement. </td></tr>
-    <tr><td class="paramname">radius</td><td>Radius of the new circle causing displacement. </td></tr>
+    <tr><td class="paramname">displacements</td><td>vector of circles with radius and diameter which causes displacement </td></tr>
   </table>
   </dd>
 </dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_polygon_a51b659954a4868469da1c3b92c40db62_cgraph.png" border="0" usemap="#aclass_polygon_a51b659954a4868469da1c3b92c40db62_cgraph" alt=""/></div>
-<map name="aclass_polygon_a51b659954a4868469da1c3b92c40db62_cgraph" id="aclass_polygon_a51b659954a4868469da1c3b92c40db62_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,128,57"/>
-<area shape="rect" href="_polygon_8cpp.html#a6b27bbe27a042b620a704c578c8089c8" title=" " alt="" coords="213,5,313,32"/>
-<area shape="rect" href="_polygon_8cpp.html#ada0f590c30f349703d897ae03d0e71a0" title=" " alt="" coords="176,56,351,83"/>
+<div class="center"><img src="class_polygon_aaf0a0ddcdbd2329fa6a2f7803b125074_cgraph.png" border="0" usemap="#aclass_polygon_aaf0a0ddcdbd2329fa6a2f7803b125074_cgraph" alt=""/></div>
+<map name="aclass_polygon_aaf0a0ddcdbd2329fa6a2f7803b125074_cgraph" id="aclass_polygon_aaf0a0ddcdbd2329fa6a2f7803b125074_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,128,32"/>
+<area shape="rect" href="_polygon_8cpp.html#ae71a84f6ab2f5ef3de160e37246f9303" title=" " alt="" coords="176,5,276,32"/>
 </map>
 </div>
 
@@ -290,6 +278,21 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Number of vertices of a polygon. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_polygon_a4cfcc27123e12eca73c4b9901d761820_icgraph.png" border="0" usemap="#aclass_polygon_a4cfcc27123e12eca73c4b9901d761820_icgraph" alt=""/></div>
+<map name="aclass_polygon_a4cfcc27123e12eca73c4b9901d761820_icgraph" id="aclass_polygon_a4cfcc27123e12eca73c4b9901d761820_icgraph">
+<area shape="rect" title=" " alt="" coords="515,81,665,108"/>
+<area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="292,81,467,108"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="165,5,236,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="162,56,239,83"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="157,107,244,133"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="167,157,234,184"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -368,7 +371,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 9 2021 15:10:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Aug 9 2021 19:53:48 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

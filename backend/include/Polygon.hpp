@@ -18,6 +18,7 @@ private:
 	struct Data {
 		Point pos;
 		int insertion; ///< >0 -> insert after this vertex x, <0 remove this
+		Point last;
 	};
     std::vector<Data> vertices; ///<List representation of the polygon.
 
@@ -92,10 +93,9 @@ public:
     Point const & getCreationPoint();
 
     /** Displace a polygon as a result of a new circle appearing.
-     * @param mid Middle point of the new circle causing displacement.
-     * @param radius Radius of the new circle causing displacement.
+	 * @param displacements vector of circles with radius and diameter which causes displacement
     */
-    void displace(Point mid, float radius);
+    void displace(const std::vector<Displacement>& displacements);
 
     /** Redraw Polygon as a new circle.
      * This is intended to be used for making the circle larger.

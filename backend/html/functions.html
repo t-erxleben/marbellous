@@ -75,6 +75,9 @@ $(function() {
 <li>add()
 : <a class="el" href="class_palette.html#a4e51642486ec5e5d95626c01f99f1c35">Palette</a>
 </li>
+<li>addDisplacement()
+: <a class="el" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf">Scene</a>
+</li>
 <li>addPalette()
 : <a class="el" href="class_options.html#ac8253319f6fe75047630ee55a51b285c">Options</a>
 </li>
@@ -89,7 +92,7 @@ $(function() {
 
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>begin()
-: <a class="el" href="class_palette.html#af285140f3b268e2223484968c3c675ba">Palette</a>
+: <a class="el" href="class_palette.html#acbf890cdc477fd81de358a686bfde3f4">Palette</a>
 , <a class="el" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">Scene</a>
 </li>
 <li>buildColorBuffer()
@@ -105,6 +108,9 @@ $(function() {
 <li>Color()
 : <a class="el" href="class_color.html#a9a742cbe9f9f4037f5d9f4e81a9b2428">Color</a>
 </li>
+<li>colorId
+: <a class="el" href="struct_drop_data.html#a3b9bc72879e81744c8377ff2819a5a8a">DropData</a>
+</li>
 <li>constructFBO()
 : <a class="el" href="class_w_g_l_renderer.html#aa28e8a772757fe4b7f4284a0f0df9290">WGLRenderer</a>
 </li>
@@ -113,7 +119,7 @@ $(function() {
 
 <h3><a id="index_d"></a>- d -</h3><ul>
 <li>displace()
-: <a class="el" href="class_polygon.html#a51b659954a4868469da1c3b92c40db62">Polygon</a>
+: <a class="el" href="class_polygon.html#aaf0a0ddcdbd2329fa6a2f7803b125074">Polygon</a>
 </li>
 <li>draw()
 : <a class="el" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e">WGLRakeRenderer</a>
@@ -130,7 +136,7 @@ $(function() {
 
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>end()
-: <a class="el" href="class_palette.html#a408239a3358fc6c3efd7e2111bd5223b">Palette</a>
+: <a class="el" href="class_palette.html#a5cec5f23de2b0dd659c945f70b194f78">Palette</a>
 , <a class="el" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5">Scene</a>
 </li>
 </ul>
@@ -149,8 +155,8 @@ $(function() {
 <li>getCreationPoint()
 : <a class="el" href="class_polygon.html#a2f5bc5111907b04cc5e85afacceeb6e2">Polygon</a>
 </li>
-<li>getDisplacement()
-: <a class="el" href="class_scene.html#a45cca662186b18afe921b0ca159c8529">Scene</a>
+<li>getDisplacements()
+: <a class="el" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca">Scene</a>
 </li>
 <li>getDrawInfo()
 : <a class="el" href="class_polygon.html#a6a29d611b7d3f8056a76dabc8319a198">Polygon</a>
@@ -169,6 +175,9 @@ $(function() {
 </li>
 <li>getRakeRes()
 : <a class="el" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c">WGLContext</a>
+</li>
+<li>getRandomColorId()
+: <a class="el" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb">Palette</a>
 </li>
 <li>getRGB()
 : <a class="el" href="class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225">Color</a>
@@ -214,11 +223,9 @@ $(function() {
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
-<li>p
-: <a class="el" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">Scene</a>
-</li>
-<li>Palette()
-: <a class="el" href="class_palette.html#a6eb6cac583a840b5251897e3403eac5a">Palette</a>
+<li>Palette
+: <a class="el" href="class_color.html#a2b0840855555be34f5b522592031d1af">Color</a>
+, <a class="el" href="class_palette.html#a6eb6cac583a840b5251897e3403eac5a">Palette</a>
 </li>
 <li>Polygon()
 : <a class="el" href="class_polygon.html#ac183e712f8be1e13f1c9d5b4d4512ead">Polygon</a>
@@ -228,7 +235,7 @@ $(function() {
 
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>r
-: <a class="el" href="class_scene.html#a602f42bcfed94a39a752fca4b9964a03">Scene</a>
+: <a class="el" href="struct_drop_data.html#aa944cddff6df07dde96afbdcb56e5e1c">DropData</a>
 </li>
 <li>rake()
 : <a class="el" href="class_w_g_l_rake_renderer.html#af04c696e15e31e955ffe5891416d5361">WGLRakeRenderer</a>
@@ -269,14 +276,20 @@ $(function() {
 : <a class="el" href="class_options.html#a83357f7956342fb58ffb7601f78fe41f">Options</a>
 , <a class="el" href="class_w_g_l_context.html#a181859abac8486988a909816702293e0">WGLContext</a>
 </li>
-<li>setDisplacement()
-: <a class="el" href="class_scene.html#ab6212abe1575299362392f7bce226abc">Scene</a>
+<li>setColorAt()
+: <a class="el" href="class_palette.html#ab69a88042a065da8d0e8301e2f1aeeb6">Palette</a>
+</li>
+<li>setDisplacementRadius()
+: <a class="el" href="class_scene.html#a650b57a9405c6b74bc60fe55d419fd0c">Scene</a>
 </li>
 <li>setDropRes()
 : <a class="el" href="class_w_g_l_context.html#a1f4c858266e7ba90e2852f4de591007f">WGLContext</a>
 </li>
 <li>setRakeRes()
 : <a class="el" href="class_w_g_l_context.html#a1e80c729fe26fd1dde76ec415a09ed61">WGLContext</a>
+</li>
+<li>setRatioAt()
+: <a class="el" href="class_palette.html#ae2342ab3b67a800ce0aad96dae586613">Palette</a>
 </li>
 <li>setState()
 : <a class="el" href="class_options.html#acd20fd8557d165f0418b2e8113c9c836">Options</a>
@@ -305,10 +318,24 @@ $(function() {
 : <a class="el" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b">WGLSceneRenderer</a>
 </li>
 </ul>
+
+
+<h3><a id="index_x"></a>- x -</h3><ul>
+<li>x
+: <a class="el" href="struct_drop_data.html#a1c688100da7ec5dcf546f3da67b0a6a8">DropData</a>
+</li>
+</ul>
+
+
+<h3><a id="index_y"></a>- y -</h3><ul>
+<li>y
+: <a class="el" href="struct_drop_data.html#aa695add9ba88755809860cfaa4293360">DropData</a>
+</li>
+</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 9 2021 15:10:02 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Aug 9 2021 19:53:48 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

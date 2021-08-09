@@ -1,6 +1,7 @@
 <map id="setColorAt" name="setColorAt">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,88,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,88,108"/>
 <area shape="rect" id="node2" href="$class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="136,5,305,32"/>
 <area shape="rect" id="node3" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="150,56,291,83"/>
 <area shape="rect" id="node4" href="$class_palette.html#a3c55a74b231deff1d256fbd94251603a" title=" " alt="" coords="165,107,277,133"/>
+<area shape="rect" id="node5" href="$class_palette.html#ab69a88042a065da8d0e8301e2f1aeeb6" title="set new color and update ratios" alt="" coords="155,157,286,184"/>
 </map>

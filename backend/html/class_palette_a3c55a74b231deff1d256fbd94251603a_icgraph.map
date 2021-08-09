@@ -1,8 +1,6 @@
 <map id="Palette::getSize" name="Palette::getSize">
-<area shape="rect" id="node1" title=" " alt="" coords="303,56,415,83"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="172,5,255,32"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec" title=" " alt="" coords="5,19,124,45"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="180,107,247,133"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="13,81,117,108"/>
-<area shape="rect" id="node6" href="$main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="15,132,114,159"/>
+<area shape="rect" id="node1" title=" " alt="" coords="333,56,445,83"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="187,5,270,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec" title=" " alt="" coords="5,31,124,57"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7" title=" " alt="" coords="172,107,285,133"/>
 </map>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['scene_113',['Scene',['../class_scene.html',1,'']]]
+  ['palette_120',['Palette',['../class_palette.html',1,'']]],
+  ['polygon_121',['Polygon',['../class_polygon.html',1,'']]]
 ];

@@ -76,14 +76,14 @@ Collaboration diagram for Scene:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene__coll__graph.png" border="0" usemap="#a_scene_coll__map" alt="Collaboration graph"/></div>
 <map name="a_scene_coll__map" id="a_scene_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,156,303"/>
+<area shape="rect" title=" " alt="" coords="5,5,151,229"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a45cca662186b18afe921b0ca159c8529"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a45cca662186b18afe921b0ca159c8529">getDisplacement</a> () const</td></tr>
-<tr class="separator:a45cca662186b18afe921b0ca159c8529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f2c54c17ebc3cce7d6b60651613d9ca"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca">getDisplacements</a> () const</td></tr>
+<tr class="separator:a8f2c54c17ebc3cce7d6b60651613d9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0015860acf1b41173be6d3bff19ab6c9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">getGeneration</a> () const</td></tr>
 <tr class="separator:a0015860acf1b41173be6d3bff19ab6c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1557dfc7914440e06198552e213267e7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a1557dfc7914440e06198552e213267e7">addPolygon</a> (<a class="el" href="class_polygon.html">Polygon</a> const &amp;pol)</td></tr>
@@ -110,12 +110,63 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac708e7f8fbb9fcb065bb3272788ceff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbecca99ac51d843e8cffbc1bd6adb54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54">applyDisplacement</a> ()</td></tr>
 <tr class="separator:adbecca99ac51d843e8cffbc1bd6adb54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6212abe1575299362392f7bce226abc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#ab6212abe1575299362392f7bce226abc">setDisplacement</a> (Point <a class="el" href="class_scene.html#a6ca9d5e53f030f2857df6c0d92b50c89">p</a>, float newRadius)</td></tr>
-<tr class="separator:ab6212abe1575299362392f7bce226abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a483d6b3587d4c2c07b9e71e38d770baf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf">addDisplacement</a> (Point p, float newRadius)</td></tr>
+<tr class="separator:a483d6b3587d4c2c07b9e71e38d770baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a650b57a9405c6b74bc60fe55d419fd0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a650b57a9405c6b74bc60fe55d419fd0c">setDisplacementRadius</a> (float rad)</td></tr>
+<tr class="separator:a650b57a9405c6b74bc60fe55d419fd0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains a vector of polygons and is iterable. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a483d6b3587d4c2c07b9e71e38d770baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a483d6b3587d4c2c07b9e71e38d770baf">&#9670;&nbsp;</a></span>addDisplacement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scene::addDisplacement </td>
+          <td>(</td>
+          <td class="paramtype">Point&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>newRadius</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_scene_a483d6b3587d4c2c07b9e71e38d770baf_icgraph.png" border="0" usemap="#aclass_scene_a483d6b3587d4c2c07b9e71e38d770baf_icgraph" alt=""/></div>
+<map name="aclass_scene_a483d6b3587d4c2c07b9e71e38d770baf_icgraph" id="aclass_scene_a483d6b3587d4c2c07b9e71e38d770baf_icgraph">
+<area shape="rect" title=" " alt="" coords="283,56,448,83"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="161,5,231,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="157,56,235,83"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,107,229,133"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,81,109,108"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,132,107,159"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a1557dfc7914440e06198552e213267e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1557dfc7914440e06198552e213267e7">&#9670;&nbsp;</a></span>addPolygon()</h2>
 
@@ -151,12 +202,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_a1557dfc7914440e06198552e213267e7_icgraph.png" border="0" usemap="#aclass_scene_a1557dfc7914440e06198552e213267e7_icgraph" alt=""/></div>
 <map name="aclass_scene_a1557dfc7914440e06198552e213267e7_icgraph" id="aclass_scene_a1557dfc7914440e06198552e213267e7_icgraph">
-<area shape="rect" title=" " alt="" coords="283,56,415,83"/>
+<area shape="rect" title=" " alt="" coords="283,81,415,108"/>
 <area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="161,5,231,32"/>
-<area shape="rect" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="157,56,235,83"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,107,229,133"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,81,109,108"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,132,107,159"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="157,56,235,83"/>
+<area shape="rect" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="157,107,235,133"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,157,229,184"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
 </map>
 </div>
 
@@ -190,9 +242,10 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_adbecca99ac51d843e8cffbc1bd6adb54_cgraph.png" border="0" usemap="#aclass_scene_adbecca99ac51d843e8cffbc1bd6adb54_cgraph" alt=""/></div>
 <map name="aclass_scene_adbecca99ac51d843e8cffbc1bd6adb54_cgraph" id="aclass_scene_adbecca99ac51d843e8cffbc1bd6adb54_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,180,57"/>
-<area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="228,5,324,32"/>
-<area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="233,56,319,83"/>
+<area shape="rect" title=" " alt="" coords="5,56,180,83"/>
+<area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="255,5,351,32"/>
+<area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="260,56,347,83"/>
+<area shape="rect" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="228,107,379,133"/>
 </map>
 </div>
 <div class="dynheader">
@@ -200,12 +253,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_adbecca99ac51d843e8cffbc1bd6adb54_icgraph.png" border="0" usemap="#aclass_scene_adbecca99ac51d843e8cffbc1bd6adb54_icgraph" alt=""/></div>
 <map name="aclass_scene_adbecca99ac51d843e8cffbc1bd6adb54_icgraph" id="aclass_scene_adbecca99ac51d843e8cffbc1bd6adb54_icgraph">
-<area shape="rect" title=" " alt="" coords="284,56,459,83"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="161,5,232,32"/>
-<area shape="rect" href="main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54" title=" " alt="" coords="157,56,236,83"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,107,230,133"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,81,109,108"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,132,107,159"/>
+<area shape="rect" title=" " alt="" coords="292,81,467,108"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="165,5,236,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="162,56,239,83"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="157,107,244,133"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="167,157,234,184"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
 </map>
 </div>
 
@@ -239,13 +293,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_a080226df8abd8a89e1c8aa48e02b4d01_icgraph.png" border="0" usemap="#aclass_scene_a080226df8abd8a89e1c8aa48e02b4d01_icgraph" alt=""/></div>
 <map name="aclass_scene_a080226df8abd8a89e1c8aa48e02b4d01_icgraph" id="aclass_scene_a080226df8abd8a89e1c8aa48e02b4d01_icgraph">
-<area shape="rect" title=" " alt="" coords="507,56,603,83"/>
-<area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="284,56,459,83"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="161,5,232,32"/>
-<area shape="rect" href="main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54" title=" " alt="" coords="157,56,236,83"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,107,230,133"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,81,109,108"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,132,107,159"/>
+<area shape="rect" title=" " alt="" coords="515,81,611,108"/>
+<area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="292,81,467,108"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="165,5,236,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="162,56,239,83"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="157,107,244,133"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="167,157,234,184"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
 </map>
 </div>
 
@@ -339,13 +394,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_ad3e6be79363fe85e92c0f7e472b1e0c5_icgraph.png" border="0" usemap="#aclass_scene_ad3e6be79363fe85e92c0f7e472b1e0c5_icgraph" alt=""/></div>
 <map name="aclass_scene_ad3e6be79363fe85e92c0f7e472b1e0c5_icgraph" id="aclass_scene_ad3e6be79363fe85e92c0f7e472b1e0c5_icgraph">
-<area shape="rect" title=" " alt="" coords="507,56,593,83"/>
-<area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="284,56,459,83"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="161,5,232,32"/>
-<area shape="rect" href="main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54" title=" " alt="" coords="157,56,236,83"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,107,230,133"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,81,109,108"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,132,107,159"/>
+<area shape="rect" title=" " alt="" coords="515,81,601,108"/>
+<area shape="rect" href="class_scene.html#adbecca99ac51d843e8cffbc1bd6adb54" title=" " alt="" coords="292,81,467,108"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="165,5,236,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="162,56,239,83"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="157,107,244,133"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="167,157,234,184"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
 </map>
 </div>
 
@@ -377,8 +433,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a45cca662186b18afe921b0ca159c8529"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45cca662186b18afe921b0ca159c8529">&#9670;&nbsp;</a></span>getDisplacement()</h2>
+<a id="a8f2c54c17ebc3cce7d6b60651613d9ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f2c54c17ebc3cce7d6b60651613d9ca">&#9670;&nbsp;</a></span>getDisplacements()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -387,7 +443,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const auto&amp; Scene::getDisplacement </td>
+          <td class="memname">const auto&amp; Scene::getDisplacements </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -402,26 +458,27 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_scene_a45cca662186b18afe921b0ca159c8529_icgraph.png" border="0" usemap="#aclass_scene_a45cca662186b18afe921b0ca159c8529_icgraph" alt=""/></div>
-<map name="aclass_scene_a45cca662186b18afe921b0ca159c8529_icgraph" id="aclass_scene_a45cca662186b18afe921b0ca159c8529_icgraph">
-<area shape="rect" title=" " alt="" coords="969,325,1132,352"/>
+<div class="center"><img src="class_scene_a8f2c54c17ebc3cce7d6b60651613d9ca_icgraph.png" border="0" usemap="#aclass_scene_a8f2c54c17ebc3cce7d6b60651613d9ca_icgraph" alt=""/></div>
+<map name="aclass_scene_a8f2c54c17ebc3cce7d6b60651613d9ca_icgraph" id="aclass_scene_a8f2c54c17ebc3cce7d6b60651613d9ca_icgraph">
+<area shape="rect" title=" " alt="" coords="969,249,1139,276"/>
 <area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="709,249,921,276"/>
-<area shape="rect" href="main_8cpp.html#ac170bb498a7d244b8f5c5c7a1d9c4017" title=" " alt="" coords="525,427,607,453"/>
 <area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="531,5,601,32"/>
-<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,69,153,96"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="471,107,661,149"/>
-<area shape="rect" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="527,173,605,200"/>
-<area shape="rect" href="main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54" title=" " alt="" coords="527,224,605,251"/>
-<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="535,275,597,301"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="533,325,599,352"/>
-<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="517,376,615,403"/>
-<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,107,376,133"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,157,423,184"/>
-<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,145,149,172"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,197,205,238"/>
-<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,275,366,301"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,325,390,352"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,376,387,403"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="527,56,605,83"/>
+<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,120,153,147"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="471,158,661,199"/>
+<area shape="rect" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="527,224,605,251"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="523,275,609,301"/>
+<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="535,325,597,352"/>
+<area shape="rect" href="main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511" title=" " alt="" coords="521,376,611,403"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="533,427,599,453"/>
+<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="517,477,615,504"/>
+<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,157,376,184"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,208,423,235"/>
+<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,196,149,223"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,247,205,289"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,325,366,352"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,401,390,428"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,452,387,479"/>
 </map>
 </div>
 
@@ -454,24 +511,25 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_a0015860acf1b41173be6d3bff19ab6c9_icgraph.png" border="0" usemap="#aclass_scene_a0015860acf1b41173be6d3bff19ab6c9_icgraph" alt=""/></div>
 <map name="aclass_scene_a0015860acf1b41173be6d3bff19ab6c9_icgraph" id="aclass_scene_a0015860acf1b41173be6d3bff19ab6c9_icgraph">
-<area shape="rect" title=" " alt="" coords="969,224,1116,251"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="709,224,921,251"/>
+<area shape="rect" title=" " alt="" coords="969,249,1116,276"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="709,249,921,276"/>
 <area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="531,5,601,32"/>
-<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,69,153,96"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="471,107,661,149"/>
-<area shape="rect" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="527,173,605,200"/>
-<area shape="rect" href="main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54" title=" " alt="" coords="527,224,605,251"/>
-<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="535,275,597,301"/>
-<area shape="rect" href="main_8cpp.html#ac170bb498a7d244b8f5c5c7a1d9c4017" title=" " alt="" coords="525,325,607,352"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="533,376,599,403"/>
-<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="517,427,615,453"/>
-<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,107,376,133"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,157,423,184"/>
-<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,145,149,172"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,197,205,238"/>
-<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,275,366,301"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,351,390,377"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,401,387,428"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="527,56,605,83"/>
+<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,120,153,147"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="471,158,661,199"/>
+<area shape="rect" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="527,224,605,251"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="523,275,609,301"/>
+<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="535,325,597,352"/>
+<area shape="rect" href="main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511" title=" " alt="" coords="521,376,611,403"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="533,427,599,453"/>
+<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="517,477,615,504"/>
+<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,157,376,184"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,208,423,235"/>
+<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,196,149,223"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,247,205,289"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,325,366,352"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,401,390,428"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,452,387,479"/>
 </map>
 </div>
 
@@ -500,15 +558,6 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Number of polygons in the scene </dd></dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_scene_a0bc2671d164f0329314da6fb0b5a77bb_icgraph.png" border="0" usemap="#aclass_scene_a0bc2671d164f0329314da6fb0b5a77bb_icgraph" alt=""/></div>
-<map name="aclass_scene_a0bc2671d164f0329314da6fb0b5a77bb_icgraph" id="aclass_scene_a0bc2671d164f0329314da6fb0b5a77bb_icgraph">
-<area shape="rect" title=" " alt="" coords="136,5,299,32"/>
-<area shape="rect" href="main_8cpp.html#ac170bb498a7d244b8f5c5c7a1d9c4017" title=" " alt="" coords="5,5,88,32"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -628,8 +677,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ab6212abe1575299362392f7bce226abc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6212abe1575299362392f7bce226abc">&#9670;&nbsp;</a></span>setDisplacement()</h2>
+<a id="a650b57a9405c6b74bc60fe55d419fd0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a650b57a9405c6b74bc60fe55d419fd0c">&#9670;&nbsp;</a></span>setDisplacementRadius()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -638,21 +687,11 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Scene::setDisplacement </td>
+          <td class="memname">void Scene::setDisplacementRadius </td>
           <td>(</td>
-          <td class="paramtype">Point&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>newRadius</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>rad</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -664,45 +703,12 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_scene_ab6212abe1575299362392f7bce226abc_icgraph.png" border="0" usemap="#aclass_scene_ab6212abe1575299362392f7bce226abc_icgraph" alt=""/></div>
-<map name="aclass_scene_ab6212abe1575299362392f7bce226abc_icgraph" id="aclass_scene_ab6212abe1575299362392f7bce226abc_icgraph">
-<area shape="rect" title=" " alt="" coords="288,56,451,83"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="163,5,234,32"/>
-<area shape="rect" href="main_8cpp.html#ac170bb498a7d244b8f5c5c7a1d9c4017" title=" " alt="" coords="157,56,240,83"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="165,107,232,133"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,81,109,108"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,132,107,159"/>
+<div class="center"><img src="class_scene_a650b57a9405c6b74bc60fe55d419fd0c_icgraph.png" border="0" usemap="#aclass_scene_a650b57a9405c6b74bc60fe55d419fd0c_icgraph" alt=""/></div>
+<map name="aclass_scene_a650b57a9405c6b74bc60fe55d419fd0c_icgraph" id="aclass_scene_a650b57a9405c6b74bc60fe55d419fd0c_icgraph">
+<area shape="rect" title=" " alt="" coords="144,5,347,32"/>
+<area shape="rect" href="main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511" title=" " alt="" coords="5,5,96,32"/>
 </map>
 </div>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a6ca9d5e53f030f2857df6c0d92b50c89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ca9d5e53f030f2857df6c0d92b50c89">&#9670;&nbsp;</a></span>p</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Point Scene::p</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a602f42bcfed94a39a752fca4b9964a03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a602f42bcfed94a39a752fca4b9964a03">&#9670;&nbsp;</a></span>r</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float Scene::r</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -712,7 +718,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 9 2021 15:10:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Aug 9 2021 19:53:48 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -79,37 +79,41 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    uint8_t r,g,b;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_color.html#aa6282186f79f9b3b9dad2bf0556e92e7">   12</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="class_color.html#aa6282186f79f9b3b9dad2bf0556e92e7">rgb_t</a> = std::tuple&lt;uint8_t, uint8_t, uint8_t&gt;;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_color.html#a5f32546193d172c70de473acf4e0cc9d">   14</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_color.html#a5f32546193d172c70de473acf4e0cc9d">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_color.html">Color</a>&amp; oth)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                <span class="keywordflow">return</span> r == oth.r &amp;&amp; g == oth.g &amp;&amp; b == oth.b;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        }</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_color.html#a9a742cbe9f9f4037f5d9f4e81a9b2428">Color</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_color.html#a9a742cbe9f9f4037f5d9f4e81a9b2428">Color</a>(uint8_t <span class="keyword">const</span> r, uint8_t <span class="keyword">const</span> g, uint8_t <span class="keyword">const</span> b);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_color.html#a9a742cbe9f9f4037f5d9f4e81a9b2428">Color</a>(<span class="keywordtype">unsigned</span> <span class="keyword">const</span> <span class="keywordtype">int</span>); </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <span class="keywordtype">unsigned</span> m_ratio;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keywordtype">float</span> m_p;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_color.html#a2b0840855555be34f5b522592031d1af">   13</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_palette.html">Palette</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_color.html#aa6282186f79f9b3b9dad2bf0556e92e7">   15</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="class_color.html#aa6282186f79f9b3b9dad2bf0556e92e7">rgb_t</a> = std::tuple&lt;uint8_t, uint8_t, uint8_t&gt;;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_color.html#a5f32546193d172c70de473acf4e0cc9d">   17</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_color.html#a5f32546193d172c70de473acf4e0cc9d">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_color.html">Color</a>&amp; oth)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                <span class="keywordflow">return</span> r == oth.r &amp;&amp; g == oth.g &amp;&amp; b == oth.b;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        }</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_color.html#a9a742cbe9f9f4037f5d9f4e81a9b2428">Color</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_color.html#a9a742cbe9f9f4037f5d9f4e81a9b2428">Color</a>(uint8_t <span class="keyword">const</span> r, uint8_t <span class="keyword">const</span> g, uint8_t <span class="keyword">const</span> b);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color.html#a228b8838e85c05ae866ea5582bd15ff8">set</a>(uint8_t <span class="keyword">const</span> r, uint8_t <span class="keyword">const</span> g, uint8_t <span class="keyword">const</span> b); </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color.html#a228b8838e85c05ae866ea5582bd15ff8">set</a>(<span class="keywordtype">unsigned</span> <span class="keyword">const</span> <span class="keywordtype">int</span>); </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_color.html#aa6282186f79f9b3b9dad2bf0556e92e7">rgb_t</a> <a class="code" href="class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225">getRGB</a>() <span class="keyword">const</span>; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_color.html#a9a742cbe9f9f4037f5d9f4e81a9b2428">Color</a>(<span class="keywordtype">unsigned</span> <span class="keyword">const</span> <span class="keywordtype">int</span>); </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color.html#a228b8838e85c05ae866ea5582bd15ff8">set</a>(uint8_t <span class="keyword">const</span> r, uint8_t <span class="keyword">const</span> g, uint8_t <span class="keyword">const</span> b); </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_color.html#a228b8838e85c05ae866ea5582bd15ff8">set</a>(<span class="keywordtype">unsigned</span> <span class="keyword">const</span> <span class="keywordtype">int</span>); </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="class_color.html#aa6282186f79f9b3b9dad2bf0556e92e7">rgb_t</a> <a class="code" href="class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225">getRGB</a>() <span class="keyword">const</span>; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
 <div class="ttc" id="aclass_color_html"><div class="ttname"><a href="class_color.html">Color</a></div><div class="ttdef"><b>Definition:</b> Color.hpp:7</div></div>
 <div class="ttc" id="aclass_color_html_a228b8838e85c05ae866ea5582bd15ff8"><div class="ttname"><a href="class_color.html#a228b8838e85c05ae866ea5582bd15ff8">Color::set</a></div><div class="ttdeci">void set(uint8_t const r, uint8_t const g, uint8_t const b)</div><div class="ttdoc">set via color channels</div><div class="ttdef"><b>Definition:</b> Color.cpp:13</div></div>
 <div class="ttc" id="aclass_color_html_a2e248e0ab2db0f6eb12ce1f6a2a84225"><div class="ttname"><a href="class_color.html#a2e248e0ab2db0f6eb12ce1f6a2a84225">Color::getRGB</a></div><div class="ttdeci">rgb_t getRGB() const</div><div class="ttdoc">get color channels</div><div class="ttdef"><b>Definition:</b> Color.cpp:27</div></div>
-<div class="ttc" id="aclass_color_html_a5f32546193d172c70de473acf4e0cc9d"><div class="ttname"><a href="class_color.html#a5f32546193d172c70de473acf4e0cc9d">Color::operator==</a></div><div class="ttdeci">bool operator==(const Color &amp;oth) const</div><div class="ttdef"><b>Definition:</b> Color.hpp:14</div></div>
+<div class="ttc" id="aclass_color_html_a5f32546193d172c70de473acf4e0cc9d"><div class="ttname"><a href="class_color.html#a5f32546193d172c70de473acf4e0cc9d">Color::operator==</a></div><div class="ttdeci">bool operator==(const Color &amp;oth) const</div><div class="ttdef"><b>Definition:</b> Color.hpp:17</div></div>
 <div class="ttc" id="aclass_color_html_a9a742cbe9f9f4037f5d9f4e81a9b2428"><div class="ttname"><a href="class_color.html#a9a742cbe9f9f4037f5d9f4e81a9b2428">Color::Color</a></div><div class="ttdeci">Color()</div><div class="ttdef"><b>Definition:</b> Color.cpp:4</div></div>
-<div class="ttc" id="aclass_color_html_aa6282186f79f9b3b9dad2bf0556e92e7"><div class="ttname"><a href="class_color.html#aa6282186f79f9b3b9dad2bf0556e92e7">Color::rgb_t</a></div><div class="ttdeci">std::tuple&lt; uint8_t, uint8_t, uint8_t &gt; rgb_t</div><div class="ttdef"><b>Definition:</b> Color.hpp:12</div></div>
+<div class="ttc" id="aclass_color_html_aa6282186f79f9b3b9dad2bf0556e92e7"><div class="ttname"><a href="class_color.html#aa6282186f79f9b3b9dad2bf0556e92e7">Color::rgb_t</a></div><div class="ttdeci">std::tuple&lt; uint8_t, uint8_t, uint8_t &gt; rgb_t</div><div class="ttdef"><b>Definition:</b> Color.hpp:15</div></div>
+<div class="ttc" id="aclass_palette_html"><div class="ttname"><a href="class_palette.html">Palette</a></div><div class="ttdef"><b>Definition:</b> Palette.hpp:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 9 2021 15:10:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Aug 9 2021 19:53:47 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
