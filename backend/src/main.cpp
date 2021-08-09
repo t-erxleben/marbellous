@@ -1,9 +1,8 @@
 #include <emscripten.h>
+#include <cstdlib> 
 #include <cstdio>
 #include <cmath>
 #include <random>
-
-#include <stdlib.h> 
 
 #include "WGLContext.hpp"
 #include "WGLSceneRenderer.hpp"
@@ -174,6 +173,19 @@ extern "C"
             rakeRenderer->draw();
         }
 	}
+
+    void EMSCRIPTEN_KEEPALIVE resize(size_t dropSize, size_t rakeSize)
+    {
+        /// \todo for now both need to be the same
+        assert(dropSize == rakeSize);
+        auto context = WGLContext::getContext();
+        context->setDropRes(dropSize);
+        context->setRakeRes(rakeSize);
+        sceneRenderer->resize();
+        rakeRenderer->resize();
+        Options::getInstance()->setState(true);
+        redraw();
+    }
 
     int EMSCRIPTEN_KEEPALIVE resizeDrop(int const dropID, float const newRadius) ///< resize drop of given ID (return val of addDrop(...))
     {
@@ -363,5 +375,6 @@ Init stuff:
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);
         return 0;
+
     }
 }

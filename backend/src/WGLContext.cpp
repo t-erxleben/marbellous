@@ -2,7 +2,7 @@
 
 WGLContext* WGLContext::instance = nullptr;
 
-WGLContext::WGLContext(std::string canvasID, size_t x): dropRes{x}
+WGLContext::WGLContext(std::string canvasID, size_t x): dropRes{x}, rakeRes{x}
 {
     emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
     this->canvasID = canvasID;
@@ -43,6 +43,7 @@ void WGLContext::setDropRes(size_t x)
     dropRes = x;
     // todo modify screenshot buffer
     emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
+    glViewport(0,0, x, x);
 }
 
 
@@ -53,10 +54,10 @@ size_t WGLContext::getDropRes()
 
 void WGLContext::setRakeRes(size_t x)
 {
-    // todo implement for raking
-    dropRes = x;
+    rakeRes = x;
     emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
-    // todo modify screenshot buffer, fbo, textures, ...
+    glViewport(0,0, x, x);
+    // todo resize buffers in rake renderer
 }
 
 
@@ -77,9 +78,3 @@ WGLContext * const WGLContext::getContext()
         return instance;
     }
 }
-
-void WGLContext::canvasResize(size_t x)
-{
-    emscripten_set_canvas_element_size(canvasID.c_str(), x, x);
-}
-
