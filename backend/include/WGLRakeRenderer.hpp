@@ -1,7 +1,6 @@
 #pragma once
 
 #include "WGLRenderer.hpp"
-
 #include "WGLSceneRenderer.hpp"
 
 #include <cassert>
@@ -159,7 +158,7 @@ class WGLRakeRenderer: private WGLRenderer
 
         // uniform locations
         GLint colorLoc;
-		GLint numColorsLoc;
+		    GLint numColorsLoc;
         GLint nailsLoc;
         GLint strokeLoc;
         GLint viscosityLoc;
@@ -170,10 +169,10 @@ class WGLRakeRenderer: private WGLRenderer
         GLint dimLoc;
 
     public:
-
         WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s);
         void setActive() const override;
         void reset(WGLSceneRenderer& sr, Scene const & s);
+        void resize() override;
         void rake(float x, float y, float period, float amplitude, float phase,  GLuint nails[1000]);
         void draw(GLuint target_fbo = 0);
         void drawToBuffer(void* buf, size_t length);

@@ -76,9 +76,9 @@ Inheritance diagram for WGLRenderer:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer__inherit__graph.png" border="0" usemap="#a_w_g_l_renderer_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_w_g_l_renderer_inherit__map" id="a_w_g_l_renderer_inherit__map">
-<area shape="rect" title=" " alt="" coords="91,5,254,127"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html" title=" " alt="" coords="5,175,159,325"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html" title=" " alt="" coords="183,189,343,311"/>
+<area shape="rect" title=" " alt="" coords="91,5,254,141"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html" title=" " alt="" coords="5,189,159,355"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html" title=" " alt="" coords="183,204,343,340"/>
 </map>
 </div>
 <div class="dynheader">
@@ -86,18 +86,20 @@ Collaboration diagram for WGLRenderer:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer__coll__graph.png" border="0" usemap="#a_w_g_l_renderer_coll__map" alt="Collaboration graph"/></div>
 <map name="a_w_g_l_renderer_coll__map" id="a_w_g_l_renderer_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,168,127"/>
+<area shape="rect" title=" " alt="" coords="5,5,168,141"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a865e294ae99d5191c6aeec84eda96ac6"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#a865e294ae99d5191c6aeec84eda96ac6">compileShader</a> (GLenum const type, std::string const shader) const</td></tr>
-<tr class="separator:a865e294ae99d5191c6aeec84eda96ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e05c7f2fff34772a495a7dfbb77d124"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124">setupShaderProgram</a> (std::string vert, std::string frag, GLint &amp;shader)</td></tr>
 <tr class="separator:a1e05c7f2fff34772a495a7dfbb77d124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa28e8a772757fe4b7f4284a0f0df9290"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#aa28e8a772757fe4b7f4284a0f0df9290">constructFBO</a> (size_t x, bool stencil_depth, GLuint &amp;fbo, GLuint &amp;tex)</td></tr>
+<tr class="separator:aa28e8a772757fe4b7f4284a0f0df9290"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae496681edec5f304697e43a6933c934b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#ae496681edec5f304697e43a6933c934b">setActive</a> () const =0</td></tr>
 <tr class="separator:ae496681edec5f304697e43a6933c934b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdfbe2d8c8906f91142ffa77aac27339"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#afdfbe2d8c8906f91142ffa77aac27339">resize</a> ()=0</td></tr>
+<tr class="separator:afdfbe2d8c8906f91142ffa77aac27339"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afca01cdb98219c15549e869472ed66a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0">buildColorBuffer</a> (<a class="el" href="class_palette.html">Palette</a> const &amp;p, std::vector&lt; GLfloat &gt; &amp;v)</td></tr>
 <tr class="separator:afca01cdb98219c15549e869472ed66a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -140,67 +142,109 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer_afca01cdb98219c15549e869472ed66a0_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_afca01cdb98219c15549e869472ed66a0_icgraph" alt=""/></div>
 <map name="aclass_w_g_l_renderer_afca01cdb98219c15549e869472ed66a0_icgraph" id="aclass_w_g_l_renderer_afca01cdb98219c15549e869472ed66a0_icgraph">
-<area shape="rect" title=" " alt="" coords="921,276,1123,303"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="683,116,851,143"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="661,386,873,412"/>
-<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="5,192,100,219"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title=" " alt="" coords="396,142,613,168"/>
-<area shape="rect" href="main_8cpp.html#aae45b9471979e61bbf17dd014224e322" title=" " alt="" coords="481,40,528,67"/>
-<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="474,192,535,219"/>
-<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="9,66,97,92"/>
-<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="210,142,286,168"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="469,512,540,539"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="409,244,600,285"/>
-<area shape="rect" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="466,614,543,640"/>
-<area shape="rect" href="main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54" title=" " alt="" coords="465,310,544,336"/>
-<area shape="rect" href="main_8cpp.html#ac170bb498a7d244b8f5c5c7a1d9c4017" title=" " alt="" coords="463,360,546,387"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="471,411,538,438"/>
-<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="455,462,554,488"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="163,192,333,219"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="148,244,348,285"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="196,386,300,412"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="199,436,297,463"/>
+<area shape="rect" title=" " alt="" coords="996,322,1197,349"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="758,162,926,189"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="736,398,948,425"/>
+<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,221,153,247"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title=" " alt="" coords="471,103,688,130"/>
+<area shape="rect" href="main_8cpp.html#aae45b9471979e61bbf17dd014224e322" title=" " alt="" coords="556,53,603,79"/>
+<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="549,271,610,298"/>
+<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,53,149,79"/>
+<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,107,376,134"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,271,366,298"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="544,423,615,450"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="484,155,675,196"/>
+<area shape="rect" href="main_8cpp.html#a72fca71a0de4d36b58be2a1a4128d8e1" title=" " alt="" coords="541,525,618,551"/>
+<area shape="rect" href="main_8cpp.html#a16e1ff4de15a972bc1b34b50d042cc54" title=" " alt="" coords="540,575,619,602"/>
+<area shape="rect" href="main_8cpp.html#ac170bb498a7d244b8f5c5c7a1d9c4017" title=" " alt="" coords="538,626,621,653"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="546,322,613,349"/>
+<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="530,373,629,399"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,162,423,189"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,155,205,196"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,373,390,399"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,322,387,349"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a865e294ae99d5191c6aeec84eda96ac6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a865e294ae99d5191c6aeec84eda96ac6">&#9670;&nbsp;</a></span>compileShader()</h2>
+<a id="aa28e8a772757fe4b7f4284a0f0df9290"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa28e8a772757fe4b7f4284a0f0df9290">&#9670;&nbsp;</a></span>constructFBO()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GLuint WGLRenderer::compileShader </td>
+          <td class="memname">void WGLRenderer::constructFBO </td>
           <td>(</td>
-          <td class="paramtype">GLenum const&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string const&#160;</td>
-          <td class="paramname"><em>shader</em>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>stencil_depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLuint &amp;&#160;</td>
+          <td class="paramname"><em>fbo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLuint &amp;&#160;</td>
+          <td class="paramname"><em>tex</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_w_g_l_renderer_a865e294ae99d5191c6aeec84eda96ac6_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_a865e294ae99d5191c6aeec84eda96ac6_icgraph" alt=""/></div>
-<map name="aclass_w_g_l_renderer_a865e294ae99d5191c6aeec84eda96ac6_icgraph" id="aclass_w_g_l_renderer_a865e294ae99d5191c6aeec84eda96ac6_icgraph">
-<area shape="rect" title=" " alt="" coords="499,46,695,73"/>
-<area shape="rect" href="class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124" title=" " alt="" coords="268,39,451,80"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="13,5,213,47"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b" title=" " alt="" coords="5,71,220,112"/>
+<div class="center"><img src="class_w_g_l_renderer_aa28e8a772757fe4b7f4284a0f0df9290_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_aa28e8a772757fe4b7f4284a0f0df9290_icgraph" alt=""/></div>
+<map name="aclass_w_g_l_renderer_aa28e8a772757fe4b7f4284a0f0df9290_icgraph" id="aclass_w_g_l_renderer_aa28e8a772757fe4b7f4284a0f0df9290_icgraph">
+<area shape="rect" title=" " alt="" coords="372,85,563,112"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title=" " alt="" coords="129,5,304,32"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title=" " alt="" coords="126,56,307,83"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="117,107,317,149"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b" title=" " alt="" coords="109,173,324,214"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="5,31,61,57"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="afdfbe2d8c8906f91142ffa77aac27339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdfbe2d8c8906f91142ffa77aac27339">&#9670;&nbsp;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void WGLRenderer::resize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049">WGLSceneRenderer</a>, and <a class="el" href="class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f">WGLRakeRenderer</a>.</p>
 
 </div>
 </div>
@@ -263,15 +307,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_cgraph.png" border="0" usemap="#aclass_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_cgraph" alt=""/></div>
-<map name="aclass_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_cgraph" id="aclass_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,188,47"/>
-<area shape="rect" href="class_w_g_l_renderer.html#a865e294ae99d5191c6aeec84eda96ac6" title=" " alt="" coords="236,13,432,39"/>
-</map>
-</div>
-<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_icgraph" alt=""/></div>
@@ -291,7 +326,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 9 2021 15:08:27 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Aug 9 2021 15:10:01 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -8,10 +8,13 @@
 
 class WGLRenderer
 {
-public:
+private:
     GLuint compileShader(GLenum const type, std::string const shader) const;
+public:
     void setupShaderProgram(std::string vert, std::string frag, GLint& shader);
+	void constructFBO(size_t x, bool stencil_depth, GLuint& fbo, GLuint& tex);
 	virtual void setActive() const = 0;
+	virtual void resize() = 0;
     
     void buildColorBuffer(Palette const & p, std::vector<GLfloat>& v)
     {
