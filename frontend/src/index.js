@@ -404,7 +404,7 @@ function DomInit(){
 		rake: document.getElementById('sidebar-rake'),
 		pallet: document.getElementById('sidebar-pallet'),
 		sprinkler: document.getElementById('sidebar-sprinkler'),
-		colorgrid: document.getElementById('sidebar-colorgrid'),
+		/* colorgrid: document.getElementById('sidebar-colorgrid'), */
 	};
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
@@ -585,10 +585,10 @@ function DomInit(){
 		})
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur()}})
 	}
-	sidebar_fn(rake_dropper.config, 'w',  "width",  "30")
-	sidebar_fn(rake_dropper.config, 'h',  "height", "30")
-	sidebar_fn(rake_dropper.config, 'of', "offset", "10")
-	{
+	// sidebar_fn(rake_dropper.config, 'w',  "width",  "30")
+	// sidebar_fn(rake_dropper.config, 'h',  "height", "30")
+	// sidebar_fn(rake_dropper.config, 'of', "offset", "10")
+	/* {
 		const id ="sidebar-colorgrid-random_color"
 		const el = document.getElementById(id)
 		fetchAndSet(el, id)
@@ -599,7 +599,7 @@ function DomInit(){
 			rake_dropper.config.random_color = el.checked
 			storage.store(id, el.checked)
 		})
-	}
+	} */
 
 	{	const id = 'sidebar-sprinkler-frequence'
 		const el = document.getElementById(id)
