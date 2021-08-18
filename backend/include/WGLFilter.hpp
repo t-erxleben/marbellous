@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WGLRenderer.hpp"
+#include "WGLContext.hpp"
 
 #include <cassert>
 
@@ -46,18 +47,21 @@ class WGLFilter: private WGLRenderer
         GLint postShader;
 
         // Frame buffer with to textures; one to load from and one to draw to
-        GLuint fbo_post[2];
-        GLuint tex_post[2];
+        GLuint fbo_post;
+        GLuint tex_post;
         
         // one and single triangle
         GLuint vbo;
 
         GLint dimLoc;
 
+        size_t curr_size;
+
     public:
-        WGLFilter();
+        WGLFilter(size_t size);
         void setActive() const override;
+        void resize(size_t size);
         void resize() override;
-        void draw(GLuint target_fbo = 0);
+        void draw(GLuint src_tex, GLuint target_fbo);
 };
 
