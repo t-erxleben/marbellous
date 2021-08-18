@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WGLRenderer.hpp"
+#include "WGLFilter.hpp"
 #include "WGLSceneRenderer.hpp"
 
 #include <cassert>
@@ -8,6 +9,8 @@
 class WGLRakeRenderer: private WGLRenderer
 {
     private:
+
+        WGLFilter *conv;
 
         // both shaders will be using that
         std::string const vertex_source{
@@ -112,44 +115,16 @@ class WGLRakeRenderer: private WGLRenderer
                 }
             )=="};
 
-        std::string const draw_post_proc_fragment_source{
-            R"==(#version 300 es
-                precision mediump float;
-                uniform sampler2D tex;
-                uniform int dim;
-                in vec2 texCoord;
-                out vec4 fFragment;
-
-                void main() 
-                {
-                    // calculate a 1D Convolution along dim
-                    float stepSize = 1./float(textureSize(tex, 0)[dim]);
-                    vec2 left = vec2(0.,0.);
-                    vec2 right = vec2(0.,0.);
-                    left[dim] = -stepSize;
-                    right[dim] = stepSize;       
-
-                    // binom filter
-                    fFragment = 0.25 * texture(tex, texCoord + left) + 0.5*texture(tex, texCoord) + 0.25 * texture(tex, texCoord + right);
-                }
-
-            )=="};
-
         // should be used to draw the texture to the canvas or another buffer
         // substitutes color codes for actual colors
         // expects to be used to draw exactly one triangle defined by (-1, -1), (-1, 3), (3, -1)
         GLint drawShader;
 
-        // same loke drawShader but expects to read real colors instead of color codes
-        // used for post processing
-        GLint postShader;
-
         GLint rakeShader;
 
         // Frame buffer with to textures; one to load from and one to draw to
-        GLuint fbo[2], fbo_post[2], fbo_screenshot;
+        GLuint fbo[2], fbo_screenshot;
         GLuint tex_screenshot;
-        GLuint tex_post[2];
         GLuint tex[2];
         uint8_t curr_tex;
         
@@ -158,7 +133,7 @@ class WGLRakeRenderer: private WGLRenderer
 
         // uniform locations
         GLint colorLoc;
-		    GLint numColorsLoc;
+        GLint numColorsLoc;
         GLint nailsLoc;
         GLint strokeLoc;
         GLint viscosityLoc;
@@ -166,7 +141,6 @@ class WGLRakeRenderer: private WGLRenderer
         GLint amplitudeLoc;
         GLint periodLoc;
         GLint phaseLoc;
-        GLint dimLoc;
 
     public:
         WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s);

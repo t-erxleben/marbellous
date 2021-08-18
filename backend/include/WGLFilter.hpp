@@ -64,4 +64,3 @@ class WGLFilter: private WGLRenderer
         void resize() override;
         void draw(GLuint src_tex, GLuint target_fbo);
 };
-

@@ -4,10 +4,11 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s): curr_te
 {
     auto rakeRes = WGLContext::getContext()->getRakeRes();
 
+    conv = new WGLFilter(rakeRes);
+
     // build shader
     setupShaderProgram(vertex_source, rake_fragment_source, rakeShader);
     setupShaderProgram(vertex_source, draw_fragment_source, drawShader);
-    setupShaderProgram(vertex_source, draw_post_proc_fragment_source, postShader);
 
     // set up the one triangle to draw
     glGenBuffers(1, &vbo);
@@ -25,13 +26,10 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s): curr_te
     amplitudeLoc = glGetUniformLocation(rakeShader, "amplitude");
     periodLoc = glGetUniformLocation(rakeShader, "period");
     phaseLoc = glGetUniformLocation(rakeShader, "phase");
-    dimLoc = glGetUniformLocation(postShader, "dim");
 
     // init fbo and textures
     constructFBO(rakeRes, false, fbo[0], tex[0]);
     constructFBO(rakeRes, false, fbo[1], tex[1]);
-    constructFBO(rakeRes, false, fbo_post[0], tex_post[0]);
-    constructFBO(rakeRes, false, fbo_post[1], tex_post[1]);
     constructFBO(rakeRes, false, fbo_screenshot, tex_screenshot);
 
     reset(sr, s);
@@ -99,30 +97,12 @@ void WGLRakeRenderer::draw(GLuint target_fbo)
 	glUniform1i(numColorsLoc, static_cast<int>(p.getSize()));
 
     // draw to hidden buffer
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo_post[0]);
-
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    // draw to canvas
-    // this is where post processing might happen
-    glUseProgram(postShader);
-
-    // perform conv along x axis
-    glUniform1i(dimLoc, 0);
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo_post[1]);
-    glBindTexture(GL_TEXTURE_2D, tex_post[0]);
-
-    glClear(GL_COLOR_BUFFER_BIT);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    // perform conv along y axis
-    glUniform1i(dimLoc, 1);
-    glBindFramebuffer(GL_FRAMEBUFFER, target_fbo);
-    glBindTexture(GL_TEXTURE_2D, tex_post[1]);
-
-    glClear(GL_COLOR_BUFFER_BIT);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    // apply blur
+    conv->draw(tex_screenshot, target_fbo);
 
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -134,6 +114,7 @@ void WGLRakeRenderer::drawToBuffer(void* buf, size_t length)
 
     assert(length == rakeRes * rakeRes * 4);
     draw(fbo_screenshot);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
     glReadPixels(0, 0, rakeRes, rakeRes, GL_RGBA, GL_UNSIGNED_BYTE, buf);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -158,17 +139,15 @@ void WGLRakeRenderer::setActive() const
 void WGLRakeRenderer::resize()
 {
     glDeleteFramebuffers(2, fbo);
-    glDeleteFramebuffers(2, fbo_post);
     glDeleteFramebuffers(1, &fbo_screenshot);
     glDeleteTextures(2, tex);
-    glDeleteTextures(2, tex_post);
     glDeleteTextures(1, &tex_screenshot);
 
     size_t rakeRes = WGLContext::getContext()->getRakeRes();
 
     constructFBO(rakeRes, false, fbo[0], tex[0]);
     constructFBO(rakeRes, false, fbo[1], tex[1]);
-    constructFBO(rakeRes, false, fbo_post[0], tex_post[0]);
-    constructFBO(rakeRes, false, fbo_post[1], tex_post[1]);
     constructFBO(rakeRes, false, fbo_screenshot, tex_screenshot);
+
+    conv->resize(rakeRes);
 }

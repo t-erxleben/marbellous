@@ -1,6 +1,5 @@
 #include "WGLFilter.hpp"
 
-
 WGLFilter::WGLFilter(size_t size): curr_size{size}
 {
     // build shader
@@ -73,19 +72,19 @@ void WGLFilter::draw(GLuint src_tex, GLuint target_fbo)
     setActive();
 
     // convolution in first dim
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo_post);
     glBindTexture(GL_TEXTURE_2D, src_tex);
-    glBindBuffer(GL_FRAMEBUFFER, fbo_post);
     glUniform1i(dimLoc, 0);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     // convolution in second dim
     glBindTexture(GL_TEXTURE_2D, tex_post);
-    glBindBuffer(GL_FRAMEBUFFER, target_fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, target_fbo);
     glUniform1i(dimLoc, 1);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     // unbind    
-    glBindBuffer(GL_FRAMEBUFFER, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
