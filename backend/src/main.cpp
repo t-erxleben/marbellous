@@ -321,6 +321,7 @@ extern "C"
 		std::uniform_real_distribution<float> radius(r_min, r_max);
 		sprinkle(amt, coord, radius);
 	}
+
 	void EMSCRIPTEN_KEEPALIVE sprinkleGlobal(int amt, float r_min, float r_max) {
 		checkSetup();
 		checkState(true,);
@@ -360,6 +361,7 @@ extern "C"
      * \param nails Boolean array which describes the rake.
      */
     void EMSCRIPTEN_KEEPALIVE rake(float x, float y, float period, float amplitude, float phase, bool nails[1000]) {
+        checkSetup();
         checkState(false,);
 
 		GLuint nail_uint[1000];
@@ -398,6 +400,14 @@ extern "C"
         sceneRenderer->drawScene(*scene);
 	}
 
+    void EMSCRIPTEN_KEEPALIVE undoLastRake() {
+        checkSetup();
+        checkState(false,);
+
+        rakeRenderer->swapBuffers();
+        redraw();
+    }
+
 /*------------------------------------------
 Init stuff:
 --------------------------------------------*/
@@ -407,6 +417,5 @@ Init stuff:
         // keep WASM module alive
         EM_ASM(Module['noExitRuntime'] = true);
         return 0;
-
     }
 }

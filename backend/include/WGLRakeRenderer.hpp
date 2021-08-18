@@ -158,7 +158,7 @@ class WGLRakeRenderer: private WGLRenderer
 
         // uniform locations
         GLint colorLoc;
-		    GLint numColorsLoc;
+        GLint numColorsLoc;
         GLint nailsLoc;
         GLint strokeLoc;
         GLint viscosityLoc;
@@ -176,4 +176,5 @@ class WGLRakeRenderer: private WGLRenderer
         void rake(float x, float y, float period, float amplitude, float phase,  GLuint nails[1000]);
         void draw(GLuint target_fbo = 0);
         void drawToBuffer(void* buf, size_t length);
+        void swapBuffers();
 };
