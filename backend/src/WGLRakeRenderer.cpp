@@ -102,7 +102,21 @@ void WGLRakeRenderer::draw(GLuint target_fbo)
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     // apply blur
-    conv->draw(tex_screenshot, target_fbo);
+    if(Options::getInstance()->getFilter())
+    {
+        // draw to hidden buffer
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo_screenshot);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        conv->draw(tex_screenshot, target_fbo);
+    }
+    else
+    {
+        // draw to hidden buffer
+        glBindFramebuffer(GL_FRAMEBUFFER, target_fbo);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+    }
 
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

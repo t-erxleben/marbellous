@@ -1,7 +1,7 @@
 #include "Options.hpp"
 #include <cstdio>
 
-Options::Options(): bgColor{0xf7e9ce}, dropState{true} , activePalette{0}, Palettes(1)
+Options::Options(): bgColor{0xf7e9ce}, dropState{true} , activePalette{0}, Palettes(1), filter{false}
 {
     // set default colors
     Palette tmp(3);
@@ -58,4 +58,14 @@ void Options::setState(bool dropState)
 bool Options::getState()
 {
     return dropState;
+}
+
+void Options::setFilter(bool filter)
+{
+    this->filter = filter;
+}
+
+bool Options::getFilter()
+{
+    return filter;
 }

@@ -132,8 +132,13 @@ void WGLSceneRenderer::drawToBuffer(const Scene &scene, char *data, int len, boo
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     glViewport(0, 0, dropRes, dropRes);
     drawScene(scene, drawColor);
-	conv->draw(frameTexture, frameBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+
+	if(Options::getInstance()->getFilter())
+	{
+		conv->draw(frameTexture, frameBuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+	}
+
     glReadPixels(0, 0, dropRes, dropRes, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

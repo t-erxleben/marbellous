@@ -12,6 +12,7 @@ class Options
         size_t activePalette; ///< Index of currently active palette inside palettes vector.
         Color bgColor; ///< Background color.
         bool dropState;
+        bool filter;
 
     public:
         Options(Options const &) = delete;
@@ -36,4 +37,7 @@ class Options
         // handling BG color
         void setBGColor(Color const & col);
         Color* getBGColor();
+
+        void setFilter(bool filter);
+        bool getFilter();
 };
