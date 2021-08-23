@@ -152,6 +152,7 @@ extern "C"
     void EMSCRIPTEN_KEEPALIVE setFilter(bool filter)
     {
         Options::getInstance()->setFilter(filter);
+		std::cout << "filter set: " << filter << "\n";
     }
 
     int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color) ///< draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color

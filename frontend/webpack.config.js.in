@@ -7,7 +7,7 @@ module.exports = {
 			}
 		]
 	},
-	mode: "production",
+	mode: "development",
 	entry: {
 		index: "${FRONTEND_DIR}/src/index.js",
 	},

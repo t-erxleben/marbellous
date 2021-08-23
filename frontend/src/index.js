@@ -82,7 +82,7 @@ var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
 var nodes = {};
-var backend = {fn_bind: false, dom_setup: false, init: false};
+var backend = {fn_bind: false, dom_setup: false, init: false, filter: false};
 var color = 0x228B22;
 var pallets = { nodes: [] }
 window.Module = {
@@ -118,6 +118,7 @@ window.Module = {
 		backend.finishDrops = Module.cwrap('finishDrops', 'number', [])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.initBackend = Module.cwrap('initBackend', 'void', ['string', 'number', 'number'])
+		backend.setFilter = Module.cwrap('setFilter', 'void', ['number'])
 		backend.fn_bind = true;
 		init();
 	}
@@ -139,6 +140,7 @@ function init() {
 		backend.setColorRatioAt(i, int(x.ratio))
 	})
 	color = 0
+	backend.setFilter(backend.filter ? 1 : 0)
 	backend.redraw();
 	backend.init = true;
 }
@@ -642,6 +644,20 @@ function DomInit(){
 			}
 		})
 		sigEl.addEventListener('keydown', (ev)=>{if (ev.which == 13) {sigEl.blur();}})
+	}
+	{
+		const id = "sidebar-filter"
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		el.checked = el.value === 'true'
+		backend.filter = el.checked
+		el.addEventListener("change", (ev)=>{
+			storage.store(id, el.checked)
+			backend.filter = el.checked
+			backend.setFilter(backend.filter ? 1 : 0)
+			backend.redraw()
+		})
+
 	}
 	backend.dom_setup = true;
 	init();
