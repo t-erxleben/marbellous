@@ -276,7 +276,7 @@ function handleClick(el) {
 					backend.clearCanvas()
 					// go back to draw when clearing in rake
 					if(state == 'rake') {
-						switchState('rake', 'draw');
+						switchState('rake', 'draw'); state = 'draw'
 					}
 				}
 				break;
