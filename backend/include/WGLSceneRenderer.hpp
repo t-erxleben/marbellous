@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "WGLRenderer.hpp"
+#include "WGLFilter.hpp"
 #include "Scene.hpp"
 #include <cassert>
 
@@ -11,6 +12,7 @@ class WGLSceneRenderer: private WGLRenderer
 {
     private:
 		size_t i_size, v_size;
+        WGLFilter *conv;
 
         void constructBuffers(GLuint** indices, WGLVertex** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
 

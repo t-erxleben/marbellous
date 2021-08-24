@@ -1,28 +1,29 @@
 <map id="src/WGLRakeRenderer.cpp" name="src/WGLRakeRenderer.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="224,5,404,32"/>
-<area shape="rect" id="node2" href="$_w_g_l_rake_renderer_8hpp.html" title=" " alt="" coords="235,80,393,107"/>
-<area shape="rect" id="node3" href="$_w_g_l_renderer_8hpp.html" title=" " alt="" coords="13,379,141,405"/>
-<area shape="rect" id="node13" href="$_w_g_l_scene_renderer_8hpp.html" title=" " alt="" coords="231,155,397,181"/>
-<area shape="rect" id="node26" title=" " alt="" coords="459,229,524,256"/>
-<area shape="rect" id="node4" title=" " alt="" coords="204,453,259,480"/>
-<area shape="rect" id="node5" title=" " alt="" coords="448,528,543,555"/>
-<area shape="rect" id="node6" title=" " alt="" coords="49,453,128,480"/>
-<area shape="rect" id="node7" href="$_palette_8hpp.html" title=" " alt="" coords="41,528,128,555"/>
-<area shape="rect" id="node8" title=" " alt="" coords="519,603,578,629"/>
-<area shape="rect" id="node9" title=" " alt="" coords="5,603,71,629"/>
-<area shape="rect" id="node10" href="$_color_8hpp.html" title=" " alt="" coords="95,603,171,629"/>
-<area shape="rect" id="node11" title=" " alt="" coords="67,677,118,704"/>
-<area shape="rect" id="node12" title=" " alt="" coords="142,677,203,704"/>
-<area shape="rect" id="node14" title=" " alt="" coords="215,229,277,256"/>
-<area shape="rect" id="node15" href="$_scene_8hpp.html" title=" " alt="" coords="351,229,434,256"/>
-<area shape="rect" id="node16" title=" " alt="" coords="355,304,430,331"/>
-<area shape="rect" id="node17" href="$_polygon_8hpp.html" title=" " alt="" coords="665,304,757,331"/>
-<area shape="rect" id="node18" href="$_point_8hpp.html" title=" " alt="" coords="759,453,835,480"/>
-<area shape="rect" id="node21" href="$_w_g_l_vertex_8hpp.html" title=" " alt="" coords="655,379,768,405"/>
-<area shape="rect" id="node22" href="$_w_g_l_context_8hpp.html" title=" " alt="" coords="427,379,547,405"/>
-<area shape="rect" id="node19" title=" " alt="" coords="766,528,827,555"/>
-<area shape="rect" id="node20" title=" " alt="" coords="602,528,674,555"/>
-<area shape="rect" id="node23" title=" " alt="" coords="551,453,683,480"/>
-<area shape="rect" id="node24" href="$_options_8hpp.html" title=" " alt="" coords="283,453,374,480"/>
-<area shape="rect" id="node25" title=" " alt="" coords="303,528,355,555"/>
+<area shape="rect" id="node1" title=" " alt="" coords="271,5,451,32"/>
+<area shape="rect" id="node2" href="$_w_g_l_rake_renderer_8hpp.html" title=" " alt="" coords="282,80,441,107"/>
+<area shape="rect" id="node3" href="$_w_g_l_renderer_8hpp.html" title=" " alt="" coords="111,304,239,331"/>
+<area shape="rect" id="node13" href="$_w_g_l_filter_8hpp.html" title=" " alt="" coords="263,229,369,256"/>
+<area shape="rect" id="node19" title=" " alt="" coords="374,304,439,331"/>
+<area shape="rect" id="node20" href="$_w_g_l_scene_renderer_8hpp.html" title=" " alt="" coords="443,155,608,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="22,453,77,480"/>
+<area shape="rect" id="node5" title=" " alt="" coords="377,528,471,555"/>
+<area shape="rect" id="node6" title=" " alt="" coords="113,379,191,405"/>
+<area shape="rect" id="node7" href="$_palette_8hpp.html" title=" " alt="" coords="57,528,143,555"/>
+<area shape="rect" id="node8" title=" " alt="" coords="687,603,745,629"/>
+<area shape="rect" id="node9" title=" " alt="" coords="21,603,86,629"/>
+<area shape="rect" id="node10" href="$_color_8hpp.html" title=" " alt="" coords="110,603,186,629"/>
+<area shape="rect" id="node11" title=" " alt="" coords="83,677,133,704"/>
+<area shape="rect" id="node12" title=" " alt="" coords="157,677,219,704"/>
+<area shape="rect" id="node14" href="$_w_g_l_context_8hpp.html" title=" " alt="" coords="273,379,393,405"/>
+<area shape="rect" id="node15" title=" " alt="" coords="496,528,568,555"/>
+<area shape="rect" id="node16" title=" " alt="" coords="267,453,399,480"/>
+<area shape="rect" id="node17" href="$_options_8hpp.html" title=" " alt="" coords="101,453,192,480"/>
+<area shape="rect" id="node18" title=" " alt="" coords="167,528,219,555"/>
+<area shape="rect" id="node21" title=" " alt="" coords="495,229,556,256"/>
+<area shape="rect" id="node22" href="$_scene_8hpp.html" title=" " alt="" coords="580,229,663,256"/>
+<area shape="rect" id="node23" title=" " alt="" coords="476,304,551,331"/>
+<area shape="rect" id="node24" href="$_polygon_8hpp.html" title=" " alt="" coords="575,304,667,331"/>
+<area shape="rect" id="node25" href="$_point_8hpp.html" title=" " alt="" coords="577,453,653,480"/>
+<area shape="rect" id="node27" href="$_w_g_l_vertex_8hpp.html" title=" " alt="" coords="470,379,583,405"/>
+<area shape="rect" id="node26" title=" " alt="" coords="592,528,653,555"/>
 </map>

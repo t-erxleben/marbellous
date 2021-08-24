@@ -1,4 +1,4 @@
-set(CMAKE_CXX_COMPILER "/home/runner/work/_temp/b400fbac-b338-4c2b-8acb-721dd9f1f4eb/emsdk-master/upstream/emscripten/em++")
+set(CMAKE_CXX_COMPILER "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/em++")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "Clang")
 set(CMAKE_CXX_COMPILER_VERSION "13.0.0")
@@ -21,10 +21,10 @@ set(CMAKE_CXX_SIMULATE_VERSION "")
 
 
 
-set(CMAKE_AR "/home/runner/work/_temp/b400fbac-b338-4c2b-8acb-721dd9f1f4eb/emsdk-master/upstream/emscripten/emar")
-set(CMAKE_CXX_COMPILER_AR "/home/runner/work/_temp/b400fbac-b338-4c2b-8acb-721dd9f1f4eb/emsdk-master/upstream/emscripten/emar")
-set(CMAKE_RANLIB "/home/runner/work/_temp/b400fbac-b338-4c2b-8acb-721dd9f1f4eb/emsdk-master/upstream/emscripten/emranlib")
-set(CMAKE_CXX_COMPILER_RANLIB "/home/runner/work/_temp/b400fbac-b338-4c2b-8acb-721dd9f1f4eb/emsdk-master/upstream/emscripten/emranlib")
+set(CMAKE_AR "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/emar")
+set(CMAKE_CXX_COMPILER_AR "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/emar")
+set(CMAKE_RANLIB "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/emranlib")
+set(CMAKE_CXX_COMPILER_RANLIB "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/emranlib")
 set(CMAKE_LINKER "CMAKE_LINKER-NOTFOUND")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCXX )

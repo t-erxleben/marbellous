@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o.d"
   "CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o"
   "CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.o.d"
+  "CMakeFiles/Marbellous-debug.dir/src/WGLFilter.cpp.o"
+  "CMakeFiles/Marbellous-debug.dir/src/WGLFilter.cpp.o.d"
   "CMakeFiles/Marbellous-debug.dir/src/WGLRakeRenderer.cpp.o"
   "CMakeFiles/Marbellous-debug.dir/src/WGLRakeRenderer.cpp.o.d"
   "CMakeFiles/Marbellous-debug.dir/src/WGLRenderer.cpp.o"

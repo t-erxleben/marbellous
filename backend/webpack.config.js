@@ -7,7 +7,7 @@ module.exports = {
 			}
 		]
 	},
-	mode: "production",
+	mode: "development",
 	entry: {
 		index: "/home/runner/work/marbellous/marbellous/backend/../frontend//src/index.js",
 	},

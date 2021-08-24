@@ -149,6 +149,12 @@ extern "C"
 		context->updateBGColor();
     }
 
+    void EMSCRIPTEN_KEEPALIVE setFilter(bool filter)
+    {
+        Options::getInstance()->setFilter(filter);
+		std::cout << "filter set: " << filter << "\n";
+    }
+
     int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color) ///< draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
     {
         checkSetup(-1);
@@ -288,17 +294,6 @@ extern "C"
 			}
 		}
         return data.data();
-    }
-  
-    void EMSCRIPTEN_KEEPALIVE dropColor(float const x, float const y, float const r, unsigned int const color) ///< deprecated and only draws in color 0
-    {
-        checkSetup();
-        checkState(true,);
-        if (r > Polygon::MIN_R)
-        {
-            scene->addPolygon(Polygon{Point{x, y}, r, 0});
-            sceneRenderer->drawScene(*scene);
-        }
     }
 
 	/// creates sprinkle in around cursor

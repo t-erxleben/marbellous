@@ -322,6 +322,33 @@ src/WGLContext.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/WGLContext.cpp.s
 .PHONY : src/WGLContext.cpp.s
 
+src/WGLFilter.o: src/WGLFilter.cpp.o
+.PHONY : src/WGLFilter.o
+
+# target to build an object file
+src/WGLFilter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/WGLFilter.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/WGLFilter.cpp.o
+.PHONY : src/WGLFilter.cpp.o
+
+src/WGLFilter.i: src/WGLFilter.cpp.i
+.PHONY : src/WGLFilter.i
+
+# target to preprocess a source file
+src/WGLFilter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/WGLFilter.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/WGLFilter.cpp.i
+.PHONY : src/WGLFilter.cpp.i
+
+src/WGLFilter.s: src/WGLFilter.cpp.s
+.PHONY : src/WGLFilter.s
+
+# target to generate assembly for a file
+src/WGLFilter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/WGLFilter.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/WGLFilter.cpp.s
+.PHONY : src/WGLFilter.cpp.s
+
 src/WGLRakeRenderer.o: src/WGLRakeRenderer.cpp.o
 .PHONY : src/WGLRakeRenderer.o
 
@@ -459,6 +486,9 @@ help:
 	@echo "... src/WGLContext.o"
 	@echo "... src/WGLContext.i"
 	@echo "... src/WGLContext.s"
+	@echo "... src/WGLFilter.o"
+	@echo "... src/WGLFilter.i"
+	@echo "... src/WGLFilter.s"
 	@echo "... src/WGLRakeRenderer.o"
 	@echo "... src/WGLRakeRenderer.i"
 	@echo "... src/WGLRakeRenderer.s"

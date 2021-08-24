@@ -1,18 +1,20 @@
 <map id="include/Palette.hpp" name="include/Palette.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="387,5,519,32"/>
-<area shape="rect" id="node2" href="$_options_8hpp.html" title=" " alt="" coords="177,80,313,107"/>
-<area shape="rect" id="node14" href="$_w_g_l_renderer_8hpp.html" title=" " alt="" coords="384,304,557,331"/>
-<area shape="rect" id="node16" href="$_palette_8cpp.html" title=" " alt="" coords="491,80,600,107"/>
-<area shape="rect" id="node3" href="$_w_g_l_context_8hpp.html" title=" " alt="" coords="80,155,245,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="446,5,578,32"/>
+<area shape="rect" id="node2" href="$_options_8hpp.html" title=" " alt="" coords="263,80,399,107"/>
+<area shape="rect" id="node16" href="$_w_g_l_renderer_8hpp.html" title=" " alt="" coords="475,229,648,256"/>
+<area shape="rect" id="node18" href="$_palette_8cpp.html" title=" " alt="" coords="549,80,659,107"/>
+<area shape="rect" id="node3" href="$_w_g_l_context_8hpp.html" title=" " alt="" coords="128,155,293,181"/>
 <area shape="rect" id="node8" href="$main_8cpp.html" title=" " alt="" coords="59,528,155,555"/>
-<area shape="rect" id="node13" href="$_options_8cpp.html" title=" " alt="" coords="270,155,383,181"/>
+<area shape="rect" id="node15" href="$_options_8cpp.html" title=" " alt="" coords="318,155,431,181"/>
 <area shape="rect" id="node4" href="$_polygon_8hpp.html" title=" " alt="" coords="94,229,231,256"/>
-<area shape="rect" id="node12" href="$_w_g_l_context_8cpp.html" title=" " alt="" coords="255,229,398,256"/>
+<area shape="rect" id="node12" href="$_w_g_l_filter_8hpp.html" title=" " alt="" coords="435,304,586,331"/>
+<area shape="rect" id="node14" href="$_w_g_l_context_8cpp.html" title=" " alt="" coords="307,229,450,256"/>
 <area shape="rect" id="node5" href="$_scene_8hpp.html" title=" " alt="" coords="93,304,221,331"/>
 <area shape="rect" id="node11" href="$_polygon_8cpp.html" title=" " alt="" coords="245,304,360,331"/>
-<area shape="rect" id="node6" href="$_w_g_l_scene_renderer_8hpp.html" title=" " alt="" coords="183,379,393,405"/>
+<area shape="rect" id="node6" href="$_w_g_l_scene_renderer_8hpp.html" title=" " alt="" coords="177,379,388,405"/>
 <area shape="rect" id="node7" href="$_w_g_l_rake_renderer_8hpp.html" title=" " alt="" coords="405,453,608,480"/>
 <area shape="rect" id="node10" href="$_w_g_l_scene_renderer_8cpp.html" title=" " alt="" coords="195,453,381,480"/>
 <area shape="rect" id="node9" href="$_w_g_l_rake_renderer_8cpp.html" title=" " alt="" coords="417,528,597,555"/>
-<area shape="rect" id="node15" href="$_w_g_l_renderer_8cpp.html" title=" " alt="" coords="509,379,659,405"/>
+<area shape="rect" id="node13" href="$_w_g_l_filter_8cpp.html" title=" " alt="" coords="463,379,590,405"/>
+<area shape="rect" id="node17" href="$_w_g_l_renderer_8cpp.html" title=" " alt="" coords="666,304,817,331"/>
 </map>

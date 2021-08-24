@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/runner/work/marbellous/marbellous/backend/src/Palette.cpp" "CMakeFiles/Marbellous.dir/src/Palette.cpp.o" "gcc" "CMakeFiles/Marbellous.dir/src/Palette.cpp.o.d"
   "/home/runner/work/marbellous/marbellous/backend/src/Polygon.cpp" "CMakeFiles/Marbellous.dir/src/Polygon.cpp.o" "gcc" "CMakeFiles/Marbellous.dir/src/Polygon.cpp.o.d"
   "/home/runner/work/marbellous/marbellous/backend/src/WGLContext.cpp" "CMakeFiles/Marbellous.dir/src/WGLContext.cpp.o" "gcc" "CMakeFiles/Marbellous.dir/src/WGLContext.cpp.o.d"
+  "/home/runner/work/marbellous/marbellous/backend/src/WGLFilter.cpp" "CMakeFiles/Marbellous.dir/src/WGLFilter.cpp.o" "gcc" "CMakeFiles/Marbellous.dir/src/WGLFilter.cpp.o.d"
   "/home/runner/work/marbellous/marbellous/backend/src/WGLRakeRenderer.cpp" "CMakeFiles/Marbellous.dir/src/WGLRakeRenderer.cpp.o" "gcc" "CMakeFiles/Marbellous.dir/src/WGLRakeRenderer.cpp.o.d"
   "/home/runner/work/marbellous/marbellous/backend/src/WGLRenderer.cpp" "CMakeFiles/Marbellous.dir/src/WGLRenderer.cpp.o" "gcc" "CMakeFiles/Marbellous.dir/src/WGLRenderer.cpp.o.d"
   "/home/runner/work/marbellous/marbellous/backend/src/WGLSceneRenderer.cpp" "CMakeFiles/Marbellous.dir/src/WGLSceneRenderer.cpp.o" "gcc" "CMakeFiles/Marbellous.dir/src/WGLSceneRenderer.cpp.o.d"
