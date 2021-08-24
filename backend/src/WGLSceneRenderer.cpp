@@ -210,4 +210,5 @@ void WGLSceneRenderer::resize()
 
 	auto dropRes = WGLContext::getContext()->getDropRes();
 	constructFBO(dropRes, true, frameBuffer, frameTexture);
+	conv->resize(dropRes);
 }
