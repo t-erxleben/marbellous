@@ -211,6 +211,10 @@ table > tbody > tr > td {
 	border: 2px solid;
 }
 
+.menu input[type="button"]:disabled ~ label > img {
+	opacity: 0.3
+}
+
 
 .menu label {
 	display: inline-block;

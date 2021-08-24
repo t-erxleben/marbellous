@@ -172,3 +172,8 @@ void WGLRakeRenderer::resize()
     constructFBO(rakeRes, false, fbo_post[1], tex_post[1]);
     constructFBO(rakeRes, false, fbo_screenshot, tex_screenshot);
 }
+
+void WGLRakeRenderer::swapBuffers()
+{
+    curr_tex = !curr_tex;
+}
