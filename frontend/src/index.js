@@ -430,7 +430,7 @@ function DomInit(){
 				backend.resolution = int(el.value)
 				storage.store(id, el.value)
 				backend.resize(backend.resolution, backend.resolution)
-				if (state === 'rake') { switchState('rake', 'draw') }
+				if (state === 'rake') { switchState('rake', 'draw'); state = 'draw' }
 			}
 		})
 	}
