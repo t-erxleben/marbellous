@@ -109,16 +109,22 @@ window.Module = {
 			'void', []);
 		backend.startRaking = Module.cwrap('startRaking', 'void', [])
 		backend.startDropping = Module.cwrap('startDropping', 'void', [])
-		backend.rake = Module.cwrap('rake',
+		backend.rake_impl = Module.cwrap('rake',
 			'void', [	'number', 'number',
 						'number', 'number', 'number',
 						'array'])
+		backend.rake = function(a,b,c,d,e,f) {
+			backend.rake_impl(a,b,c,d,e,f)
+			document.getElementById('undo').disabled = false
+		}
 		backend.sprinklerGlobal = Module.cwrap('sprinkleGlobal', 'void', ['number', 'number', 'number'])
 		backend.sprinklerLocal = Module.cwrap('sprinkleLocal', 'void', ['number', 'number', 'number', 'number', 'number', 'number'])
 		backend.finishDrops = Module.cwrap('finishDrops', 'number', [])
 		backend.clearCanvas = Module.cwrap('clearCanvas', 'void', [])
 		backend.initBackend = Module.cwrap('initBackend', 'void', ['string', 'number', 'number'])
 		backend.setFilter = Module.cwrap('setFilter', 'void', ['number'])
+		backend.undoLastRake = Module.cwrap('undoLastRake', 'void', [])
+
 		backend.fn_bind = true;
 		init();
 	}
@@ -259,6 +265,10 @@ function handleClick(el) {
 					spinner.hidden = false
 					setTimeout(()=>downloadCanvas(spinner), 100)
 				}
+				break;
+			case 'undo':
+				backend.undoLastRake()
+				el.disabled = true
 				break;
 			case 'clear':
 				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you clear the Canvas?'))

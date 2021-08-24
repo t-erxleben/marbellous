@@ -165,3 +165,8 @@ void WGLRakeRenderer::resize()
 
     conv->resize(rakeRes);
 }
+
+void WGLRakeRenderer::swapBuffers()
+{
+    curr_tex = !curr_tex;
+}
