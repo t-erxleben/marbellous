@@ -82,7 +82,7 @@ var active = {};
 const states = ['draw','rake'];
 var state = 'draw';
 var nodes = {};
-var backend = {fn_bind: false, dom_setup: false, init: false, filter: false};
+var backend = {fn_bind: false, dom_setup: false, init: false, filter: false, resolution: null};
 var color = 0x228B22;
 var pallets = { nodes: [] }
 window.Module = {
@@ -124,7 +124,7 @@ window.Module = {
 		backend.initBackend = Module.cwrap('initBackend', 'void', ['string', 'number', 'number'])
 		backend.setFilter = Module.cwrap('setFilter', 'void', ['number'])
 		backend.undoLastRake = Module.cwrap('undoLastRake', 'void', [])
-
+		backend.resize = Module.cwrap('resize', 'void', ['number', 'number'])
 		backend.fn_bind = true;
 		init();
 	}
@@ -137,7 +137,7 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
-	backend.initBackend('#image', 1080, 1080)
+	backend.initBackend('#image', backend.resolution, backend.resolution)
 	backend.setBGColor(color2int(pallets[pallets.active].background));
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
@@ -276,7 +276,7 @@ function handleClick(el) {
 					backend.clearCanvas()
 					// go back to draw when clearing in rake
 					if(state == 'rake') {
-						switchState('rake', 'draw');
+						switchState('rake', 'draw'); state = 'draw'
 					}
 				}
 				break;
@@ -420,7 +420,20 @@ function DomInit(){
 	};
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
-
+	{
+		const id = 'sidebar-general-resolution'
+		const el = document.getElementById(id)
+		fetchAndSet(el, id)
+		backend.resolution = int(el.value)
+		el.addEventListener("change", (ev)=>{
+			if(state != 'rake' || window.confirm("Changing the resolution will undo all raking steps!\nWill you change the resolution?")) {
+				backend.resolution = int(el.value)
+				storage.store(id, el.value)
+				backend.resize(backend.resolution, backend.resolution)
+				if (state === 'rake') { switchState('rake', 'draw'); state = 'draw' }
+			}
+		})
+	}
 	{
 		const id = 'sidebar-pallet-active-pallet'
 		const el = document.getElementById(id);
