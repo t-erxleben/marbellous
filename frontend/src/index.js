@@ -462,10 +462,16 @@ function DomInit(){
 
 
 			pallets.inputs.forEach(function(x,i) {
-				colors[i].color = x.color.value;
-				colors[i].ratio = x.ratio.value;
+				colors[i] = {
+					color: x.color.value,
+					ratio: x.ratio.value
+				}
+				storage.store(pallets.active + 'sidebar-pallet-color-' + i.toString(), x.color.value)
+				storage.store(pallets.active + 'sidebar-pallet-ratio-' + i.toString(), x.ratio.value)
 			});
 			background = pallets.inputs.background.value;
+			storage.store(pallets.active + 'sidebar-pallet-background', pallets.inputs.background.value)
+
 			pallets[pallets.active] = {colors, background}
 			pallets[pallets.active].colors.forEach(function(x,i){
 				backend.setColorAt(i, color2int(x.color))
