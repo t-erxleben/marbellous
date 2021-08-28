@@ -654,22 +654,42 @@ function DomInit(){
 
 	{	const id = 'sidebar-sprinkler-frequence'
 		const el = document.getElementById(id)
+		const slider = document.getElementById(id+'-slider')
 		fetchAndSet(el, id)
 		sparkle_dropper.rate = 1000. / int(el.value || "5") 
 		el.addEventListener('change', (ev)=> {
 			if (el.validity.valid) {
 				try {
-					sparkle_dropper.rate = 1000. / int(el.value)
+					const v = int(el.value)
+					sparkle_dropper.rate = 1000. / v
+					slider.noUiSlider.set(v)
 					storage.store(id, el.value)
 				}	catch(e) { /* TODO: error handling */ }
 			}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur();}})
+		console.log(sparkle_dropper.rate)
+		libSlider.create(slider, {
+				start: 1000. / sparkle_dropper.rate,
+				step: 1,
+				connect: [true, false],
+				range: {
+					min: int(el.min),
+					max: int(el.max)
+				}
+			}
+		)
+		slider.noUiSlider.on('update', function(vals) {
+			el.value = `${Math.round(vals[0])}`
+			sparkle_dropper.rate = 1000. / vals
+			storage.store(id, el.value)
+		})
 	}
 	{	const id = 'sidebar-sprinkler-local'
 		const el = document.getElementById(id)
 		fetchAndSet(el, id)
 		const sigId = 'sidebar-sprinkler-sig'
+		const sigSlider = document.getElementById(sigId + "-slider")
 		const sigEl = document.getElementById(sigId)
 		fetchAndSet(sigEl, sigId)
 
@@ -686,6 +706,7 @@ function DomInit(){
 			if (el.validity.valid) {
 				try {
 					sparkle_dropper.sig = int(sigEl.value) / 100.
+					sigSlider.noUiSlider.set(sparkle_dropper.sig * 100)
 					storage.store(sigId, sigEl.value)
 				}	catch(e) {
 					// TODO: error handling
@@ -693,6 +714,21 @@ function DomInit(){
 			}
 		})
 		sigEl.addEventListener('keydown', (ev)=>{if (ev.which == 13) {sigEl.blur();}})
+		
+		libSlider.create(sigSlider, {
+			start: sparkle_dropper.sig * 100,
+			connect: [true, false],
+			step: 1,
+			range: {
+				min: int(sigEl.min),
+				max: int(sigEl.max)
+			}
+		})
+		sigSlider.noUiSlider.on('update', function(vals) {
+			sigEl.value = `${Math.round(vals[0])}`
+			sparkle_dropper.sig = int(sigEl.value) / 100.
+			storage.store(sigId, sigEl.value)
+		})
 	}
 	{
 		const id = "sidebar-filter"
