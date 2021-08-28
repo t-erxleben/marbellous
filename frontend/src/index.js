@@ -594,6 +594,7 @@ function DomInit(){
 		sparkle_dropper.range = parseRadiusRange(el.value || "5-10");
 		el.addEventListener('change', (ev)=>{
 			try {
+				if(el.value == "") { el.value = '5-10' }
 				sparkle_dropper.range = parseRadiusRange(el.value)
 				console.log(sparkle_dropper.range)
 				slider.noUiSlider.set([sparkle_dropper.range.min*100, sparkle_dropper.range.max*100])
@@ -658,6 +659,7 @@ function DomInit(){
 		fetchAndSet(el, id)
 		sparkle_dropper.rate = 1000. / int(el.value || "5") 
 		el.addEventListener('change', (ev)=> {
+			if(el.value == "") { el.value = "5" }
 			if (el.validity.valid) {
 				try {
 					const v = int(el.value)
@@ -680,6 +682,7 @@ function DomInit(){
 			}
 		)
 		slider.noUiSlider.on('update', function(vals) {
+			console.log('set\n');
 			el.value = `${Math.round(vals[0])}`
 			sparkle_dropper.rate = 1000. / vals
 			storage.store(id, el.value)
@@ -703,7 +706,8 @@ function DomInit(){
 		})
 		sparkle_dropper.sig = int(sigEl.value || '10' ) / 100.
 		sigEl.addEventListener('change', (ev)=> {
-			if (el.validity.valid) {
+			if(sigEl.value == "") { sigEl.value = '10' }
+			if (sigEl.validity.valid) {
 				try {
 					sparkle_dropper.sig = int(sigEl.value) / 100.
 					sigSlider.noUiSlider.set(sparkle_dropper.sig * 100)
