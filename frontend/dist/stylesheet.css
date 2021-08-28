@@ -490,6 +490,9 @@ input.slider:checked + span.slider:before {
 .sidebar .noUi-connect {
 	background: var(--accent-color-1);
 }
+.sidebar [disabled].noUi-horizontal .noUi-connect {
+	background: var(--accent-color-1);
+}
 .sidebar .noUi-horizontal .noUi-handle:before { content: none; }
 .sidebar .noUi-horizontal .noUi-handle {
 	width: 1.05em; /* TODO: handle gap problem */
@@ -531,6 +534,9 @@ input.slider:checked + span.slider:before {
 	border-radius: 0;
 	height: 1em;
 	margin-top: 1em;
+}
+.sidebar [disabled].noUi-target {
+	opacity: 0.3;
 }
 .sidebar .noUi-connects {
     margin: 0 -0.5em;

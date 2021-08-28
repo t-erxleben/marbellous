@@ -699,10 +699,20 @@ function DomInit(){
 		el.checked = el.value === 'true'
 		sparkle_dropper.local = el.checked
 		sigEl.disabled = !el.checked
+		if(!el.checked) {
+			sigSlider.setAttribute('disabled', true)
+		} else {
+			sigSlider.removeAttribute('disabled')
+		}
 		el.addEventListener('change', (ev) => {
 			sparkle_dropper.local = el.checked
 			storage.store(id, el.checked)
 			sigEl.disabled = !el.checked
+			if(!el.checked) {
+				sigSlider.setAttribute('disabled', true)
+			} else {
+				sigSlider.removeAttribute('disabled')
+			}
 		})
 		sparkle_dropper.sig = int(sigEl.value || '10' ) / 100.
 		sigEl.addEventListener('change', (ev)=> {
