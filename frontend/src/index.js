@@ -1,5 +1,7 @@
 import * as parser from './rake_syntax.pegjs'
 import * as png from 'fast-png'
+import * as libSlider from 'nouislider'
+import 'nouislider/dist/nouislider.css';
 
 const int = parseInt;
 var inputs = {}
@@ -586,11 +588,15 @@ function DomInit(){
 	}
 	{	const id = 'sidebar-sprinkler-radius'
 		const el = document.getElementById(id)
+		const slider = document.getElementById(id + '-slider')
+
 		fetchAndSet(el, id)
 		sparkle_dropper.range = parseRadiusRange(el.value || "5-10");
 		el.addEventListener('change', (ev)=>{
 			try {
 				sparkle_dropper.range = parseRadiusRange(el.value)
+				console.log(sparkle_dropper.range)
+				slider.noUiSlider.set([sparkle_dropper.range.min*100, sparkle_dropper.range.max*100])
 				storage.store(id, el.value)
 			} catch(e) {
 				console.error("failed to parse radius range: ", e)
@@ -598,6 +604,22 @@ function DomInit(){
 			}
 		})
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}})
+
+		libSlider.create(slider, {
+				start: [5,10],
+				connect: true,
+				step: 1,
+				range: {
+					min: 1,
+					max: 100
+				}
+			}
+		)
+		slider.noUiSlider.on('update', function(vals) {
+			el.value = `${Math.round(vals[0])}-${Math.round(vals[1])}`
+			sparkle_dropper.range = parseRadiusRange(el.value)
+			storage.store(id, el.value)
+		})
 	}
 	const sidebar_fn = function(obj, key, config, value){
 		const id ="sidebar-colorgrid-" + config
