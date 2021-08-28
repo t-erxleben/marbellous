@@ -987,10 +987,11 @@ var rake = {
 			const y = startBound.y + i / len * a.y;
 			ctx.moveTo(x + up.x * mag, y + up.y * mag);
 		}
-		for(i = -rake.config.periode/4; i <= len + rake.config.periode / 4 + step; i += step) {
+		console.log(rake.config.periode)
+		for(i = 0; i <= len + step; i += step) {
 			const x = startBound.x + i / len * a.x;
 			const y = startBound.y + i / len * a.y;
-			const mag = Math.sin((i-phaseOff) / (rake.config.periode * w) * Math.PI) * rake.config.magnitude * w;
+			const mag = Math.sin((i-phaseOff) / (rake.config.periode * w) * 2 * Math.PI) * rake.config.magnitude * w;
 			ctx.lineTo(x + up.x * mag ,y + up.y * mag);
 		}
 		ctx.stroke();
