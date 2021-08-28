@@ -394,7 +394,7 @@ input.slider:checked + span.slider:before {
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
-  width: 75%;
+  width: max-content;
 }
 
 .form_field {
@@ -477,38 +477,55 @@ input.slider:checked + span.slider:before {
 	background-color: transparent;
 }
 
-.sidebar .noUi-base {
-	margin-top: 1em; 
-	margin-left: 0.5em;
-	margin-right: 0.5em;
-	width: auto;
-}
-
-.sidebar .noUi-target {
-	background: var(--overlay-color);
-	box-shadow: none;
-	border-radius: 0.5em;
-	border: none;
-	height: 1em;
-}
 .sidebar .noUi-connect {
 	background: var(--accent-color-1);
-	border-radius: 0.5em;
 }
-
+.sidebar .noUi-horizontal .noUi-handle:before { content: none; }
 .sidebar .noUi-horizontal .noUi-handle {
-	width: 1em;
+	width: 1.05em; /* TODO: handle gap problem */
 	height: 1em;
 	right: -0.5em;
 	top: 0;
-	border-radius: 0.5em;
+	background: none;
+	border: 0;
+	box-shadow: none;
+	border-radius: 0;
+}
+.sidebar .noUi-horizontal .noUi-connects:first-child:nth-last-child(3) ~ .noUi-origin:nth-last-child(1) > .noUi-handle{
+	background: var(--accent-color-1);
+}
+.sidebar .noUi-horizontal .noUi-connects:first-child:nth-last-child(3) ~ .noUi-origin:nth-last-child(1) {
+	z-index: 4 !important;
+}
+.sidebar .noUi-horizontal .noUi-handle:after {
+	content: "";
+	width: 0.75em;
+	height: 0.75em;
+	left: 0.125em;
+	top: 0.125em;
+	border-radius: 0.375em;
 	background: var(--font-color);
 	border: 0;
 	box-shadow: none;
 }
 
-.sidebar .noUi-horizontal .noUi-handle:before { content: none; }
-.sidebar .noUi-horizontal .noUi-handle:after { content: none; }
+ 
+.sidebar .noUi-target {
+    padding: 0 0.5em;
+	background: var(--overlay-color);
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+	height: 1em;
+	margin-top: 1em;
+}
+.sidebar .noUi-connects {
+    margin: 0 -0.5em;
+    width: 100%;
+	border-radius: 0;
+}
+
+
 
 /* menu.sidebar input {
 	background: var(--background-color);

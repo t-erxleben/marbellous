@@ -606,7 +606,7 @@ function DomInit(){
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}})
 
 		libSlider.create(slider, {
-				start: [5,10],
+				start: [sparkle_dropper.range.min * 100, sparkle_dropper.range.max * 100],
 				connect: true,
 				step: 1,
 				range: {
