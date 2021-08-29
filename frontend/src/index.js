@@ -1070,7 +1070,8 @@ var rake = {
 
 		ctx.lineWidth = 0.5;
 		ctx.beginPath();
-		const step = 20;
+		const step = (len * rake.config.periode) / 50
+		console.log('step', step)
 		{
 			const i = - rake.config.periode / 4 - step;
 			const mag = Math.sin((i-phaseOff) / (rake.config.periode * w) * Math.PI) * rake.config.magnitude * w;
