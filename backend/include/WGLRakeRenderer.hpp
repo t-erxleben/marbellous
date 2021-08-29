@@ -49,7 +49,7 @@ class WGLRakeRenderer: private WGLRenderer
                 float scaled_sin(float x)
                 {
                     const float pi = 3.1415926535897932384626433832795;
-                    return sin((x - phase) * pi / period) * amplitude;
+                    return sin((x - phase) * 2. * pi / period) * amplitude;
                 }
  
                 void main() {
