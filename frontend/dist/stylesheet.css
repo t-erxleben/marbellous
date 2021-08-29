@@ -611,3 +611,54 @@ input.slider:checked + span.slider:before {
   }
 }
   
+.popup {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 300ms, opacity 300ms;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	display: flex;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.popup_open {
+	visibility: visible;
+	opacity: 1;
+}
+
+.popup_title {
+	font-size: 36px;
+	margin: 0 0 0.5em;
+}
+
+.popup_container {
+	background-color: white;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+	border-radius: 15px;
+	text-align: center;
+	margin: auto;
+	position: relative;
+	padding: 15px;
+}
+
+.popup_content {
+	max-width: 60vw;
+	max-height: 60vh;
+}
+
+.close_button {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	border: 0;
+	background: url('./icons/times-solid.svg') center center / 100% 100% no-repeat;
+	width: 40px;
+	height: 40px;
+	fill: #000;
+	padding: 0;
+	cursor: pointer;
+	display: block;
+}

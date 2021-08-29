@@ -4,6 +4,7 @@ import * as libSlider from 'nouislider'
 import 'nouislider/dist/nouislider.css';
 
 const int = parseInt;
+var popup = {}
 var inputs = {}
 window.Storage =  class Storage {
 	constructor() {
@@ -259,6 +260,9 @@ function downloadCanvas(el) {
 
 function handleClick(el) {
 		switch(el.id) {
+			case 'help':
+				popup.popup.classList.add('popup_open')
+				break;
 			case 'download':
 				const spinner = el.parentElement.getElementsByClassName('spinner')[0]
 				if(spinner.hidden) {
@@ -289,7 +293,6 @@ function handleClick(el) {
 				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
-				sidebar.btn.checked = true
 				sidebar.options.sprinkler.checked = true
 				break;
 			case 'rake-movement-linear':
@@ -389,6 +392,9 @@ function DomInit(){
 			active[rad.attributes.name.nodeValue] = null;
 		}
 	});
+	popup.popup = document.querySelector('.popup')
+	popup.close = popup.popup.querySelector('.close_button')
+	popup.close.addEventListener('click', function() { popup.popup.classList.remove('popup_open') })
 	{
 		tool.image = document.getElementById('image');
 	}

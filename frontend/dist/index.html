@@ -51,20 +51,29 @@
 			</p>
 		</div>
 	</noscript>
+	<div class="popup">
+		<div class="popup_container">
+			<input type="button" class="close_button"></input>
+			<h2 class="popup_title">A Help message</h2>
+			<div class="popup_content">
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit a
+			</div>
+		</div>
+	</div>
 	<input id="sidebar-btn" type="checkbox" class="sidebar">
 	<label for="sidebar-btn" class="sidebar">
 		<img src="icons/arrow-right-solid.svg" title="">
 	</label>
 	<menu class="sidebar">
 		<!-- help menu -->
-		<li>
+		<!-- <li>
 				<input type="radio" name="sidebar" id="sidebar-help"/>
 				<label for="sidebar-help">Help</label>
 				<div>
 					Bla bla helpful<br>
 					explain rake syntax (TODO)
 				</div>
-		</li>
+		</li> -->
 		<!-- general -->
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-general" />
@@ -93,10 +102,14 @@
 								</td>
 							<td>
 								<select class="form_field" id="sidebar-general-resolution">
-									<option value="720">720x720</option>
-									<option value="1080" selected>1080x1080</option>
-									<option value="2160">2160x2160</option>
-									<option value="3840">3840x3840</option>
+									<option value="500">500x500</option>
+									<option value="1000" selected>1000x1000</option>
+									<option value="1500">1500x1500</option>
+									<option value="2000">2000x2000</option>
+									<option value="2500">2500x2500</option>
+									<option value="3000">3000x3000</option>
+									<option value="3500">3500x3500</option>
+									<option value="4000">4000x4000</option>
 								</select></td></tr>
 					</table>
 				</div>
@@ -386,14 +399,14 @@
 				</label>
 			</li> -->
 
-			<li><input type="button" id="clear" name="history">
-				<label for="clear" title="Clear canvas">
-					<img src="icons/chalkboard-solid.svg" alt="clear canvas">
-				</label>
-			</li>
 			<li class="rake state"><input type="button" id="undo" name="history" disabled>
 				<label for="undo" title="Undo one rake step.">
 					<img src="icons/undo-solid.svg" alt="undo rake">
+				</label>
+			</li>
+			<li><input type="button" id="clear" name="history">
+				<label for="clear" title="Clear canvas">
+					<img src="icons/chalkboard-solid.svg" alt="clear canvas">
 				</label>
 			</li>
 			<li><input type="button" id="switch-state" name="history">
@@ -412,6 +425,11 @@
 							</circle>
 						</svg>
 					</div>
+				</label>
+			</li>
+			<li><input type="button" id="help">
+				<label for="help" title="Show help/manual." style="position:relative;">
+					<img = src="icons/question-solid.svg" alt="help">
 				</label>
 			</li>
 
