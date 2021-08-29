@@ -563,15 +563,33 @@ function DomInit(){
 	{
 		const id = 'sidebar-rake-periode'
 		const el = document.getElementById(id)
+		const slider = document.getElementById(id + '-slider')
+		const def = el.value;
 		fetchAndSet(el, id)
-		rake.config.periode = int(el.value || '20') / 100
+		rake.config.periode = int(el.value || def) / 100
 		el.addEventListener('change', (ev)=>{
 			try {
-				rake.config.periode = int(el.value) / 100
+				if(el.value === "") { el.value = def }
+				const v = int(el.value)
+				rake.config.periode = v / 100
+				slider.noUiSlider.set(v)
 				storage.store(id, el.value)
 			} catch(e) {}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur()}})
+		libSlider.create(slider,{
+			start: rake.config.periode * 100,
+			connect: [true, false],
+			range: {
+				min: int(el.min),
+				max: int(el.max)
+			}
+		})
+		slider.noUiSlider.on('update', function(vals) {
+			el.value = `${Math.round(vals[0])}`
+			rake.config.periode = vals[0] / 100.
+			storage.store(id, el.value)
+		})
 	}
 	{
 		const id = 'sidebar-rake-magnitude'
