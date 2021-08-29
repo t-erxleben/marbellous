@@ -576,15 +576,33 @@ function DomInit(){
 	{
 		const id = 'sidebar-rake-magnitude'
 		const el = document.getElementById(id)
+		const slider = document.getElementById(id + '-slider')
 		fetchAndSet(el, id)
 		rake.config.magnitude = int(el.value || '5') / 100
 		el.addEventListener('change', (ev)=>{
 			try {
-				rake.config.magnitude = int(el.value) / 100
+				if(el.value == "") { el.value = '5' }
+				const v = int(el.value)
+				rake.config.magnitude = v / 100
+				slider.noUiSlider.set(v)
 				storage.store(id, el.value)
 			} catch(e) {}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur()}})
+		libSlider.create(slider, {
+			start: rake.config.magnitude * 100,
+			connect: [true, false],
+			step: 1,
+			range: {
+				min: int(el.min),
+				max: int(el.max)
+			},
+		})
+		slider.noUiSlider.on('update', function(vals) {
+			el.value = `${Math.round(vals[0])}`
+			rake.config.magnitude = vals[0] / 100.
+			storage.store(id, el.value)
+		})
 	}
 	{	const id = 'sidebar-sprinkler-radius'
 		const el = document.getElementById(id)
@@ -596,7 +614,6 @@ function DomInit(){
 			try {
 				if(el.value == "") { el.value = '5-10' }
 				sparkle_dropper.range = parseRadiusRange(el.value)
-				console.log(sparkle_dropper.range)
 				slider.noUiSlider.set([sparkle_dropper.range.min*100, sparkle_dropper.range.max*100])
 				storage.store(id, el.value)
 			} catch(e) {
@@ -670,7 +687,6 @@ function DomInit(){
 			}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur();}})
-		console.log(sparkle_dropper.rate)
 		libSlider.create(slider, {
 				start: 1000. / sparkle_dropper.rate,
 				step: 1,
@@ -682,7 +698,6 @@ function DomInit(){
 			}
 		)
 		slider.noUiSlider.on('update', function(vals) {
-			console.log('set\n');
 			el.value = `${Math.round(vals[0])}`
 			sparkle_dropper.rate = 1000. / vals
 			storage.store(id, el.value)
@@ -1063,7 +1078,6 @@ var rake = {
 			const y = startBound.y + i / len * a.y;
 			ctx.moveTo(x + up.x * mag, y + up.y * mag);
 		}
-		console.log(rake.config.periode)
 		for(i = 0; i <= len + step; i += step) {
 			const x = startBound.x + i / len * a.x;
 			const y = startBound.y + i / len * a.y;
