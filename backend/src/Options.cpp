@@ -1,16 +1,8 @@
 #include "Options.hpp"
 #include <cstdio>
 
-Options::Options(): bgColor{0xf7e9ce}, dropState{true} , activePalette{0}, Palettes(1), filter{false}
-{
-    // set default colors
-    Palette tmp(3);
-    // taken from @colours.cafe https://www.instagram.com/p/CKEJtrvAXVT/
-    tmp.add(Color(0x09382F));
-    tmp.add(Color(0xBE3D3D));
-    tmp.add(Color(0xC99910));
-    Palettes[0] = tmp;
-}
+Options::Options(): bgColor{0xf7e9ce}, dropState{true} , activePalette{0}, Palettes(0), filter{false}
+{ }
 
 Options* const Options::getInstance()
 {
