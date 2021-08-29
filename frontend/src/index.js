@@ -837,7 +837,7 @@ var sparkle_dropper = {
 		const n = int(d / sparkle_dropper.rate)
 		if(n > 0) {
 			if(sparkle_dropper.local === true) {
-				backend.sprinklerLocal(n, sparkle_dropper.range.min, sparkle_dropper.range.max,
+				backend.sprinklerLocal(n, sparkle_dropper.range.min / 2., sparkle_dropper.range.max / 2.,
 					sparkle_dropper.pos.x * 2 - 1,1 - sparkle_dropper.pos.y * 2,
 					sparkle_dropper.sig)
 			} else {

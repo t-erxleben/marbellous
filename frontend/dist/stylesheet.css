@@ -103,7 +103,7 @@ menu.sidebar {
 
 menu.sidebar > li {
 	margin-bottom: 20px;
-	width: 100%;
+	width: var(--sidebar-width);
 }
 menu.sidebar > li > input:checked + label {
 	background-color: var(--accent-color-2);
