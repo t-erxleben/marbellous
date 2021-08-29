@@ -138,6 +138,10 @@ input.sidebar:checked + label.sidebar + menu.sidebar {
 	display: none;
 }
 
+.sidebar table td {
+	padding-top: 10px;
+}
+
 label > img {
 	width: 32px;
 	height: 32px;
