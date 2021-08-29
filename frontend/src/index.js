@@ -509,6 +509,7 @@ function DomInit(){
 		const iid = 'sidebar-pallet-color-' + num.toString();
 		const riid = 'sidebar-pallet-ratio-' + num.toString()
 		const rel = document.getElementById(riid);
+		const rdef = rel.value
 		const id = function() { return pallets.active + iid }
 		const rid = function() { return pallets.active + riid }
 		fetchAndSet(el, id());
@@ -524,6 +525,7 @@ function DomInit(){
 			backend.redraw();
 			updatePallet();});
 		rel.addEventListener('change', (ev)=>{
+			if(rel.value === "") { rel.value = rdef }
 			pallets[pallets.active].colors[num].ratio = rel.value
 			storage.store(rid(), rel.value)
 			backend.setColorRatioAt(num, int(rel.value))
@@ -548,10 +550,12 @@ function DomInit(){
 
 	{	const id = 'sidebar-rake-placement'
 		const el = document.getElementById(id);
+		const def = el.value
 		fetchAndSet(el, id)
-		rake.config.placement = new RakeConfig(el.value || '20');
+		rake.config.placement = new RakeConfig(el.value || def);
 		el.addEventListener('change', (ev)=>{
 			try {
+				if(el.value === "") { el.value = def }
 				rake.config.placement = new RakeConfig(el.value);
 				storage.store(id, el.value);
 			} catch (e) {
