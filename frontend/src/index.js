@@ -595,11 +595,12 @@ function DomInit(){
 		const id = 'sidebar-rake-magnitude'
 		const el = document.getElementById(id)
 		const slider = document.getElementById(id + '-slider')
+		const def = el.value
 		fetchAndSet(el, id)
-		rake.config.magnitude = int(el.value || '5') / 100
+		rake.config.magnitude = int(el.value || def) / 100
 		el.addEventListener('change', (ev)=>{
 			try {
-				if(el.value == "") { el.value = '5' }
+				if(el.value === "") { el.value = def }
 				const v = int(el.value)
 				rake.config.magnitude = v / 100
 				slider.noUiSlider.set(v)
@@ -625,12 +626,13 @@ function DomInit(){
 	{	const id = 'sidebar-sprinkler-radius'
 		const el = document.getElementById(id)
 		const slider = document.getElementById(id + '-slider')
+		const def = el.value
 
 		fetchAndSet(el, id)
-		sparkle_dropper.range = parseRadiusRange(el.value || "5-10");
+		sparkle_dropper.range = parseRadiusRange(el.value || def);
 		el.addEventListener('change', (ev)=>{
 			try {
-				if(el.value == "") { el.value = '5-10' }
+				if(el.value === "") { el.value = def }
 				sparkle_dropper.range = parseRadiusRange(el.value)
 				slider.noUiSlider.set([sparkle_dropper.range.min*100, sparkle_dropper.range.max*100])
 				storage.store(id, el.value)
@@ -691,10 +693,11 @@ function DomInit(){
 	{	const id = 'sidebar-sprinkler-frequence'
 		const el = document.getElementById(id)
 		const slider = document.getElementById(id+'-slider')
+		const def = el.value
 		fetchAndSet(el, id)
-		sparkle_dropper.rate = 1000. / int(el.value || "5") 
+		sparkle_dropper.rate = 1000. / int(el.value || def) 
 		el.addEventListener('change', (ev)=> {
-			if(el.value == "") { el.value = "5" }
+			if(el.value === "") { el.value = def }
 			if (el.validity.valid) {
 				try {
 					const v = int(el.value)
@@ -727,6 +730,7 @@ function DomInit(){
 		const sigId = 'sidebar-sprinkler-sig'
 		const sigSlider = document.getElementById(sigId + "-slider")
 		const sigEl = document.getElementById(sigId)
+		const sigDef = sigEl.value
 		fetchAndSet(sigEl, sigId)
 
 		el.checked = el.value === 'true'
@@ -747,9 +751,9 @@ function DomInit(){
 				sigSlider.removeAttribute('disabled')
 			}
 		})
-		sparkle_dropper.sig = int(sigEl.value || '10' ) / 100.
+		sparkle_dropper.sig = int(sigEl.value || sigDef ) / 100.
 		sigEl.addEventListener('change', (ev)=> {
-			if(sigEl.value == "") { sigEl.value = '10' }
+			if(sigEl.value === "") { sigEl.value = sigDef }
 			if (sigEl.validity.valid) {
 				try {
 					sparkle_dropper.sig = int(sigEl.value) / 100.
