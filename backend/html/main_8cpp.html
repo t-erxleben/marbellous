@@ -158,8 +158,6 @@ Functions</h2></td></tr>
 <tr class="separator:a397b3dd5426f82f8ddc246682dbf9abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50d77acb1121a4e4ce5446bfcda4cea7"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7">setColorRatioAt</a> (size_t const colorNumber, unsigned const ratio)</td></tr>
 <tr class="separator:a50d77acb1121a4e4ce5446bfcda4cea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b138b2d88669375a4d289f8bf1607ec"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec">setPaletteColors</a> (unsigned int const c0, unsigned int const c1, unsigned int const c2, unsigned int const c3)</td></tr>
-<tr class="separator:a4b138b2d88669375a4d289f8bf1607ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3efa7b9bcca549832c95f4eaca43f7a"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad3efa7b9bcca549832c95f4eaca43f7a">setBGColor</a> (unsigned int const color)</td></tr>
 <tr class="separator:ad3efa7b9bcca549832c95f4eaca43f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9672ebb75d7cb9f47d46dda323e77bb9"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a9672ebb75d7cb9f47d46dda323e77bb9">setFilter</a> (bool filter)</td></tr>
@@ -263,7 +261,7 @@ Variables</h2></td></tr>
 <div class="line">            fprintf(stderr, <span class="stringliteral">&quot;Drop function called in rake state or rake function called in drop state!\n&quot;</span>); \</div>
 <div class="line">            return RET; \</div>
 <div class="line">        } \</div>
-<div class="ttc" id="aclass_options_html_afa26d7ecc68acacdda8e57603bdc94ea"><div class="ttname"><a href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea">Options::getInstance</a></div><div class="ttdeci">static Options *const getInstance()</div><div class="ttdef"><b>Definition:</b> Options.cpp:15</div></div>
+<div class="ttc" id="aclass_options_html_afa26d7ecc68acacdda8e57603bdc94ea"><div class="ttname"><a href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea">Options::getInstance</a></div><div class="ttdeci">static Options *const getInstance()</div><div class="ttdef"><b>Definition:</b> Options.cpp:7</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1036,15 +1034,6 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="class_palette.html#ab69a88042a065da8d0e8301e2f1aeeb6" title="set new color and update ratios" alt="" coords="155,157,286,184"/>
 </map>
 </div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a397b3dd5426f82f8ddc246682dbf9abf_icgraph.png" border="0" usemap="#amain_8cpp_a397b3dd5426f82f8ddc246682dbf9abf_icgraph" alt=""/></div>
-<map name="amain_8cpp_a397b3dd5426f82f8ddc246682dbf9abf_icgraph" id="amain_8cpp_a397b3dd5426f82f8ddc246682dbf9abf_icgraph">
-<area shape="rect" title=" " alt="" coords="172,5,255,32"/>
-<area shape="rect" href="main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec" title=" " alt="" coords="5,5,124,32"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -1111,60 +1100,6 @@ Here is the call graph for this function:</div>
 <area shape="rect" title=" " alt="" coords="5,31,75,57"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="123,5,264,32"/>
 <area shape="rect" href="class_options.html#ac34bedbf5ec33e348addd2cc1d104a81" title=" " alt="" coords="133,56,253,83"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a4b138b2d88669375a4d289f8bf1607ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b138b2d88669375a4d289f8bf1607ec">&#9670;&nbsp;</a></span>setPaletteColors()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int EMSCRIPTEN_KEEPALIVE setPaletteColors </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int const&#160;</td>
-          <td class="paramname"><em>c0</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int const&#160;</td>
-          <td class="paramname"><em>c1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int const&#160;</td>
-          <td class="paramname"><em>c2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int const&#160;</td>
-          <td class="paramname"><em>c3</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a4b138b2d88669375a4d289f8bf1607ec_cgraph.png" border="0" usemap="#amain_8cpp_a4b138b2d88669375a4d289f8bf1607ec_cgraph" alt=""/></div>
-<map name="amain_8cpp_a4b138b2d88669375a4d289f8bf1607ec_cgraph" id="amain_8cpp_a4b138b2d88669375a4d289f8bf1607ec_cgraph">
-<area shape="rect" title=" " alt="" coords="5,107,124,133"/>
-<area shape="rect" href="class_palette.html#a4e51642486ec5e5d95626c01f99f1c35" title="adds color to palette and returns its index" alt="" coords="172,5,263,32"/>
-<area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="311,56,480,83"/>
-<area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="325,107,466,133"/>
-<area shape="rect" href="class_palette.html#a3c55a74b231deff1d256fbd94251603a" title=" " alt="" coords="339,208,451,235"/>
-<area shape="rect" href="main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="176,157,259,184"/>
-<area shape="rect" href="class_palette.html#ab69a88042a065da8d0e8301e2f1aeeb6" title="set new color and update ratios" alt="" coords="330,157,461,184"/>
 </map>
 </div>
 
@@ -1575,7 +1510,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 29 2021 10:19:35 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Aug 31 2021 14:11:39 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

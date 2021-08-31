@@ -1,9 +1,0 @@
-<map id="setPaletteColors" name="setPaletteColors">
-<area shape="rect" id="node1" title=" " alt="" coords="5,107,124,133"/>
-<area shape="rect" id="node2" href="$class_palette.html#a4e51642486ec5e5d95626c01f99f1c35" title="adds color to palette and returns its index" alt="" coords="172,5,263,32"/>
-<area shape="rect" id="node3" href="$class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="311,56,480,83"/>
-<area shape="rect" id="node4" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="325,107,466,133"/>
-<area shape="rect" id="node5" href="$class_palette.html#a3c55a74b231deff1d256fbd94251603a" title=" " alt="" coords="339,208,451,235"/>
-<area shape="rect" id="node6" href="$main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="176,157,259,184"/>
-<area shape="rect" id="node7" href="$class_palette.html#ab69a88042a065da8d0e8301e2f1aeeb6" title="set new color and update ratios" alt="" coords="330,157,461,184"/>
-</map>

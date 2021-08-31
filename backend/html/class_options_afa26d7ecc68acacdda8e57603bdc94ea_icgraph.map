@@ -1,34 +1,33 @@
 <map id="Options::getInstance" name="Options::getInstance">
-<area shape="rect" id="node1" title=" " alt="" coords="996,691,1137,717"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="544,501,615,528"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="541,704,618,731"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#a0bf79a0535581b7580865f40eca43208" title=" " alt="" coords="800,232,884,259"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,316,153,343"/>
-<area shape="rect" id="node6" href="$class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="758,181,926,208"/>
-<area shape="rect" id="node8" href="$main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,283,376,309"/>
-<area shape="rect" id="node10" href="$main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="549,333,610,360"/>
-<area shape="rect" id="node11" href="$main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,384,366,411"/>
-<area shape="rect" id="node13" href="$main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,573,149,600"/>
-<area shape="rect" id="node14" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="736,589,948,616"/>
-<area shape="rect" id="node15" href="$class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="484,435,675,477"/>
-<area shape="rect" id="node20" href="$main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="546,805,613,832"/>
-<area shape="rect" id="node23" href="$main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="530,755,629,781"/>
-<area shape="rect" id="node24" href="$class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e" title=" " alt="" coords="781,843,903,869"/>
-<area shape="rect" id="node25" href="$main_8cpp.html#a47514aeb6ba7b6d105f9e2342e562917" title=" " alt="" coords="783,893,901,920"/>
-<area shape="rect" id="node26" href="$main_8cpp.html#ad3efa7b9bcca549832c95f4eaca43f7a" title=" " alt="" coords="797,944,887,971"/>
-<area shape="rect" id="node27" href="$main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="801,995,883,1021"/>
-<area shape="rect" id="node28" href="$main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec" title=" " alt="" coords="520,1020,639,1047"/>
-<area shape="rect" id="node29" href="$main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7" title=" " alt="" coords="785,1096,899,1123"/>
-<area shape="rect" id="node30" href="$main_8cpp.html#a9672ebb75d7cb9f47d46dda323e77bb9" title=" " alt="" coords="807,1147,877,1173"/>
-<area shape="rect" id="node31" href="$class_w_g_l_context.html#af7a6ada0a1019095322342e55d547090" title=" " alt="" coords="747,1197,937,1224"/>
-<area shape="rect" id="node7" href="$class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title=" " alt="" coords="471,232,688,259"/>
-<area shape="rect" id="node9" href="$main_8cpp.html#aae45b9471979e61bbf17dd014224e322" title=" " alt="" coords="556,131,603,157"/>
-<area shape="rect" id="node12" href="$main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title=" " alt="" coords="285,333,391,360"/>
-<area shape="rect" id="node18" href="$main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="536,653,623,680"/>
-<area shape="rect" id="node19" href="$main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511" title=" " alt="" coords="534,603,625,629"/>
-<area shape="rect" id="node16" href="$class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,603,423,629"/>
-<area shape="rect" id="node17" href="$class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,625,205,666"/>
-<area shape="rect" id="node21" href="$main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,755,390,781"/>
-<area shape="rect" id="node22" href="$main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,805,387,832"/>
-<area shape="rect" id="node32" href="$main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b" title=" " alt="" coords="534,1197,625,1224"/>
+<area shape="rect" id="node1" title=" " alt="" coords="996,654,1137,681"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="544,433,615,460"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="541,484,618,510"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a0bf79a0535581b7580865f40eca43208" title=" " alt="" coords="800,230,884,257"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,306,153,333"/>
+<area shape="rect" id="node6" href="$class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="758,180,926,206"/>
+<area shape="rect" id="node8" href="$main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,382,376,409"/>
+<area shape="rect" id="node10" href="$main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="549,281,610,308"/>
+<area shape="rect" id="node11" href="$main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,332,366,358"/>
+<area shape="rect" id="node13" href="$main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,589,149,616"/>
+<area shape="rect" id="node14" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="736,578,948,605"/>
+<area shape="rect" id="node15" href="$class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="484,687,675,728"/>
+<area shape="rect" id="node20" href="$main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="546,753,613,780"/>
+<area shape="rect" id="node23" href="$main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="530,804,629,830"/>
+<area shape="rect" id="node24" href="$class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e" title=" " alt="" coords="781,832,903,858"/>
+<area shape="rect" id="node25" href="$main_8cpp.html#a47514aeb6ba7b6d105f9e2342e562917" title=" " alt="" coords="783,882,901,909"/>
+<area shape="rect" id="node26" href="$main_8cpp.html#ad3efa7b9bcca549832c95f4eaca43f7a" title=" " alt="" coords="797,933,887,960"/>
+<area shape="rect" id="node27" href="$main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="801,984,883,1010"/>
+<area shape="rect" id="node28" href="$main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7" title=" " alt="" coords="785,1034,899,1061"/>
+<area shape="rect" id="node29" href="$main_8cpp.html#a9672ebb75d7cb9f47d46dda323e77bb9" title=" " alt="" coords="807,1085,877,1112"/>
+<area shape="rect" id="node30" href="$class_w_g_l_context.html#af7a6ada0a1019095322342e55d547090" title=" " alt="" coords="747,1136,937,1162"/>
+<area shape="rect" id="node7" href="$class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title=" " alt="" coords="471,230,688,257"/>
+<area shape="rect" id="node9" href="$main_8cpp.html#aae45b9471979e61bbf17dd014224e322" title=" " alt="" coords="556,129,603,156"/>
+<area shape="rect" id="node12" href="$main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title=" " alt="" coords="285,281,391,308"/>
+<area shape="rect" id="node18" href="$main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="536,585,623,612"/>
+<area shape="rect" id="node19" href="$main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511" title=" " alt="" coords="534,636,625,662"/>
+<area shape="rect" id="node16" href="$class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,618,423,645"/>
+<area shape="rect" id="node17" href="$class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,640,205,682"/>
+<area shape="rect" id="node21" href="$main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,778,390,805"/>
+<area shape="rect" id="node22" href="$main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,728,387,754"/>
+<area shape="rect" id="node31" href="$main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b" title=" " alt="" coords="534,1136,625,1162"/>
 </map>

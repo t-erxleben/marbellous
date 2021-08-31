@@ -1,6 +1,5 @@
 <map id="Palette::getSize" name="Palette::getSize">
-<area shape="rect" id="node1" title=" " alt="" coords="333,56,445,83"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="187,5,270,32"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a4b138b2d88669375a4d289f8bf1607ec" title=" " alt="" coords="5,31,124,57"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7" title=" " alt="" coords="172,107,285,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="167,31,279,57"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title=" " alt="" coords="21,5,103,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7" title=" " alt="" coords="5,56,119,83"/>
 </map>
