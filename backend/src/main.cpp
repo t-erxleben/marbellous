@@ -9,7 +9,6 @@
 #include "WGLRakeRenderer.hpp"
 #include "Scene.hpp"
 #include "Options.hpp"
-#include "WGLRakeRenderer.hpp"
 
 #define checkSetup(RET) if (!setupDone) \
         { \
@@ -345,23 +344,23 @@ extern "C"
         checkSetup();
         checkState(false,);
 
-		GLuint nail_uint[1000];
+		GLint nail_int[1000];
 
         // account for different defintions of origin
         if(abs(y) < 1e-9)
         {
-		    for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[999 - i] ? 1 : 0; }
+		    for(int i = 0; i < 1000; ++i) { nail_int[i] = nails[999 - i] ? 1 : 0; }
         }
         else
         {
-		    for(int i = 0; i < 1000; ++i) { nail_uint[i] = nails[i] ? 1 : 0; }
+		    for(int i = 0; i < 1000; ++i) { nail_int[i] = nails[i] ? 1 : 0; }
         }
 
 
         float xs =  0.5f * x;
         float ys = -0.5f * y;
 
-        rakeRenderer->rake(x, -1.*y, period, amplitude, phase, nail_uint);
+        rakeRenderer->rake(x, -1.*y, period, amplitude, phase, nail_int);
         rakeRenderer->draw();
 	}
 

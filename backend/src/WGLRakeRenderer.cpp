@@ -56,14 +56,14 @@ void WGLRakeRenderer::reset(WGLSceneRenderer& sr, Scene const & s)
     delete[] data;
 }
 
-void WGLRakeRenderer::rake(float x, float y, float period, float amplitude, float phase,  GLuint nails[1000])
+void WGLRakeRenderer::rake(float x, float y, float period, float amplitude, float phase,  GLint nails[1000])
 {
     glUseProgram(rakeShader);
     setActive();
     glBindFramebuffer(GL_FRAMEBUFFER, fbo[!curr_tex]);
 
     // set uniforms
-    glUniform1uiv(nailsLoc, 1000, nails);
+    glUniform1iv(nailsLoc, 1000, nails);
     glUniform1f(viscosityLoc, 0.9);
     glUniform1f(scalingLoc, 250.0);
     glUniform2f(strokeLoc, x, y);
