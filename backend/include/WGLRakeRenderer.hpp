@@ -65,16 +65,13 @@ class WGLRakeRenderer: private WGLRenderer
                     // for each nail
                     for(i = 0; i < 1000; ++i)
                     {
-                        if(nails[i])
-                        {
-                            nailPos = float(i) / float(nails.length());
-                            // wavines corrected distance to rake nail
-                            d = dis(
-								texCoord[dim] - scaled_sin(texCoord[1-dim]) * up,
-								nailPos
-							);
-                            shift += stroke * pow(viscosity, scaling * d);
-                        }
+                        nailPos = float(i) / float(nails.length());
+                        // wavines corrected distance to rake nail
+                        d = dis(
+                            texCoord[dim] - scaled_sin(texCoord[1-dim]) * up,
+                            nailPos
+                        );
+                        shift += (stroke * pow(viscosity, scaling * d)) * float(nails[i]);
                     }
 
                     // linear origin position
