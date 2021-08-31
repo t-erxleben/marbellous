@@ -91,8 +91,6 @@ window.Module = {
 			'number', ['number']);
 		backend.setActivePalette = Module.cwrap('setActivePalette',
 			'number', ['number']);
-		backend.setPaletteColors = Module.cwrap('setPaletteColors',
-			'number', ['number', 'number', 'number', 'number']);
 		backend.setBGColor = Module.cwrap('setBGColor',
 			'void', ['number']);
 		backend.addDrop = Module.cwrap('addDrop',
@@ -137,14 +135,14 @@ function color2int(color) {
 }
 function init() {
 	if(backend.init || !(backend.fn_bind && backend.dom_setup)) return;
-	backend.initBackend('#image', backend.resolution, backend.resolution)
-	backend.setBGColor(color2int(pallets[pallets.active].background));
 	pallets[pallets.active].id = backend.addPallete(pallets.inputs.length);
 	backend.setActivePalette(pallets[pallets.active].id);
 	pallets[pallets.active].colors.forEach(function(x,i) {
 		backend.setColorAt(i, color2int(x.color))
 		backend.setColorRatioAt(i, int(x.ratio))
 	})
+	backend.initBackend('#image', backend.resolution, backend.resolution)
+	backend.setBGColor(color2int(pallets[pallets.active].background));
 	color = 0
 	backend.setFilter(backend.filter ? 1 : 0)
 	backend.redraw();
@@ -462,10 +460,16 @@ function DomInit(){
 
 
 			pallets.inputs.forEach(function(x,i) {
-				colors[i].color = x.color.value;
-				colors[i].ratio = x.ratio.value;
+				colors[i] = {
+					color: x.color.value,
+					ratio: x.ratio.value
+				}
+				storage.store(pallets.active + 'sidebar-pallet-color-' + i.toString(), x.color.value)
+				storage.store(pallets.active + 'sidebar-pallet-ratio-' + i.toString(), x.ratio.value)
 			});
 			background = pallets.inputs.background.value;
+			storage.store(pallets.active + 'sidebar-pallet-background', pallets.inputs.background.value)
+
 			pallets[pallets.active] = {colors, background}
 			pallets[pallets.active].colors.forEach(function(x,i){
 				backend.setColorAt(i, color2int(x.color))

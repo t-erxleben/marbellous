@@ -126,20 +126,6 @@ extern "C"
 		return 0;
 	}
 
-    int EMSCRIPTEN_KEEPALIVE setPaletteColors(unsigned int const c0, unsigned int const c1, unsigned int const c2, unsigned int const c3)
-    {
-        Palette* p = Options::getInstance()->getActivePalette();
-        
-        // add missing colors
-        int num_colors_missing = 4 - p->getSize();
-        for(int i = 0; i < num_colors_missing; ++i) p->add(Color{});
-
-        setColorAt(0, c0);
-        setColorAt(1, c1);
-        setColorAt(2, c2);
-        setColorAt(3, c3);
-        return 0;
-    }
 
     void EMSCRIPTEN_KEEPALIVE setBGColor(unsigned int const color)
     {
