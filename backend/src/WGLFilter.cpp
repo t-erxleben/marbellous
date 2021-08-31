@@ -15,7 +15,7 @@ WGLFilter::WGLFilter(size_t size): curr_size{size}
     dimLoc = glGetUniformLocation(postShader, "dim");
 
     // init fbo and textures
-    constructFBO(size, false, fbo_post, tex_post);
+    constructFBO(size, false, GL_LINEAR, fbo_post, tex_post);
 
     // clean up
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -63,7 +63,7 @@ void WGLFilter::resize(size_t size)
         glDeleteFramebuffers(1, &fbo_post);
         glDeleteTextures(1, &tex_post);
 
-        constructFBO(size, false, fbo_post, tex_post);
+        constructFBO(size, false, GL_LINEAR, fbo_post, tex_post);
     }
 }
 

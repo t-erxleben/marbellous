@@ -28,9 +28,9 @@ WGLRakeRenderer::WGLRakeRenderer(WGLSceneRenderer& sr, Scene const & s): curr_te
     phaseLoc = glGetUniformLocation(rakeShader, "phase");
 
     // init fbo and textures
-    constructFBO(rakeRes, false, fbo[0], tex[0]);
-    constructFBO(rakeRes, false, fbo[1], tex[1]);
-    constructFBO(rakeRes, false, fbo_screenshot, tex_screenshot);
+    constructFBO(rakeRes, false, GL_NEAREST, fbo[0], tex[0]);
+    constructFBO(rakeRes, false, GL_NEAREST, fbo[1], tex[1]);
+    constructFBO(rakeRes, false, GL_LINEAR, fbo_screenshot, tex_screenshot);
 
     reset(sr, s);
 
@@ -159,9 +159,9 @@ void WGLRakeRenderer::resize()
 
     size_t rakeRes = WGLContext::getContext()->getRakeRes();
 
-    constructFBO(rakeRes, false, fbo[0], tex[0]);
-    constructFBO(rakeRes, false, fbo[1], tex[1]);
-    constructFBO(rakeRes, false, fbo_screenshot, tex_screenshot);
+    constructFBO(rakeRes, false, GL_NEAREST, fbo[0], tex[0]);
+    constructFBO(rakeRes, false, GL_NEAREST, fbo[1], tex[1]);
+    constructFBO(rakeRes, false, GL_LINEAR, fbo_screenshot, tex_screenshot);
 
     conv->resize(rakeRes);
 }
