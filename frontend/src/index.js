@@ -225,7 +225,7 @@ function switchState(_old, _new) {
 	switch(_new) {
 		case 'rake':
 			img.src = 'icons/fast-backward-solid.svg';
-			label.title = 'Go to state before first rake strike.';
+			label.title = 'Go back to color dropping.';
 			backend.startRaking()
 		break;
 		case 'draw':
@@ -275,7 +275,7 @@ function handleClick(el) {
 				el.disabled = true
 				break;
 			case 'clear':
-				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you clear the Canvas?'))
+				if(window.confirm('All your work will be lost.\nAre you sure?'))
 				{
 					backend.clearCanvas()
 					// go back to draw when clearing in rake
@@ -304,7 +304,7 @@ function handleClick(el) {
 			case 'switch-state':
 				const oldState = state;
 				if (oldState === 'rake') {
-					if(!window.confirm("This will go back before you make your first rake stroke. The stroke marked will all be removed, and there is NO way to restore them.\nWant you go back to the color drop state?"))
+					if(!window.confirm("Going back to color dropping will undo all rake steps.\nAre you sure?"))
 					{
 						break;
 					}
@@ -351,7 +351,7 @@ document.addEventListener("click", function(evnt){
 	}
 });
 document.addEventListener("touchstart", function() {
-	alert("No support for touch inputs at the moment!");	
+	alert("There is no support for touch input at the moment!");	
 });
 function hideMenu() {
 	const submenu = active['menu'];
@@ -432,7 +432,7 @@ function DomInit(){
 		fetchAndSet(el, id)
 		backend.resolution = int(el.value)
 		el.addEventListener("change", (ev)=>{
-			if(state != 'rake' || window.confirm("Changing the resolution will undo all raking steps!\nWill you change the resolution?")) {
+			if(state != 'rake' || window.confirm("Changing the resolution will undo all rake steps!\nAre you sure?")) {
 				backend.resolution = int(el.value)
 				storage.store(id, el.value)
 				backend.resize(backend.resolution, backend.resolution)

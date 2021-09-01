@@ -14,7 +14,7 @@
 				if(switchStore.input.checked) {
 					window.localStorage.setItem('store-active', '1');
 				} else {
-					if(window.confirm('When you disable browser storage all stored options will be cleared.\nThere is no way to undo this!')) {
+					if(window.confirm('Diabling browsers storage will clear all saved options.\nAre you sure?')) {
 						window.storage.backup()
 						window.localStorage.clear();
 					} else {
@@ -25,7 +25,7 @@
 					try {
 						window.storage = new window.Storage()
 					} catch (e) {
-						window.alert('Failed to enable storing!\nThis may caused by the Application is not fully loaded!')
+						window.alert('Failed to enable settings storage!')
 						console.error(e)
 						switchStore.input.checked = false
 					}
@@ -45,7 +45,7 @@
 	<noscript>
 		<div style="position: absolute; top:50%;left:25%; z-index: 10;background: #EEE; border: solid gray 5px;transform: translate(-16%,-50%);min-width:75%;text-align:center;">
 			<p style="margin: 30 30 0 30">
-				<b>You must enable JavaScript to use Marbellous in your browser.</b>
+				<b>Javascript must be enabled to use Marbellous!</b>
 			</p><p style="margin: 15 30 30 30">
 				Please consider one of the following guides if you don't know how: <a href="https://www.enablejavascript.io/en">https://www.enablejavascript.io/en</a>
 			</p>
@@ -81,23 +81,23 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 				<div>
 					<table>
 						<tr>
-							<td><label title="Enable to store settings in browser. This will persist the settings even when you close and revisit the site later. This only effects settings which you changed after enabling storing!">store settings</label></td>
-							<td><label class="switch" title="Enable to store settings in browser. This will persist the settings even when you close and revisit the site later. This only effects settings which you changed after enabling storing!">
+							<td><label title="Enable settings storage. This will persist the settings even when you close and revisit the site later.">save settings</label></td>
+							<td><label class="switch" title="Enable settings storage. This will persist the settings even when you close and revisit the site later.">
 									<input id="store-active" class="slider" type="checkbox" onclick="switchStore()">
 									<span class="slider"></span>
 								</label></td>
 						</tr>
 						<tr>
-							<td><label title="Use image post processing to reduce noise and rough edges.\nThis may results in display errors (known platform Safarie on MacOS). If this the case please disable it!.">
+							<td><label title="Use image post processing to smooth rough edges. This may results in display errors (known on Chrome on MacOS). If this the case please disable it!.">
 									post processing</label></td>
-							<td><label class="switch" title="Use image post processing to reduce noise and rough edges.\nThis may results in display errors (known platform Safarie on MacOS). If this the case please disable it!.">
+							<td><label class="switch" title="Use image post processing to smooth rough edges. This may results in display errors (known on Chrome on MacOS). If this the case please disable it!.">
 								<input id="sidebar-filter" class="slider" type="checkbox">
 								<span class="slider"></span>
 							</label></td>
 						</tr>
 						</tr><tr>
 							<td>
-								<label for="sidebar-general-resolution" title="Set resolution for image.\nA high resolution may result in lags and crashes!">
+								<label for="sidebar-general-resolution" title="Set image resolution in pixels. A high resolution may result in lags and crashes!">
 								resolution: </label>
 								</td>
 							<td>
@@ -129,20 +129,20 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 											   value="20"/>
 							<label class="form_label"
 								   for="sidebar-rake-placement"
-								   title="space between nails in rake">
-								placement
+								   title="The space between tines for raking. See help text for further information.">
+								tine gap
 							</label>
 						</li>
 						<li class="form_group field">
 							<input class="form_field"
-								   placeholder="periode"
-								   title="<periode in %>"
+								   placeholder="period"
+								   title="<period in %>"
 								   id="sidebar-rake-periode"
 								   type="number" min="0" max="100" step="1" value="40"/>
 							<label class="form_label"
 								   for="sidebar-rake-periode"
-								   title="periode of wave rake movment">
-								periode
+								   title="Period length of wavy rakes.">
+								period
 							</label>
 							<div id="sidebar-rake-periode-slider"></div>
 						</li>
@@ -154,7 +154,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 								   type="number" min="0" max="50" step="1" value="5">
 							<label class="form_label"
 								   for="sidebar-rake-magnitude"
-								   title="magnitude of wave rake movement">
+								   title="Magnitude of wavy rakes.">
 								magnitude
 							</label>
 							<div id="sidebar-rake-magnitude-slider"></div>
@@ -164,21 +164,21 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 		<!-- pallet -->
 		<li>
 				<input type="radio" name="sidebar" id="sidebar-pallet"/>
-				<label for="sidebar-pallet">Pallet</label>
+				<label for="sidebar-pallet">Palette</label>
 				<div>
 					<table>
 						<tr>
 							<td>
-								<label for="sidebar-pallet-active-pallet" title="select current pallet, changing pallet will also change the colors used accordintly.">
+								<label for="sidebar-pallet-active-pallet" title="Select the palette to use. Changes will apply to the canvas accordingly.">
 								color theme: </label>
 								</td>
 							<td>
 								<select class="form_field" name="active-pallet" id="sidebar-pallet-active-pallet">
-									<option value="pallet-1">default</option>
-									<option value="pallet-2">light</option>
-									<option value="pallet-3">funky</option>
+									<option value="pallet-1">palette 1</option>
+									<option value="pallet-2">palette 2</option>
+									<option value="pallet-3">palette 3</option>
 								</select></td>						</tr><tr>
-									<td title="colors usable for drops">Colors</td><td></td><td title="Ratio of apperience for color sprinkler">Ratio</td>
+									<td title="Colors of current palette.">Colors:</td><td></td><td title="Ratios of drops in sprinkler mode.">Ratio:</td>
 						</tr><tr class ="sub-row">
 							<td><label for="sidebar-pallet-color-0">A:</label></td>
 							<td><input id="sidebar-pallet-color-0" type="color"
@@ -280,7 +280,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 				<menu style="width:75%;list-style:none;margin-left:-40px;">
 					<li class="form_group field">
 						<input 	class="form_field"
-							   	placeholder="size min-max"
+							   	placeholder="size of color drops: min-max"
 							   	title="<min> - <max>"
 								id="sidebar-sprinkler-radius"
  							   	type="text" autocomplete="on"
@@ -288,8 +288,8 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 								value="5-10">
 						<label class="form_label"
 							   for="sidebar-sprinkler-radius"
-							   title="Size range for drops dropped by sprinkler tool.">
-							size min-max
+							   title="Size range for sprinkled drops.">
+							Size range of drops
 						</label>
 						<div id="sidebar-sprinkler-radius-slider"></div>
 					</li>
@@ -302,16 +302,16 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 								min="1" step="1" max="20">
 						 <label class="form_label"
 							 	for="sidebar-sprinkler-frequence"
-								title="Drops per second placet by the sprinkler tool.">
-							 drop frequence
+								title="Drops per second placed by the sprinkler tool.">
+							 drop frequency
 						 </label>
 						 <div id="sidebar-sprinkler-frequence-slider"></div>
 					</li>
-					<li><label class="switch" title="Sparkle drops only around cursor. If disable drops will sparkle in the full area." style="margin-top:20px">
+					<li><label class="switch" title="Sprinkle drops locally around the cursor. If disabled drops will sprinkle in the full area." style="margin-top:20px">
 							<input id="sidebar-sprinkler-local" class="slider" type="checkbox">
 							<span class="slider"></span>
 						</label>
-						sparkle around cursor
+						sprinkle around cursor
 						<menu style="list-style:none;margin-top:-10px">
 							<li class="form_group field">
 								<input class="form_field"
@@ -323,7 +323,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 									   min="1" step="1" max="100">
 								<label class="form_label"
 									    for="sidebar-sprinkler-sig"
-										title="Standart deviation for dropps to be generated.">
+										title="Standart deviation of the distance to the cursor for drops to be generated.">
 									σ
 								</label>
 								<div id="sidebar-sprinkler-sig-slider"></div>
@@ -337,44 +337,44 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 	</menu>
 	<div id="content" style="height:100%"><menu class="menu">
 			<li class="draw state"><input type="radio" id="color-picker" name="menu">
-				<label for="color-picker" title="select a color to apply">
+				<label for="color-picker" title="Select a color to apply.">
 					<img src="icons/palette-solid.svg" alt="color picker">
 				</label><!-- romves whitespaces
 				--><menu option="pallet">
 					<li><input type="radio" id="color-0" name="color-picker" checked>
-						<label for="color-0" title="change to color 1">
+						<label for="color-0" title="Select color 1.">
 							<img src="icons/empty.svg" alt="color-0">
 						</label>
 					</li>
 					<li><input type="radio" id="color-1" name="color-picker">
-						<label for="color-1" title="change to color 2">
+						<label for="color-1" title="Select color 2.">
 							<img src="icons/empty.svg" alt="color-1">
 						</label>
 					</li>
 					<li><input type="radio" id="color-2" name="color-picker">
-						<label for="color-2" title="change to color 3">
+						<label for="color-2" title="Select color 3.">
 							<img src="icons/empty.svg" alt="color-2">
 						</label>
 					</li>
 					<li><input type="radio" id="color-3" name="color-picker">
-						<label for="color-3" title="change to color 3">
+						<label for="color-3" title="Select color 4.">
 							<img src="icons/empty.svg" alt="color-3">
 						</label>
 				</menu>
 			</li>
 
 			<li class="rake state"><input type="radio" id="rake-movement" name="menu">
-				<label for="rake-movement" title="select movement for rake">
+				<label for="rake-movement" title="Select straight or wavy rake movement.">
 					<img src="icons/movement.svg">
 				</label>
 				<menu option="rake">
 					<li><input type="radio" id="rake-movement-linear" name="rake-movement" checked>
-						<label for="rake-movement-linear" title="Move rake straigth">
+						<label for="rake-movement-linear" title="Straight movement.">
 							<img src="icons/straight.svg">
 						</label>
 					</li>
 					<li><input type="radio" id="rake-movement-wave" name="rake-movement">
-						<label for="rake-movement-wave" title="Move rake in wave like facion.">
+						<label for="rake-movement-wave" title="Wavy movement.">
 							<img src="icons/wave.svg">
 						</label>
 					</li>
@@ -382,13 +382,13 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 			</li>
 
 			<li class="draw state"><input type="radio" id="color-dropper" name="menu" checked>
-				<label for="color-dropper" title="Create color blobs at position when applied. Hold for larger drops">
+				<label for="color-dropper" title="Create color drops at cursor position. Hold for larger drops.">
 					<img src="icons/eye-dropper-solid.svg" alt="color dropper">
 				</label>
 			</li>
 
 			<li class="draw state"><input type="radio" id="color-sprinkler" name="menu">
-				<label for="color-sprinkler" title="Apply color in random pattern. Hold for more drops.">
+				<label for="color-sprinkler" title="Apply random color drops. Hold for more drops.">
 					<img src="icons/sparkle-solid.svg" alt="color sprinkler">
 				</label>
 			</li>
@@ -400,23 +400,23 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 			</li> -->
 
 			<li class="rake state"><input type="button" id="undo" name="history" disabled>
-				<label for="undo" title="Undo one rake step.">
+				<label for="undo" title="Undo the last rake step.">
 					<img src="icons/undo-solid.svg" alt="undo rake">
 				</label>
 			</li>
 			<li><input type="button" id="clear" name="history">
-				<label for="clear" title="Clear canvas">
+				<label for="clear" title="Clear canvas.">
 					<img src="icons/chalkboard-solid.svg" alt="clear canvas">
 				</label>
 			</li>
 			<li><input type="button" id="switch-state" name="history">
-				<label for="switch-state" title="Start rakeing!">
+				<label for="switch-state" title="Start raking!">
 					<img src="icons/arrow-right-solid.svg">
 				</label>
 			</li>
 
 			<li><input type="button" id="download">
-				<label for="download" title="Download current canvas state as image" style="position:relative;">
+				<label for="download" title="Download current canvas as image." style="position:relative;">
 					<img src="icons/file-download-solid.svg" alt="download" >
 					<div class="spinner" style="position:absolute" hidden>
 						<svg 
@@ -428,7 +428,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 				</label>
 			</li>
 			<li><input type="button" id="help">
-				<label for="help" title="Show help/manual." style="position:relative;">
+				<label for="help" title="Show help." style="position:relative;">
 					<img = src="icons/question-solid.svg" alt="help">
 				</label>
 			</li>
