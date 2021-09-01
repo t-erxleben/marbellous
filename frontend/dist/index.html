@@ -14,7 +14,7 @@
 				if(switchStore.input.checked) {
 					window.localStorage.setItem('store-active', '1');
 				} else {
-					if(window.confirm('Diabling browsers storage will clear all saved options.\nAre you sure?')) {
+					if(window.confirm('Disabling browser storage will clear all saved options.\nAre you sure?')) {
 						window.storage.backup()
 						window.localStorage.clear();
 					} else {
@@ -88,9 +88,9 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 								</label></td>
 						</tr>
 						<tr>
-							<td><label title="Use image post processing to smooth rough edges. This may results in display errors (known on Chrome on MacOS). If this the case please disable it!.">
+							<td><label title="Use image post processing to smooth out rough edges. This may results in display errors (known on Chrome on MacOS). If this the case please disable it!.">
 									post processing</label></td>
-							<td><label class="switch" title="Use image post processing to smooth rough edges. This may results in display errors (known on Chrome on MacOS). If this the case please disable it!.">
+							<td><label class="switch" title="Use image post processing to smooth out rough edges. This may results in display errors (known on Chrome on MacOS). If this the case please disable it!.">
 								<input id="sidebar-filter" class="slider" type="checkbox">
 								<span class="slider"></span>
 							</label></td>
@@ -323,7 +323,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 									   min="1" step="1" max="100">
 								<label class="form_label"
 									    for="sidebar-sprinkler-sig"
-										title="Standart deviation of the distance to the cursor for drops to be generated.">
+										title="Standard deviation of the distance to the cursor for drops to be generated.">
 									σ
 								</label>
 								<div id="sidebar-sprinkler-sig-slider"></div>
@@ -364,7 +364,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 			</li>
 
 			<li class="rake state"><input type="radio" id="rake-movement" name="menu">
-				<label for="rake-movement" title="Select straight or wavy rake movement.">
+				<label for="rake-movement" title="Select either straight or wavy rake movement.">
 					<img src="icons/movement.svg">
 				</label>
 				<menu option="rake">
