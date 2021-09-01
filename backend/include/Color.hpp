@@ -3,6 +3,12 @@
 #include <tuple>
 #include <cstdint>
 
+/**
+ * @addtogroup util
+ * 
+ * A class representing a RGB color with a ratio. 
+ * The ratio influences the drop rate of drops with this color when using the sprinkler.
+ **/
 class Color
 {
 private:
@@ -23,33 +29,56 @@ public:
     Color(): r{0}, g{0}, b{0}, m_ratio{1} {}
 
     /** Construct color by RGB values.
-     * @param r Red channel
-     * @param g Green channel
-     * @param b Blue channel
-     * @return Color Object
+     * \param r Red channel
+     * \param g Green channel
+     * \param b Blue channel
+     * \return Color Object
     */
 	Color(uint8_t const red, uint8_t const green, uint8_t const blue)
 		: r{red}, g{green}, b{blue}, m_ratio{1} {}
 
     
-    Color(unsigned const int color) ///< construct from color code
+    /**
+     * Construct a color object from HEX color code.
+     * 
+     * \param c Color code given in HEX.
+     **/
+    Color(unsigned const int color)
 		: Color(color / 256 / 256, (color / 256) % 256, color % 256) {}
 
 
-    void set(uint8_t const red, uint8_t const green, uint8_t const blue) ///< set via color channels
+    /**
+     * Set color via color channels.
+     * 
+     * \param r Red channel
+     * \param g Green channel
+     * \param b Blue channel
+     * 
+     **/
+    void set(uint8_t const red, uint8_t const green, uint8_t const blue)
 	{
 		r = red;
 		g = green;
 		b = blue;
 	}
 
-    void set(unsigned const int color) ///< set via color code
+    /**
+     * Set color via HEX color code.
+     * 
+     * \param c Color code given in HEX
+     **/
+    void set(unsigned const int color)
 	{
 		r = color / 256 / 256;
 		g = (color / 256) % 256;
 		b = color % 256;
 	}
 
+    /**
+     * Get the color values.
+     * 
+     * \return Color channels as tuple.
+     **/
    	rgb_t getRGB() const ///< get color channels
 	{
 		return std::make_tuple(r,g,b);

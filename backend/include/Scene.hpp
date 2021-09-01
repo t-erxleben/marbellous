@@ -6,29 +6,39 @@
 #include "Polygon.hpp"
 
 /**
- * Contains a vector of polygons and is iterable.
+ * \brief Contains a vector of polygons and is iterable.
+ * 
+ * Displacement of polygons can be done at a leter time.
  */
 class Scene
 {
 private:
     std::vector<Polygon> polygons; ///<Internal vector to store all polygons
-    size_t vertCount;
+    size_t vertCount; ///< number of vertices
 	unsigned generation = 0; ///< generation of polygons, needed to reduce buffer updates on GPU
-	std::vector<Displacement> displacements;
+	std::vector<Displacement> displacements; /// vector of all displacements
 
 public:
 
+    /**
+     * \brief Get the currently saved displacements.
+     * 
+     * \return Displacement vector
+     **/
 	const auto& getDisplacements() const {
 		return displacements;
 	}
 
+    /**
+     * \brief Get the generation of the scene
+     **/
 	unsigned getGeneration() const {
 		return generation;
 	}
 
-    /** Internal vector saving the references to the polygons
-     * @param pol Polygon that will be added to the scene
-     * @return Index of the saved polygon in the scene
+    /** Add a new Polygon to the Scene.
+     * \param pol Polygon that will be added to the scene
+     * \return Index of the saved polygon in the scene
     */
     int addPolygon(Polygon const &pol)
     {
@@ -38,8 +48,8 @@ public:
     }
 
     /** Get or set the polygon at index, might throw std::out_of_range
-     * @param index Index of the polygon you want to access
-     * @return Reference to the requested polygon
+     * \param index Index of the polygon you want to access
+     * \return Reference to the requested polygon
     */
     Polygon &operator[](size_t const index)
     {
@@ -47,8 +57,8 @@ public:
     }
 
     /** Get the polygon at index, might throw std::out_of_range
-     * @param index Index of the polygon you want to read
-     * @return Reference to the requested polygon
+     * \param index Index of the polygon you want to read
+     * \return Reference to the requested polygon
     */
     Polygon const & operator[](size_t const index) const
     {
@@ -56,40 +66,48 @@ public:
     }
 
     /**
-     * @return Number of polygons in the scene
+     * \return Number of polygons in the scene
     */
     size_t getPolygonCount() const
     {
         return polygons.size();
     }
 	
+    /**
+     * \brief Clear the scene by deleting all polygons.
+     * 
+     **/
 	void clear() {
 		polygons.clear();
 		++generation;
 	}
 
     /**
-     * @return Begin iterator over the polygons in the scene
-    */
+     * \return Begin iterator over the polygons in the scene
+     **/
     std::vector<Polygon>::iterator begin()
     {
         return polygons.begin();
     }
 
     /**
-     * @return Begin const_iterator over the polygons in the scene
+     * \return Begin const_iterator over the polygons in the scene
     */
     std::vector<Polygon>::const_iterator begin() const
     {
         return polygons.begin();
     }
+
+    /**
+     * \return Begin reverse const_iterator over polygons in the scene
+     **/
 	std::vector<Polygon>::const_reverse_iterator rbegin() const
 	{
 		return polygons.rbegin();
 	}
 
     /**
-     * @return End iterator over the polygons in the scene
+     * \return End iterator over the polygons in the scene
     */
     std::vector<Polygon>::iterator end()
     {
@@ -97,18 +115,28 @@ public:
     }
 
     /**
-     * @return End const_iterator over the polygons in the scene
+     * \return End const_iterator over the polygons in the scene
     */
     std::vector<Polygon>::const_iterator end() const
     {
         return polygons.end();
     }
+
+    /**
+     * \return End const_reverse_iterator over polygons in the scene.
+     **/
 	std::vector<Polygon>::const_reverse_iterator rend() const
 	{
 		return polygons.rend();
 	}
 
-	void applyDisplacement(size_t _canvasSize) { ///< stores current state, advance generation
+    /**
+     * \brief Apply the current stored displacement.
+     * 
+     * The generation will increase by one.
+     * 
+     **/
+	void applyDisplacement(size_t _canvasSize) {
 		if(displacements.empty()) { return; }
 
 		for(auto& p : *this) {
