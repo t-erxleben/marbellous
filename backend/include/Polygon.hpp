@@ -94,6 +94,7 @@ public:
     Point const & getCreationPoint();
 
     /** Displace a polygon as a result of a new circle appearing.
+     * The math for this function was provided by Prof. Graham Horton.
 	 * \param displacements vector of circles with radius and diameter which causes displacement
 	 * \param canvasSize size of canvas in pixel to calculate vertex insertion for smooth edges.
     */

@@ -8,6 +8,12 @@
 #include "Scene.hpp"
 #include <cassert>
 
+/**
+ * \brief Render scenes to buffers.
+ * 
+ * \todo explain draw algorithm
+ * 
+ **/
 class WGLSceneRenderer: private WGLRenderer
 {
     private:
@@ -16,6 +22,7 @@ class WGLSceneRenderer: private WGLRenderer
 
         void constructBuffers(GLuint** indices, WGLVertex** vertices, Scene const & scene, size_t & indices_size, size_t & vertices_size);
 
+        ///< Vertex shader code. Implements displacement for up to 100 new circle objects.
         std::string const vertex_source{
             R"==(#version 300 es
                 in vec2 position;
@@ -41,6 +48,7 @@ class WGLSceneRenderer: private WGLRenderer
                 }
             )=="};
     
+        ///< Fragment shader code. Can draw either color or color codes.
         std::string const fragment_source{
             R"==(#version 300 es
                 precision mediump float;
@@ -72,26 +80,65 @@ class WGLSceneRenderer: private WGLRenderer
                 }
             )=="};
 
+        ///< Shader program handle
         GLint shaderProgram;
 
+        ///< vertex buffer object holding all vertices
         GLuint vbo;
+        ///< element buffer holding all indices for drawing orgder of vertices.
         GLuint ebo;
 
+        ///< uniform position handles
         GLint colorLoc;
         GLint drawColorLoc;
 		GLint locDis;
 		GLint locDisCount;
 
+        ///< FBO used for screenshots
 		GLuint frameBuffer;
 		GLuint frameTexture;
 		GLuint depthStencilTexture;
 
+        ///< Generation of drawing. See Scene for explenation.
 		unsigned generation = ~0;
         
     public:
+
+        /**
+         * \brief Construct a new WGLSceneRenderer object
+         * 
+         **/
         WGLSceneRenderer();
+
+        /**
+         * \brief Draw Scene to a given buffer.
+         * 
+         * Used for screenshots.
+         * 
+         * \param scene Scene to draw.
+         * \param data Prealoocated buffer to use.
+         * \param len Length of \p data.
+         * \param drawColor Wether to draw in color or color codes. Defaults to color.
+         **/
 		void drawToBuffer(const Scene& scene, char* data, int len, bool drawColor = true);
+
+        /**
+         * \brief Draw the scene.
+         * 
+         * \param scene Scene object to draw.
+         * \param drawColor Wether to draw in color or color codes. Defaults to color.
+         **/
         void drawScene(Scene const & scene, bool drawColor = true);
+
+        /**
+         * \brief Set the WebGL state needed for the shader.
+         * 
+         **/
         void setActive() const override;
+
+        /**
+         * \brief Resize to the resolution set for rake state in WGLContext 
+         * 
+         **/
         void resize() override;
 };
