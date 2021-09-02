@@ -482,7 +482,7 @@ input.slider:checked + span.slider:before {
 	color: var(--overlay-color)
 }
 
-.sidbar menu {
+.sidebar menu {
 	padding-left: 40px;
 }
 
@@ -491,39 +491,51 @@ input.slider:checked + span.slider:before {
 	background-color: transparent;
 }
 
+.sidebar .dummy_handle {
+	position: absolute;
+	width: 0.5em;
+	height: 1em;
+	left: 0;
+	top: 0;
+	border-radius: 1em 0 0 1em;
+	background: var(--accent-color-1);
+}
+
 .sidebar .noUi-connect {
 	background: var(--accent-color-1);
+}
+.sidebar .noUi-base {
+	width: calc(100% - 1em);
 }
 .sidebar [disabled].noUi-horizontal .noUi-connect {
 	background: var(--accent-color-1);
 }
 .sidebar .noUi-horizontal .noUi-handle:before { content: none; }
 .sidebar .noUi-horizontal .noUi-handle {
-	width: 1.05em; /* TODO: handle gap problem */
+	width: 0.5em;
 	height: 1em;
-	right: -0.5em;
 	top: 0;
-	background: none;
+	right: -1em;
+	background: var(--accent-color-1);
 	border: 0;
 	box-shadow: none;
-	border-radius: 0;
+	border-radius: 0 1em 1em 0;
 }
-.sidebar .noUi-horizontal .noUi-connects:first-child:nth-last-child(3) ~ .noUi-origin:nth-last-child(1) > .noUi-handle{
-	background: var(--accent-color-1);
+.sidebar .noUi-horizontal .noUi-connects:first-child:nth-last-child(3) ~ .noUi-origin:nth-last-child(2) > .noUi-handle {
+	border-radius: 1em 0 0 1em;
+	right: -0.5em;
 }
-.sidebar .noUi-horizontal .noUi-connects:first-child:nth-last-child(2) ~ .noUi-origin > .noUi-handle {
-	background: var(--accent-color-1);
-}
-.sidebar .noUi-horizontal .noUi-connects:first-child:nth-last-child(3) ~ .noUi-origin:nth-last-child(1) {
-	z-index: 4 !important;
+/* .sidebar .noUi-horizontal .noUi-origin:last-child:nth-child(2) > .noUi-handle:after, */
+.sidebar .noUi-horizontal .noUi-connects:first-child:nth-last-child(3) ~ .noUi-origin:nth-last-child(2) > .noUi-handle:after {
+	left: 0.125em;
 }
 .sidebar .noUi-horizontal .noUi-handle:after {
 	content: "";
 	width: 0.75em;
 	height: 0.75em;
-	left: 0.125em;
+	left: -0.375em;
 	top: 0.125em;
-	/* border-radius: 0.375em; */
+	border-radius: 0.375em;
 	background: var(--font-color);
 	border: 0;
 	box-shadow: none;
@@ -531,11 +543,10 @@ input.slider:checked + span.slider:before {
 
  
 .sidebar .noUi-target {
-    padding: 0 0.5em;
 	background: var(--overlay-color);
 	border: none;
 	box-shadow: none;
-	border-radius: 0;
+	border-radius: 1em;
 	height: 1em;
 	margin-top: 1em;
 }
@@ -543,7 +554,7 @@ input.slider:checked + span.slider:before {
 	opacity: 0.3;
 }
 .sidebar .noUi-connects {
-    margin: 0 -0.5em;
+	margin-left: 0.5em;
     width: 100%;
 	border-radius: 0;
 }

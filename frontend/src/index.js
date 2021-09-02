@@ -3,6 +3,15 @@ import * as png from 'fast-png'
 import * as libSlider from 'nouislider'
 import 'nouislider/dist/nouislider.css';
 
+function createSlider(node, obj) {
+	libSlider.create(node, obj)
+	if(!(obj.start instanceof Array) || obj.start.length == 1) {
+		var d = document.createElement('div')
+		d.classList.add('dummy_handle')
+		node.querySelector('.noUi-base').prepend(d)
+	}
+}
+
 const int = parseInt;
 var popup = {}
 var inputs = {}
@@ -587,7 +596,7 @@ function DomInit(){
 			} catch(e) {}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur()}})
-		libSlider.create(slider,{
+		createSlider(slider,{
 			start: rake.config.periode * 100,
 			connect: [true, false],
 			range: {
@@ -618,7 +627,7 @@ function DomInit(){
 			} catch(e) {}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur()}})
-		libSlider.create(slider, {
+		createSlider(slider, {
 			start: rake.config.magnitude * 100,
 			connect: [true, false],
 			step: 1,
@@ -653,7 +662,7 @@ function DomInit(){
 		})
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}})
 
-		libSlider.create(slider, {
+		createSlider(slider, {
 				start: [sparkle_dropper.range.min * 100, sparkle_dropper.range.max * 100],
 				connect: true,
 				step: 1,
@@ -718,7 +727,7 @@ function DomInit(){
 			}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur();}})
-		libSlider.create(slider, {
+		createSlider(slider, {
 				start: 1000. / sparkle_dropper.rate,
 				step: 1,
 				connect: [true, false],
@@ -776,7 +785,7 @@ function DomInit(){
 		})
 		sigEl.addEventListener('keydown', (ev)=>{if (ev.which == 13) {sigEl.blur();}})
 		
-		libSlider.create(sigSlider, {
+		createSlider(sigSlider, {
 			start: sparkle_dropper.sig * 100,
 			connect: [true, false],
 			step: 1,
