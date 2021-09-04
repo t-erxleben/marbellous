@@ -44,7 +44,7 @@ WGLSceneRenderer::WGLSceneRenderer()
 	locDis   =    glGetUniformLocation(shaderProgram, "dis");
 	locDisCount = glGetUniformLocation(shaderProgram, "count");
 
-	constructFBO(dropRes, true, frameBuffer, frameTexture);
+	constructFBO(dropRes, true, GL_NEAREST, frameBuffer, frameTexture);
 
 	glClearDepthf(1.);
 	glClearStencil(0b10);
@@ -209,6 +209,6 @@ void WGLSceneRenderer::resize()
     glDeleteTextures(1, &frameTexture);
 
 	auto dropRes = WGLContext::getContext()->getDropRes();
-	constructFBO(dropRes, true, frameBuffer, frameTexture);
+	constructFBO(dropRes, true, GL_NEAREST, frameBuffer, frameTexture);
 	conv->resize(dropRes);
 }
