@@ -138,6 +138,50 @@ input.sidebar:checked + label.sidebar + menu.sidebar {
 	display: none;
 }
 
+.popup input {
+	display: none;
+}
+.popup input.collapsible + label {
+	background: #777;
+	color: white;
+	cursor: pointer;
+	padding: 18px;
+	width: auto;
+	display: block;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
+}
+.popup input.collapsible + label:after {
+	content: '\002B';
+	color: white;
+	font-weight: bold;
+	float: right;
+	margin-left: 5px;
+}
+
+.popup input.collapsible:checked + label:after {
+	content: '\2212';
+}
+
+.popup input.collapsible:checked + label,
+.popup input.collapsible + label:hover {
+	background: #555;
+}
+
+.popup input.collapsible + label + div {
+	text-align: left;
+	padding: 0 18px;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+	background-color: #f1f1f1;
+}
+
+.popup input.collapsible:not(:checked) + label + div {
+	max-height: 0!important;
+}
+
 .sidebar table td {
 	padding-top: 10px;
 }
@@ -662,6 +706,7 @@ input.slider:checked + span.slider:before {
 .popup_content {
 	max-width: 60vw;
 	max-height: 60vh;
+	overflow-y: auto;
 }
 
 .close_button {

@@ -54,9 +54,84 @@
 	<div class="popup">
 		<div class="popup_container">
 			<input type="button" class="close_button"></input>
-			<h2 class="popup_title">A Help message</h2>
+			<h2 class="popup_title">Help</h2>
 			<div class="popup_content">
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit a
+				<input type="radio" name="help" id="help-quickstart"class="collapsible">
+				<label for="help-quickstart">Quickstart</label>
+				<div>
+					<!-- iframe width="420" height="315" src="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+					</iframe -->
+					<p>The first step to create a nice marbling pattern is to apply some color drops to the canvas.</p>
+
+					<p>This can be done easily either by using the single drop tool <icon> or by using the color sprinkle tool <icon>. Holding the left mouse button will increase the drop size for <icon> or generate more drops for <icon>.</p>
+
+					<p>When using <icon for single drop> you can choose a color at <icon>.
+					Colors can be set in the side menu which is explained below.</p>
+
+					<p>If you are happy with your color drops you can click <icon> to start raking!</p>
+
+					<p>In the rake state the menu buttons will change a little bit.
+					Use the <icon> button to choose either a straight rake movement (This is the default!) or a wavy movement.</p>
+
+					<p>Now click and hold on the canvas to select the rake's direction and strength.
+					The preview will show you the position of each tine.
+					If you want to abort just release the key outside of the canvas.
+					Releasing the key inside the canvas will apply the rake step.
+					Depending on your resolution this may take a few seconds.</p>
+
+					<p>The <icon> button will undo the last rake step for you.</p>
+
+					<p>Now feel free to experiment with different rake combinations!
+					You can download the result at any time by clicking <icon>.</p>
+				</div>
+				<input type="radio" name="help" id="help-options"class="collapsible">
+				<label for="help-options">Options</label>
+				<div>
+					<p>Despite being usable out of the box quite a few options for Marbellous are hidden on the right side, including highlights such as custom resolutions, color palette configuration and special rake settings.
+					All options have hover texts explaining their influence.</p>
+
+					<p>If you have performance problems please consider lowering the resolution in the general settings. If you have other kinds of visual bugs, please try to deactivate the post processing.</p>
+				</div>
+				<input type="radio" name="help" id="help-rake"class="collapsible">
+				<label for="help-rake">Special rake configurations</label>
+				<div>
+					<p>Even though the tine gap field may look simple it is possible to create nearly arbitrarily complex rake patterns. As explained below:</p>
+
+<rake syntax image>
+
+<p>Basically you can specify a list of tine gaps which defines one group of the rake. This group will be repeated to fill the canvas. For convenience it is possible to set the group's offset to the cursor making it possible to match the cursor's position with a tine.</p>
+				</div>
+				<input type="radio" name="help" id="help-tileable" class="collapsible">
+				<label for="help-tileable">Hints for tileable patterns:</label>
+				<div>
+					<ul>
+						<li>You need at least one straight rake in horizontal and vertical direction or a wavy rake with sufficient magnitude in one direction.</li>
+						<li>When using the wavy rake movement the peroid length needs to be
+							<math xmlns="http://www.w3.org/1998/Math/MathML" alttext="\frac{100}{k}">
+							  <mfrac>
+								<mn>100</mn>
+								<mi>k</mi>
+							  </mfrac>
+							</math>
+							or
+							<math xmlns="http://www.w3.org/1998/Math/MathML" alttext="100\times k">
+							  <mrow>
+								<mn>100</mn>
+								<mo>×</mo>
+								<mi>k</mi>
+							  </mrow>
+							</math>
+							for any
+							<math xmlns="http://www.w3.org/1998/Math/MathML" alttext="100\in ℕ">
+							  <mrow>
+								<mn>k</mn>
+								<mo>∈</mo>
+								<mi mathvariant="normal">ℕ</mi>
+							  </mrow>
+							</math>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -333,6 +333,7 @@ document.addEventListener("click", function(evnt){
 	if (el.tagName == 'INPUT'
 		&& el.attributes.type
 		&& el.attributes.type.nodeValue == 'radio'
+		&& !el.classList.contains('collapsible')
 		&& !el.parentNode.parentNode.classList.contains('sidebar'))
 	{
 		handleClick(el);
@@ -387,8 +388,11 @@ function fetchAndSet(element, id) {
 window.storage = null
 window.onload = function() {
 	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
-		div.style.maxHeight = div.scrollHeight + 3;
+		div.style.maxHeight = div.scrollHeight + 3 + 'px';
 	});
+	document.querySelectorAll('input.collapsible + label + div').forEach(function(div){
+		div.style.maxHeight = div.scrollHeight + 3 + 'px';
+	})
 }
 
 function DomInit(){
