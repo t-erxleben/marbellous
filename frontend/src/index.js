@@ -402,6 +402,11 @@ function DomInit(){
 		}
 	});
 	popup.popup = document.querySelector('.popup')
+	popup.popup.addEventListener('click', function(ev){
+		if(ev.target === ev.currentTarget) {
+			popup.popup.classList.remove('popup_open')
+		}
+	})
 	popup.close = popup.popup.querySelector('.close_button')
 	popup.close.addEventListener('click', function() { popup.popup.classList.remove('popup_open') })
 	{
