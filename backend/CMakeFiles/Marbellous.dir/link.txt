@@ -1,1 +1,1 @@
-/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/em++ -s EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1  -s USE_WEBGL2=1 -s FULL_ES3=1 -s ASSERTIONS=1 @CMakeFiles/Marbellous.dir/objects1.rsp -o Marbellous.js 
+/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/em++ -s EXPORTED_RUNTIME_METHODS='[ccall,cwrap]' -O3 -s ALLOW_MEMORY_GROWTH=1 -s MIN_WEBGL_VERSION=2 -s MAX_WEBGL_VERSION=2 -s ASSERTIONS=1 @CMakeFiles/Marbellous.dir/objects1.rsp -o Marbellous.js 

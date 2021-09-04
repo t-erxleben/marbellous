@@ -95,8 +95,8 @@ Collaboration diagram for WGLRenderer:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1e05c7f2fff34772a495a7dfbb77d124"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124">setupShaderProgram</a> (std::string vert, std::string frag, GLint &amp;shader)</td></tr>
 <tr class="separator:a1e05c7f2fff34772a495a7dfbb77d124"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa28e8a772757fe4b7f4284a0f0df9290"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#aa28e8a772757fe4b7f4284a0f0df9290">constructFBO</a> (size_t x, bool stencil_depth, GLuint &amp;fbo, GLuint &amp;tex)</td></tr>
-<tr class="separator:aa28e8a772757fe4b7f4284a0f0df9290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76bf7de4296fcfdb65d87b68b262cf8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e">constructFBO</a> (size_t x, bool stencil_depth, GLint interpolation, GLuint &amp;fbo, GLuint &amp;tex)</td></tr>
+<tr class="separator:a76bf7de4296fcfdb65d87b68b262cf8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae496681edec5f304697e43a6933c934b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#ae496681edec5f304697e43a6933c934b">setActive</a> () const =0</td></tr>
 <tr class="separator:ae496681edec5f304697e43a6933c934b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdfbe2d8c8906f91142ffa77aac27339"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#afdfbe2d8c8906f91142ffa77aac27339">resize</a> ()=0</td></tr>
@@ -170,8 +170,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="aa28e8a772757fe4b7f4284a0f0df9290"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa28e8a772757fe4b7f4284a0f0df9290">&#9670;&nbsp;</a></span>constructFBO()</h2>
+<a id="a76bf7de4296fcfdb65d87b68b262cf8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76bf7de4296fcfdb65d87b68b262cf8e">&#9670;&nbsp;</a></span>constructFBO()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,6 +187,12 @@ Here is the caller graph for this function:</div>
           <td></td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>stencil_depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLint&#160;</td>
+          <td class="paramname"><em>interpolation</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -210,8 +216,8 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_w_g_l_renderer_aa28e8a772757fe4b7f4284a0f0df9290_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_aa28e8a772757fe4b7f4284a0f0df9290_icgraph" alt=""/></div>
-<map name="aclass_w_g_l_renderer_aa28e8a772757fe4b7f4284a0f0df9290_icgraph" id="aclass_w_g_l_renderer_aa28e8a772757fe4b7f4284a0f0df9290_icgraph">
+<div class="center"><img src="class_w_g_l_renderer_a76bf7de4296fcfdb65d87b68b262cf8e_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_a76bf7de4296fcfdb65d87b68b262cf8e_icgraph" alt=""/></div>
+<map name="aclass_w_g_l_renderer_a76bf7de4296fcfdb65d87b68b262cf8e_icgraph" id="aclass_w_g_l_renderer_a76bf7de4296fcfdb65d87b68b262cf8e_icgraph">
 <area shape="rect" title=" " alt="" coords="601,115,792,141"/>
 <area shape="rect" href="class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title=" " alt="" coords="113,13,287,40"/>
 <area shape="rect" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title=" " alt="" coords="109,64,291,91"/>
@@ -331,7 +337,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 31 2021 14:11:39 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Sep 4 2021 11:06:38 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

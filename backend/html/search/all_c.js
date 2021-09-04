@@ -1,7 +1,7 @@
 var searchData=
 [
   ['r_67',['r',['../struct_drop_data.html#aa944cddff6df07dde96afbdcb56e5e1c',1,'DropData']]],
-  ['rake_68',['rake',['../class_w_g_l_rake_renderer.html#af04c696e15e31e955ffe5891416d5361',1,'WGLRakeRenderer::rake()'],['../main_8cpp.html#aae45b9471979e61bbf17dd014224e322',1,'rake(float x, float y, float period, float amplitude, float phase, bool nails[1000]):&#160;main.cpp']]],
+  ['rake_68',['rake',['../class_w_g_l_rake_renderer.html#a5717094f8aef4340a2554db7509800c8',1,'WGLRakeRenderer::rake()'],['../main_8cpp.html#aae45b9471979e61bbf17dd014224e322',1,'rake(float x, float y, float period, float amplitude, float phase, bool nails[1000]):&#160;main.cpp']]],
   ['rakerenderer_69',['rakeRenderer',['../main_8cpp.html#af6c706e3b2d0dfa7127a7e06c5fcf483',1,'main.cpp']]],
   ['rbegin_70',['rbegin',['../class_scene.html#ae375ece8da0f5b33ee9178ba20e969fc',1,'Scene']]],
   ['redraw_71',['redraw',['../main_8cpp.html#a93bbd3db8037452b0dfb9587be449586',1,'main.cpp']]],

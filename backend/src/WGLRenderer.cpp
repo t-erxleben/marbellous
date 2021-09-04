@@ -45,7 +45,7 @@ void WGLRenderer::setupShaderProgram(std::string vert, std::string frag, GLint& 
     glValidateProgram(shader);
 }
 
-void WGLRenderer::constructFBO(size_t x, bool stencil_depth, GLuint& fbo, GLuint& tex)
+void WGLRenderer::constructFBO(size_t x, bool stencil_depth, GLint interpolation, GLuint& fbo, GLuint& tex)
 {
     GLuint depthStencilTexture;
     glGenFramebuffers(1, &fbo);
@@ -53,8 +53,8 @@ void WGLRenderer::constructFBO(size_t x, bool stencil_depth, GLuint& fbo, GLuint
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_2D, tex);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, x, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);        
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, interpolation);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, interpolation);        
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
@@ -64,8 +64,8 @@ void WGLRenderer::constructFBO(size_t x, bool stencil_depth, GLuint& fbo, GLuint
         glGenTextures(1, &depthStencilTexture);
         glBindTexture(GL_TEXTURE_2D, depthStencilTexture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, x, x, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, interpolation);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, interpolation);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depthStencilTexture, 0);
         GLenum drawBuffers[2] = {GL_COLOR_ATTACHMENT0, GL_DEPTH_STENCIL_ATTACHMENT};
         glDrawBuffers(1, drawBuffers);

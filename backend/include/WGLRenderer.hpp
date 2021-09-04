@@ -2,7 +2,6 @@
 
 #include <string>
 #include <GLES3/gl3.h>
-#include <EGL/egl.h>
 
 #include "Palette.hpp"
 
@@ -12,7 +11,7 @@ private:
     GLuint compileShader(GLenum const type, std::string const shader) const;
 public:
     void setupShaderProgram(std::string vert, std::string frag, GLint& shader);
-	void constructFBO(size_t x, bool stencil_depth, GLuint& fbo, GLuint& tex);
+	void constructFBO(size_t x, bool stencil_depth, GLint interpolation, GLuint& fbo, GLuint& tex);
 	virtual void setActive() const = 0;
 	virtual void resize() = 0;
     

@@ -65,16 +65,13 @@ class WGLRakeRenderer: private WGLRenderer
                     // for each nail
                     for(i = 0; i < 1000; ++i)
                     {
-                        if(nails[i])
-                        {
-                            nailPos = float(i) / float(nails.length());
-                            // wavines corrected distance to rake nail
-                            d = dis(
-								texCoord[dim] - scaled_sin(texCoord[1-dim]) * up,
-								nailPos
-							);
-                            shift += stroke * pow(viscosity, scaling * d);
-                        }
+                        nailPos = float(i) / float(nails.length());
+                        // wavines corrected distance to rake nail
+                        d = dis(
+                            texCoord[dim] - scaled_sin(texCoord[1-dim]) * up,
+                            nailPos
+                        );
+                        shift += (stroke * pow(viscosity, scaling * d)) * float(nails[i]);
                     }
 
                     // linear origin position
@@ -147,7 +144,7 @@ class WGLRakeRenderer: private WGLRenderer
         void setActive() const override;
         void reset(WGLSceneRenderer& sr, Scene const & s);
         void resize() override;
-        void rake(float x, float y, float period, float amplitude, float phase,  GLuint nails[1000]);
+        void rake(float x, float y, float period, float amplitude, float phase,  GLint nails[1000]);
         void draw(GLuint target_fbo = 0);
         void drawToBuffer(void* buf, size_t length);
         void swapBuffers();
