@@ -389,7 +389,7 @@ p.notice {
 	position: relative;
 	display: inline-block;
 	width: 2em;
-	height: 1em;
+	height: 1em; enxd
 }
 
 .switch input {
