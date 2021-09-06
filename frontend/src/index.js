@@ -205,6 +205,8 @@ function getTopSubmenu(label) {
 
 function switchState(_old, _new) {
 	console.log(`switch from ${_old} to ${_new}`)
+
+	if(_old === 'rake' ) { document.getElementById('undo').disabled = true }
 	nodes[_old] = []
 	Array.prototype.forEach.call(document.getElementsByClassName('state ' + _old), function (e){
 		var next = e;
