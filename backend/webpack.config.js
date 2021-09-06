@@ -4,6 +4,10 @@ module.exports = {
 			{
 				test: /\.pegjs$/,
 				use: 'pegjs-loader'
+			},
+			{
+				test: /\.css$/i,
+				use: ['style-loader', 'css-loader'],
 			}
 		]
 	},

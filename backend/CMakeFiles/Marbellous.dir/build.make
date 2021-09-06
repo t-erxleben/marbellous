@@ -70,6 +70,7 @@ include CMakeFiles/Marbellous.dir/progress.make
 include CMakeFiles/Marbellous.dir/flags.make
 
 dist/index.js: /home/runner/work/marbellous/marbellous/frontend/src/index.js
+dist/index.js: /home/runner/work/marbellous/marbellous/frontend/src/rake.drawio
 dist/index.js: /home/runner/work/marbellous/marbellous/frontend/src/rake_syntax.pegjs
 dist/index.js: npm.stamp
 dist/index.js: webpack.config.js

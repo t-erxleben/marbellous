@@ -2,11 +2,13 @@
 /home/runner/work/marbellous/marbellous/backend/page/Marbellous.wasm
 /home/runner/work/marbellous/marbellous/backend/page//fav-raw.png
 /home/runner/work/marbellous/marbellous/backend/page//stylesheet.css
+/home/runner/work/marbellous/marbellous/backend/page//imgs/rake.svg
 /home/runner/work/marbellous/marbellous/backend/page//mstile-144x144.png
 /home/runner/work/marbellous/marbellous/backend/page//icons/undo-solid.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/empty.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/wave.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/chalkboard-solid.svg
+/home/runner/work/marbellous/marbellous/backend/page//icons/times-solid.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/fast-backward-solid.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/sparkle-solid.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/palette-solid.svg

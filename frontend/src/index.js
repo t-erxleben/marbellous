@@ -1,7 +1,19 @@
 import * as parser from './rake_syntax.pegjs'
 import * as png from 'fast-png'
+import * as libSlider from 'nouislider'
+import 'nouislider/dist/nouislider.css';
+
+function createSlider(node, obj) {
+	libSlider.create(node, obj)
+	if(!(obj.start instanceof Array) || obj.start.length == 1) {
+		var d = document.createElement('div')
+		d.classList.add('dummy_handle')
+		node.querySelector('.noUi-base').prepend(d)
+	}
+}
 
 const int = parseInt;
+var popup = {}
 var inputs = {}
 window.Storage =  class Storage {
 	constructor() {
@@ -222,7 +234,7 @@ function switchState(_old, _new) {
 	switch(_new) {
 		case 'rake':
 			img.src = 'icons/fast-backward-solid.svg';
-			label.title = 'Go to state before first rake strike.';
+			label.title = 'Go back to color dropping.';
 			backend.startRaking()
 		break;
 		case 'draw':
@@ -257,6 +269,9 @@ function downloadCanvas(el) {
 
 function handleClick(el) {
 		switch(el.id) {
+			case 'help':
+				popup.popup.classList.add('popup_open')
+				break;
 			case 'download':
 				const spinner = el.parentElement.getElementsByClassName('spinner')[0]
 				if(spinner.hidden) {
@@ -269,7 +284,7 @@ function handleClick(el) {
 				el.disabled = true
 				break;
 			case 'clear':
-				if(window.confirm('Clearing the canvas will result in an empty canvas.\nAll your work is lost, there is NO way back.\nWill you clear the Canvas?'))
+				if(window.confirm('All your work will be lost.\nAre you sure?'))
 				{
 					backend.clearCanvas()
 					// go back to draw when clearing in rake
@@ -287,7 +302,6 @@ function handleClick(el) {
 				break;
 			case 'color-sprinkler':
 				tool.tool[state] = sparkle_dropper;
-				sidebar.btn.checked = true
 				sidebar.options.sprinkler.checked = true
 				break;
 			case 'rake-movement-linear':
@@ -299,7 +313,7 @@ function handleClick(el) {
 			case 'switch-state':
 				const oldState = state;
 				if (oldState === 'rake') {
-					if(!window.confirm("This will go back before you make your first rake stroke. The stroke marked will all be removed, and there is NO way to restore them.\nWant you go back to the color drop state?"))
+					if(!window.confirm("Going back to color dropping will undo all rake steps.\nAre you sure?"))
 					{
 						break;
 					}
@@ -319,6 +333,7 @@ document.addEventListener("click", function(evnt){
 	if (el.tagName == 'INPUT'
 		&& el.attributes.type
 		&& el.attributes.type.nodeValue == 'radio'
+		&& !el.classList.contains('collapsible')
 		&& !el.parentNode.parentNode.classList.contains('sidebar'))
 	{
 		handleClick(el);
@@ -346,7 +361,7 @@ document.addEventListener("click", function(evnt){
 	}
 });
 document.addEventListener("touchstart", function() {
-	alert("No support for touch inputs at the moment!");	
+	alert("There is no support for touch input at the moment!");	
 });
 function hideMenu() {
 	const submenu = active['menu'];
@@ -373,8 +388,11 @@ function fetchAndSet(element, id) {
 window.storage = null
 window.onload = function() {
 	document.querySelectorAll('menu.sidebar > li > div').forEach(function(div){
-		div.style.maxHeight = div.scrollHeight + 3;
+		div.style.maxHeight = div.scrollHeight + 3 + 'px';
 	});
+	document.querySelectorAll('input.collapsible + label + div').forEach(function(div){
+		div.style.maxHeight = div.scrollHeight + 3 + 'px';
+	})
 }
 
 function DomInit(){
@@ -387,6 +405,14 @@ function DomInit(){
 			active[rad.attributes.name.nodeValue] = null;
 		}
 	});
+	popup.popup = document.querySelector('.popup')
+	popup.popup.addEventListener('click', function(ev){
+		if(ev.target === ev.currentTarget) {
+			popup.popup.classList.remove('popup_open')
+		}
+	})
+	popup.close = popup.popup.querySelector('.close_button')
+	popup.close.addEventListener('click', function() { popup.popup.classList.remove('popup_open') })
 	{
 		tool.image = document.getElementById('image');
 	}
@@ -424,7 +450,7 @@ function DomInit(){
 		fetchAndSet(el, id)
 		backend.resolution = int(el.value)
 		el.addEventListener("change", (ev)=>{
-			if(state != 'rake' || window.confirm("Changing the resolution will undo all raking steps!\nWill you change the resolution?")) {
+			if(state != 'rake' || window.confirm("Changing the resolution will undo all rake steps!\nAre you sure?")) {
 				backend.resolution = int(el.value)
 				storage.store(id, el.value)
 				backend.resize(backend.resolution, backend.resolution)
@@ -507,6 +533,7 @@ function DomInit(){
 		const iid = 'sidebar-pallet-color-' + num.toString();
 		const riid = 'sidebar-pallet-ratio-' + num.toString()
 		const rel = document.getElementById(riid);
+		const rdef = rel.value
 		const id = function() { return pallets.active + iid }
 		const rid = function() { return pallets.active + riid }
 		fetchAndSet(el, id());
@@ -522,6 +549,7 @@ function DomInit(){
 			backend.redraw();
 			updatePallet();});
 		rel.addEventListener('change', (ev)=>{
+			if(rel.value === "") { rel.value = rdef }
 			pallets[pallets.active].colors[num].ratio = rel.value
 			storage.store(rid(), rel.value)
 			backend.setColorRatioAt(num, int(rel.value))
@@ -546,10 +574,12 @@ function DomInit(){
 
 	{	const id = 'sidebar-rake-placement'
 		const el = document.getElementById(id);
+		const def = el.value
 		fetchAndSet(el, id)
-		rake.config.placement = new RakeConfig(el.value || '20');
+		rake.config.placement = new RakeConfig(el.value || def);
 		el.addEventListener('change', (ev)=>{
 			try {
+				if(el.value === "") { el.value = def }
 				rake.config.placement = new RakeConfig(el.value);
 				storage.store(id, el.value);
 			} catch (e) {
@@ -561,36 +591,78 @@ function DomInit(){
 	{
 		const id = 'sidebar-rake-periode'
 		const el = document.getElementById(id)
+		const slider = document.getElementById(id + '-slider')
+		const def = el.value;
 		fetchAndSet(el, id)
-		rake.config.periode = int(el.value || '20') / 100
+		rake.config.periode = int(el.value || def) / 100
 		el.addEventListener('change', (ev)=>{
 			try {
-				rake.config.periode = int(el.value) / 100
+				if(el.value === "") { el.value = def }
+				const v = int(el.value)
+				rake.config.periode = v / 100
+				slider.noUiSlider.set(v)
 				storage.store(id, el.value)
 			} catch(e) {}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur()}})
+		createSlider(slider,{
+			start: rake.config.periode * 100,
+			connect: [true, false],
+			range: {
+				min: int(el.min),
+				max: int(el.max)
+			}
+		})
+		slider.noUiSlider.on('update', function(vals) {
+			el.value = `${Math.round(vals[0])}`
+			rake.config.periode = vals[0] / 100.
+			storage.store(id, el.value)
+		})
 	}
 	{
 		const id = 'sidebar-rake-magnitude'
 		const el = document.getElementById(id)
+		const slider = document.getElementById(id + '-slider')
+		const def = el.value
 		fetchAndSet(el, id)
-		rake.config.magnitude = int(el.value || '5') / 100
+		rake.config.magnitude = int(el.value || def) / 100
 		el.addEventListener('change', (ev)=>{
 			try {
-				rake.config.magnitude = int(el.value) / 100
+				if(el.value === "") { el.value = def }
+				const v = int(el.value)
+				rake.config.magnitude = v / 100
+				slider.noUiSlider.set(v)
 				storage.store(id, el.value)
 			} catch(e) {}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur()}})
+		createSlider(slider, {
+			start: rake.config.magnitude * 100,
+			connect: [true, false],
+			step: 1,
+			range: {
+				min: int(el.min),
+				max: int(el.max)
+			},
+		})
+		slider.noUiSlider.on('update', function(vals) {
+			el.value = `${Math.round(vals[0])}`
+			rake.config.magnitude = vals[0] / 100.
+			storage.store(id, el.value)
+		})
 	}
 	{	const id = 'sidebar-sprinkler-radius'
 		const el = document.getElementById(id)
+		const slider = document.getElementById(id + '-slider')
+		const def = el.value
+
 		fetchAndSet(el, id)
-		sparkle_dropper.range = parseRadiusRange(el.value || "5-10");
+		sparkle_dropper.range = parseRadiusRange(el.value || def);
 		el.addEventListener('change', (ev)=>{
 			try {
+				if(el.value === "") { el.value = def }
 				sparkle_dropper.range = parseRadiusRange(el.value)
+				slider.noUiSlider.set([sparkle_dropper.range.min*100, sparkle_dropper.range.max*100])
 				storage.store(id, el.value)
 			} catch(e) {
 				console.error("failed to parse radius range: ", e)
@@ -598,6 +670,22 @@ function DomInit(){
 			}
 		})
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur();}})
+
+		createSlider(slider, {
+				start: [sparkle_dropper.range.min * 100, sparkle_dropper.range.max * 100],
+				connect: true,
+				step: 1,
+				range: {
+					min: 1,
+					max: 100
+				}
+			}
+		)
+		slider.noUiSlider.on('update', function(vals) {
+			el.value = `${Math.round(vals[0])}-${Math.round(vals[1])}`
+			sparkle_dropper.range = parseRadiusRange(el.value)
+			storage.store(id, el.value)
+		})
 	}
 	const sidebar_fn = function(obj, key, config, value){
 		const id ="sidebar-colorgrid-" + config
@@ -632,38 +720,72 @@ function DomInit(){
 
 	{	const id = 'sidebar-sprinkler-frequence'
 		const el = document.getElementById(id)
+		const slider = document.getElementById(id+'-slider')
+		const def = el.value
 		fetchAndSet(el, id)
-		sparkle_dropper.rate = 1000. / int(el.value || "5") 
+		sparkle_dropper.rate = 1000. / int(el.value || def) 
 		el.addEventListener('change', (ev)=> {
+			if(el.value === "") { el.value = def }
 			if (el.validity.valid) {
 				try {
-					sparkle_dropper.rate = 1000. / int(el.value)
+					const v = int(el.value)
+					sparkle_dropper.rate = 1000. / v
+					slider.noUiSlider.set(v)
 					storage.store(id, el.value)
 				}	catch(e) { /* TODO: error handling */ }
 			}
 		})
 		el.addEventListener('keydown', (ev)=>{if (ev.which == 13) {el.blur();}})
+		createSlider(slider, {
+				start: 1000. / sparkle_dropper.rate,
+				step: 1,
+				connect: [true, false],
+				range: {
+					min: int(el.min),
+					max: int(el.max)
+				}
+			}
+		)
+		slider.noUiSlider.on('update', function(vals) {
+			el.value = `${Math.round(vals[0])}`
+			sparkle_dropper.rate = 1000. / vals
+			storage.store(id, el.value)
+		})
 	}
 	{	const id = 'sidebar-sprinkler-local'
 		const el = document.getElementById(id)
 		fetchAndSet(el, id)
 		const sigId = 'sidebar-sprinkler-sig'
+		const sigSlider = document.getElementById(sigId + "-slider")
 		const sigEl = document.getElementById(sigId)
+		const sigDef = sigEl.value
 		fetchAndSet(sigEl, sigId)
 
 		el.checked = el.value === 'true'
 		sparkle_dropper.local = el.checked
 		sigEl.disabled = !el.checked
+		if(!el.checked) {
+			sigSlider.setAttribute('disabled', true)
+		} else {
+			sigSlider.removeAttribute('disabled')
+		}
 		el.addEventListener('change', (ev) => {
 			sparkle_dropper.local = el.checked
 			storage.store(id, el.checked)
 			sigEl.disabled = !el.checked
+			if(!el.checked) {
+				sigSlider.setAttribute('disabled', true)
+			} else {
+				sigSlider.removeAttribute('disabled')
+			}
 		})
-		sparkle_dropper.sig = int(sigEl.value || '10' ) / 100.
+		sparkle_dropper.sig = int(sigEl.value || sigDef ) / 100.
 		sigEl.addEventListener('change', (ev)=> {
-			if (el.validity.valid) {
+			if(sigEl.value === "") { sigEl.value = sigDef }
+			if (sigEl.validity.valid) {
 				try {
 					sparkle_dropper.sig = int(sigEl.value) / 100.
+					sigSlider.noUiSlider.set(sparkle_dropper.sig * 100)
 					storage.store(sigId, sigEl.value)
 				}	catch(e) {
 					// TODO: error handling
@@ -671,6 +793,21 @@ function DomInit(){
 			}
 		})
 		sigEl.addEventListener('keydown', (ev)=>{if (ev.which == 13) {sigEl.blur();}})
+		
+		createSlider(sigSlider, {
+			start: sparkle_dropper.sig * 100,
+			connect: [true, false],
+			step: 1,
+			range: {
+				min: int(sigEl.min),
+				max: int(sigEl.max)
+			}
+		})
+		sigSlider.noUiSlider.on('update', function(vals) {
+			sigEl.value = `${Math.round(vals[0])}`
+			sparkle_dropper.sig = int(sigEl.value) / 100.
+			storage.store(sigId, sigEl.value)
+		})
 	}
 	{
 		const id = "sidebar-filter"
@@ -765,7 +902,7 @@ var sparkle_dropper = {
 		const n = int(d / sparkle_dropper.rate)
 		if(n > 0) {
 			if(sparkle_dropper.local === true) {
-				backend.sprinklerLocal(n, sparkle_dropper.range.min, sparkle_dropper.range.max,
+				backend.sprinklerLocal(n, sparkle_dropper.range.min / 2., sparkle_dropper.range.max / 2.,
 					sparkle_dropper.pos.x * 2 - 1,1 - sparkle_dropper.pos.y * 2,
 					sparkle_dropper.sig)
 			} else {
@@ -983,7 +1120,8 @@ var rake = {
 
 		ctx.lineWidth = 0.5;
 		ctx.beginPath();
-		const step = 20;
+		const step = (len * rake.config.periode) / 50
+		console.log('step', step)
 		{
 			const i = - rake.config.periode / 4 - step;
 			const mag = Math.sin((i-phaseOff) / (rake.config.periode * w) * Math.PI) * rake.config.magnitude * w;
@@ -991,7 +1129,6 @@ var rake = {
 			const y = startBound.y + i / len * a.y;
 			ctx.moveTo(x + up.x * mag, y + up.y * mag);
 		}
-		console.log(rake.config.periode)
 		for(i = 0; i <= len + step; i += step) {
 			const x = startBound.x + i / len * a.x;
 			const y = startBound.y + i / len * a.y;
