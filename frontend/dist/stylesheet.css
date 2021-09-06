@@ -32,8 +32,8 @@ tr.sub-row > td:first-of-type {
 	width: 86vw;
 	height: 86vw;
 	/* 100/56.25 = 1.778 */
-	max-height: 86vh;
-	max-width: 86vh;
+	max-height: 76vh;
+	max-width: 76vh;
 	/* 16/9 = 1.778 */
 	top: 0;
 	bottom: 0;
