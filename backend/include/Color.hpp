@@ -20,7 +20,7 @@ public:
 
     /** Construct black.
     */  
-    Color();
+    Color(): r{0}, g{0}, b{0}, m_ratio{1} {}
 
     /** Construct color by RGB values.
      * @param r Red channel
@@ -28,14 +28,31 @@ public:
      * @param b Blue channel
      * @return Color Object
     */
-    Color(uint8_t const r, uint8_t const g, uint8_t const b);
+	Color(uint8_t const red, uint8_t const green, uint8_t const blue)
+		: r{red}, g{green}, b{blue}, m_ratio{1} {}
 
     
-    Color(unsigned const int); ///< construct from color code
+    Color(unsigned const int color) ///< construct from color code
+		: Color(color / 256 / 256, (color / 256) % 256, color % 256) {}
 
-    void set(uint8_t const r, uint8_t const g, uint8_t const b); ///< set via color channels
 
-    void set(unsigned const int); ///< set via color code
+    void set(uint8_t const red, uint8_t const green, uint8_t const blue) ///< set via color channels
+	{
+		r = red;
+		g = green;
+		b = blue;
+	}
 
-   	rgb_t getRGB() const; ///< get color channels
+    void set(unsigned const int color) ///< set via color code
+	{
+		r = color / 256 / 256;
+		g = (color / 256) % 256;
+		b = color % 256;
+	}
+
+   	rgb_t getRGB() const ///< get color channels
+	{
+		return std::make_tuple(r,g,b);
+	}
 };
+
