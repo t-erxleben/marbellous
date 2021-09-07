@@ -11,8 +11,31 @@
 /**
  * \brief Render scenes to buffers.
  * 
- * \todo explain draw algorithm
+ *	When you have a list of vertices where neighbors in the list are adjunct vertices of a polygon,
+ *	then the triangle fan of that list covers areas inside the polygon with an odd amount of triangles
+ *	and areas outside of the polygon with an even amount or none.
  * 
+ * 	Because we draw multiple polygons on top of each other and we don't want to draw each polygon
+ * 	separately we need to extend this scheme.
+ *
+ *  We need to figure out which is the first visible polygon for an fragment.
+ *  For that we initialize each fragment with an stencil value of 0b10
+ *  then each time when the first triangle of an polygon is drawn on that fragment (depth test succeeds)
+ *  we decrement this value, for the first polygon it is than 0b01 (an odd count).
+ *  Each additional triangle over that fragment will toggle this value between 0b10 and 0b01 (even/odd count).
+ *  If an polygon has an even number of triangles at this fragment (the fragment is outside of the polygon),
+ *  the value will be 0b10 when the next polygon starts, and there fore the same as the initialisation.
+ *  If an polygon as an odd number of triangles at this fragment (the fragment is inside the polygon),
+ *  the value will be 0b01 what means if we subtract 1 now the value is 0.
+ *  We use this 0 to indicate that this fragment is inside the polygon above the current one.
+ *
+ *  After this first draw pass, every fragment which is inside of at leas 1 polygon has an stencil value
+ *  of 0 or 1. All with an one are visible so we can just draw them (this will happen in draw pass 3), 
+ *  because the correct depth is stored in the depth buffer.
+ *
+ *  For the fragments with stencil 0 we only now the depth value of the polygon below them,
+ *  so we just draw every polygon above the stored depth value, this way we will use the painter algorithm
+ *  to only show the polygon direct above the stored one.
  **/
 class WGLSceneRenderer: private WGLRenderer
 {
