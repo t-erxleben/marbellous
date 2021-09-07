@@ -31,10 +31,8 @@ tr.sub-row > td:first-of-type {
 	position: relative;
 	width: 86vw;
 	height: 86vw;
-	/* 100/56.25 = 1.778 */
 	max-height: 76vh;
 	max-width: 76vh;
-	/* 16/9 = 1.778 */
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -133,7 +131,6 @@ input.sidebar:checked + label.sidebar + menu.sidebar {
 	max-width: 100vw;
 }
 
-/* merege with .menu radio? */
 .sidebar input[type="radio"] {
 	display: none;
 }
@@ -569,7 +566,7 @@ input.slider:checked + span.slider:before {
 	border-radius: 1em 0 0 1em;
 	right: -0.5em;
 }
-/* .sidebar .noUi-horizontal .noUi-origin:last-child:nth-child(2) > .noUi-handle:after, */
+
 .sidebar .noUi-horizontal .noUi-connects:first-child:nth-last-child(3) ~ .noUi-origin:nth-last-child(2) > .noUi-handle:after {
 	left: 0.125em;
 }
@@ -602,20 +599,6 @@ input.slider:checked + span.slider:before {
     width: 100%;
 	border-radius: 0;
 }
-
-
-
-/* menu.sidebar input {
-	background: var(--background-color);
-	border-bottom-color: var(--font-color);
-	border-right-color: var(--font-color);
-	border-left-color: var(--overlay-color);
-	border-top-color: var(--overlay-color);
-} */
-/*input:invalid {
-	border: red solid 3px!important;
-}*/
-
 
 .spinner  > svg {
 	  animation: rotator 1.4s linear infinite;
