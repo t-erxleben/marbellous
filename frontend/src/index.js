@@ -204,7 +204,6 @@ function getTopSubmenu(label) {
 }
 
 function switchState(_old, _new) {
-	console.log(`switch from ${_old} to ${_new}`)
 	nodes[_old] = []
 	Array.prototype.forEach.call(document.getElementsByClassName('state ' + _old), function (e){
 		var next = e;
@@ -440,7 +439,6 @@ function DomInit(){
 		rake: document.getElementById('sidebar-rake'),
 		pallet: document.getElementById('sidebar-pallet'),
 		sprinkler: document.getElementById('sidebar-sprinkler'),
-		/* colorgrid: document.getElementById('sidebar-colorgrid'), */
 	};
 	sidebar.btn = document.getElementById('sidebar-btn');
 	sidebar.menu = document.querySelector('menu.sidebar');
@@ -702,21 +700,6 @@ function DomInit(){
 		})
 		el.addEventListener("keydown", (ev)=>{if (ev.which == 13) {el.blur()}})
 	}
-	// sidebar_fn(rake_dropper.config, 'w',  "width",  "30")
-	// sidebar_fn(rake_dropper.config, 'h',  "height", "30")
-	// sidebar_fn(rake_dropper.config, 'of', "offset", "10")
-	/* {
-		const id ="sidebar-colorgrid-random_color"
-		const el = document.getElementById(id)
-		fetchAndSet(el, id)
-
-		el.checked = el.value === 'true'
-		rake_dropper.config.random_color = el.checked
-		el.addEventListener('change', (ev) => {
-			rake_dropper.config.random_color = el.checked
-			storage.store(id, el.checked)
-		})
-	} */
 
 	{	const id = 'sidebar-sprinkler-frequence'
 		const el = document.getElementById(id)
@@ -890,7 +873,6 @@ var sparkle_dropper = {
 		sparkle_dropper.dim = {w, h}
 		const size = tool.translate({x: 32, y: 32});
 		canvas.drawImage(sparkle_dropper.img,x-size.x/2,y-size.y/2,size.x,size.y);
-		// canvas.drawImage(sparkle_dropper.img,y-size/2,x-size/2,size.x,size.y);
 	},
 	drop: function(time) {
 		if(! sparkle_dropper.active) { sparkle_dropper.time = null; return }
@@ -1121,7 +1103,6 @@ var rake = {
 		ctx.lineWidth = 0.5;
 		ctx.beginPath();
 		const step = (len * rake.config.periode) / 50
-		console.log('step', step)
 		{
 			const i = - rake.config.periode / 4 - step;
 			const mag = Math.sin((i-phaseOff) / (rake.config.periode * w) * Math.PI) * rake.config.magnitude * w;
@@ -1335,7 +1316,6 @@ var tool = {
 			}
 		}
 		tool.start = null;
-		// tool.overlay.drawImage()
 	},
 };
 

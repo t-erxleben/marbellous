@@ -137,7 +137,6 @@ extern "C"
     void EMSCRIPTEN_KEEPALIVE setFilter(bool filter)
     {
         Options::getInstance()->setFilter(filter);
-		std::cout << "filter set: " << filter << "\n";
     }
 
     int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color) ///< draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
@@ -367,7 +366,6 @@ extern "C"
 
 	void EMSCRIPTEN_KEEPALIVE startRaking() {
         checkState(true,);
-		std::cout << "start Raking\n";
         Options::getInstance()->setState(false);
         rakeRenderer->reset(*sceneRenderer, *scene);
         rakeRenderer->draw();
@@ -375,7 +373,6 @@ extern "C"
 
     void EMSCRIPTEN_KEEPALIVE startDropping() {
         checkState(false,);
-		std::cout << "start Dropping\n";
         Options::getInstance()->setState(true);
         sceneRenderer->drawScene(*scene);
 	}
