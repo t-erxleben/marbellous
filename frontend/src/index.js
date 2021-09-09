@@ -1077,6 +1077,7 @@ var rake = {
 	},
 	lrBound: function(start, end , w, h) {
 		const v = {x: end.x - start.x, y: end.y - start.y};
+		if(Math.abs(v.x) < Number.EPSILON && Math.abs(v.y) < Number.EPSILON) { return { leftBound: null, rightBound: null} }
 		const m = v.y / v.x;
 		if(Math.abs(m) === Infinity) {
 			const leftBound = {x: start.x, y: 0};
@@ -1091,6 +1092,7 @@ var rake = {
 	},
 	straight: function(ctx, start, end, w, h) {
 		const {leftBound, rightBound} = rake.lrBound(start, end, w, h);
+		if(leftBound === null || rightBound === null) { return }
 
 		ctx.lineWidth = 0.5;
 		ctx.beginPath();
@@ -1105,6 +1107,7 @@ var rake = {
 	},
 	curve: function(ctx, start, end, w, h) {
 		const {leftBound, rightBound} = rake.lrBound(start, end, w, h);
+		if(leftBound === null || rightBound === null) { return }
 		var a;
 		var startBound;
 		if (end.x - start.x > 0 || (end.x === start.x && start.y < end.y)) {
@@ -1183,6 +1186,7 @@ var rake = {
 		const r = rake.setPattern(ctx);
 		const rot = Math.atan2(a.y,a.x);
 		const {leftBound, rightBound} = rake.lrBound(start, {x: start.x + a.x, y: start.y + a.y}, w, h)
+		if(leftBound === null || rightBound === null) { return }
 		const len = Math.sqrt((leftBound.x - rightBound.x)**2 + (leftBound.y - rightBound.y)**2);
 		const startBound = a.x > 0 || (a.x === 0 && a.y > 0) ? leftBound : rightBound;
 
@@ -1224,6 +1228,7 @@ var rake = {
 			)
 		} else if (rake.config.line === rake.curve) {
 			const {leftBound, rightBound} = rake.lrBound(start, end, w, h)
+			if(leftBound=== null || rightBound === null) { return }
 			var offset;
 			if (end.x - start.x > 0 || (end.x === start.x && start.y < end.y)) 
 			{
