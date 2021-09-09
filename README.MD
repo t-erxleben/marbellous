@@ -17,7 +17,7 @@ You can play with the current version at [github pages](https://t-erxleben.githu
 * [cmake](https://cmake.org/)
 * [emscripten](https://emscripten.org/index.html)
 
-1. Clone the repository and sub-repositories with: `git clone --recurse-submodules https://github.com/t-erxleben/marbellous.git` 
+1. Clone the repository and sub-repositories with: `git clone https://github.com/t-erxleben/marbellous.git` 
 2. Create and enter the build directory:
 	```bash
 	cd marbellous
@@ -25,15 +25,15 @@ You can play with the current version at [github pages](https://t-erxleben.githu
 	cd build
 	```
 3. Make sure to load the emscripten environment.
-4. Initialize cmake `emcmake cmake ..`.
-5. Build WebASM code and collect needed files `emcmake cmake --build . `
-6. Collect the needed files `emcmake cmake --install . `
+4. Initialize cmake `emcmake cmake ../backend/`.
+5. Build WebASM code and collect needed files `cmake --build . `
+6. Collect the needed files `cmake --install . `
 7. The results are now in the `page` subdirectory: `cd page`
 8. You may copy this files or serve it with `emrun index.html`
 
-### Developper documentation
+### Developer documentation
 
-The developper documentation is build with doxygen and is available at [github pages](https://t-erxleben.github.io/marbellous/backend/html/index.html).
+The developer documentation is build with Doxygen and is available at [github pages](https://t-erxleben.github.io/marbellous/backend/html/index.html).
 
 ## Copyright notice
 

@@ -18,11 +18,7 @@ h1 {
 	color: var(--accent-color-2);
 	max-height: 9vh;
 	margin: 0;
-	padding: 2vh;
-}
-
-tr.sub-row > td:first-of-type {
-	padding-left: 30px;
+	padding: calc(0.5 * (9vh - 1em));
 }
 
 .page {
@@ -31,14 +27,28 @@ tr.sub-row > td:first-of-type {
 	position: relative;
 	width: 86vw;
 	height: 86vw;
-	max-height: 76vh;
-	max-width: 76vh;
+	max-height: 86vh;
+	max-width: 86vh;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	vertical-align: middle;
 }
+
+p.notice {
+	color: gray;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+	padding: calc(5vh - 2em) 0 0 0;
+	max-height: 5vh;
+}
+
+tr.sub-row > td:first-of-type {
+	padding-left: 30px;
+}
+
 
 .page canvas {
 	position: absolute;
@@ -285,6 +295,12 @@ table > tbody > tr > td {
 	width: max-content;
 }
 
+@media (max-height: calc(406px + 7em)) {
+	.menu li {
+		padding: 0 0 0 1em;
+	}
+}
+
 .menu menu > li {
 	display: inline;
 	position: absolute;
@@ -371,15 +387,6 @@ table > tbody > tr > td {
 body > #content {
 	display: table;
 	margin-left: min(0px, max(-140px, calc(82vh + 140px - 100vw)));
-}
-
-p.notice {
-	color: gray;
-	text-align: center;
-	width: 100%;
-	margin: 0;
-	padding: 3vh 0 0 0;
-	max-height: 5vh;
 }
 
 .switch {
@@ -553,7 +560,7 @@ input.slider:checked + span.slider:before {
 }
 .sidebar .noUi-horizontal .noUi-handle:before { content: none; }
 .sidebar .noUi-horizontal .noUi-handle {
-	width: 0.5em;
+	width: 0.6em;
 	height: 1em;
 	top: 0;
 	right: -1em;
