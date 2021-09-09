@@ -563,7 +563,7 @@ input.slider:checked + span.slider:before {
 }
 .sidebar .noUi-horizontal .noUi-handle:before { content: none; }
 .sidebar .noUi-horizontal .noUi-handle {
-	width: 0.5em;
+	width: 0.6em;
 	height: 1em;
 	top: 0;
 	right: -1em;
