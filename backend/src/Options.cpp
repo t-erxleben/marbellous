@@ -35,14 +35,6 @@ int Options::setActivePalette(size_t id)
     return 0;
     
 }
-void Options::setCanvasSize(size_t size)
-{
-	canvasSize = size;
-}
-size_t Options::getCanvasSize() const
-{
-	return canvasSize;
-}
 
 void Options::setBGColor(Color const & col)
 {

@@ -10,7 +10,6 @@ class Options
         Options();
         std::vector<Palette> Palettes; ///< All saved palettes.
         size_t activePalette; ///< Index of currently active palette inside palettes vector.
-		size_t canvasSize; ///< size of canvas in pixel.
         Color bgColor; ///< Background color.
         bool dropState;
         bool filter;
@@ -35,9 +34,6 @@ class Options
 
         void setState(bool dropState);
         bool getState() const;
-
-		void setCanvasSize(size_t size);
-		size_t getCanvasSize() const;
 
         void setBGColor(Color const & col);
         const Color* getBGColor() const;

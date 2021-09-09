@@ -112,13 +112,9 @@ public:
 		std::cout << "can size: " << _canvasSize << std::endl;
 		if(displacements.empty()) { return; }
 
-		size_t vCount = 0;
 		for(auto& p : *this) {
 			p.displace(displacements, _canvasSize);
-			vCount += p.getVertCount();
 		}
-
-		std::cout << "vCount: " << vCount << "\n";
 
 		// remove polygons with less then 3 vertices
 		polygons.erase(

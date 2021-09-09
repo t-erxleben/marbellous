@@ -54,7 +54,7 @@ void sprinkle(int amt, C& coord, R& radius)
 		float r = radius(rng);
 		GLuint col = static_cast<GLuint>(Options::getInstance()->getActivePalette()->getRandomColorId());
 
-		scene->applyDisplacement(Options::getInstance()->getCanvasSize());
+		scene->applyDisplacement(dropRes);
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
 		scene->addDisplacement({p.x,p.y}, r);
 
@@ -68,7 +68,7 @@ void sprinkle(int amt, C& coord, R& radius)
         int handle = scene->addPolygon(Polygon{p, Polygon::MIN_R,
 				col});
 	}
-	scene->applyDisplacement(Options::getInstance()->getCanvasSize());
+	scene->applyDisplacement(dropRes);
 	sceneRenderer->drawScene(*scene);
 }
 
@@ -89,7 +89,6 @@ extern "C"
     {
 		assert(dropRes == rakeRes);
 
-		Options::getInstance()->setCanvasSize(dropRes);
         _initWGLContext(canvasID, dropRes);
 
 		WGLContext::getContext()->updateBGColor();
@@ -149,7 +148,7 @@ extern "C"
 
         auto dropRes = WGLContext::getContext()->getDropRes();
 
-		scene->applyDisplacement(Options::getInstance()->getCanvasSize());
+		scene->applyDisplacement(dropRes);
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
 		scene->addDisplacement({x,y}, r);
 
@@ -171,8 +170,7 @@ extern "C"
 		checkState(true, );
 
 		auto dropRes = WGLContext::getContext()->getDropRes();
-
-		scene->applyDisplacement(Options::getInstance()->getCanvasSize());
+		scene->applyDisplacement(dropRes);
 		sceneRenderer->drawScene(*scene);
 
 		uint8_t c[4];
@@ -208,7 +206,6 @@ extern "C"
     {
         /// \todo for now both need to be the same
         assert(dropSize == rakeSize);
-		Options::getInstance()->setCanvasSize(dropSize);
         auto context = WGLContext::getContext();
         context->setDropRes(dropSize);
         context->setRakeRes(rakeSize);
@@ -235,7 +232,7 @@ extern "C"
 		checkSetup(-1);
         checkState(true, -1);
 
-		scene->applyDisplacement(Options::getInstance()->getCanvasSize());
+		scene->applyDisplacement(WGLContext::getContext()->getDropRes());
 		sceneRenderer->drawScene(*scene);
 		return 0;
 	}
