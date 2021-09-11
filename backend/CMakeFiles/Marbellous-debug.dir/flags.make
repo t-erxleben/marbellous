@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = @CMakeFiles/Marbellous-debug.dir/includes_CXX.rsp
 
-CXX_FLAGS = -fsanitize=undefined,address -s ASSERTIONS=1 -g4 -std=gnu++17
+CXX_FLAGS = -fsanitize=undefined,address -gsource-map -std=gnu++17
 

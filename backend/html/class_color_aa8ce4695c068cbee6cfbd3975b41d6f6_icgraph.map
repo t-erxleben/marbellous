@@ -1,5 +1,5 @@
 <map id="Color::getRGB" name="Color::getRGB">
-<area shape="rect" id="node1" title="get color channels" alt="" coords="969,224,1073,251"/>
+<area shape="rect" id="node1" title="&lt; get color channels" alt="" coords="969,224,1073,251"/>
 <area shape="rect" id="node2" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="709,224,921,251"/>
 <area shape="rect" id="node3" href="$main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="531,5,601,32"/>
 <area shape="rect" id="node4" href="$main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="527,56,605,83"/>

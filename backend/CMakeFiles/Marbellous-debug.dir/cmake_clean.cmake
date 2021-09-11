@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o"
-  "CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o.d"
   "CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o"
   "CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o.d"
   "CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o"

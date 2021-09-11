@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['palette_250',['Palette',['../class_color.html#a2b0840855555be34f5b522592031d1af',1,'Color']]]
+  ['palette_248',['Palette',['../class_color.html#a2b0840855555be34f5b522592031d1af',1,'Color']]]
 ];

@@ -187,33 +187,6 @@ Marbellous-debug/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/build
 .PHONY : Marbellous-debug/fast
 
-src/Color.o: src/Color.cpp.o
-.PHONY : src/Color.o
-
-# target to build an object file
-src/Color.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/Color.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o
-.PHONY : src/Color.cpp.o
-
-src/Color.i: src/Color.cpp.i
-.PHONY : src/Color.i
-
-# target to preprocess a source file
-src/Color.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/Color.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/Color.cpp.i
-.PHONY : src/Color.cpp.i
-
-src/Color.s: src/Color.cpp.s
-.PHONY : src/Color.s
-
-# target to generate assembly for a file
-src/Color.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous.dir/build.make CMakeFiles/Marbellous.dir/src/Color.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Marbellous-debug.dir/build.make CMakeFiles/Marbellous-debug.dir/src/Color.cpp.s
-.PHONY : src/Color.cpp.s
-
 src/Options.o: src/Options.cpp.o
 .PHONY : src/Options.o
 
@@ -471,9 +444,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Marbellous"
 	@echo "... Marbellous-debug"
-	@echo "... src/Color.o"
-	@echo "... src/Color.i"
-	@echo "... src/Color.s"
 	@echo "... src/Options.o"
 	@echo "... src/Options.i"
 	@echo "... src/Options.s"

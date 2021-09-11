@@ -55,64 +55,41 @@ Point displacePoint(const Point& p, const std::vector<Displacement>& displacemen
 	Point ret(p);
 	return displacePoint(ret, displacements);
 }
-
-// p = c + d
-// p2 = c + d2
-// p2 = c + d*s
-// d2 = d * s
-// d = d2/s
-// s = sqrt(1+r*r/<d,d>)
-// s^2 = 1 + r^2 / <d2/s,d2/s>
-// s^2 = 1 + r^2 * s^2 / <d2,d2>
-// 1 = 1/s^2 + r^2/<d2,d2>
-// 1/s^2 = 1 - r^2/<d2,d2>
-// 1/(1-r^2/<d2,d2>) = s^2
-// s = sqrt(1/(1-r^2/<d2,d2>))
-// d = d2 * 1/s
-/*Point reverseDisplacementPoint(const Point& p, const Point& c, float r) {
-	Point d = p - c;
-	float det = 1.f - r*r/(d*d);
-	if(det <= 0.f) {
-		d /= sqrtf(d*d);
-		d *= Polygon::MIN_R;
-	} else {
-		d /= sqrtf(1.f/(1.f-r*r/(d*d)));
+int Polygon::calcInsertion(const Point& p0, const Point& p1, float min_dis2, float max_dis2) {
+	float d2 = distance2(p0, p1);
+	if(d2 > max_dis2) {
+		return static_cast<int>(sqrtf(d2 / min_dis2));
+	} else if (d2 < min_dis2) {
+		return -1;
 	}
-	return c + d;
-}*/
-
-int Polygon::calcInsertion(const Point& start, const Point& end) {
-		float d2 = distance2(start, end);
-		if(d2 > MAX_DISTANCE2) {
-			return static_cast<int>(
-					ceilf(sqrtf(d2) / VERTEX_DISTANCE));
-		} else if (d2 < MIN_DISTANCE2) {
-			return -1;
-		}
-		return 0;
+	return 0;
 }
 
-void Polygon::displace(const std::vector<Displacement>& displacements)
+void Polygon::displace(const std::vector<Displacement>& displacements, size_t canvas_size)
 {
 	assert(vertices.size() > 2);
+	const float px_size = 2.f / static_cast<float>(canvas_size);
+	float min_dis2 = px_size * MIN_DISTANCE; min_dis2 *= min_dis2;
+	float max_dis2 = px_size * MIN_DISTANCE; max_dis2 *= max_dis2;
     isCircle = false;
 	vertices[0].last = vertices[0].pos;
 	displacePoint(vertices[0].pos, displacements);
 	int size_diff = 0;
 	size_t lastId = 0;
+	vertices[0].insertion = 0;
 	for(std::size_t i = 1; i < vertices.size(); ++i) {
 		Point& p = vertices[i].pos;
 		vertices[i].last = p;
 
 		displacePoint(p, displacements);
-		vertices[i].insertion = calcInsertion(vertices[lastId].pos, p);
+		vertices[i].insertion = calcInsertion(vertices[lastId].pos, p, min_dis2, max_dis2);
 
 		if (vertices[i].insertion >= 0) {lastId = i; }
 		size_diff += vertices[i].insertion;
 	}
-	vertices[0].insertion
-		= calcInsertion(vertices.back().pos, vertices[0].pos);
-	size_diff += vertices[0].insertion;
+
+	int insertion
+		= calcInsertion(vertices.back().pos, vertices[0].pos, min_dis2, max_dis2);
 
 	// remove collapsed vertices
 	int del = 0;
@@ -132,7 +109,7 @@ void Polygon::displace(const std::vector<Displacement>& displacements)
 	vertices.resize(vertices.size() + size_diff);
 	auto dst = vertices.rbegin();
 	auto src = vertices.rbegin() + del + size_diff;
-	int insertion = 0;
+	insertion = 0;
 	float fraction = 0.f;
 	Point last{};
 	Point next{};

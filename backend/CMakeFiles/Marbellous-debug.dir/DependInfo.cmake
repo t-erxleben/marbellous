@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/runner/work/marbellous/marbellous/backend/src/Color.cpp" "CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o" "gcc" "CMakeFiles/Marbellous-debug.dir/src/Color.cpp.o.d"
   "/home/runner/work/marbellous/marbellous/backend/src/Options.cpp" "CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o" "gcc" "CMakeFiles/Marbellous-debug.dir/src/Options.cpp.o.d"
   "/home/runner/work/marbellous/marbellous/backend/src/Palette.cpp" "CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o" "gcc" "CMakeFiles/Marbellous-debug.dir/src/Palette.cpp.o.d"
   "/home/runner/work/marbellous/marbellous/backend/src/Polygon.cpp" "CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o" "gcc" "CMakeFiles/Marbellous-debug.dir/src/Polygon.cpp.o.d"

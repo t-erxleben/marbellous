@@ -18,7 +18,7 @@ h1 {
 	color: var(--accent-color-2);
 	max-height: 9vh;
 	margin: 0;
-	padding: calc(0.5 * (9vh - 1em));
+	padding: calc(0.5 * (9vh - 1.1em));
 }
 
 .page {
@@ -41,7 +41,7 @@ p.notice {
 	text-align: center;
 	width: 100%;
 	margin: 0;
-	padding: calc(5vh - 2em) 0 0 0;
+	padding: calc(0.5*(5vh - 1.5em));
 	max-height: 5vh;
 }
 
