@@ -12,9 +12,8 @@
 class Polygon
 {
 private:
-	static constexpr float VERTEX_DISTANCE = 0.01f; ///< largest distance between vertices -> insertion when distance ist greater
-	static constexpr float MAX_DISTANCE2 = VERTEX_DISTANCE * VERTEX_DISTANCE; // squared for easier useage
-	static constexpr float MIN_DISTANCE2 = MAX_DISTANCE2 * 0.5f; ///< minimal distance -> collapsion when distance is smaller
+	static constexpr float MIN_DISTANCE = 0.9f; ///< minimal distance between vertices in pixel
+	static constexpr float MAX_DISTANCE = 2.f; ///< maximal distance between vertices in pixel
 	struct Data {
 		Point pos;
 		int insertion; ///< >0 -> insert after this vertex x, <0 remove this
@@ -54,9 +53,11 @@ private:
     static size_t circleVertCount(float radius);
     
 	/** calculate how many points should be inserted between two
-	 * adjanticive points
+	 * adjunctive points
+	 * @param p0,p1 points to calc insertion between
+	 * @param min_dis2,max_dis2 square of minimal/maximal distance between vertices
 	 */
-	static int calcInsertion(const Point& start, const Point& end);
+	static int calcInsertion(const Point& p0, const Point& p1, float min_dis2, float max_dis2);
 
 public:
 
@@ -94,8 +95,9 @@ public:
 
     /** Displace a polygon as a result of a new circle appearing.
 	 * @param displacements vector of circles with radius and diameter which causes displacement
+	 * @param canvasSize size of canvas in pixel to calculate vertex insertion for smooth edges.
     */
-    void displace(const std::vector<Displacement>& displacements);
+    void displace(const std::vector<Displacement>& displacements, size_t canvasSize);
 
     /** Redraw Polygon as a new circle.
      * This is intended to be used for making the circle larger.

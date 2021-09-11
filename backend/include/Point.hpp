@@ -54,6 +54,10 @@ public:
 		return Point(x + rh.x, y + rh.y);
 	}
 
+	Point operator/(float f) const {
+		return Point(x / f, y / f);
+	}
+
 	float operator*(const Point& rh) const {
 		return x*rh.x + y*rh.y;
 	}

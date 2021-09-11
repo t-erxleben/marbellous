@@ -54,7 +54,7 @@ void sprinkle(int amt, C& coord, R& radius)
 		float r = radius(rng);
 		GLuint col = static_cast<GLuint>(Options::getInstance()->getActivePalette()->getRandomColorId());
 
-		scene->applyDisplacement();
+		scene->applyDisplacement(dropRes);
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
 		scene->addDisplacement({p.x,p.y}, r);
 
@@ -68,7 +68,7 @@ void sprinkle(int amt, C& coord, R& radius)
         int handle = scene->addPolygon(Polygon{p, Polygon::MIN_R,
 				col});
 	}
-	scene->applyDisplacement();
+	scene->applyDisplacement(dropRes);
 	sceneRenderer->drawScene(*scene);
 }
 
@@ -87,6 +87,8 @@ extern "C"
 {
     void EMSCRIPTEN_KEEPALIVE initBackend(const char canvasID[], size_t dropRes, size_t rakeRes)
     {
+		assert(dropRes == rakeRes);
+
         _initWGLContext(canvasID, dropRes);
 
 		WGLContext::getContext()->updateBGColor();
@@ -146,7 +148,7 @@ extern "C"
 
         auto dropRes = WGLContext::getContext()->getDropRes();
 
-		scene->applyDisplacement();
+		scene->applyDisplacement(dropRes);
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
 		scene->addDisplacement({x,y}, r);
 
@@ -168,8 +170,7 @@ extern "C"
 		checkState(true, );
 
 		auto dropRes = WGLContext::getContext()->getDropRes();
-
-		scene->applyDisplacement();
+		scene->applyDisplacement(dropRes);
 		sceneRenderer->drawScene(*scene);
 
 		uint8_t c[4];
@@ -231,7 +232,7 @@ extern "C"
 		checkSetup(-1);
         checkState(true, -1);
 
-		scene->applyDisplacement();
+		scene->applyDisplacement(WGLContext::getContext()->getDropRes());
 		sceneRenderer->drawScene(*scene);
 		return 0;
 	}

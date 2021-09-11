@@ -29,15 +29,15 @@ class Options
         // handling Palettes
         size_t addPalette(Palette const & newPalette);
         Palette* getActivePalette();
+        const Palette* getActivePalette() const;
         int setActivePalette(size_t id);
 
         void setState(bool dropState);
-        bool getState();
+        bool getState() const;
 
-        // handling BG color
         void setBGColor(Color const & col);
-        Color* getBGColor();
+        const Color* getBGColor() const;
 
         void setFilter(bool filter);
-        bool getFilter();
+        bool getFilter() const;
 };

@@ -108,11 +108,12 @@ public:
 		return polygons.rend();
 	}
 
-	void applyDisplacement() { ///< stores current state, advance generation
+	void applyDisplacement(size_t _canvasSize) { ///< stores current state, advance generation
+		std::cout << "can size: " << _canvasSize << std::endl;
 		if(displacements.empty()) { return; }
 
 		for(auto& p : *this) {
-			p.displace(displacements);
+			p.displace(displacements, _canvasSize);
 		}
 
 		// remove polygons with less then 3 vertices
