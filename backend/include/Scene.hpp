@@ -109,7 +109,6 @@ public:
 	}
 
 	void applyDisplacement(size_t _canvasSize) { ///< stores current state, advance generation
-		std::cout << "can size: " << _canvasSize << std::endl;
 		if(displacements.empty()) { return; }
 
 		for(auto& p : *this) {

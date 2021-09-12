@@ -25,7 +25,7 @@ set(CMAKE_AR "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/u
 set(CMAKE_CXX_COMPILER_AR "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/emar")
 set(CMAKE_RANLIB "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/emranlib")
 set(CMAKE_CXX_COMPILER_RANLIB "/home/runner/work/marbellous/marbellous/emsdk-cache/emsdk-master/upstream/emscripten/emranlib")
-set(CMAKE_LINKER "CMAKE_LINKER-NOTFOUND")
+set(CMAKE_LINKER "/usr/bin/ld")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCXX )
 set(CMAKE_CXX_COMPILER_LOADED 1)
