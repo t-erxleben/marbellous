@@ -10,72 +10,111 @@
 #include "Scene.hpp"
 #include "Options.hpp"
 
+/**
+ * \brief Check wether the backend is initialized or not.
+ * 
+ * \param RET return value of the function in case that the backend is not initialized.
+ **/
 #define checkSetup(RET) if (!setupDone) \
         { \
             fprintf(stderr, "%s: %s", __func__, ": Backend is not initialized yet!\n"); \
             return RET; \
         } \
 
+/**
+ * \brief Check wether the backend is currently in the state given by \p STATE
+ * 
+ * \param STATE State to compare with. True for drop state, false for rake state
+ * \param RET Return value of the function in case of unmatched state.
+ * 
+ **/
 #define checkState(STATE, RET) if(Options::getInstance()->getState() != STATE) \
         { \
             fprintf(stderr, "Drop function called in rake state or rake function called in drop state!\n"); \
             return RET; \
         } \
 
+///< Stores wether backend is initialized or not
 bool setupDone = false;
+
+///< global WGLSceneRenderer
 WGLSceneRenderer *sceneRenderer;
-WGLRakeRenderer *rakeRenderer;
+
+///< global scene
 Scene *scene;
 
+///< global WGLRakeRenderer
+WGLRakeRenderer *rakeRenderer;
 
+/**
+ * \brief Used to initialize the WGL context.
+ * 
+ * Friend function of WGLContext
+ * 
+ * \param canvasID CSS identifier of the HTML5 canvas to use.
+ * \param x Resolution of the canvas will be set to x times x.
+ **/
 void _initWGLContext(const char *canvasID, size_t x)
 {
     WGLContext::instance = new WGLContext(canvasID, x);
 }
 
-extern "C" {
+extern "C" 
+{
+    // used in sprinkle
 	int EMSCRIPTEN_KEEPALIVE addDrop(float,float,float,unsigned);
-	int EMSCRIPTEN_KEEPALIVE finishDrop(int); }
+	int EMSCRIPTEN_KEEPALIVE finishDrop(int); 
+}
 
+/**
+ * \brief Generate drops of random size and position.
+ * 
+ * \tparam C A function type for transforming random numbers to drop coordinates.
+ * \tparam R A function type for transforming random numbers to drop sizes.
+ * \param amt Number of drops to generate
+ * \param coord A function of type C.
+ * \param radius A function of type R.
+ **/
 template<typename C, typename R>
 void sprinkle(int amt, C& coord, R& radius)
 {
-	checkSetup();
-	checkState(true,);
+    checkSetup();
+    checkState(true,);
 
-	static std::mt19937 rng(std::random_device{}());
+    static std::mt19937 rng(std::random_device{}());
 
-	auto dropRes = WGLContext::getContext()->getDropRes();
+    auto dropRes = WGLContext::getContext()->getDropRes();
 
-	sceneRenderer->drawScene(*scene);
+    sceneRenderer->drawScene(*scene);
 
-	for(int i = 0; i < amt; ++i) {
-		Point p = coord(rng);
-		float r = radius(rng);
-		GLuint col = static_cast<GLuint>(Options::getInstance()->getActivePalette()->getRandomColorId());
+    for(int i = 0; i < amt; ++i) {
+        Point p = coord(rng);
+        float r = radius(rng);
+        GLuint col = static_cast<GLuint>(Options::getInstance()->getActivePalette()->getRandomColorId());
 
 		scene->applyDisplacement(dropRes);
         r = r>=Polygon::MIN_R ? r : Polygon::MIN_R;
-		scene->addDisplacement({p.x,p.y}, r);
+        scene->addDisplacement({p.x,p.y}, r);
 
-		uint8_t c[4];
-		glReadPixels((p.x+1.f)*dropRes/2, (p.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
-		const auto& [cr,cg,cb] = (*Options::getInstance()->getActivePalette())[col].getRGB();
-		if(cr == c[0] && cg == c[1] && cb == c[2]) {
-			continue;
-		}
+        uint8_t c[4];
+        glReadPixels((p.x+1.f)*dropRes/2, (p.y+1.f)*dropRes/2, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, c);
+        const auto& [cr,cg,cb] = (*Options::getInstance()->getActivePalette())[col].getRGB();
+        if(cr == c[0] && cg == c[1] && cb == c[2]) {
+            continue;
+        }
 
         int handle = scene->addPolygon(Polygon{p, Polygon::MIN_R,
-				col});
-	}
-	scene->applyDisplacement(dropRes);
-	sceneRenderer->drawScene(*scene);
+                col});
+    }
+    scene->applyDisplacement(dropRes);
+    sceneRenderer->drawScene(*scene);
 }
 
 /*------------------------------------------
 Interface to front end:
 --------------------------------------------*/
 
+///< All relevant data for a single drop grouped as a struct.
 struct DropData {
 	float x;
 	float y;
@@ -85,6 +124,15 @@ struct DropData {
 
 extern "C"
 {
+    /**
+     * \brief Init function. Should be called first.
+     * 
+     * \param canvasID CSS identifier of HTML5 canvas in the frontend.
+     * \param dropRes Resolution of the canvas for drop mode.
+     * \param rakeRes Resolution of the canvas for rake mode.
+     * 
+     * \attention Currently \p dropRes and \p rakeRes need to be the same.
+     **/
     void EMSCRIPTEN_KEEPALIVE initBackend(const char canvasID[], size_t dropRes, size_t rakeRes)
     {
 		assert(dropRes == rakeRes);
@@ -100,16 +148,35 @@ extern "C"
         setupDone = true;
     }
 
+    /**
+     * \brief Add a new palette.
+     * 
+     * \param num_colors Number of colors to pre allocate.
+     * \return int ID of this palette. May be used to set it active later.
+     **/
     int EMSCRIPTEN_KEEPALIVE addPalette(size_t num_colors)
     {
         return Options::getInstance()->addPalette(Palette{num_colors});
     }
 
+    /**
+     * \brief Set an active palette.
+     * 
+     * \param id ID of the palette to set active. Return value of addPalette()
+     * \return int Negative in case of failure.
+     **/
     int EMSCRIPTEN_KEEPALIVE setActivePalette(int const id)
     {
         return Options::getInstance()->setActivePalette(id);
     }
 
+    /**
+     * \brief Set the number at position \p colorNumber of the active palette.
+     * 
+     * \param colorNumber Number of color to set.
+     * \param color Color als HEX code.
+     * \return int Negative in case of failure.
+     **/
     int EMSCRIPTEN_KEEPALIVE setColorAt(size_t const colorNumber, unsigned int const color)
     {
         Palette* p = Options::getInstance()->getActivePalette();
@@ -119,6 +186,13 @@ extern "C"
         return 0;        
     }
 
+    /**
+     * \brief Set the the ratio of a color in the active palette.
+     * 
+     * \param colorNumber Number of the color to modify.
+     * \param ratio New ratio for sprinkler drops.
+     * \return int Negative in case of failure.
+     **/
 	int EMSCRIPTEN_KEEPALIVE setColorRatioAt(size_t const colorNumber, unsigned const ratio)
 	{
 		Palette& p = *Options::getInstance()->getActivePalette();
@@ -127,7 +201,11 @@ extern "C"
 		return 0;
 	}
 
-
+    /**
+     * \brief Set the background color.
+     * 
+     * \param color Color in HEX Code 
+     **/
     void EMSCRIPTEN_KEEPALIVE setBGColor(unsigned int const color)
     {
         checkSetup();
@@ -136,11 +214,28 @@ extern "C"
 		context->updateBGColor();
     }
 
+    /**
+     * \brief Set the filter option.
+     * 
+     * \param filter True for post processing filter, false otherwise.
+     **/
     void EMSCRIPTEN_KEEPALIVE setFilter(bool filter)
     {
         Options::getInstance()->setFilter(filter);
     }
 
+    /**
+     * \brief Add a new color drop.
+     * 
+     * Intended workflow for animation is to add a drop, keep its ID and resize it step wise.
+     * After the animation is done and the drop will not further grow call finishDrops().
+     * 
+     * \param x x coordinate for the drop.
+     * \param y y coordinate for the drop.
+     * \param r Radius of the drop.
+     * \param color Color of th drop. This is a position inside a palette. Changing the active palette will result in a different color later on.
+     * \return int Negative value in case of failure.
+     **/
     int EMSCRIPTEN_KEEPALIVE addDrop(float const x, float const y, float r, unsigned int const color) ///< draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color
     {
         checkSetup(-1);
@@ -164,6 +259,14 @@ extern "C"
         return handle;
     }
 
+    /**
+     * \brief Add multiple drops at once.
+     * 
+     * \param count Number of drops.
+     * \param drops Drop data.
+     * 
+     * \attention This is an unstable and experimental feature as it's hard to do with our model.
+     **/
 	void EMSCRIPTEN_KEEPALIVE addDrops(int count, DropData drops[])
 	{
 		checkSetup();
@@ -187,6 +290,12 @@ extern "C"
 		}
 	}
 
+    /**
+     * \brief Redraw the current data model based on the backend state.
+     * 
+     * Useful for color updates for example.
+     * 
+     **/
 	void EMSCRIPTEN_KEEPALIVE redraw()
 	{
 		checkSetup();
@@ -202,6 +311,14 @@ extern "C"
         }
 	}
 
+    /**
+     * \brief Resize the canvas.
+     * 
+     * \param dropSize New resolution for drop state.
+     * \param rakeSize New resolution for rake state.
+     * 
+     * \attention Currently both need to be the same.
+     **/
     void EMSCRIPTEN_KEEPALIVE resize(size_t dropSize, size_t rakeSize)
     {
         /// \todo for now both need to be the same
@@ -226,7 +343,11 @@ extern "C"
         return 0;
     }
 
-	/// finalize all current growing drops
+	/**
+	 * \brief Finish all drops applying their displacement on all old drops.
+	 * 
+	 * \return int Negative value in case of failure.
+	 **/
 	int EMSCRIPTEN_KEEPALIVE finishDrops()
 	{
 		checkSetup(-1);
@@ -237,6 +358,11 @@ extern "C"
 		return 0;
 	}
 
+    /**
+     * \brief Return the current canvas content as image.
+     * 
+     * \return char* Image as raw pixel buffer.
+     **/
     char *EMSCRIPTEN_KEEPALIVE getImage()
     {
         checkSetup(NULL);
@@ -281,12 +407,13 @@ extern "C"
         return data.data();
     }
 
-	/// creates sprinkle in around cursor
 	/**
-	 * \param amt number of drops to create
+     * \brief Create drops around the cursor postion.
+     * 
+	 * \param amt Number of drops to create.
 	 * \param r_min,r_max drop size range
 	 * \param x,y cursor position
-	 * \param sig sigma for normal distribution for drop position
+	 * \param sig Sigma of normal distribution for drop position
 	 */
 	void EMSCRIPTEN_KEEPALIVE sprinkleLocal(int amt, float r_min, float r_max,
 			float x, float y, float sig)
@@ -302,6 +429,13 @@ extern "C"
 		sprinkle(amt, coord, radius);
 	}
 
+    /**
+     * \brief Create drops at random positions on the canvas
+     * 
+     * \param amt Number of drops to create.
+     * \param r_min Minimum size.
+     * \param r_max Maximum size.
+     **/
 	void EMSCRIPTEN_KEEPALIVE sprinkleGlobal(int amt, float r_min, float r_max) {
 		checkSetup();
 		checkState(true,);
@@ -316,7 +450,12 @@ extern "C"
 		sprinkle(amt, coord, radius);
 	}
 
-	void EMSCRIPTEN_KEEPALIVE clearCanvas() { ///< clear the canvas (delete all polygones and redraw scene)
+    /**
+     * \brief Clear canvas content and data model.
+     * 
+     * This can not be undone!
+     **/
+	void EMSCRIPTEN_KEEPALIVE clearCanvas() {
 		checkSetup();
         
 		scene->clear();
@@ -364,7 +503,12 @@ extern "C"
         rakeRenderer->draw();
 	}
 
-
+    /**
+     * \brief Set rake state.
+     * 
+     * This results in the scene being rendered to a hidden buffer which is given to the WGLRakeRenderer
+     * 
+     **/
 	void EMSCRIPTEN_KEEPALIVE startRaking() {
         checkState(true,);
         Options::getInstance()->setState(false);
@@ -372,12 +516,25 @@ extern "C"
         rakeRenderer->draw();
 	}
 
+    /**
+     * \brief Set drop state.
+     * 
+     * All rakes will be lost.
+     * 
+     **/
     void EMSCRIPTEN_KEEPALIVE startDropping() {
         checkState(false,);
         Options::getInstance()->setState(true);
         sceneRenderer->drawScene(*scene);
 	}
 
+    /**
+     * \brief Undo the last rake.
+     * 
+     * Reverting only the last step is very cheap by swapping buffer pointers.
+     * Calling it again will swap back (e.g. undo the undo).
+     * 
+     **/
     void EMSCRIPTEN_KEEPALIVE undoLastRake() {
         checkSetup();
         checkState(false,);
@@ -389,7 +546,7 @@ extern "C"
 /*------------------------------------------
 Init stuff:
 --------------------------------------------*/
-
+    ///< Currently does nothing. Initialization is the frontend's job.
     int EMSCRIPTEN_KEEPALIVE main()
     {
         // keep WASM module alive
