@@ -2,8 +2,12 @@
 /home/runner/work/marbellous/marbellous/backend/page/Marbellous.wasm
 /home/runner/work/marbellous/marbellous/backend/page//fav-raw.png
 /home/runner/work/marbellous/marbellous/backend/page//stylesheet.css
+/home/runner/work/marbellous/marbellous/backend/page//imgs/tutorial-thumbnail.jpg
 /home/runner/work/marbellous/marbellous/backend/page//imgs/rake.svg
 /home/runner/work/marbellous/marbellous/backend/page//mstile-144x144.png
+/home/runner/work/marbellous/marbellous/backend/page//vids/tutorial-8.webm
+/home/runner/work/marbellous/marbellous/backend/page//vids/tutorial.webm
+/home/runner/work/marbellous/marbellous/backend/page//vids/tutorial.mp4
 /home/runner/work/marbellous/marbellous/backend/page//icons/undo-solid.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/empty.svg
 /home/runner/work/marbellous/marbellous/backend/page//icons/wave.svg
