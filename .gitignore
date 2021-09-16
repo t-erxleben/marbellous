@@ -33,3 +33,7 @@
 
 # IDE
 **/.vscode/**
+
+**/html/**
+
+!**/html/Pictures/**
