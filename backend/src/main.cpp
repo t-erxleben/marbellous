@@ -34,17 +34,13 @@
             return RET; \
         } \
 
-///< Stores wether backend is initialized or not
-bool setupDone = false;
+bool setupDone = false; ///< Stores wether backend is initialized or not
 
-///< global WGLSceneRenderer
-WGLSceneRenderer *sceneRenderer;
+WGLSceneRenderer *sceneRenderer; ///< global WGLSceneRenderer
 
-///< global scene
-Scene *scene;
+Scene *scene; ///< global scene
 
-///< global WGLRakeRenderer
-WGLRakeRenderer *rakeRenderer;
+WGLRakeRenderer *rakeRenderer; ///< global WGLRakeRenderer
 
 /**
  * \brief Used to initialize the WGL context.
