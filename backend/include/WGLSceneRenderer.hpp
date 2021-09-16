@@ -11,12 +11,12 @@
 /**
  * \brief Render scenes to buffers.
  * 
- *	When you have a list of vertices where neighbors in the list are adjunct vertices of a polygon,
- *	then the triangle fan of that list covers areas inside the polygon with an odd amount of triangles
- *	and areas outside of the polygon with an even amount or none.
+ *  When you have a list of vertices where neighbors in the list are adjunct vertices of a polygon,
+ *  then the triangle fan of that list covers areas inside the polygon with an odd amount of triangles
+ *  and areas outside of the polygon with an even amount or none.
  * 
- * 	Because we draw multiple polygons on top of each other and we don't want to draw each polygon
- * 	separately we need to extend this scheme.
+ *  Because we draw multiple polygons on top of each other and we don't want to draw each polygon
+ *  separately we need to extend this scheme.
  *
  *  We need to figure out which is the first visible polygon for an fragment.
  *  For that we initialize each fragment with an stencil value of 0b10
