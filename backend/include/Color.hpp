@@ -4,7 +4,6 @@
 #include <cstdint>
 
 /**
- * @addtogroup util
  * 
  * A class representing a RGB color with a ratio. 
  * The ratio influences the drop rate of drops with this color when using the sprinkler.

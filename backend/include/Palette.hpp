@@ -7,7 +7,7 @@
 
 /**
  * \brief Contains a vector of colors.
- * \addtogroup util
+ * 
  */
 class Palette
 {

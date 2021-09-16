@@ -8,7 +8,7 @@ constexpr size_t PRIMITIVE_RESTART = 4294967295;
 
 /**
  * \brief Contains a point in 2D (GLfloat).
- * \addtogroup util
+ * 
  */
 class __attribute__((packed)) Point
 {
