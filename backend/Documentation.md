@@ -46,6 +46,7 @@ In Marbellous we use WebGL for the rendering of the color drops and some
 calculations for their interactions.
 
 ### Emscripten
+
 <img src="Pictures/100002010000014A0000005A391F0C68A8488761.png"  height="100"/>
 
 Emscripten is a LLVM/Clang based compiler for turning C/C++ source code
@@ -57,6 +58,7 @@ We decided to use Emscripten to be able to write the backend code in a
 language that is meant to write highly efficient software.
 
 ### CMake
+
 <img src="Pictures/100002010000009000000090B0B2EFA457698CCA.png"  height="100"/>
 
 CMake is a cross-platform software for build automation, testing,
@@ -68,18 +70,21 @@ For Marbellous, we used CMake alongside of Make in the context of
 Emscripten to build our webassembly files.
 
 ### Webpack
+
 <img src="Pictures/100002010000014A000000809F127A67DC81E8E9.png"  height="100"/>
 
 Webpack is a JavaScript module bundler. It is used to combine multiple
 source files into one.
 
 ### NPM
+
 <img src="Pictures/100002010000014A0000008047600BF75023824B.png"  height="80"/>
 
 NPM (node package manager) is a manager for JavaScript libraries, like
 the one we use to export images to png.
 
 ### Git
+
 <img src="Pictures/10000201000000E10000005E3451440A90FE5318.png"  height="80"/>
 
 Git is a revision control system created in 2005 to help with the
@@ -88,6 +93,7 @@ excels in coordinating multiple programmers
 collaboratively working on source code.
 
 ### GitHub/ GitHub Projects/GitHub Actions/GitHub Pages
+
 <img src="Pictures/1000020100000164000000607CF209F4AC769F50.png"  height="50"/>
 
 GitHub is a host for git with several additional features:
@@ -103,6 +109,7 @@ host it on GitHub Pages.
 ---
 
 ## Front- and Backend
+
 <img src="Pictures/10000201000002BD000001737179BC21251A4CE6.png"  width="500"/>
 
 ### Frontend
@@ -118,6 +125,7 @@ and rendering of the scene happen. A detailed explanation to the way we
 render can be found here.
 
 ### Backend class types and their interactions
+
 Before taking a closer look at the backend, let's think about it in a
 broader sense.
 When looking at our classes, you can roughly assign each of them to one
@@ -134,47 +142,47 @@ could have been represented as basic data models, but were so integral
 to and only used by it, so we decided to include them into the renderer
 itself.
 
-
-
 ### Overview over the classes in the backend
-*  Color              - Basic color class with getters and setters.
-*  DropData           - Contains the relevant information of drops (position, radius, color).
-*  Options            - A class for interacting with several states (background color, active palette, drop state).
-*  Palette            - Contains a vector of colors and some functions to randomly pick them.
-*  Polygon            - Represent polygons in 2D as a list of vertices in counter-clockwise order.
-*  Scene              - Contains all exisiting polygons and methods to add and displace them.
-*  WGLContext         - Contains several parameters for WebGL (e.g. resolution for Rake, Drop).
-*  WGLRenderer        - Base class containing everything all renderers need.
-*  WGLRakeRenderer    - Inherits from Renderer and is used to rake.
-*  WGLFilter          - Inherits from Renderer and is used to filter.
-*  WGLSceneRenderer   - Inherits from WGLRenderer and is used to display the scene.
+
+* Color              - Basic color class with getters and setters.
+* DropData           - Contains the relevant information of drops (position, radius, color).
+* Options            - A class for interacting with several states (background color, active palette, drop state).
+* Palette            - Contains a vector of colors and some functions to randomly pick them.
+* Polygon            - Represent polygons in 2D as a list of vertices in counter-clockwise order.
+* Scene              - Contains all exisiting polygons and methods to add and displace them.
+* WGLContext         - Contains several parameters for WebGL (e.g. resolution for Rake, Drop).
+* WGLRenderer        - Base class containing everything all renderers need.
+* WGLRakeRenderer    - Inherits from Renderer and is used to rake.
+* WGLFilter          - Inherits from Renderer and is used to filter.
+* WGLSceneRenderer   - Inherits from WGLRenderer and is used to display the scene.
 
 ### Backend API
 
 The backend API is mostly accessed by using Module.cwrap(), which
 generates a callable JavaScript function that was compiled from C++ to
 WASM via Emscripten. Here is a list of the backend functions called that
-way with short descriptions where the names aren't self-explanatory:
-*  addPalette         
-*  setActivePalette   
-*  setBGColor         
-*  addDrop            
-*  addDrops           
-*  resizeDrops        
-*  setColorAt         - set the color of the palette at the specified position to the specified value
-*  setColorRatioAt    - set the probability ratio of the color at the specified position in the palette to the specified value
-*  redraw             - redraw the scene
-*  startRaking        
-*  startDropping      
-*  rake               
-*  sprinkleGlobal     
-*  sprinklerLocal     
-*  finishDrops        - function that is called after the mouse button is released when dropping color
-*  clearCanvas        
-*  initBackend        
-*  setFilter          
-*  undoLastRake       
-*  resize             - resizes the resolution of the backend
+way. Further documentation is linked to the function names:
+
+* addPalette()
+* setActivePalette()
+* setBGColor()
+* addDrop()
+* addDrops()
+* resizeDrops()
+* setColorAt()
+* setColorRatioAt()
+* redraw()
+* startRaking()
+* startDropping()
+* rake()
+* sprinkleGlobal()
+* sprinkleLocal()
+* finishDrops()
+* clearCanvas()
+* initBackend()
+* setFilter()
+* undoLastRake()
+* resize()
 
 ---
 

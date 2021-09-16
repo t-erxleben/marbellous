@@ -7,7 +7,7 @@
 #include "WGLContext.hpp"
 
 /**
- * Represent polygons in 2D as a list of vertices in counter-clockwise order.
+ * \brief Represent polygons in 2D as a list of vertices in counter-clockwise order.
  */
 class Polygon
 {

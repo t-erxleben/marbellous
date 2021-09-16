@@ -5,7 +5,8 @@
 
 /**
  * 
- * A class representing a RGB color with a ratio. 
+ * \brief A class representing a RGB color with a ratio. 
+ * 
  * The ratio influences the drop rate of drops with this color when using the sprinkler.
  **/
 class Color

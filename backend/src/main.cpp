@@ -114,7 +114,7 @@ void sprinkle(int amt, C& coord, R& radius)
 Interface to front end:
 --------------------------------------------*/
 
-///< All relevant data for a single drop grouped as a struct.
+/// All relevant data for a single drop grouped as a struct.
 struct DropData {
 	float x;
 	float y;
