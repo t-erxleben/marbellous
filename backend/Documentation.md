@@ -4,26 +4,31 @@
 
 ### JavaScript
 
-<img src="Pictures/10000000000002000000020039EDA5960216C6DE.png"  height="100"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/10000000000002000000020039EDA5960216C6DE.png"  height="50px"/>
+</td><td style="width:750px">
 JavaScript is a programming language originally designed to be executed
 client-side in web browsers to extend the capabilities of the World Wide
 Web. The source code of Marbellous is made up of about 40% JavaScript,
 handling the frontend alongside HTML5 and CSS.
+</td></tr></table>
 
 ### C++
 
-<img src="Pictures/10000201000000B4000000CA18287C510212EE2D.png"  height="100"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/10000201000000B4000000CA18287C510212EE2D.png"  height="50px"/>
+</td><td style="width:750px">
 C++ is a programming language created as an extension of the C
 programming language and was designed to allow for efficient,
 high-performance applications. The backend of Marbellous is written in
 C++ and thus it accounts for about 60% of the source code.
+</td></tr></table>
 
 ### WebAssembly
 
-<img src="Pictures/100002010000014A0000014A51392247F561327C.png"  height="100"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/100002010000014A0000014A51392247F561327C.png"  height="50px"/>
+</td><td style="width:750px">
 WebAssembly (shortened WASM) is an open standard which defines portable
 binary code, a corresponding assembly language as well as interfaces for
 them. The main goal of WebAssembly is to allow high performance in
@@ -32,11 +37,13 @@ websites.\n
 Because the performance of the calculations is paramount for the
 interactivity of the marbling, we decided to use WebAssembly for the
 backend.
+</td></tr></table>
 
 ### OpenGL/WebGL 
 
-<img src="Pictures/10000201000001C2000000BCCC3536B3CA7993D7.png"  height="100"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/10000201000001C2000000BCCC3536B3CA7993D7.png"  height="50px"/>
+</td><td style="width:750px">
 OpenGL is a cross-language, cross-platform, abstract API for rendering,
 typically hardware-accelerated. One of the most important language
 bindings of this API is the Javascript Binding WebGL, which allows
@@ -44,11 +51,13 @@ rendering in web browsers.\n
 
 In Marbellous we use WebGL for the rendering of the color drops and some
 calculations for their interactions.
+</td></tr></table>
 
 ### Emscripten
 
-<img src="Pictures/100002010000014A0000005A391F0C68A8488761.png"  height="100"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/100002010000014A0000005A391F0C68A8488761.png"  height="50px"/>
+</td><td style="width:750px">
 Emscripten is a LLVM/Clang based compiler for turning C/C++ source code
 into WASM. It
 is also used in Game Engines like Unreal Engine, Godot and Unity to
@@ -56,11 +65,13 @@ export games to the browser.
 
 We decided to use Emscripten to be able to write the backend code in a
 language that is meant to write highly efficient software.
+</td></tr></table>
 
 ### CMake
 
-<img src="Pictures/100002010000009000000090B0B2EFA457698CCA.png"  height="100"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/100002010000009000000090B0B2EFA457698CCA.png"  height="50px"/>
+</td><td style="width:750px">
 CMake is a cross-platform software for build automation, testing,
 packaging and installation of software with compiler independent
 methods. It is not a build system, but it generates files that can be
@@ -68,34 +79,43 @@ used with build systems. \n
 
 For Marbellous, we used CMake alongside of Make in the context of
 Emscripten to build our webassembly files.
+</td></tr></table>
 
 ### Webpack
 
-<img src="Pictures/100002010000014A000000809F127A67DC81E8E9.png"  height="100"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/100002010000014A000000809F127A67DC81E8E9.png"  height="50px"/>
+</td><td style="width:750px">
 Webpack is a JavaScript module bundler. It is used to combine multiple
 source files into one.
+</td></tr></table>
 
 ### NPM
 
-<img src="Pictures/100002010000014A0000008047600BF75023824B.png"  height="80"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/100002010000014A0000008047600BF75023824B.png"  height="50px"/>
+</td><td style="width:750px">
 NPM (node package manager) is a manager for JavaScript libraries, like
 the one we use to export images to png.
+</td></tr></table>
 
 ### Git
 
-<img src="Pictures/10000201000000E10000005E3451440A90FE5318.png"  height="80"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/10000201000000E10000005E3451440A90FE5318.png"  height="50px"/>
+</td><td>
+<td style="width:750px">
 Git is a revision control system created in 2005 to help with the
 development of the linux kernel. It
 excels in coordinating multiple programmers
 collaboratively working on source code.
+</td></tr></table>
 
 ### GitHub/ GitHub Projects/GitHub Actions/GitHub Pages
 
-<img src="Pictures/1000020100000164000000607CF209F4AC769F50.png"  height="50"/>
-
+<table style="border:none;border-spacing:1em"><tr><td style="width:184px">
+<img src="Pictures/GitHub-Mark.png"  height="50px"/>
+</td><td style="width:750px">
 GitHub is a host for git with several additional features:
 GitHub Projects provides a Kanban board for coordination of
 collaborative work.
@@ -105,12 +125,13 @@ GitHub Actions is a CI/CD system that allows automatic actions to be
 taken after user-defined triggers were activated. We used GitHub Actions
 to always compile the latest version of Marbellous and automatically
 host it on GitHub Pages.
+</td></tr></table>
 
----
+<div height="5cm">
 
 ## Front- and Backend
 
-<img src="Pictures/10000201000002BD000001737179BC21251A4CE6.png"  width="500"/>
+<img src="Pictures/10000201000002BD000001737179BC21251A4CE6.png"  width="500px"/>
 
 ### Frontend
 
