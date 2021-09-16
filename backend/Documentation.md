@@ -127,9 +127,9 @@ to always compile the latest version of Marbellous and automatically
 host it on GitHub Pages.
 </td></tr></table>
 
-<div height="5cm">
-
 ## Front- and Backend
+
+<div style="max-width:980px">
 
 <img src="Pictures/10000201000002BD000001737179BC21251A4CE6.png"  width="500px"/>
 
@@ -296,3 +296,5 @@ Due to the way different operating systems and browsers handle graphics
 differently internally however, this process can work in unintended ways
 on some systems. For the users affected, we provide the option to
 disable the postprocessing.
+
+</div>
