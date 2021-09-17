@@ -1,8 +1,7 @@
 # Marbellous
 
-Marbellous will be a WebApp to generate [paper marbling](https://en.wikipedia.org/wiki/Paper_marbling) patterns.
+Marbellous is a WebApp to generate [paper marbling](https://en.wikipedia.org/wiki/Paper_marbling) patterns.
 We aim for the best possible performance by using WebASM and WebGL.
-The project is still in an early state so most of the functionality is still missing.
 
 ## How to use
 
