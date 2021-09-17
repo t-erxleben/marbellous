@@ -5,7 +5,7 @@
 ### JavaScript
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/10000000000002000000020039EDA5960216C6DE.png"  height="50px"/>
+<img src="../Pictures/10000000000002000000020039EDA5960216C6DE.png"  height="50px"/>
 </td><td style="width:750px">
 JavaScript is a programming language originally designed to be executed
 client-side in web browsers to extend the capabilities of the World Wide
@@ -16,7 +16,7 @@ handling the frontend alongside HTML5 and CSS.
 ### C++
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/10000201000000B4000000CA18287C510212EE2D.png"  height="50px"/>
+<img src="../Pictures/10000201000000B4000000CA18287C510212EE2D.png"  height="50px"/>
 </td><td style="width:750px">
 C++ is a programming language created as an extension of the C
 programming language and was designed to allow for efficient,
@@ -27,7 +27,7 @@ C++ and thus it accounts for about 60% of the source code.
 ### WebAssembly
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/100002010000014A0000014A51392247F561327C.png"  height="50px"/>
+<img src="../Pictures/100002010000014A0000014A51392247F561327C.png"  height="50px"/>
 </td><td style="width:750px">
 WebAssembly (shortened WASM) is an open standard which defines portable
 binary code, a corresponding assembly language as well as interfaces for
@@ -42,7 +42,7 @@ backend.
 ### OpenGL/WebGL 
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/10000201000001C2000000BCCC3536B3CA7993D7.png"  height="50px"/>
+<img src="../Pictures/10000201000001C2000000BCCC3536B3CA7993D7.png"  height="50px"/>
 </td><td style="width:750px">
 OpenGL is a cross-language, cross-platform, abstract API for rendering,
 typically hardware-accelerated. One of the most important language
@@ -56,7 +56,7 @@ calculations for their interactions.
 ### Emscripten
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/100002010000014A0000005A391F0C68A8488761.png"  height="50px"/>
+<img src="../Pictures/100002010000014A0000005A391F0C68A8488761.png"  height="50px"/>
 </td><td style="width:750px">
 Emscripten is a LLVM/Clang based compiler for turning C/C++ source code
 into WASM. It
@@ -70,7 +70,7 @@ language that is meant to write highly efficient software.
 ### CMake
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/100002010000009000000090B0B2EFA457698CCA.png"  height="50px"/>
+<img src="../Pictures/100002010000009000000090B0B2EFA457698CCA.png"  height="50px"/>
 </td><td style="width:750px">
 CMake is a cross-platform software for build automation, testing,
 packaging and installation of software with compiler independent
@@ -84,7 +84,7 @@ Emscripten to build our webassembly files.
 ### Webpack
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/100002010000014A000000809F127A67DC81E8E9.png"  height="50px"/>
+<img src="../Pictures/100002010000014A000000809F127A67DC81E8E9.png"  height="50px"/>
 </td><td style="width:750px">
 Webpack is a JavaScript module bundler. It is used to combine multiple
 source files into one.
@@ -93,7 +93,7 @@ source files into one.
 ### NPM
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/100002010000014A0000008047600BF75023824B.png"  height="50px"/>
+<img src="../Pictures/100002010000014A0000008047600BF75023824B.png"  height="50px"/>
 </td><td style="width:750px">
 NPM (node package manager) is a manager for JavaScript libraries, like
 the one we use to export images to png.
@@ -102,7 +102,7 @@ the one we use to export images to png.
 ### Git
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/10000201000000E10000005E3451440A90FE5318.png"  height="50px"/>
+<img src="../Pictures/10000201000000E10000005E3451440A90FE5318.png"  height="50px"/>
 </td><td>
 <td style="width:750px">
 Git is a revision control system created in 2005 to help with the
@@ -114,7 +114,7 @@ collaboratively working on source code.
 ### GitHub/ GitHub Projects/GitHub Actions/GitHub Pages
 
 <table style="border:none;border-spacing:1em"><tr><td style="width:184px">
-<img src="Pictures/GitHub-Mark.png"  height="50px"/>
+<img src="../Pictures/GitHub-Mark.png"  height="50px"/>
 </td><td style="width:750px">
 GitHub is a host for git with several additional features:
 GitHub Projects provides a Kanban board for coordination of
@@ -131,7 +131,7 @@ host it on GitHub Pages.
 
 <div style="max-width:980px">
 
-<img src="Pictures/10000201000002BD000001737179BC21251A4CE6.png"  width="500px"/>
+<img src="../Pictures/10000201000002BD000001737179BC21251A4CE6.png"  width="500px"/>
 
 ### Frontend
 
@@ -256,7 +256,7 @@ opposite of the first shift we did. The result looks close to someone
 actually going over the surface in a wavelike manner.
 
 ### Color Dropping In Code
-<img src="Pictures/10000201000007370000045991F78369D3A502BF.png" width="1000"/>
+<img src="../Pictures/10000201000007370000045991F78369D3A502BF.png" width="1000"/>
 
 When the left mouse button is pressed down, first a
 drop is added (backend.drop), then a loop will start that keeps
@@ -271,7 +271,7 @@ to go into the terminating branch that calls backend.finishDrops
 instead of calling itself again.
 
 ### Raking In Code
-<img src="Pictures/1000020100000386000001C40AEDF40938C050E1.png" width="500"/>
+<img src="../Pictures/1000020100000386000001C40AEDF40938C050E1.png" width="500"/>
 
 In rake mode, everytime the mouse button is held down and moved, the
 corresponding information for that rake is saved. Once the button is
