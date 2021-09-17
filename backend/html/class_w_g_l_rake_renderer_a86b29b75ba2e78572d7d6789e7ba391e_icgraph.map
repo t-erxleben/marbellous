@@ -1,11 +1,11 @@
 <map id="WGLRakeRenderer::draw" name="WGLRakeRenderer::draw">
-<area shape="rect" id="node1" title=" " alt="" coords="425,107,593,133"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="221,5,316,32"/>
-<area shape="rect" id="node3" href="$class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title=" " alt="" coords="160,56,377,83"/>
+<area shape="rect" id="node1" title="Draw the current raked stated to target_fbo." alt="" coords="425,107,593,133"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title="Clear canvas content and data model." alt="" coords="221,5,316,32"/>
+<area shape="rect" id="node3" href="$class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title="Save the current rake state to a buffer." alt="" coords="160,56,377,83"/>
 <area shape="rect" id="node5" href="$main_8cpp.html#aae45b9471979e61bbf17dd014224e322" title=" " alt="" coords="245,107,292,133"/>
-<area shape="rect" id="node6" href="$main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="238,157,299,184"/>
-<area shape="rect" id="node9" href="$main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="225,208,313,235"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="21,56,97,83"/>
-<area shape="rect" id="node7" href="$main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="31,132,87,159"/>
-<area shape="rect" id="node8" href="$main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title=" " alt="" coords="5,183,112,209"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title="Redraw the current data model based on the backend state." alt="" coords="238,157,299,184"/>
+<area shape="rect" id="node9" href="$main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title="Set rake state." alt="" coords="225,208,313,235"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title="Return the current canvas content as image." alt="" coords="21,56,97,83"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas." alt="" coords="31,132,87,159"/>
+<area shape="rect" id="node8" href="$main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title="Undo the last rake." alt="" coords="5,183,112,209"/>
 </map>

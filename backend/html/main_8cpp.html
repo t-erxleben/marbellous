@@ -127,18 +127,22 @@ Include dependency graph for main.cpp:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_drop_data.html">DropData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">All relevant data for a single drop grouped as a struct.  <a href="struct_drop_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a6ef0aebf1ef430ce1dfba482f50282e4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a6ef0aebf1ef430ce1dfba482f50282e4">checkSetup</a>(RET)</td></tr>
+<tr class="memdesc:a6ef0aebf1ef430ce1dfba482f50282e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check wether the backend is initialized or not.  <a href="main_8cpp.html#a6ef0aebf1ef430ce1dfba482f50282e4">More...</a><br /></td></tr>
 <tr class="separator:a6ef0aebf1ef430ce1dfba482f50282e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a752bdcad992f6834ae17e0eb1f2460d2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a752bdcad992f6834ae17e0eb1f2460d2">checkState</a>(STATE,  RET)</td></tr>
+<tr class="memdesc:a752bdcad992f6834ae17e0eb1f2460d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check wether the backend is currently in the state given by <code>STATE</code>.  <a href="main_8cpp.html#a752bdcad992f6834ae17e0eb1f2460d2">More...</a><br /></td></tr>
 <tr class="separator:a752bdcad992f6834ae17e0eb1f2460d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aae3a2f77d1a59abbea8e55939bb322f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aae3a2f77d1a59abbea8e55939bb322f7">_initWGLContext</a> (const char *canvasID, size_t x)</td></tr>
+<tr class="memdesc:aae3a2f77d1a59abbea8e55939bb322f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to initialize the WGL context.  <a href="main_8cpp.html#aae3a2f77d1a59abbea8e55939bb322f7">More...</a><br /></td></tr>
 <tr class="separator:aae3a2f77d1a59abbea8e55939bb322f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29e7dbcd960b144648754d9a04c04402"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a29e7dbcd960b144648754d9a04c04402">addDrop</a> (float, float, float, unsigned)</td></tr>
 <tr class="separator:a29e7dbcd960b144648754d9a04c04402"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,64 +150,87 @@ Functions</h2></td></tr>
 <tr class="separator:a16e1ff4de15a972bc1b34b50d042cc54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d56c68697f035817a8d576e2552f2c2"><td class="memTemplParams" colspan="2">template&lt;typename C , typename R &gt; </td></tr>
 <tr class="memitem:a7d56c68697f035817a8d576e2552f2c2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2">sprinkle</a> (int amt, C &amp;coord, R &amp;radius)</td></tr>
+<tr class="memdesc:a7d56c68697f035817a8d576e2552f2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate drops of random size and position.  <a href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2">More...</a><br /></td></tr>
 <tr class="separator:a7d56c68697f035817a8d576e2552f2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8710d7ad22d50a8befcf59b7d4eb35b"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b">initBackend</a> (const char canvasID[], size_t dropRes, size_t rakeRes)</td></tr>
+<tr class="memdesc:ad8710d7ad22d50a8befcf59b7d4eb35b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init function. Should be called first.  <a href="main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b">More...</a><br /></td></tr>
 <tr class="separator:ad8710d7ad22d50a8befcf59b7d4eb35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bf79a0535581b7580865f40eca43208"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0bf79a0535581b7580865f40eca43208">addPalette</a> (size_t num_colors)</td></tr>
+<tr class="memdesc:a0bf79a0535581b7580865f40eca43208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new palette.  <a href="main_8cpp.html#a0bf79a0535581b7580865f40eca43208">More...</a><br /></td></tr>
 <tr class="separator:a0bf79a0535581b7580865f40eca43208"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47514aeb6ba7b6d105f9e2342e562917"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a47514aeb6ba7b6d105f9e2342e562917">setActivePalette</a> (int const id)</td></tr>
+<tr class="memdesc:a47514aeb6ba7b6d105f9e2342e562917"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set an active palette.  <a href="main_8cpp.html#a47514aeb6ba7b6d105f9e2342e562917">More...</a><br /></td></tr>
 <tr class="separator:a47514aeb6ba7b6d105f9e2342e562917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a397b3dd5426f82f8ddc246682dbf9abf"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf">setColorAt</a> (size_t const colorNumber, unsigned int const color)</td></tr>
+<tr class="memdesc:a397b3dd5426f82f8ddc246682dbf9abf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the number at position <code>colorNumber</code> of the active palette.  <a href="main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf">More...</a><br /></td></tr>
 <tr class="separator:a397b3dd5426f82f8ddc246682dbf9abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50d77acb1121a4e4ce5446bfcda4cea7"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7">setColorRatioAt</a> (size_t const colorNumber, unsigned const ratio)</td></tr>
+<tr class="memdesc:a50d77acb1121a4e4ce5446bfcda4cea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the the ratio of a color in the active palette.  <a href="main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7">More...</a><br /></td></tr>
 <tr class="separator:a50d77acb1121a4e4ce5446bfcda4cea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3efa7b9bcca549832c95f4eaca43f7a"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad3efa7b9bcca549832c95f4eaca43f7a">setBGColor</a> (unsigned int const color)</td></tr>
+<tr class="memdesc:ad3efa7b9bcca549832c95f4eaca43f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the background color.  <a href="main_8cpp.html#ad3efa7b9bcca549832c95f4eaca43f7a">More...</a><br /></td></tr>
 <tr class="separator:ad3efa7b9bcca549832c95f4eaca43f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9672ebb75d7cb9f47d46dda323e77bb9"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a9672ebb75d7cb9f47d46dda323e77bb9">setFilter</a> (bool filter)</td></tr>
+<tr class="memdesc:a9672ebb75d7cb9f47d46dda323e77bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the filter option.  <a href="main_8cpp.html#a9672ebb75d7cb9f47d46dda323e77bb9">More...</a><br /></td></tr>
 <tr class="separator:a9672ebb75d7cb9f47d46dda323e77bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59f7cfce85003d6b839f1d68fb1919e7"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7">addDrop</a> (float const x, float const y, float r, unsigned int const color)</td></tr>
+<tr class="memdesc:a59f7cfce85003d6b839f1d68fb1919e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new color drop.  <a href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7">More...</a><br /></td></tr>
 <tr class="separator:a59f7cfce85003d6b839f1d68fb1919e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73d7d624b222dd029e5e477ec651595e"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e">addDrops</a> (int count, <a class="el" href="struct_drop_data.html">DropData</a> drops[])</td></tr>
+<tr class="memdesc:a73d7d624b222dd029e5e477ec651595e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add multiple drops at once.  <a href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e">More...</a><br /></td></tr>
 <tr class="separator:a73d7d624b222dd029e5e477ec651595e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93bbd3db8037452b0dfb9587be449586"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586">redraw</a> ()</td></tr>
+<tr class="memdesc:a93bbd3db8037452b0dfb9587be449586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redraw the current data model based on the backend state.  <a href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586">More...</a><br /></td></tr>
 <tr class="separator:a93bbd3db8037452b0dfb9587be449586"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92dd76b954c987b1f807ba2ad72785b1"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1">resize</a> (size_t dropSize, size_t rakeSize)</td></tr>
+<tr class="memdesc:a92dd76b954c987b1f807ba2ad72785b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the canvas.  <a href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1">More...</a><br /></td></tr>
 <tr class="separator:a92dd76b954c987b1f807ba2ad72785b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30e5c8f24f1c31b8b2a17e1279433511"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511">resizeDrops</a> (float const newRadius)</td></tr>
 <tr class="separator:a30e5c8f24f1c31b8b2a17e1279433511"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6abb0efd1714bbece1fe2446072a6a0a"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a">finishDrops</a> ()</td></tr>
-<tr class="memdesc:a6abb0efd1714bbece1fe2446072a6a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">finalize all current growing drops  <a href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a">More...</a><br /></td></tr>
+<tr class="memdesc:a6abb0efd1714bbece1fe2446072a6a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finish all drops applying their displacement on all old drops.  <a href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a">More...</a><br /></td></tr>
 <tr class="separator:a6abb0efd1714bbece1fe2446072a6a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8dcacd97325cade8a2db1d6de4b5ae3"><td class="memItemLeft" align="right" valign="top">char *EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3">getImage</a> ()</td></tr>
+<tr class="memdesc:af8dcacd97325cade8a2db1d6de4b5ae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current canvas content as image.  <a href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3">More...</a><br /></td></tr>
 <tr class="separator:af8dcacd97325cade8a2db1d6de4b5ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4df20e610fee8d6a8bee2388640a08a5"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5">sprinkleLocal</a> (int amt, float r_min, float r_max, float x, float y, float sig)</td></tr>
-<tr class="memdesc:a4df20e610fee8d6a8bee2388640a08a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates sprinkle in around cursor  <a href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5">More...</a><br /></td></tr>
+<tr class="memdesc:a4df20e610fee8d6a8bee2388640a08a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create drops around the cursor postion.  <a href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5">More...</a><br /></td></tr>
 <tr class="separator:a4df20e610fee8d6a8bee2388640a08a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad53ec54d7a98c61fc51cfff7109e4bea"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea">sprinkleGlobal</a> (int amt, float r_min, float r_max)</td></tr>
+<tr class="memdesc:ad53ec54d7a98c61fc51cfff7109e4bea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create drops at random positions on the canvas.  <a href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea">More...</a><br /></td></tr>
 <tr class="separator:ad53ec54d7a98c61fc51cfff7109e4bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89af8d1d1b6f81830962b153a96d23b3"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3">clearCanvas</a> ()</td></tr>
+<tr class="memdesc:a89af8d1d1b6f81830962b153a96d23b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear canvas content and data model.  <a href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3">More...</a><br /></td></tr>
 <tr class="separator:a89af8d1d1b6f81830962b153a96d23b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae45b9471979e61bbf17dd014224e322"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aae45b9471979e61bbf17dd014224e322">rake</a> (float x, float y, float period, float amplitude, float phase, bool nails[1000])</td></tr>
 <tr class="separator:aae45b9471979e61bbf17dd014224e322"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c9f1e96be7b94c399e800a35319dcd8"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8">startRaking</a> ()</td></tr>
+<tr class="memdesc:a6c9f1e96be7b94c399e800a35319dcd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set rake state.  <a href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8">More...</a><br /></td></tr>
 <tr class="separator:a6c9f1e96be7b94c399e800a35319dcd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a799b5f11d1ed618fa2fe44febc509b3a"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a">startDropping</a> ()</td></tr>
+<tr class="memdesc:a799b5f11d1ed618fa2fe44febc509b3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set drop state.  <a href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a">More...</a><br /></td></tr>
 <tr class="separator:a799b5f11d1ed618fa2fe44febc509b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af39818aa33f80df7d767334ae9c8a00c"><td class="memItemLeft" align="right" valign="top">void EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c">undoLastRake</a> ()</td></tr>
+<tr class="memdesc:af39818aa33f80df7d767334ae9c8a00c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Undo the last rake.  <a href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c">More...</a><br /></td></tr>
 <tr class="separator:af39818aa33f80df7d767334ae9c8a00c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0af0ef384682f2be6baa856713051ac8"><td class="memItemLeft" align="right" valign="top">int EMSCRIPTEN_KEEPALIVE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0af0ef384682f2be6baa856713051ac8">main</a> ()</td></tr>
+<tr class="memdesc:a0af0ef384682f2be6baa856713051ac8"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Currently does nothing. Initialization is the frontend's job.  <a href="main_8cpp.html#a0af0ef384682f2be6baa856713051ac8">More...</a><br /></td></tr>
 <tr class="separator:a0af0ef384682f2be6baa856713051ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a063b033095d66a781d7ecd123ca4aa30"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a063b033095d66a781d7ecd123ca4aa30">setupDone</a> = false</td></tr>
+<tr class="memdesc:a063b033095d66a781d7ecd123ca4aa30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores wether backend is initialized or not.  <a href="main_8cpp.html#a063b033095d66a781d7ecd123ca4aa30">More...</a><br /></td></tr>
 <tr class="separator:a063b033095d66a781d7ecd123ca4aa30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68b52c387ad35109de14b377bb9feb3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_w_g_l_scene_renderer.html">WGLSceneRenderer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a68b52c387ad35109de14b377bb9feb3a">sceneRenderer</a></td></tr>
+<tr class="memdesc:a68b52c387ad35109de14b377bb9feb3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">global <a class="el" href="class_w_g_l_scene_renderer.html" title="Render scenes to buffers.">WGLSceneRenderer</a>  <a href="main_8cpp.html#a68b52c387ad35109de14b377bb9feb3a">More...</a><br /></td></tr>
 <tr class="separator:a68b52c387ad35109de14b377bb9feb3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6c706e3b2d0dfa7127a7e06c5fcf483"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_w_g_l_rake_renderer.html">WGLRakeRenderer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#af6c706e3b2d0dfa7127a7e06c5fcf483">rakeRenderer</a></td></tr>
-<tr class="separator:af6c706e3b2d0dfa7127a7e06c5fcf483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6de66f9ad116ce1d596c7f4edc40c521"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_scene.html">Scene</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a6de66f9ad116ce1d596c7f4edc40c521">scene</a></td></tr>
+<tr class="memdesc:a6de66f9ad116ce1d596c7f4edc40c521"><td class="mdescLeft">&#160;</td><td class="mdescRight">global scene  <a href="main_8cpp.html#a6de66f9ad116ce1d596c7f4edc40c521">More...</a><br /></td></tr>
 <tr class="separator:a6de66f9ad116ce1d596c7f4edc40c521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6c706e3b2d0dfa7127a7e06c5fcf483"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_w_g_l_rake_renderer.html">WGLRakeRenderer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#af6c706e3b2d0dfa7127a7e06c5fcf483">rakeRenderer</a></td></tr>
+<tr class="memdesc:af6c706e3b2d0dfa7127a7e06c5fcf483"><td class="mdescLeft">&#160;</td><td class="mdescRight">global <a class="el" href="class_w_g_l_rake_renderer.html" title="Implementation of raking.">WGLRakeRenderer</a>  <a href="main_8cpp.html#af6c706e3b2d0dfa7127a7e06c5fcf483">More...</a><br /></td></tr>
+<tr class="separator:af6c706e3b2d0dfa7127a7e06c5fcf483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a6ef0aebf1ef430ce1dfba482f50282e4"></a>
@@ -226,8 +253,16 @@ Variables</h2></td></tr>
 <div class="line">            fprintf(stderr, <span class="stringliteral">&quot;%s: %s&quot;</span>, __func__, <span class="stringliteral">&quot;: Backend is not initialized yet!\n&quot;</span>); \</div>
 <div class="line">            return RET; \</div>
 <div class="line">        } \</div>
-<div class="ttc" id="amain_8cpp_html_a063b033095d66a781d7ecd123ca4aa30"><div class="ttname"><a href="main_8cpp.html#a063b033095d66a781d7ecd123ca4aa30">setupDone</a></div><div class="ttdeci">bool setupDone</div><div class="ttdef"><b>Definition:</b> main.cpp:25</div></div>
+<div class="ttc" id="amain_8cpp_html_a063b033095d66a781d7ecd123ca4aa30"><div class="ttname"><a href="main_8cpp.html#a063b033095d66a781d7ecd123ca4aa30">setupDone</a></div><div class="ttdeci">bool setupDone</div><div class="ttdoc">Stores wether backend is initialized or not.</div><div class="ttdef"><b>Definition:</b> main.cpp:37</div></div>
 </div><!-- fragment -->
+<p>Check wether the backend is initialized or not. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">RET</td><td>return value of the function in case that the backend is not initialized. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a752bdcad992f6834ae17e0eb1f2460d2"></a>
@@ -262,6 +297,15 @@ Variables</h2></td></tr>
 <div class="line">        } \</div>
 <div class="ttc" id="aclass_options_html_afa26d7ecc68acacdda8e57603bdc94ea"><div class="ttname"><a href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea">Options::getInstance</a></div><div class="ttdeci">static Options *const getInstance()</div><div class="ttdef"><b>Definition:</b> Options.cpp:7</div></div>
 </div><!-- fragment -->
+<p>Check wether the backend is currently in the state given by <code>STATE</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">STATE</td><td>State to compare with. True for drop state, false for rake state </td></tr>
+    <tr><td class="paramname">RET</td><td>Return value of the function in case of unmatched state. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
@@ -290,13 +334,24 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Used to initialize the WGL context. </p>
+<p>&lt; Friend function to use for initialization.</p>
+<p>Friend function of <a class="el" href="class_w_g_l_context.html" title="Singleton representing the visible WebGL Context.">WGLContext</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">canvasID</td><td>CSS identifier of the HTML5 canvas to use. </td></tr>
+    <tr><td class="paramname">x</td><td>Resolution of the canvas will be set to x times x. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_aae3a2f77d1a59abbea8e55939bb322f7_icgraph.png" border="0" usemap="#amain_8cpp_aae3a2f77d1a59abbea8e55939bb322f7_icgraph" alt=""/></div>
 <map name="amain_8cpp_aae3a2f77d1a59abbea8e55939bb322f7_icgraph" id="amain_8cpp_aae3a2f77d1a59abbea8e55939bb322f7_icgraph">
-<area shape="rect" title=" " alt="" coords="144,5,264,32"/>
-<area shape="rect" href="main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b" title=" " alt="" coords="5,5,96,32"/>
+<area shape="rect" title="Used to initialize the WGL context." alt="" coords="144,5,264,32"/>
+<area shape="rect" href="main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b" title="Init function. Should be called first." alt="" coords="5,5,96,32"/>
 </map>
 </div>
 
@@ -339,6 +394,19 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add a new color drop. </p>
+<p>Intended workflow for animation is to add a drop, keep its ID and resize it step wise. After the animation is done and the drop will not further grow call <a class="el" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops.">finishDrops()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x coordinate for the drop. </td></tr>
+    <tr><td class="paramname">y</td><td>y coordinate for the drop. </td></tr>
+    <tr><td class="paramname">r</td><td>Radius of the drop. </td></tr>
+    <tr><td class="paramname">color</td><td><a class="el" href="class_color.html" title="A class representing a RGB color with a ratio.">Color</a> of th drop. This is a position inside a palette. Changing the active palette will result in a different color later on. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Negative value in case of failure. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">color</td><td>draw a circle at point (x,y) (should be normed to [-1,1]^2) with radius r in the given color </td></tr>
@@ -350,24 +418,24 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a59f7cfce85003d6b839f1d68fb1919e7_cgraph.png" border="0" usemap="#amain_8cpp_a59f7cfce85003d6b839f1d68fb1919e7_cgraph" alt=""/></div>
 <map name="amain_8cpp_a59f7cfce85003d6b839f1d68fb1919e7_cgraph" id="amain_8cpp_a59f7cfce85003d6b839f1d68fb1919e7_cgraph">
-<area shape="rect" title=" " alt="" coords="5,380,76,407"/>
+<area shape="rect" title="Add a new color drop." alt="" coords="5,380,76,407"/>
 <area shape="rect" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf" title=" " alt="" coords="147,95,313,121"/>
 <area shape="rect" href="class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="164,145,296,172"/>
-<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="143,196,317,223"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="124,335,336,361"/>
+<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="143,196,317,223"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="124,335,336,361"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="415,461,556,488"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="638,436,802,463"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="635,512,805,539"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="638,436,802,463"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="635,512,805,539"/>
 <area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="145,613,315,640"/>
 <area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="437,5,533,32"/>
 <area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="442,56,529,83"/>
 <area shape="rect" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="410,107,561,133"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="385,157,586,184"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="385,157,586,184"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="415,208,555,235"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="401,259,570,285"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="412,309,559,336"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="401,259,570,285"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="412,309,559,336"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="433,360,537,387"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="384,411,587,437"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="384,411,587,437"/>
 </map>
 </div>
 
@@ -438,30 +506,40 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add multiple drops at once. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Number of drops. </td></tr>
+    <tr><td class="paramname">drops</td><td>Drop data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>Attention</dt><dd>This is an unstable and experimental feature as it's hard to do with our model. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a73d7d624b222dd029e5e477ec651595e_cgraph.png" border="0" usemap="#amain_8cpp_a73d7d624b222dd029e5e477ec651595e_cgraph" alt=""/></div>
 <map name="amain_8cpp_a73d7d624b222dd029e5e477ec651595e_cgraph" id="amain_8cpp_a73d7d624b222dd029e5e477ec651595e_cgraph">
-<area shape="rect" title=" " alt="" coords="5,461,83,488"/>
+<area shape="rect" title="Add multiple drops at once." alt="" coords="5,461,83,488"/>
 <area shape="rect" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf" title=" " alt="" coords="154,95,319,121"/>
 <area shape="rect" href="class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="171,145,303,172"/>
-<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="149,196,324,223"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="131,335,343,361"/>
+<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="149,196,324,223"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="131,335,343,361"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="421,461,563,488"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="645,436,809,463"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="641,512,812,539"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="645,436,809,463"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="641,512,812,539"/>
 <area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="152,613,321,640"/>
-<area shape="rect" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb" title="returns a random color of that pallet based on the ratios" alt="" coords="149,664,325,691"/>
+<area shape="rect" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb" title="Returns a random color of that pallet based on the ratios." alt="" coords="149,664,325,691"/>
 <area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="444,5,540,32"/>
 <area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="449,56,535,83"/>
 <area shape="rect" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="417,107,567,133"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="391,157,593,184"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="391,157,593,184"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="422,208,562,235"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="407,259,577,285"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="419,309,565,336"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="407,259,577,285"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="419,309,565,336"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="440,360,544,387"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="391,411,593,437"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="391,411,593,437"/>
 </map>
 </div>
 
@@ -482,12 +560,21 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Add a new palette. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num_colors</td><td>Number of colors to pre allocate. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int ID of this palette. May be used to set it active later. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a0bf79a0535581b7580865f40eca43208_cgraph.png" border="0" usemap="#amain_8cpp_a0bf79a0535581b7580865f40eca43208_cgraph" alt=""/></div>
 <map name="amain_8cpp_a0bf79a0535581b7580865f40eca43208_cgraph" id="amain_8cpp_a0bf79a0535581b7580865f40eca43208_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,89,57"/>
+<area shape="rect" title="Add a new palette." alt="" coords="5,31,89,57"/>
 <area shape="rect" href="class_options.html#ac8253319f6fe75047630ee55a51b285c" title=" " alt="" coords="141,5,275,32"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="137,56,279,83"/>
 </map>
@@ -509,32 +596,34 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>&lt; clear the canvas (delete all polygones and redraw scene)</p>
+
+<p>Clear canvas content and data model. </p>
+<p>This can not be undone! </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a89af8d1d1b6f81830962b153a96d23b3_cgraph.png" border="0" usemap="#amain_8cpp_a89af8d1d1b6f81830962b153a96d23b3_cgraph" alt=""/></div>
 <map name="amain_8cpp_a89af8d1d1b6f81830962b153a96d23b3_cgraph" id="amain_8cpp_a89af8d1d1b6f81830962b153a96d23b3_cgraph">
-<area shape="rect" title=" " alt="" coords="5,430,100,457"/>
-<area shape="rect" href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9" title=" " alt="" coords="186,266,279,293"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="377,215,545,242"/>
+<area shape="rect" title="Clear canvas content and data model." alt="" coords="5,430,100,457"/>
+<area shape="rect" href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9" title="Clear the scene by deleting all polygons." alt="" coords="186,266,279,293"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="377,215,545,242"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="895,367,1036,394"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="604,519,816,546"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="604,519,816,546"/>
 <area shape="rect" href="class_options.html#ae18ec07d3f7f3ba8eea4e4760716cdbe" title=" " alt="" coords="171,506,294,533"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="148,317,317,343"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="865,418,1066,445"/>
-<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="653,215,767,242"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="613,114,807,141"/>
-<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="894,215,1037,242"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="1118,229,1282,255"/>
-<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="879,63,1052,90"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title="Resets the WGLRakeRenderer to a new initial state." alt="" coords="148,317,317,343"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="865,418,1066,445"/>
+<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="653,215,767,242"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title="Set the WebGL state needed for the shader." alt="" coords="613,114,807,141"/>
+<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="894,215,1037,242"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="1118,229,1282,255"/>
+<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="879,63,1052,90"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="895,519,1035,546"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="881,570,1050,597"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="892,621,1039,647"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="881,570,1050,597"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="892,621,1039,647"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="913,671,1017,698"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="864,469,1067,495"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="1115,355,1285,382"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="365,309,556,351"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="864,469,1067,495"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="1115,355,1285,382"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title="Draw Scene to a given buffer." alt="" coords="365,309,556,351"/>
 </map>
 </div>
 
@@ -573,27 +662,28 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>finalize all current growing drops </p>
+<p>Finish all drops applying their displacement on all old drops. </p>
+<dl class="section return"><dt>Returns</dt><dd>int Negative value in case of failure. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a6abb0efd1714bbece1fe2446072a6a0a_cgraph.png" border="0" usemap="#amain_8cpp_a6abb0efd1714bbece1fe2446072a6a0a_cgraph" alt=""/></div>
 <map name="amain_8cpp_a6abb0efd1714bbece1fe2446072a6a0a_cgraph" id="amain_8cpp_a6abb0efd1714bbece1fe2446072a6a0a_cgraph">
-<area shape="rect" title="finalize all current growing drops" alt="" coords="5,309,92,336"/>
-<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="159,81,333,108"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="140,309,352,336"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="654,512,818,539"/>
+<area shape="rect" title="Finish all drops applying their displacement on all old drops." alt="" coords="5,309,92,336"/>
+<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="159,81,333,108"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="140,309,352,336"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="654,512,818,539"/>
 <area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="453,5,549,32"/>
 <area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="458,56,545,83"/>
 <area shape="rect" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="426,107,577,133"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="401,157,602,184"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="401,157,602,184"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="431,208,571,235"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="417,259,586,285"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="428,309,575,336"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="417,259,586,285"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="428,309,575,336"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="431,360,572,387"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="449,411,553,437"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="400,461,603,488"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="651,461,821,488"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="400,461,603,488"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="651,461,821,488"/>
 </map>
 </div>
 
@@ -613,29 +703,32 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return the current canvas content as image. </p>
+<dl class="section return"><dt>Returns</dt><dd>char* Image as raw pixel buffer. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_af8dcacd97325cade8a2db1d6de4b5ae3_cgraph.png" border="0" usemap="#amain_8cpp_af8dcacd97325cade8a2db1d6de4b5ae3_cgraph" alt=""/></div>
 <map name="amain_8cpp_af8dcacd97325cade8a2db1d6de4b5ae3_cgraph" id="amain_8cpp_af8dcacd97325cade8a2db1d6de4b5ae3_cgraph">
-<area shape="rect" title=" " alt="" coords="5,452,81,479"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="143,326,333,368"/>
+<area shape="rect" title="Return the current canvas content as image." alt="" coords="5,452,81,479"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title="Draw Scene to a given buffer." alt="" coords="143,326,333,368"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="685,363,827,390"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="910,515,1074,542"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="907,8,1077,35"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title=" " alt="" coords="129,528,347,555"/>
-<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="905,667,1079,694"/>
-<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="699,414,813,440"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="395,236,607,263"/>
-<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="921,414,1063,440"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="655,312,857,339"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="910,515,1074,542"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="907,8,1077,35"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title="Save the current rake state to a buffer." alt="" coords="129,528,347,555"/>
+<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="905,667,1079,694"/>
+<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="699,414,813,440"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="395,236,607,263"/>
+<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="921,414,1063,440"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="655,312,857,339"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="686,110,826,136"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="671,160,841,187"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="683,211,829,238"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="671,160,841,187"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="683,211,829,238"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="704,262,808,288"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="655,59,857,86"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="417,464,585,491"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="659,464,853,491"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="655,59,857,86"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="417,464,585,491"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title="Set the WebGL state needed for the shader." alt="" coords="659,464,853,491"/>
 </map>
 </div>
 
@@ -672,17 +765,27 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Init function. Should be called first. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">canvasID</td><td>CSS identifier of HTML5 canvas in the frontend. </td></tr>
+    <tr><td class="paramname">dropRes</td><td>Resolution of the canvas for drop mode. </td></tr>
+    <tr><td class="paramname">rakeRes</td><td>Resolution of the canvas for rake mode.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>Attention</dt><dd>Currently <code>dropRes</code> and <code>rakeRes</code> need to be the same. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_ad8710d7ad22d50a8befcf59b7d4eb35b_cgraph.png" border="0" usemap="#amain_8cpp_ad8710d7ad22d50a8befcf59b7d4eb35b_cgraph" alt=""/></div>
 <map name="amain_8cpp_ad8710d7ad22d50a8befcf59b7d4eb35b_cgraph" id="amain_8cpp_ad8710d7ad22d50a8befcf59b7d4eb35b_cgraph">
-<area shape="rect" title=" " alt="" coords="5,56,96,83"/>
-<area shape="rect" href="main_8cpp.html#aae3a2f77d1a59abbea8e55939bb322f7" title=" " alt="" coords="179,5,299,32"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="157,56,321,83"/>
-<area shape="rect" href="class_w_g_l_context.html#af7a6ada0a1019095322342e55d547090" title=" " alt="" coords="144,107,335,133"/>
-<area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="397,81,538,108"/>
-<area shape="rect" href="class_w_g_l_context.html#a181859abac8486988a909816702293e0" title=" " alt="" coords="383,132,552,159"/>
+<area shape="rect" title="Init function. Should be called first." alt="" coords="5,56,96,83"/>
+<area shape="rect" href="main_8cpp.html#aae3a2f77d1a59abbea8e55939bb322f7" title="Used to initialize the WGL context." alt="" coords="179,5,299,32"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="157,56,321,83"/>
+<area shape="rect" href="class_w_g_l_context.html#af7a6ada0a1019095322342e55d547090" title="Update the BG color using Options singleton." alt="" coords="144,107,335,133"/>
+<area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="383,107,524,133"/>
 </map>
 </div>
 
@@ -702,6 +805,8 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>&lt; Currently does nothing. Initialization is the frontend's job. </p>
 
 </div>
 </div>
@@ -772,15 +877,15 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="main_8cpp_aae45b9471979e61bbf17dd014224e322_cgraph.png" border="0" usemap="#amain_8cpp_aae45b9471979e61bbf17dd014224e322_cgraph" alt=""/></div>
 <map name="amain_8cpp_aae45b9471979e61bbf17dd014224e322_cgraph" id="amain_8cpp_aae45b9471979e61bbf17dd014224e322_cgraph">
 <area shape="rect" title=" " alt="" coords="5,132,52,159"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="100,107,268,133"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a5717094f8aef4340a2554db7509800c8" title=" " alt="" coords="101,157,267,184"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="316,5,517,32"/>
-<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="359,56,474,83"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="100,107,268,133"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a5717094f8aef4340a2554db7509800c8" title="Compute a rake step." alt="" coords="101,157,267,184"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="316,5,517,32"/>
+<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="359,56,474,83"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="346,107,487,133"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="319,157,514,184"/>
-<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="581,56,723,83"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="570,132,734,159"/>
-<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="565,183,739,209"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title="Set the WebGL state needed for the shader." alt="" coords="319,157,514,184"/>
+<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="581,56,723,83"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="570,132,734,159"/>
+<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="565,183,739,209"/>
 </map>
 </div>
 
@@ -800,28 +905,31 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Redraw the current data model based on the backend state. </p>
+<p>Useful for color updates for example. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a93bbd3db8037452b0dfb9587be449586_cgraph.png" border="0" usemap="#amain_8cpp_a93bbd3db8037452b0dfb9587be449586_cgraph" alt=""/></div>
 <map name="amain_8cpp_a93bbd3db8037452b0dfb9587be449586_cgraph" id="amain_8cpp_a93bbd3db8037452b0dfb9587be449586_cgraph">
-<area shape="rect" title=" " alt="" coords="5,183,67,209"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="137,107,305,133"/>
+<area shape="rect" title="Redraw the current data model based on the backend state." alt="" coords="5,183,67,209"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="137,107,305,133"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="405,107,547,133"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="115,208,327,235"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="115,208,327,235"/>
 <area shape="rect" href="class_options.html#ae18ec07d3f7f3ba8eea4e4760716cdbe" title=" " alt="" coords="159,259,282,285"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="375,157,577,184"/>
-<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="419,5,533,32"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="379,56,573,83"/>
-<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="641,5,783,32"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="630,157,794,184"/>
-<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="625,56,799,83"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="375,157,577,184"/>
+<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="419,5,533,32"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title="Set the WebGL state needed for the shader." alt="" coords="379,56,573,83"/>
+<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="641,5,783,32"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="630,157,794,184"/>
+<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="625,56,799,83"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="406,309,546,336"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="391,360,561,387"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="403,411,549,437"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="391,360,561,387"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="403,411,549,437"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="424,208,528,235"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="375,259,577,285"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="627,259,797,285"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="375,259,577,285"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="627,259,797,285"/>
 </map>
 </div>
 <div class="dynheader">
@@ -829,9 +937,9 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a93bbd3db8037452b0dfb9587be449586_icgraph.png" border="0" usemap="#amain_8cpp_a93bbd3db8037452b0dfb9587be449586_icgraph" alt=""/></div>
 <map name="amain_8cpp_a93bbd3db8037452b0dfb9587be449586_icgraph" id="amain_8cpp_a93bbd3db8037452b0dfb9587be449586_icgraph">
-<area shape="rect" title=" " alt="" coords="160,31,221,57"/>
-<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="31,5,87,32"/>
-<area shape="rect" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title=" " alt="" coords="5,56,112,83"/>
+<area shape="rect" title="Redraw the current data model based on the backend state." alt="" coords="160,31,221,57"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas." alt="" coords="31,5,87,32"/>
+<area shape="rect" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title="Undo the last rake." alt="" coords="5,56,112,83"/>
 </map>
 </div>
 
@@ -862,35 +970,45 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Resize the canvas. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dropSize</td><td>New resolution for drop state. </td></tr>
+    <tr><td class="paramname">rakeSize</td><td>New resolution for rake state.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>Attention</dt><dd>Currently both need to be the same. </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>for now both need to be the same </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a92dd76b954c987b1f807ba2ad72785b1_cgraph.png" border="0" usemap="#amain_8cpp_a92dd76b954c987b1f807ba2ad72785b1_cgraph" alt=""/></div>
 <map name="amain_8cpp_a92dd76b954c987b1f807ba2ad72785b1_cgraph" id="amain_8cpp_a92dd76b954c987b1f807ba2ad72785b1_cgraph">
-<area shape="rect" title=" " alt="" coords="5,259,61,285"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="795,411,959,437"/>
+<area shape="rect" title="Resize the canvas." alt="" coords="5,259,61,285"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="795,411,959,437"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="571,5,712,32"/>
-<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="140,132,201,159"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title=" " alt="" coords="554,461,729,488"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title=" " alt="" coords="551,563,732,589"/>
+<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title="Redraw the current data model based on the backend state." alt="" coords="140,132,201,159"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="554,461,729,488"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="551,563,732,589"/>
 <area shape="rect" href="class_options.html#acd20fd8557d165f0418b2e8113c9c836" title=" " alt="" coords="109,411,232,437"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="302,81,470,108"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="280,259,492,285"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="302,81,470,108"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="280,259,492,285"/>
 <area shape="rect" href="class_options.html#ae18ec07d3f7f3ba8eea4e4760716cdbe" title=" " alt="" coords="325,132,447,159"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="541,208,742,235"/>
-<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="584,56,699,83"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="544,107,739,133"/>
-<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="806,56,949,83"/>
-<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="791,233,964,260"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="541,208,742,235"/>
+<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="584,56,699,83"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title="Set the WebGL state needed for the shader." alt="" coords="544,107,739,133"/>
+<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="806,56,949,83"/>
+<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="791,233,964,260"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="571,259,711,285"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="557,309,726,336"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="568,360,715,387"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="557,309,726,336"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="568,360,715,387"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="589,411,693,437"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="540,512,743,539"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="792,563,963,589"/>
-<area shape="rect" href="class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e" title=" " alt="" coords="1012,512,1203,539"/>
-<area shape="rect" href="class_w_g_l_filter.html#a0bf6ff56bb8b4bdeae3e6d0fb50bf5a2" title=" " alt="" coords="817,512,938,539"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="540,512,743,539"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="792,563,963,589"/>
+<area shape="rect" href="class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e" title="Construct a FBO." alt="" coords="1012,512,1203,539"/>
+<area shape="rect" href="class_w_g_l_filter.html#a0bf6ff56bb8b4bdeae3e6d0fb50bf5a2" title="Resize all allocated buffers to size." alt="" coords="817,512,938,539"/>
 </map>
 </div>
 
@@ -923,17 +1041,17 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="main_8cpp_a30e5c8f24f1c31b8b2a17e1279433511_cgraph.png" border="0" usemap="#amain_8cpp_a30e5c8f24f1c31b8b2a17e1279433511_cgraph" alt=""/></div>
 <map name="amain_8cpp_a30e5c8f24f1c31b8b2a17e1279433511_cgraph" id="amain_8cpp_a30e5c8f24f1c31b8b2a17e1279433511_cgraph">
 <area shape="rect" title=" " alt="" coords="5,183,96,209"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="144,157,356,184"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="144,157,356,184"/>
 <area shape="rect" href="class_scene.html#a650b57a9405c6b74bc60fe55d419fd0c" title=" " alt="" coords="149,208,351,235"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="405,5,606,32"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="405,5,606,32"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="435,56,575,83"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="421,107,590,133"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="432,157,579,184"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="421,107,590,133"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="432,157,579,184"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="435,208,576,235"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="453,259,557,285"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="404,309,607,336"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="658,284,822,311"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="655,335,825,361"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="404,309,607,336"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="658,284,822,311"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="655,335,825,361"/>
 </map>
 </div>
 
@@ -954,12 +1072,21 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set an active palette. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>ID of the palette to set active. Return value of <a class="el" href="main_8cpp.html#a0bf79a0535581b7580865f40eca43208" title="Add a new palette.">addPalette()</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Negative in case of failure. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a47514aeb6ba7b6d105f9e2342e562917_cgraph.png" border="0" usemap="#amain_8cpp_a47514aeb6ba7b6d105f9e2342e562917_cgraph" alt=""/></div>
 <map name="amain_8cpp_a47514aeb6ba7b6d105f9e2342e562917_cgraph" id="amain_8cpp_a47514aeb6ba7b6d105f9e2342e562917_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,124,57"/>
+<area shape="rect" title="Set an active palette." alt="" coords="5,31,124,57"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="186,5,327,32"/>
 <area shape="rect" href="class_options.html#a6d34b8f09f4d6f074604b13c5b2b9dc4" title=" " alt="" coords="172,56,341,83"/>
 </map>
@@ -982,13 +1109,21 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the background color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color</td><td><a class="el" href="class_color.html" title="A class representing a RGB color with a ratio.">Color</a> in HEX Code </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_ad3efa7b9bcca549832c95f4eaca43f7a_cgraph.png" border="0" usemap="#amain_8cpp_ad3efa7b9bcca549832c95f4eaca43f7a_cgraph" alt=""/></div>
 <map name="amain_8cpp_ad3efa7b9bcca549832c95f4eaca43f7a_cgraph" id="amain_8cpp_ad3efa7b9bcca549832c95f4eaca43f7a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,56,95,83"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="143,5,307,32"/>
+<area shape="rect" title="Set the background color." alt="" coords="5,56,95,83"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="143,5,307,32"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="154,56,295,83"/>
 <area shape="rect" href="class_options.html#a83357f7956342fb58ffb7601f78fe41f" title=" " alt="" coords="155,107,295,133"/>
 </map>
@@ -1021,15 +1156,25 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the number at position <code>colorNumber</code> of the active palette. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">colorNumber</td><td>Number of color to set. </td></tr>
+    <tr><td class="paramname">color</td><td><a class="el" href="class_color.html" title="A class representing a RGB color with a ratio.">Color</a> als HEX code. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Negative in case of failure. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a397b3dd5426f82f8ddc246682dbf9abf_cgraph.png" border="0" usemap="#amain_8cpp_a397b3dd5426f82f8ddc246682dbf9abf_cgraph" alt=""/></div>
 <map name="amain_8cpp_a397b3dd5426f82f8ddc246682dbf9abf_cgraph" id="amain_8cpp_a397b3dd5426f82f8ddc246682dbf9abf_cgraph">
-<area shape="rect" title=" " alt="" coords="5,81,88,108"/>
+<area shape="rect" title="Set the number at position colorNumber of the active palette." alt="" coords="5,81,88,108"/>
 <area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="136,5,305,32"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="150,56,291,83"/>
-<area shape="rect" href="class_palette.html#a3c55a74b231deff1d256fbd94251603a" title=" " alt="" coords="165,107,277,133"/>
+<area shape="rect" href="class_palette.html#a3c55a74b231deff1d256fbd94251603a" title="Get the palette&#39;s size." alt="" coords="165,107,277,133"/>
 <area shape="rect" href="class_palette.html#ab69a88042a065da8d0e8301e2f1aeeb6" title="set new color and update ratios" alt="" coords="155,157,286,184"/>
 </map>
 </div>
@@ -1061,16 +1206,26 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the the ratio of a color in the active palette. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">colorNumber</td><td>Number of the color to modify. </td></tr>
+    <tr><td class="paramname">ratio</td><td>New ratio for sprinkler drops. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Negative in case of failure. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a50d77acb1121a4e4ce5446bfcda4cea7_cgraph.png" border="0" usemap="#amain_8cpp_a50d77acb1121a4e4ce5446bfcda4cea7_cgraph" alt=""/></div>
 <map name="amain_8cpp_a50d77acb1121a4e4ce5446bfcda4cea7_cgraph" id="amain_8cpp_a50d77acb1121a4e4ce5446bfcda4cea7_cgraph">
-<area shape="rect" title=" " alt="" coords="5,81,119,108"/>
+<area shape="rect" title="Set the the ratio of a color in the active palette." alt="" coords="5,81,119,108"/>
 <area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="167,5,336,32"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="181,56,322,83"/>
-<area shape="rect" href="class_palette.html#a3c55a74b231deff1d256fbd94251603a" title=" " alt="" coords="195,107,307,133"/>
-<area shape="rect" href="class_palette.html#ae2342ab3b67a800ce0aad96dae586613" title="updates a ratio" alt="" coords="186,157,317,184"/>
+<area shape="rect" href="class_palette.html#a3c55a74b231deff1d256fbd94251603a" title="Get the palette&#39;s size." alt="" coords="195,107,307,133"/>
+<area shape="rect" href="class_palette.html#ae2342ab3b67a800ce0aad96dae586613" title="Set the ratio of the color at index." alt="" coords="186,157,317,184"/>
 </map>
 </div>
 
@@ -1091,12 +1246,20 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the filter option. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filter</td><td>True for post processing filter, false otherwise. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a9672ebb75d7cb9f47d46dda323e77bb9_cgraph.png" border="0" usemap="#amain_8cpp_a9672ebb75d7cb9f47d46dda323e77bb9_cgraph" alt=""/></div>
 <map name="amain_8cpp_a9672ebb75d7cb9f47d46dda323e77bb9_cgraph" id="amain_8cpp_a9672ebb75d7cb9f47d46dda323e77bb9_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,75,57"/>
+<area shape="rect" title="Set the filter option." alt="" coords="5,31,75,57"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="123,5,264,32"/>
 <area shape="rect" href="class_options.html#ac34bedbf5ec33e348addd2cc1d104a81" title=" " alt="" coords="133,56,253,83"/>
 </map>
@@ -1137,30 +1300,47 @@ template&lt;typename C , typename R &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate drops of random size and position. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">C</td><td>A function type for transforming random numbers to drop coordinates. </td></tr>
+    <tr><td class="paramname">R</td><td>A function type for transforming random numbers to drop sizes. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">amt</td><td>Number of drops to generate </td></tr>
+    <tr><td class="paramname">coord</td><td>A function of type C. </td></tr>
+    <tr><td class="paramname">radius</td><td>A function of type R. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a7d56c68697f035817a8d576e2552f2c2_cgraph.png" border="0" usemap="#amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_cgraph" alt=""/></div>
 <map name="amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_cgraph" id="amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_cgraph">
-<area shape="rect" title=" " alt="" coords="5,461,72,488"/>
+<area shape="rect" title="Generate drops of random size and position." alt="" coords="5,461,72,488"/>
 <area shape="rect" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf" title=" " alt="" coords="143,95,309,121"/>
 <area shape="rect" href="class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="160,145,292,172"/>
-<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="139,196,313,223"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="120,335,332,361"/>
+<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="139,196,313,223"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="120,335,332,361"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="411,461,552,488"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="634,436,798,463"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="631,512,801,539"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="634,436,798,463"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="631,512,801,539"/>
 <area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="141,613,311,640"/>
-<area shape="rect" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb" title="returns a random color of that pallet based on the ratios" alt="" coords="138,664,314,691"/>
+<area shape="rect" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb" title="Returns a random color of that pallet based on the ratios." alt="" coords="138,664,314,691"/>
 <area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="433,5,529,32"/>
 <area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="438,56,525,83"/>
 <area shape="rect" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="406,107,557,133"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="381,157,582,184"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="381,157,582,184"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="411,208,551,235"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="397,259,566,285"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="408,309,555,336"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="397,259,566,285"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="408,309,555,336"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="429,360,533,387"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="380,411,583,437"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="380,411,583,437"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1168,9 +1348,9 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a7d56c68697f035817a8d576e2552f2c2_icgraph.png" border="0" usemap="#amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_icgraph" alt=""/></div>
 <map name="amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_icgraph" id="amain_8cpp_a7d56c68697f035817a8d576e2552f2c2_icgraph">
-<area shape="rect" title=" " alt="" coords="157,31,224,57"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,5,109,32"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,56,107,83"/>
+<area shape="rect" title="Generate drops of random size and position." alt="" coords="157,31,224,57"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="5,5,109,32"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="8,56,107,83"/>
 </map>
 </div>
 
@@ -1207,31 +1387,41 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Create drops at random positions on the canvas. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">amt</td><td>Number of drops to create. </td></tr>
+    <tr><td class="paramname">r_min</td><td>Minimum size. </td></tr>
+    <tr><td class="paramname">r_max</td><td>Maximum size. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_ad53ec54d7a98c61fc51cfff7109e4bea_cgraph.png" border="0" usemap="#amain_8cpp_ad53ec54d7a98c61fc51cfff7109e4bea_cgraph" alt=""/></div>
 <map name="amain_8cpp_ad53ec54d7a98c61fc51cfff7109e4bea_cgraph" id="amain_8cpp_ad53ec54d7a98c61fc51cfff7109e4bea_cgraph">
-<area shape="rect" title=" " alt="" coords="5,461,109,488"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="157,461,224,488"/>
+<area shape="rect" title="Create drops at random positions on the canvas." alt="" coords="5,461,109,488"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="157,461,224,488"/>
 <area shape="rect" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf" title=" " alt="" coords="295,95,461,121"/>
 <area shape="rect" href="class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="312,145,444,172"/>
-<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="291,196,465,223"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="272,335,484,361"/>
+<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="291,196,465,223"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="272,335,484,361"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="563,461,704,488"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="786,436,950,463"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="783,512,953,539"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="786,436,950,463"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="783,512,953,539"/>
 <area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="293,613,463,640"/>
-<area shape="rect" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb" title="returns a random color of that pallet based on the ratios" alt="" coords="290,664,466,691"/>
+<area shape="rect" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb" title="Returns a random color of that pallet based on the ratios." alt="" coords="290,664,466,691"/>
 <area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="585,5,681,32"/>
 <area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="590,56,677,83"/>
 <area shape="rect" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="558,107,709,133"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="533,157,734,184"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="533,157,734,184"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="563,208,703,235"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="549,259,718,285"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="560,309,707,336"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="549,259,718,285"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="560,309,707,336"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="581,360,685,387"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="532,411,735,437"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="532,411,735,437"/>
 </map>
 </div>
 
@@ -1287,41 +1477,36 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>creates sprinkle in around cursor </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">amt</td><td>number of drops to create </td></tr>
-    <tr><td class="paramname">r_min,r_max</td><td>drop size range </td></tr>
-    <tr><td class="paramname">x,y</td><td>cursor position </td></tr>
-    <tr><td class="paramname">sig</td><td>sigma for normal distribution for drop position </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="dynheader">
+<p>Create drops around the cursor postion. </p>
+<pre class="fragment">\param amt Number of drops to create.
+\param r_min,r_max drop size range
+\param x,y cursor position
+\param sig Sigma of normal distribution for drop position
+</pre> <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a4df20e610fee8d6a8bee2388640a08a5_cgraph.png" border="0" usemap="#amain_8cpp_a4df20e610fee8d6a8bee2388640a08a5_cgraph" alt=""/></div>
 <map name="amain_8cpp_a4df20e610fee8d6a8bee2388640a08a5_cgraph" id="amain_8cpp_a4df20e610fee8d6a8bee2388640a08a5_cgraph">
-<area shape="rect" title="creates sprinkle in around cursor" alt="" coords="5,461,104,488"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="152,461,219,488"/>
+<area shape="rect" title="Create drops around the cursor postion." alt="" coords="5,461,104,488"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="152,461,219,488"/>
 <area shape="rect" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf" title=" " alt="" coords="290,95,455,121"/>
 <area shape="rect" href="class_scene.html#a1557dfc7914440e06198552e213267e7" title=" " alt="" coords="307,145,439,172"/>
-<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="285,196,460,223"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="267,335,479,361"/>
+<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="285,196,460,223"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="267,335,479,361"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="557,461,699,488"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="781,436,945,463"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="777,512,948,539"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="781,436,945,463"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="777,512,948,539"/>
 <area shape="rect" href="class_options.html#aa03b31eaab63434c4e67f2e4731bbf1c" title=" " alt="" coords="288,613,457,640"/>
-<area shape="rect" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb" title="returns a random color of that pallet based on the ratios" alt="" coords="285,664,461,691"/>
+<area shape="rect" href="class_palette.html#ac4b3ca79b7739e09c6afb40e216644fb" title="Returns a random color of that pallet based on the ratios." alt="" coords="285,664,461,691"/>
 <area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="580,5,676,32"/>
 <area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="585,56,671,83"/>
 <area shape="rect" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="553,107,703,133"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="527,157,729,184"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="527,157,729,184"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="558,208,698,235"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="543,259,713,285"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="555,309,701,336"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="543,259,713,285"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="555,309,701,336"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="576,360,680,387"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="527,411,729,437"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="527,411,729,437"/>
 </map>
 </div>
 
@@ -1341,23 +1526,26 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set drop state. </p>
+<p>All rakes will be lost. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a799b5f11d1ed618fa2fe44febc509b3a_cgraph.png" border="0" usemap="#amain_8cpp_a799b5f11d1ed618fa2fe44febc509b3a_cgraph" alt=""/></div>
 <map name="amain_8cpp_a799b5f11d1ed618fa2fe44febc509b3a_cgraph" id="amain_8cpp_a799b5f11d1ed618fa2fe44febc509b3a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,271,104,297"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="152,183,364,209"/>
+<area shape="rect" title="Set drop state." alt="" coords="5,271,104,297"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="152,183,364,209"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="443,309,584,336"/>
 <area shape="rect" href="class_options.html#acd20fd8557d165f0418b2e8113c9c836" title=" " alt="" coords="197,321,319,348"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="413,5,614,32"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="413,5,614,32"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="443,56,583,83"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="429,107,598,133"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="440,157,587,184"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="429,107,598,133"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="440,157,587,184"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="461,208,565,235"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="412,259,615,285"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="666,233,830,260"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="663,284,833,311"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="412,259,615,285"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="666,233,830,260"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="663,284,833,311"/>
 </map>
 </div>
 
@@ -1377,30 +1565,33 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set rake state. </p>
+<p>This results in the scene being rendered to a hidden buffer which is given to the <a class="el" href="class_w_g_l_rake_renderer.html" title="Implementation of raking.">WGLRakeRenderer</a> </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a6c9f1e96be7b94c399e800a35319dcd8_cgraph.png" border="0" usemap="#amain_8cpp_a6c9f1e96be7b94c399e800a35319dcd8_cgraph" alt=""/></div>
 <map name="amain_8cpp_a6c9f1e96be7b94c399e800a35319dcd8_cgraph" id="amain_8cpp_a6c9f1e96be7b94c399e800a35319dcd8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,278,93,305"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="370,253,538,279"/>
+<area shape="rect" title="Set rake state." alt="" coords="5,278,93,305"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="370,253,538,279"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="888,253,1029,279"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="141,151,311,178"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title="Resets the WGLRakeRenderer to a new initial state." alt="" coords="141,151,311,178"/>
 <area shape="rect" href="class_options.html#acd20fd8557d165f0418b2e8113c9c836" title=" " alt="" coords="165,354,287,381"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="858,303,1059,330"/>
-<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="646,202,761,229"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="606,151,801,178"/>
-<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="887,202,1030,229"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="1111,545,1275,571"/>
-<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="872,101,1045,127"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="359,401,549,443"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="597,455,809,482"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="1108,621,1279,647"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="858,303,1059,330"/>
+<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="646,202,761,229"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title="Set the WebGL state needed for the shader." alt="" coords="606,151,801,178"/>
+<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="887,202,1030,229"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="1111,545,1275,571"/>
+<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="872,101,1045,127"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title="Draw Scene to a given buffer." alt="" coords="359,401,549,443"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="597,455,809,482"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="1108,621,1279,647"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="889,455,1029,482"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="874,506,1043,533"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="885,354,1032,381"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="874,506,1043,533"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="885,354,1032,381"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="907,405,1011,431"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="857,607,1060,634"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="857,607,1060,634"/>
 </map>
 </div>
 
@@ -1420,30 +1611,33 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Undo the last rake. </p>
+<p>Reverting only the last step is very cheap by swapping buffer pointers. Calling it again will swap back (e.g. undo the undo). </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_af39818aa33f80df7d767334ae9c8a00c_cgraph.png" border="0" usemap="#amain_8cpp_af39818aa33f80df7d767334ae9c8a00c_cgraph" alt=""/></div>
 <map name="amain_8cpp_af39818aa33f80df7d767334ae9c8a00c_cgraph" id="amain_8cpp_af39818aa33f80df7d767334ae9c8a00c_cgraph">
-<area shape="rect" title=" " alt="" coords="5,208,112,235"/>
-<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="235,183,297,209"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a089de0ace0bc171833a55af213b4d777" title=" " alt="" coords="160,233,372,260"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="442,107,610,133"/>
+<area shape="rect" title="Undo the last rake." alt="" coords="5,208,112,235"/>
+<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title="Redraw the current data model based on the backend state." alt="" coords="235,183,297,209"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a089de0ace0bc171833a55af213b4d777" title="Swap internal rake state buffers." alt="" coords="160,233,372,260"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="442,107,610,133"/>
 <area shape="rect" href="class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="711,107,852,133"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="420,208,632,235"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="420,208,632,235"/>
 <area shape="rect" href="class_options.html#ae18ec07d3f7f3ba8eea4e4760716cdbe" title=" " alt="" coords="465,259,587,285"/>
-<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="681,157,882,184"/>
-<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="724,5,839,32"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="684,56,879,83"/>
-<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="946,5,1089,32"/>
-<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="935,157,1099,184"/>
-<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="931,56,1104,83"/>
+<area shape="rect" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="681,157,882,184"/>
+<area shape="rect" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="724,5,839,32"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title="Set the WebGL state needed for the shader." alt="" coords="684,56,879,83"/>
+<area shape="rect" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="946,5,1089,32"/>
+<area shape="rect" href="class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="935,157,1099,184"/>
+<area shape="rect" href="class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="931,56,1104,83"/>
 <area shape="rect" href="class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="711,309,851,336"/>
-<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="697,360,866,387"/>
-<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="708,411,855,437"/>
+<area shape="rect" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="697,360,866,387"/>
+<area shape="rect" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="708,411,855,437"/>
 <area shape="rect" href="class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="729,208,833,235"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="680,259,883,285"/>
-<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="932,259,1103,285"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="680,259,883,285"/>
+<area shape="rect" href="class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="932,259,1103,285"/>
 </map>
 </div>
 
@@ -1462,6 +1656,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>global <a class="el" href="class_w_g_l_rake_renderer.html" title="Implementation of raking.">WGLRakeRenderer</a> </p>
+
 </div>
 </div>
 <a id="a6de66f9ad116ce1d596c7f4edc40c521"></a>
@@ -1475,6 +1671,8 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>global scene </p>
 
 </div>
 </div>
@@ -1490,6 +1688,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>global <a class="el" href="class_w_g_l_scene_renderer.html" title="Render scenes to buffers.">WGLSceneRenderer</a> </p>
+
 </div>
 </div>
 <a id="a063b033095d66a781d7ecd123ca4aa30"></a>
@@ -1504,12 +1704,14 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Stores wether backend is initialized or not. </p>
+
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 13 2021 16:34:59 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Sep 17 2021 13:13:12 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

@@ -1,14 +1,14 @@
 <map id="startDropping" name="startDropping">
-<area shape="rect" id="node1" title=" " alt="" coords="5,271,104,297"/>
-<area shape="rect" id="node2" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="152,183,364,209"/>
+<area shape="rect" id="node1" title="Set drop state." alt="" coords="5,271,104,297"/>
+<area shape="rect" id="node2" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="152,183,364,209"/>
 <area shape="rect" id="node7" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="443,309,584,336"/>
 <area shape="rect" id="node12" href="$class_options.html#acd20fd8557d165f0418b2e8113c9c836" title=" " alt="" coords="197,321,319,348"/>
-<area shape="rect" id="node3" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="413,5,614,32"/>
+<area shape="rect" id="node3" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="413,5,614,32"/>
 <area shape="rect" id="node4" href="$class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="443,56,583,83"/>
-<area shape="rect" id="node5" href="$class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="429,107,598,133"/>
-<area shape="rect" id="node6" href="$class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="440,157,587,184"/>
+<area shape="rect" id="node5" href="$class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="429,107,598,133"/>
+<area shape="rect" id="node6" href="$class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="440,157,587,184"/>
 <area shape="rect" id="node8" href="$class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="461,208,565,235"/>
-<area shape="rect" id="node9" href="$class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="412,259,615,285"/>
-<area shape="rect" id="node10" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="666,233,830,260"/>
-<area shape="rect" id="node11" href="$class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="663,284,833,311"/>
+<area shape="rect" id="node9" href="$class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="412,259,615,285"/>
+<area shape="rect" id="node10" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="666,233,830,260"/>
+<area shape="rect" id="node11" href="$class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="663,284,833,311"/>
 </map>

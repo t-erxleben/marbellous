@@ -1,5 +1,5 @@
 <map id="WGLRakeRenderer::setActive" name="WGLRakeRenderer::setActive">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,200,57"/>
-<area shape="rect" id="node2" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="253,5,417,32"/>
-<area shape="rect" id="node3" href="$class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="248,56,421,83"/>
+<area shape="rect" id="node1" title="Set the WebGL state needed for the shader." alt="" coords="5,31,200,57"/>
+<area shape="rect" id="node2" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="253,5,417,32"/>
+<area shape="rect" id="node3" href="$class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="248,56,421,83"/>
 </map>

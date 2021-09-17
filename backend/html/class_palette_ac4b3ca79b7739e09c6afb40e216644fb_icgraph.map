@@ -1,7 +1,7 @@
 <map id="Palette::getRandomColorId" name="Palette::getRandomColorId">
-<area shape="rect" id="node1" title="returns a random color of that pallet based on the ratios" alt="" coords="283,31,459,57"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="157,5,235,32"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,56,229,83"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,31,109,57"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,81,107,108"/>
+<area shape="rect" id="node1" title="Returns a random color of that pallet based on the ratios." alt="" coords="283,31,459,57"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="157,5,235,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="163,56,229,83"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="5,31,109,57"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="8,81,107,108"/>
 </map>

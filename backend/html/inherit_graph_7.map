@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_w_g_l_renderer.html" title=" " alt="" coords="5,56,109,83"/>
-<area shape="rect" id="node2" href="$class_w_g_l_filter.html" title=" " alt="" coords="187,5,269,32"/>
-<area shape="rect" id="node3" href="$class_w_g_l_rake_renderer.html" title=" " alt="" coords="161,56,295,83"/>
-<area shape="rect" id="node4" href="$class_w_g_l_scene_renderer.html" title=" " alt="" coords="157,107,299,133"/>
+<area shape="rect" id="node1" href="$class_w_g_l_renderer.html" title="Base class for rendering." alt="" coords="5,56,109,83"/>
+<area shape="rect" id="node2" href="$class_w_g_l_filter.html" title="Implements a 3x3 blur filter." alt="" coords="187,5,269,32"/>
+<area shape="rect" id="node3" href="$class_w_g_l_rake_renderer.html" title="Implementation of raking." alt="" coords="161,56,295,83"/>
+<area shape="rect" id="node4" href="$class_w_g_l_scene_renderer.html" title="Render scenes to buffers." alt="" coords="157,107,299,133"/>
 </map>

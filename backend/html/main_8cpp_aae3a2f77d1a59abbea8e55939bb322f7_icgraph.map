@@ -1,4 +1,4 @@
 <map id="_initWGLContext" name="_initWGLContext">
-<area shape="rect" id="node1" title=" " alt="" coords="144,5,264,32"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b" title=" " alt="" coords="5,5,96,32"/>
+<area shape="rect" id="node1" title="Used to initialize the WGL context." alt="" coords="144,5,264,32"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b" title="Init function. Should be called first." alt="" coords="5,5,96,32"/>
 </map>

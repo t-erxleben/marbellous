@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Marbellous: Main Page</title>
+<title>Marbellous: General Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,15 +61,153 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Marbellous Documentation</div>  </div>
+<div class="title">General Documentation </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="mainpage"></a> </p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Used technologies and languages</h1>
+<h2><a class="anchor" id="autotoc_md1"></a>
+JavaScript</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/10000000000002000000020039EDA5960216C6DE.png" alt="" height="50px" class="inline"/> </td><td style="width:750px">JavaScript is a programming language originally designed to be executed client-side in web browsers to extend the capabilities of the World Wide Web. The source code of Marbellous is made up of about 40% JavaScript, handling the frontend alongside HTML5 and CSS. </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2"></a>
+C++</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/10000201000000B4000000CA18287C510212EE2D.png" alt="" height="50px" class="inline"/> </td><td style="width:750px">C++ is a programming language created as an extension of the C programming language and was designed to allow for efficient, high-performance applications. The backend of Marbellous is written in C++ and thus it accounts for about 60% of the source code. </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md3"></a>
+WebAssembly</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/100002010000014A0000014A51392247F561327C.png" alt="" height="50px" class="inline"/> </td><td style="width:750px">WebAssembly (shortened WASM) is an open standard which defines portable binary code, a corresponding assembly language as well as interfaces for them. The main goal of WebAssembly is to allow high performance in websites.<br  />
+ Because the performance of the calculations is paramount for the interactivity of the marbling, we decided to use WebAssembly for the backend. </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md4"></a>
+OpenGL/WebGL</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/10000201000001C2000000BCCC3536B3CA7993D7.png" alt="" height="50px" class="inline"/> </td><td style="width:750px">OpenGL is a cross-language, cross-platform, abstract API for rendering, typically hardware-accelerated. One of the most important language bindings of this API is the Javascript Binding WebGL, which allows rendering in web browsers.<br  />
+ In Marbellous we use WebGL for the rendering of the color drops and some calculations for their interactions. </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Emscripten</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/100002010000014A0000005A391F0C68A8488761.png" alt="" height="50px" class="inline"/> </td><td style="width:750px"><p class="starttd">Emscripten is a LLVM/Clang based compiler for turning C/C++ source code into WASM. It is also used in Game Engines like Unreal Engine, Godot and Unity to export games to the browser.</p>
+<p class="endtd">We decided to use Emscripten to be able to write the backend code in a language that is meant to write highly efficient software. </p>
+</td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md6"></a>
+CMake</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/100002010000009000000090B0B2EFA457698CCA.png" alt="" height="50px" class="inline"/> </td><td style="width:750px">CMake is a cross-platform software for build automation, testing, packaging and installation of software with compiler independent methods. It is not a build system, but it generates files that can be used with build systems. <br  />
+ For Marbellous, we used CMake alongside of Make in the context of Emscripten to build our webassembly files. </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Webpack</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/100002010000014A000000809F127A67DC81E8E9.png" alt="" height="50px" class="inline"/> </td><td style="width:750px">Webpack is a JavaScript module bundler. It is used to combine multiple source files into one. </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md8"></a>
+NPM</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/100002010000014A0000008047600BF75023824B.png" alt="" height="50px" class="inline"/> </td><td style="width:750px">NPM (node package manager) is a manager for JavaScript libraries, like the one we use to export images to png. </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Git</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/10000201000000E10000005E3451440A90FE5318.png" alt="" height="50px" class="inline"/> </td><td></td><td style="width:750px">Git is a revision control system created in 2005 to help with the development of the linux kernel. It excels in coordinating multiple programmers collaboratively working on source code. </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md10"></a>
+GitHub/ GitHub Projects/GitHub Actions/GitHub Pages</h2>
+<table style="border:none;border-spacing:1em">
+<tr>
+<td style="width:184px"><img src="Pictures/GitHub-Mark.png" alt="" height="50px" class="inline"/> </td><td style="width:750px">GitHub is a host for git with several additional features: GitHub Projects provides a Kanban board for coordination of collaborative work. GitHub Pages is a static web page hosting service provided by GitHub. GitHub Actions is a CI/CD system that allows automatic actions to be taken after user-defined triggers were activated. We used GitHub Actions to always compile the latest version of Marbellous and automatically host it on GitHub Pages. </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md11"></a>
+Front- and Backend</h1>
+<div style="max-width:980px"></div><div style="max-width:980px"><img src="Pictures/10000201000002BD000001737179BC21251A4CE6.png" alt="" width="500px" class="inline"/></div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md12"></a>
+Frontend</h2>
+<div style="max-width:980px"> Frontend is responsible for all the visible control elements and their functions using HTML5, JavaScript and CSS. It interacts with the backend via the JavaScript functions WASM provides.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md13"></a>
+Backend</h2>
+<div style="max-width:980px"> The backend is the part where all calculations related to the marbling and rendering of the scene happen. A detailed explanation to the way we render can be found here.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md14"></a>
+Backend class types and their interactions</h2>
+<div style="max-width:980px"> Before taking a closer look at the backend, let's think about it in a broader sense. When looking at our classes, you can roughly assign each of them to one of three types. We have classes that represent:</div><div style="max-width:980px"><ol type="1">
+<li>a basic data model (e.g. color, point, scene)</li>
+<li>global states (e.g. options, context)</li>
+<li>renderers (e.g. sceneRenderer, filter)</li>
+</ol>
+</div><div style="max-width:980px">Generally speaking, the global states modify the way in which the renderers process the basic data models into the end result shown to the user. In the case of the RakeRenderer, there is some information that could have been represented as basic data models, but were so integral to and only used by it, so we decided to include them into the renderer itself.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md15"></a>
+Overview over the classes in the backend</h2>
+<div style="max-width:980px"><ul>
+<li><a class="el" href="class_color.html" title="A class representing a RGB color with a ratio.">Color</a> - Basic color class with getters and setters.</li>
+<li><a class="el" href="struct_drop_data.html" title="All relevant data for a single drop grouped as a struct.">DropData</a> - Contains the relevant information of drops (position, radius, color).</li>
+<li><a class="el" href="class_options.html" title="Global option state.">Options</a> - A class for interacting with several states (background color, active palette, drop state).</li>
+<li><a class="el" href="class_palette.html" title="Contains a vector of colors.">Palette</a> - Contains a vector of colors and some functions to randomly pick them.</li>
+<li><a class="el" href="class_polygon.html" title="Represent polygons in 2D as a list of vertices in counter-clockwise order.">Polygon</a> - Represent polygons in 2D as a list of vertices in counter-clockwise order.</li>
+<li><a class="el" href="class_scene.html" title="Contains a vector of polygons and is iterable.">Scene</a> - Contains all exisiting polygons and methods to add and displace them.</li>
+<li><a class="el" href="class_w_g_l_context.html" title="Singleton representing the visible WebGL Context.">WGLContext</a> - Contains several parameters for WebGL (e.g. resolution for Rake, Drop).</li>
+<li><a class="el" href="class_w_g_l_renderer.html" title="Base class for rendering.">WGLRenderer</a> - Base class containing everything all renderers need.</li>
+<li><a class="el" href="class_w_g_l_rake_renderer.html" title="Implementation of raking.">WGLRakeRenderer</a> - Inherits from Renderer and is used to rake.</li>
+<li><a class="el" href="class_w_g_l_filter.html" title="Implements a 3x3 blur filter.">WGLFilter</a> - Inherits from Renderer and is used to filter.</li>
+<li><a class="el" href="class_w_g_l_scene_renderer.html" title="Render scenes to buffers.">WGLSceneRenderer</a> - Inherits from <a class="el" href="class_w_g_l_renderer.html" title="Base class for rendering.">WGLRenderer</a> and is used to display the scene.</li>
+</ul>
+</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md16"></a>
+Backend API</h2>
+<div style="max-width:980px"> The backend API is mostly accessed by using Module.cwrap(), which generates a callable JavaScript function that was compiled from C++ to WASM via Emscripten. Here is a list of the backend functions called that way. Further documentation is linked to the function names:</div><div style="max-width:980px"><ul>
+<li><a class="el" href="main_8cpp.html#a0bf79a0535581b7580865f40eca43208" title="Add a new palette.">addPalette()</a></li>
+<li><a class="el" href="main_8cpp.html#a47514aeb6ba7b6d105f9e2342e562917" title="Set an active palette.">setActivePalette()</a></li>
+<li><a class="el" href="main_8cpp.html#ad3efa7b9bcca549832c95f4eaca43f7a" title="Set the background color.">setBGColor()</a></li>
+<li><a class="el" href="main_8cpp.html#a29e7dbcd960b144648754d9a04c04402">addDrop()</a></li>
+<li><a class="el" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once.">addDrops()</a></li>
+<li><a class="el" href="main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511">resizeDrops()</a></li>
+<li><a class="el" href="main_8cpp.html#a397b3dd5426f82f8ddc246682dbf9abf" title="Set the number at position colorNumber of the active palette.">setColorAt()</a></li>
+<li><a class="el" href="main_8cpp.html#a50d77acb1121a4e4ce5446bfcda4cea7" title="Set the the ratio of a color in the active palette.">setColorRatioAt()</a></li>
+<li><a class="el" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title="Redraw the current data model based on the backend state.">redraw()</a></li>
+<li><a class="el" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title="Set rake state.">startRaking()</a></li>
+<li><a class="el" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title="Set drop state.">startDropping()</a></li>
+<li><a class="el" href="main_8cpp.html#aae45b9471979e61bbf17dd014224e322">rake()</a></li>
+<li><a class="el" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas.">sprinkleGlobal()</a></li>
+<li><a class="el" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion.">sprinkleLocal()</a></li>
+<li><a class="el" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops.">finishDrops()</a></li>
+<li><a class="el" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title="Clear canvas content and data model.">clearCanvas()</a></li>
+<li><a class="el" href="main_8cpp.html#ad8710d7ad22d50a8befcf59b7d4eb35b" title="Init function. Should be called first.">initBackend()</a></li>
+<li><a class="el" href="main_8cpp.html#a9672ebb75d7cb9f47d46dda323e77bb9" title="Set the filter option.">setFilter()</a></li>
+<li><a class="el" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title="Undo the last rake.">undoLastRake()</a></li>
+<li><a class="el" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas.">resize()</a></li>
+</ul>
+</div><div style="max-width:980px"><hr  />
+</div><div style="max-width:980px"></div><h1><a class="anchor" id="autotoc_md18"></a>
+Marbling</h1>
+<div style="max-width:980px"> </div><h2><a class="anchor" id="autotoc_md19"></a>
+Color Dropping Basics</h2>
+<div style="max-width:980px"> In the physical world, marbling works by putting drops of oil-based color onto a water surface. Since oil and water don't mix, the drops spread out as far as they can on the water surface and displace one another, each new drop forcing the whole surface to adapt to a new equilibrium.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md20"></a>
+Color Dropping Algorithm</h2>
+<div style="max-width:980px"> The way we calculate the displacement of old drops when a new one is added makes use of our decision to store the drops as polygons with a discrete number of vertices. When a new drop is added we move every vertex of every older drop in a straight line away from the center of this new drop.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md21"></a>
+Raking Basics</h2>
+<div style="max-width:980px"> When a marbling artist is satisfied with the drops he placed onto the surface, he can begin to to carefully draw a rake through the water surface. Nearby color is attracted to each tine and follows their path to some extend, allowing for very complex patterns.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md22"></a>
+Raking Algorithm</h2>
+<div style="max-width:980px"> Linear Rakes:</div><div style="max-width:980px">When calculating rake strokes, for every pixel in the resulting image we calculate the position we need to look in the opposite direction of the stroke (because that is where the color came from that will land at the spot we are interested in).</div><div style="max-width:980px">The strength of the stroke falls off the further away from the tine the line of pixels is. Conceptionally there is no difference between horizontal and vertical strokes. In both cases we ensure that we don't look into a void by wrapping around the canvas.</div><div style="max-width:980px">Wavy Rakes:</div><div style="max-width:980px">To realize wavy rake strokes, we use a trick. First, we shift the lines/rows of pixel perpendicular to our main stroke direction with wraparound in accordance to the user-specified wave, then we apply a normal linear rake on that modified canvas, and then finally we do the opposite of the first shift we did. The result looks close to someone actually going over the surface in a wavelike manner.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md23"></a>
+Color Dropping In Code</h2>
+<div style="max-width:980px"><img src="Pictures/10000201000007370000045991F78369D3A502BF.png" alt="" width="1000" class="inline"/></div><div style="max-width:980px">When the left mouse button is pressed down, first a drop is added (backend.drop), then a loop will start that keeps growing the drop and displacing the other drops further and further (dropper.drop) while rendering and displaying the scene after each update. A detailed explanation on how we draw the scene can be found <a href="https://t-erxleben.github.io/marbellous/backend/html/class_w_g_l_scene_renderer.html">here</a>.</div><div style="max-width:980px">The loop keeps going until a mouseup event is registered, which will set the loop variable dropper.active to false, causing dropper.drop to go into the terminating branch that calls backend.finishDrops instead of calling itself again.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md24"></a>
+Raking In Code</h2>
+<div style="max-width:980px"><img src="Pictures/1000020100000386000001C40AEDF40938C050E1.png" alt="" width="500" class="inline"/></div><div style="max-width:980px">In rake mode, everytime the mouse button is held down and moved, the corresponding information for that rake is saved. Once the button is released, rake.up is called which makes the calls to the backend to apply the rake and then draw the resulting, new scene.</div><div style="max-width:980px"></div><h2><a class="anchor" id="autotoc_md25"></a>
+Postprocessing</h2>
+<div style="max-width:980px"> Sometimes when using marbellous, we noticed that some of the edges of the color drops could start to look a little bit too sharp or blocky. This is why we have also implemented a postprocessing filter to smooth out the edges. In the same way we draw the scene and rake over it, the postprocessing is also implemented as an OpenGL shader. We use a 1D binomial filter across both of the image dimensions, achieving a 2-dimensional blur.</div><div style="max-width:980px">Due to the way different operating systems and browsers handle graphics differently internally however, this process can work in unintended ways on some systems. For the users affected, we provide the option to disable the postprocessing.</div><div style="max-width:980px"></div> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 13 2021 16:34:59 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Sep 17 2021 13:13:13 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

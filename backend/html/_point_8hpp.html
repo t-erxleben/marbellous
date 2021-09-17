@@ -110,6 +110,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a0bec146314795632f4df033751efba52"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_point_8hpp.html#a0bec146314795632f4df033751efba52">__attribute__</a> ((packed)) Point</td></tr>
+<tr class="memdesc:a0bec146314795632f4df033751efba52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains a point in 2D (GLfloat).  <a href="_point_8hpp.html#a0bec146314795632f4df033751efba52">More...</a><br /></td></tr>
 <tr class="separator:a0bec146314795632f4df033751efba52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad39a7abbd5b7cbdf29e3a2edb15294e6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_point_8hpp.html#ad39a7abbd5b7cbdf29e3a2edb15294e6">distance2</a> (const Point &amp;a, const Point &amp;b)</td></tr>
 <tr class="separator:ad39a7abbd5b7cbdf29e3a2edb15294e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,7 +136,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
 <p>Contains a point in 2D (GLfloat). </p>
+<p>Displacement information for a Point.</p>
+<p>This point will be displaced based on a a new circle at p with radius r. </p>
+<p>&lt; x coordinate</p>
+<p>&lt; y coordinate</p>
 <p>Construct point at origin.</p>
 <p>Construct point by coordinates. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -152,6 +158,84 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<p>Interpolate between two points.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Point 1 </td></tr>
+    <tr><td class="paramname">b</td><td>Point 2 </td></tr>
+    <tr><td class="paramname">m</td><td>Influence of <code>a</code> in result. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>interpolated Point</dd></dl>
+<p>Check two points for equality.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oth</td><td>Other point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true Points are equal. </dd>
+<dd>
+false Points are not equal.</dd></dl>
+<p>Substract two Point objects.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rh</td><td>Other Point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Point</dd></dl>
+<p>Add two Point objects.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rh</td><td>Other Point. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Point</dd></dl>
+<p>scale a point.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>factor for inverse scaling. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a new point where res = this / f</dd></dl>
+<p>Inner product of two points.</p>
+<p>Scale a point.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Scaling factor. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to result for chaining.</dd></dl>
+<p>Same as P*= 1/<code>f</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Scale with 1/f </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to result for chaining.</dd></dl>
+<p>Add two points.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rh</td><td>Other Point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to result for chaining.</dd></dl>
+<p>Stream operator for convenient debug output.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>An std::ostream reference. </td></tr>
+    <tr><td class="paramname">p</td><td>Point to output. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::ostream&amp;</dd></dl>
 
 </div>
 </div>
@@ -188,7 +272,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Calculate distance^2 between the points </p>
+<p>Calculate squarred distance between two Point objects.</p>
+<dl class="section return"><dt>Returns</dt><dd>Squarred distance </dd></dl>
 
 </div>
 </div>
@@ -218,7 +303,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 13 2021 16:34:59 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Sep 17 2021 13:13:12 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

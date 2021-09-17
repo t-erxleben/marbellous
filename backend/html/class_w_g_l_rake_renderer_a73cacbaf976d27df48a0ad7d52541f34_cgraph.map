@@ -1,17 +1,17 @@
 <map id="WGLRakeRenderer::reset" name="WGLRakeRenderer::reset">
-<area shape="rect" id="node1" title=" " alt="" coords="5,491,175,518"/>
-<area shape="rect" id="node2" href="$class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="223,295,413,336"/>
-<area shape="rect" id="node13" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="975,441,1139,467"/>
-<area shape="rect" id="node15" href="$class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="231,542,405,569"/>
-<area shape="rect" id="node3" href="$class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="510,137,625,163"/>
-<area shape="rect" id="node5" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="461,263,673,290"/>
+<area shape="rect" id="node1" title="Resets the WGLRakeRenderer to a new initial state." alt="" coords="5,491,175,518"/>
+<area shape="rect" id="node2" href="$class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title="Draw Scene to a given buffer." alt="" coords="223,295,413,336"/>
+<area shape="rect" id="node13" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="975,441,1139,467"/>
+<area shape="rect" id="node15" href="$class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="231,542,405,569"/>
+<area shape="rect" id="node3" href="$class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="510,137,625,163"/>
+<area shape="rect" id="node5" href="$class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="461,263,673,290"/>
 <area shape="rect" id="node10" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="752,390,893,417"/>
-<area shape="rect" id="node14" href="$class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="972,111,1143,138"/>
-<area shape="rect" id="node4" href="$class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="751,35,894,62"/>
-<area shape="rect" id="node6" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="722,289,923,315"/>
+<area shape="rect" id="node14" href="$class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="972,111,1143,138"/>
+<area shape="rect" id="node4" href="$class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="751,35,894,62"/>
+<area shape="rect" id="node6" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="722,289,923,315"/>
 <area shape="rect" id="node7" href="$class_options.html#ab8230de24cbffc466ceac728f9658b15" title=" " alt="" coords="753,339,893,366"/>
-<area shape="rect" id="node8" href="$class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title=" " alt="" coords="738,86,907,113"/>
-<area shape="rect" id="node9" href="$class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title=" " alt="" coords="749,137,896,163"/>
+<area shape="rect" id="node8" href="$class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca" title="vector of all displacements" alt="" coords="738,86,907,113"/>
+<area shape="rect" id="node9" href="$class_scene.html#a0015860acf1b41173be6d3bff19ab6c9" title="Get the generation of the scene." alt="" coords="749,137,896,163"/>
 <area shape="rect" id="node11" href="$class_color.html#aa8ce4695c068cbee6cfbd3975b41d6f6" title="&lt; get color channels" alt="" coords="771,187,875,214"/>
-<area shape="rect" id="node12" href="$class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title=" " alt="" coords="721,238,924,265"/>
+<area shape="rect" id="node12" href="$class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5" title="Set the WebGL state needed for the shader." alt="" coords="721,238,924,265"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="WGLFilter::WGLFilter" name="WGLFilter::WGLFilter">
-<area shape="rect" id="node1" title=" " alt="" coords="5,35,152,61"/>
-<area shape="rect" id="node2" href="$class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e" title=" " alt="" coords="200,5,391,32"/>
-<area shape="rect" id="node3" href="$class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124" title=" " alt="" coords="204,57,387,98"/>
+<area shape="rect" id="node1" title="Construct a new WGLFilter object." alt="" coords="5,35,152,61"/>
+<area shape="rect" id="node2" href="$class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e" title="Construct a FBO." alt="" coords="200,5,391,32"/>
+<area shape="rect" id="node3" href="$class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124" title="Create a shader program." alt="" coords="204,57,387,98"/>
 </map>

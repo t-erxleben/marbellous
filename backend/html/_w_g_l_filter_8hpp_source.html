@@ -77,77 +77,77 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_w_g_l_filter.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_w_g_l_filter.html">WGLFilter</a>: <span class="keyword">private</span> <a class="code" href="class_w_g_l_renderer.html">WGLRenderer</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        std::string <span class="keyword">const</span> vertex_source{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            R<span class="stringliteral">&quot;==(#version 300 es</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">                layout (location = 0) in vec2 position;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">                out vec2 texCoord;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">                void main(){</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">                    gl_Position = vec4(position, 0., 1.);</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">                    texCoord = (position + vec2(1.,1.))/2.;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">                }</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">            )==&quot;};</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">        std::string </span><span class="keyword">const</span> draw_post_proc_fragment_source{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            R<span class="stringliteral">&quot;==(#version 300 es</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">                precision mediump float;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral">                uniform sampler2D tex;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">                uniform int dim;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">                in vec2 texCoord;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">                out vec4 fFragment;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">                void main() </span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">                {</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">                    // calculate a 1D Convolution along dim</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">                    float stepSize = 1./float(textureSize(tex, 0)[dim]);</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">                    vec2 left = vec2(0.,0.);</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">                    vec2 right = vec2(0.,0.);</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">                    left[dim] = -stepSize;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">                    right[dim] = stepSize;       </span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">                    // binom filter</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">                    fFragment = 0.25 * texture(tex, texCoord + left) + 0.5*texture(tex, texCoord) + 0.25 * texture(tex, texCoord + right);</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">                }</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="stringliteral">            )==&quot;};</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_w_g_l_filter.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_w_g_l_filter.html">WGLFilter</a>: <span class="keyword">private</span> <a class="code" href="class_w_g_l_renderer.html">WGLRenderer</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        std::string <span class="keyword">const</span> vertex_source{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            R<span class="stringliteral">&quot;==(#version 300 es</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">                layout (location = 0) in vec2 position;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">                out vec2 texCoord;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral">                void main(){</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">                    gl_Position = vec4(position, 0., 1.);</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">                    texCoord = (position + vec2(1.,1.))/2.;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">                }</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral">            )==&quot;};</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">        std::string </span><span class="keyword">const</span> draw_post_proc_fragment_source{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            R<span class="stringliteral">&quot;==(#version 300 es</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">                precision mediump float;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">                uniform sampler2D tex;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">                uniform int dim;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">                in vec2 texCoord;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">                out vec4 fFragment;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">                void main() </span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">                {</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">                    // calculate a 1D Convolution along dim</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">                    float stepSize = 1./float(textureSize(tex, 0)[dim]);</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">                    vec2 left = vec2(0.,0.);</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">                    vec2 right = vec2(0.,0.);</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral">                    left[dim] = -stepSize;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="stringliteral">                    right[dim] = stepSize;       </span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">        </span><span class="comment">// same loke drawShader but expects to read real colors instead of color codes</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="comment">// used for post processing</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        GLint postShader;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="comment">// Frame buffer with to textures; one to load from and one to draw to</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        GLuint fbo_post;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        GLuint tex_post;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">// one and single triangle</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        GLuint vbo;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        GLint dimLoc;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">size_t</span> curr_size;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4">WGLFilter</a>(<span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266">setActive</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e">resize</a>(<span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e">resize</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1">draw</a>(GLuint src_tex, GLuint target_fbo);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">                    // binom filter</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral">                    fFragment = 0.25 * texture(tex, texCoord + left) + 0.5*texture(tex, texCoord) + 0.25 * texture(tex, texCoord + right);</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">                }</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="stringliteral">            )==&quot;};</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="stringliteral">        GLint postShader;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="stringliteral">        GLuint fbo_post;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="stringliteral">        GLuint tex_post;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="stringliteral">        </span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="stringliteral">        GLuint vbo;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="stringliteral">        GLint dimLoc;</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="stringliteral">        </span><span class="keywordtype">size_t</span> curr_size;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4">WGLFilter</a>(<span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266">setActive</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e">resize</a>(<span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e">resize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1">draw</a>(GLuint src_tex, GLuint target_fbo);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
 <div class="ttc" id="a_w_g_l_context_8hpp_html"><div class="ttname"><a href="_w_g_l_context_8hpp.html">WGLContext.hpp</a></div></div>
 <div class="ttc" id="a_w_g_l_renderer_8hpp_html"><div class="ttname"><a href="_w_g_l_renderer_8hpp.html">WGLRenderer.hpp</a></div></div>
-<div class="ttc" id="aclass_w_g_l_filter_html"><div class="ttname"><a href="class_w_g_l_filter.html">WGLFilter</a></div><div class="ttdef"><b>Definition:</b> WGLFilter.hpp:9</div></div>
-<div class="ttc" id="aclass_w_g_l_filter_html_a1092d8c7e5518f33672455d9d0cc0266"><div class="ttname"><a href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266">WGLFilter::setActive</a></div><div class="ttdeci">void setActive() const override</div><div class="ttdef"><b>Definition:</b> WGLFilter.cpp:26</div></div>
-<div class="ttc" id="aclass_w_g_l_filter_html_a275b4ca701dd4c8565a39cb8140ee6e1"><div class="ttname"><a href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1">WGLFilter::draw</a></div><div class="ttdeci">void draw(GLuint src_tex, GLuint target_fbo)</div><div class="ttdef"><b>Definition:</b> WGLFilter.cpp:70</div></div>
-<div class="ttc" id="aclass_w_g_l_filter_html_a5ca80e9cdcab9a388e7ee172546c020e"><div class="ttname"><a href="class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e">WGLFilter::resize</a></div><div class="ttdeci">void resize() override</div><div class="ttdef"><b>Definition:</b> WGLFilter.cpp:41</div></div>
-<div class="ttc" id="aclass_w_g_l_filter_html_ac45c61003dd4e17814f8b0de2efb36e4"><div class="ttname"><a href="class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4">WGLFilter::WGLFilter</a></div><div class="ttdeci">WGLFilter(size_t size)</div><div class="ttdef"><b>Definition:</b> WGLFilter.cpp:3</div></div>
-<div class="ttc" id="aclass_w_g_l_renderer_html"><div class="ttname"><a href="class_w_g_l_renderer.html">WGLRenderer</a></div><div class="ttdef"><b>Definition:</b> WGLRenderer.hpp:9</div></div>
+<div class="ttc" id="aclass_w_g_l_filter_html"><div class="ttname"><a href="class_w_g_l_filter.html">WGLFilter</a></div><div class="ttdoc">Implements a 3x3 blur filter.</div><div class="ttdef"><b>Definition:</b> WGLFilter.hpp:13</div></div>
+<div class="ttc" id="aclass_w_g_l_filter_html_a1092d8c7e5518f33672455d9d0cc0266"><div class="ttname"><a href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266">WGLFilter::setActive</a></div><div class="ttdeci">void setActive() const override</div><div class="ttdoc">Set the WGL state needed for this shader.</div><div class="ttdef"><b>Definition:</b> WGLFilter.cpp:26</div></div>
+<div class="ttc" id="aclass_w_g_l_filter_html_a275b4ca701dd4c8565a39cb8140ee6e1"><div class="ttname"><a href="class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1">WGLFilter::draw</a></div><div class="ttdeci">void draw(GLuint src_tex, GLuint target_fbo)</div><div class="ttdoc">Apply the convolution.</div><div class="ttdef"><b>Definition:</b> WGLFilter.cpp:70</div></div>
+<div class="ttc" id="aclass_w_g_l_filter_html_a5ca80e9cdcab9a388e7ee172546c020e"><div class="ttname"><a href="class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e">WGLFilter::resize</a></div><div class="ttdeci">void resize() override</div><div class="ttdoc">Resize to the size of the current state (e.g. drop or rake)</div><div class="ttdef"><b>Definition:</b> WGLFilter.cpp:41</div></div>
+<div class="ttc" id="aclass_w_g_l_filter_html_ac45c61003dd4e17814f8b0de2efb36e4"><div class="ttname"><a href="class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4">WGLFilter::WGLFilter</a></div><div class="ttdeci">WGLFilter(size_t size)</div><div class="ttdoc">Construct a new WGLFilter object.</div><div class="ttdef"><b>Definition:</b> WGLFilter.cpp:3</div></div>
+<div class="ttc" id="aclass_w_g_l_renderer_html"><div class="ttname"><a href="class_w_g_l_renderer.html">WGLRenderer</a></div><div class="ttdoc">Base class for rendering.</div><div class="ttdef"><b>Definition:</b> WGLRenderer.hpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 13 2021 16:34:59 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Sep 17 2021 13:13:12 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

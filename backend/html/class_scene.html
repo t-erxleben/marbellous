@@ -70,21 +70,26 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Contains a vector of polygons and is iterable.  
+ <a href="class_scene.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_scene_8hpp_source.html">Scene.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Scene:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene__coll__graph.png" border="0" usemap="#a_scene_coll__map" alt="Collaboration graph"/></div>
 <map name="a_scene_coll__map" id="a_scene_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,151,229"/>
+<area shape="rect" title="Contains a vector of polygons and is iterable." alt="" coords="5,5,151,229"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f2c54c17ebc3cce7d6b60651613d9ca"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca">getDisplacements</a> () const</td></tr>
+<tr class="memdesc:a8f2c54c17ebc3cce7d6b60651613d9ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector of all displacements  <a href="class_scene.html#a8f2c54c17ebc3cce7d6b60651613d9ca">More...</a><br /></td></tr>
 <tr class="separator:a8f2c54c17ebc3cce7d6b60651613d9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0015860acf1b41173be6d3bff19ab6c9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">getGeneration</a> () const</td></tr>
+<tr class="memdesc:a0015860acf1b41173be6d3bff19ab6c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the generation of the scene.  <a href="class_scene.html#a0015860acf1b41173be6d3bff19ab6c9">More...</a><br /></td></tr>
 <tr class="separator:a0015860acf1b41173be6d3bff19ab6c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1557dfc7914440e06198552e213267e7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a1557dfc7914440e06198552e213267e7">addPolygon</a> (<a class="el" href="class_polygon.html">Polygon</a> const &amp;pol)</td></tr>
 <tr class="separator:a1557dfc7914440e06198552e213267e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -95,6 +100,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0bc2671d164f0329314da6fb0b5a77bb"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a0bc2671d164f0329314da6fb0b5a77bb">getPolygonCount</a> () const</td></tr>
 <tr class="separator:a0bc2671d164f0329314da6fb0b5a77bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70e5b1218abb729d70d9f41b107017f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9">clear</a> ()</td></tr>
+<tr class="memdesc:a70e5b1218abb729d70d9f41b107017f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the scene by deleting all polygons.  <a href="class_scene.html#a70e5b1218abb729d70d9f41b107017f9">More...</a><br /></td></tr>
 <tr class="separator:a70e5b1218abb729d70d9f41b107017f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a080226df8abd8a89e1c8aa48e02b4d01"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_polygon.html">Polygon</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01">begin</a> ()</td></tr>
 <tr class="separator:a080226df8abd8a89e1c8aa48e02b4d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +115,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac708e7f8fbb9fcb065bb3272788ceff4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_polygon.html">Polygon</a> &gt;::const_reverse_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#ac708e7f8fbb9fcb065bb3272788ceff4">rend</a> () const</td></tr>
 <tr class="separator:ac708e7f8fbb9fcb065bb3272788ceff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa332796b09a4b73eb4f933ef644e6e8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d">applyDisplacement</a> (size_t _canvasSize)</td></tr>
+<tr class="memdesc:aa332796b09a4b73eb4f933ef644e6e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the current stored displacement.  <a href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d">More...</a><br /></td></tr>
 <tr class="separator:aa332796b09a4b73eb4f933ef644e6e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a483d6b3587d4c2c07b9e71e38d770baf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a483d6b3587d4c2c07b9e71e38d770baf">addDisplacement</a> (Point p, float newRadius)</td></tr>
 <tr class="separator:a483d6b3587d4c2c07b9e71e38d770baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,6 +124,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains a vector of polygons and is iterable. </p>
+<p>Displacement of polygons can be done at a leter time. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a483d6b3587d4c2c07b9e71e38d770baf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a483d6b3587d4c2c07b9e71e38d770baf">&#9670;&nbsp;</a></span>addDisplacement()</h2>
@@ -157,11 +165,11 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_scene_a483d6b3587d4c2c07b9e71e38d770baf_icgraph.png" border="0" usemap="#aclass_scene_a483d6b3587d4c2c07b9e71e38d770baf_icgraph" alt=""/></div>
 <map name="aclass_scene_a483d6b3587d4c2c07b9e71e38d770baf_icgraph" id="aclass_scene_a483d6b3587d4c2c07b9e71e38d770baf_icgraph">
 <area shape="rect" title=" " alt="" coords="283,56,448,83"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="161,5,231,32"/>
-<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="157,56,235,83"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,107,229,133"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,81,109,108"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,132,107,159"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="161,5,231,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="157,56,235,83"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="163,107,229,133"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="5,81,109,108"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="8,132,107,159"/>
 </map>
 </div>
 
@@ -190,9 +198,9 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Internal vector saving the references to the polygons </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Add a new <a class="el" href="class_polygon.html" title="Represent polygons in 2D as a list of vertices in counter-clockwise order.">Polygon</a> to the <a class="el" href="class_scene.html" title="Contains a vector of polygons and is iterable.">Scene</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pol</td><td><a class="el" href="class_polygon.html">Polygon</a> that will be added to the scene </td></tr>
+    <tr><td class="paramname">pol</td><td><a class="el" href="class_polygon.html" title="Represent polygons in 2D as a list of vertices in counter-clockwise order.">Polygon</a> that will be added to the scene </td></tr>
   </table>
   </dd>
 </dl>
@@ -203,11 +211,11 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_scene_a1557dfc7914440e06198552e213267e7_icgraph.png" border="0" usemap="#aclass_scene_a1557dfc7914440e06198552e213267e7_icgraph" alt=""/></div>
 <map name="aclass_scene_a1557dfc7914440e06198552e213267e7_icgraph" id="aclass_scene_a1557dfc7914440e06198552e213267e7_icgraph">
 <area shape="rect" title=" " alt="" coords="283,56,415,83"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="161,5,231,32"/>
-<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="157,56,235,83"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="163,107,229,133"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,81,109,108"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,132,107,159"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="161,5,231,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="157,56,235,83"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="163,107,229,133"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="5,81,109,108"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="8,132,107,159"/>
 </map>
 </div>
 
@@ -236,13 +244,15 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>&lt; stores current state, advance generation</p>
+
+<p>Apply the current stored displacement. </p>
+<p>The generation will increase by one. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_aa332796b09a4b73eb4f933ef644e6e8d_cgraph.png" border="0" usemap="#aclass_scene_aa332796b09a4b73eb4f933ef644e6e8d_cgraph" alt=""/></div>
 <map name="aclass_scene_aa332796b09a4b73eb4f933ef644e6e8d_cgraph" id="aclass_scene_aa332796b09a4b73eb4f933ef644e6e8d_cgraph">
-<area shape="rect" title=" " alt="" coords="5,56,180,83"/>
+<area shape="rect" title="Apply the current stored displacement." alt="" coords="5,56,180,83"/>
 <area shape="rect" href="class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="255,5,351,32"/>
 <area shape="rect" href="class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="260,56,347,83"/>
 <area shape="rect" href="class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="228,107,379,133"/>
@@ -253,13 +263,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_aa332796b09a4b73eb4f933ef644e6e8d_icgraph.png" border="0" usemap="#aclass_scene_aa332796b09a4b73eb4f933ef644e6e8d_icgraph" alt=""/></div>
 <map name="aclass_scene_aa332796b09a4b73eb4f933ef644e6e8d_icgraph" id="aclass_scene_aa332796b09a4b73eb4f933ef644e6e8d_icgraph">
-<area shape="rect" title=" " alt="" coords="292,81,467,108"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="165,5,236,32"/>
-<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="162,56,239,83"/>
-<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="157,107,244,133"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="167,157,234,184"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
+<area shape="rect" title="Apply the current stored displacement." alt="" coords="292,81,467,108"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="165,5,236,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="162,56,239,83"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops." alt="" coords="157,107,244,133"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="167,157,234,184"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="5,132,109,159"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="8,183,107,209"/>
 </map>
 </div>
 
@@ -294,13 +304,13 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_scene_a080226df8abd8a89e1c8aa48e02b4d01_icgraph.png" border="0" usemap="#aclass_scene_a080226df8abd8a89e1c8aa48e02b4d01_icgraph" alt=""/></div>
 <map name="aclass_scene_a080226df8abd8a89e1c8aa48e02b4d01_icgraph" id="aclass_scene_a080226df8abd8a89e1c8aa48e02b4d01_icgraph">
 <area shape="rect" title=" " alt="" coords="515,81,611,108"/>
-<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="292,81,467,108"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="165,5,236,32"/>
-<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="162,56,239,83"/>
-<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="157,107,244,133"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="167,157,234,184"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
+<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="292,81,467,108"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="165,5,236,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="162,56,239,83"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops." alt="" coords="157,107,244,133"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="167,157,234,184"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="5,132,109,159"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="8,183,107,209"/>
 </map>
 </div>
 
@@ -354,13 +364,15 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Clear the scene by deleting all polygons. </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_a70e5b1218abb729d70d9f41b107017f9_icgraph.png" border="0" usemap="#aclass_scene_a70e5b1218abb729d70d9f41b107017f9_icgraph" alt=""/></div>
 <map name="aclass_scene_a70e5b1218abb729d70d9f41b107017f9_icgraph" id="aclass_scene_a70e5b1218abb729d70d9f41b107017f9_icgraph">
-<area shape="rect" title=" " alt="" coords="148,5,241,32"/>
-<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="5,5,100,32"/>
+<area shape="rect" title="Clear the scene by deleting all polygons." alt="" coords="148,5,241,32"/>
+<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title="Clear canvas content and data model." alt="" coords="5,5,100,32"/>
 </map>
 </div>
 
@@ -395,13 +407,13 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_scene_ad3e6be79363fe85e92c0f7e472b1e0c5_icgraph.png" border="0" usemap="#aclass_scene_ad3e6be79363fe85e92c0f7e472b1e0c5_icgraph" alt=""/></div>
 <map name="aclass_scene_ad3e6be79363fe85e92c0f7e472b1e0c5_icgraph" id="aclass_scene_ad3e6be79363fe85e92c0f7e472b1e0c5_icgraph">
 <area shape="rect" title=" " alt="" coords="515,81,601,108"/>
-<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="292,81,467,108"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="165,5,236,32"/>
-<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="162,56,239,83"/>
-<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="157,107,244,133"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="167,157,234,184"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
+<area shape="rect" href="class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="292,81,467,108"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="165,5,236,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="162,56,239,83"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops." alt="" coords="157,107,244,133"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="167,157,234,184"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="5,132,109,159"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="8,183,107,209"/>
 </map>
 </div>
 
@@ -455,30 +467,34 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>vector of all displacements </p>
+<p>Get the currently saved displacements.</p>
+<dl class="section return"><dt>Returns</dt><dd>Displacement vector </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_a8f2c54c17ebc3cce7d6b60651613d9ca_icgraph.png" border="0" usemap="#aclass_scene_a8f2c54c17ebc3cce7d6b60651613d9ca_icgraph" alt=""/></div>
 <map name="aclass_scene_a8f2c54c17ebc3cce7d6b60651613d9ca_icgraph" id="aclass_scene_a8f2c54c17ebc3cce7d6b60651613d9ca_icgraph">
-<area shape="rect" title=" " alt="" coords="969,224,1139,251"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="709,224,921,251"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="531,5,601,32"/>
-<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="527,56,605,83"/>
-<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,120,153,147"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="471,158,661,199"/>
-<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="523,224,609,251"/>
-<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="535,275,597,301"/>
+<area shape="rect" title="vector of all displacements" alt="" coords="969,224,1139,251"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="709,224,921,251"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="531,5,601,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="527,56,605,83"/>
+<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title="Clear canvas content and data model." alt="" coords="58,120,153,147"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title="Draw Scene to a given buffer." alt="" coords="471,158,661,199"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops." alt="" coords="523,224,609,251"/>
+<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title="Redraw the current data model based on the backend state." alt="" coords="535,275,597,301"/>
 <area shape="rect" href="main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511" title=" " alt="" coords="521,325,611,352"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="533,376,599,403"/>
-<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="517,427,615,453"/>
-<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,157,376,184"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,208,423,235"/>
-<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,196,149,223"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,247,205,289"/>
-<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,263,366,289"/>
-<area shape="rect" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title=" " alt="" coords="285,313,391,340"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,372,390,399"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,423,387,449"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="533,376,599,403"/>
+<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title="Set drop state." alt="" coords="517,427,615,453"/>
+<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title="Return the current canvas content as image." alt="" coords="300,157,376,184"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title="Resets the WGLRakeRenderer to a new initial state." alt="" coords="253,208,423,235"/>
+<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title="Set rake state." alt="" coords="61,196,149,223"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title="Construct a new WGLRakeRenderer object." alt="" coords="5,247,205,289"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas." alt="" coords="310,263,366,289"/>
+<area shape="rect" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title="Undo the last rake." alt="" coords="285,313,391,340"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="286,372,390,399"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="289,423,387,449"/>
 </map>
 </div>
 
@@ -506,30 +522,32 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the generation of the scene. </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scene_a0015860acf1b41173be6d3bff19ab6c9_icgraph.png" border="0" usemap="#aclass_scene_a0015860acf1b41173be6d3bff19ab6c9_icgraph" alt=""/></div>
 <map name="aclass_scene_a0015860acf1b41173be6d3bff19ab6c9_icgraph" id="aclass_scene_a0015860acf1b41173be6d3bff19ab6c9_icgraph">
-<area shape="rect" title=" " alt="" coords="969,224,1116,251"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="709,224,921,251"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="531,5,601,32"/>
-<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="527,56,605,83"/>
-<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,120,153,147"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="471,158,661,199"/>
-<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="523,224,609,251"/>
-<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="535,275,597,301"/>
+<area shape="rect" title="Get the generation of the scene." alt="" coords="969,224,1116,251"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="709,224,921,251"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="531,5,601,32"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="527,56,605,83"/>
+<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title="Clear canvas content and data model." alt="" coords="58,120,153,147"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title="Draw Scene to a given buffer." alt="" coords="471,158,661,199"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops." alt="" coords="523,224,609,251"/>
+<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title="Redraw the current data model based on the backend state." alt="" coords="535,275,597,301"/>
 <area shape="rect" href="main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511" title=" " alt="" coords="521,325,611,352"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="533,376,599,403"/>
-<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="517,427,615,453"/>
-<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,157,376,184"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,208,423,235"/>
-<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,196,149,223"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,247,205,289"/>
-<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,263,366,289"/>
-<area shape="rect" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title=" " alt="" coords="285,313,391,340"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,372,390,399"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,423,387,449"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="533,376,599,403"/>
+<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title="Set drop state." alt="" coords="517,427,615,453"/>
+<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title="Return the current canvas content as image." alt="" coords="300,157,376,184"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title="Resets the WGLRakeRenderer to a new initial state." alt="" coords="253,208,423,235"/>
+<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title="Set rake state." alt="" coords="61,196,149,223"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title="Construct a new WGLRakeRenderer object." alt="" coords="5,247,205,289"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas." alt="" coords="310,263,366,289"/>
+<area shape="rect" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title="Undo the last rake." alt="" coords="285,313,391,340"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="286,372,390,399"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="289,423,387,449"/>
 </map>
 </div>
 
@@ -649,6 +667,7 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Begin reverse const_iterator over polygons in the scene </dd></dl>
 
 </div>
 </div>
@@ -674,6 +693,7 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>End const_reverse_iterator over polygons in the scene. </dd></dl>
 
 </div>
 </div>
@@ -718,7 +738,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 13 2021 16:34:59 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Sep 17 2021 13:13:12 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

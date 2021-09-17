@@ -1,7 +1,7 @@
 <map id="WGLSceneRenderer::resize" name="WGLSceneRenderer::resize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,53,187,79"/>
-<area shape="rect" id="node2" href="$class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e" title=" " alt="" coords="453,53,644,79"/>
-<area shape="rect" id="node3" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="238,27,402,54"/>
-<area shape="rect" id="node4" href="$class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title=" " alt="" coords="235,78,405,105"/>
-<area shape="rect" id="node5" href="$class_w_g_l_filter.html#a0bf6ff56bb8b4bdeae3e6d0fb50bf5a2" title=" " alt="" coords="259,129,381,155"/>
+<area shape="rect" id="node1" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="5,53,187,79"/>
+<area shape="rect" id="node2" href="$class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e" title="Construct a FBO." alt="" coords="453,53,644,79"/>
+<area shape="rect" id="node3" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="238,27,402,54"/>
+<area shape="rect" id="node4" href="$class_w_g_l_context.html#a100d6bc9197ced38a5d83b0bb4ce6c9c" title="Get the drop state resolution." alt="" coords="235,78,405,105"/>
+<area shape="rect" id="node5" href="$class_w_g_l_filter.html#a0bf6ff56bb8b4bdeae3e6d0fb50bf5a2" title="Resize all allocated buffers to size." alt="" coords="259,129,381,155"/>
 </map>

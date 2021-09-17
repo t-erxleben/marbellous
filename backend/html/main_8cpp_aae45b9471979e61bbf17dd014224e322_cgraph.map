@@ -1,12 +1,12 @@
 <map id="rake" name="rake">
 <area shape="rect" id="node1" title=" " alt="" coords="5,132,52,159"/>
-<area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="100,107,268,133"/>
-<area shape="rect" id="node10" href="$class_w_g_l_rake_renderer.html#a5717094f8aef4340a2554db7509800c8" title=" " alt="" coords="101,157,267,184"/>
-<area shape="rect" id="node3" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title=" " alt="" coords="316,5,517,32"/>
-<area shape="rect" id="node4" href="$class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title=" " alt="" coords="359,56,474,83"/>
+<area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="100,107,268,133"/>
+<area shape="rect" id="node10" href="$class_w_g_l_rake_renderer.html#a5717094f8aef4340a2554db7509800c8" title="Compute a rake step." alt="" coords="101,157,267,184"/>
+<area shape="rect" id="node3" href="$class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="316,5,517,32"/>
+<area shape="rect" id="node4" href="$class_w_g_l_filter.html#a275b4ca701dd4c8565a39cb8140ee6e1" title="Apply the convolution." alt="" coords="359,56,474,83"/>
 <area shape="rect" id="node6" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="346,107,487,133"/>
-<area shape="rect" id="node7" href="$class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title=" " alt="" coords="319,157,514,184"/>
-<area shape="rect" id="node5" href="$class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title=" " alt="" coords="581,56,723,83"/>
-<area shape="rect" id="node8" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title=" " alt="" coords="570,132,734,159"/>
-<area shape="rect" id="node9" href="$class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title=" " alt="" coords="565,183,739,209"/>
+<area shape="rect" id="node7" href="$class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48" title="Set the WebGL state needed for the shader." alt="" coords="319,157,514,184"/>
+<area shape="rect" id="node5" href="$class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266" title="Set the WGL state needed for this shader." alt="" coords="581,56,723,83"/>
+<area shape="rect" id="node8" href="$class_w_g_l_context.html#ae068c0f5c7835ff00ed935fb8f02e014" title="get the current context." alt="" coords="570,132,734,159"/>
+<area shape="rect" id="node9" href="$class_w_g_l_context.html#a77f700c2598a089ab7822cd46534f74c" title="Get the drop state resolution." alt="" coords="565,183,739,209"/>
 </map>

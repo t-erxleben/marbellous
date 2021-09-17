@@ -1,10 +1,10 @@
 <map id="WGLRenderer::constructFBO" name="WGLRenderer::constructFBO">
-<area shape="rect" id="node1" title=" " alt="" coords="601,115,792,141"/>
-<area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title=" " alt="" coords="113,13,287,40"/>
-<area shape="rect" id="node4" href="$class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title=" " alt="" coords="109,64,291,91"/>
-<area shape="rect" id="node5" href="$class_w_g_l_filter.html#a0bf6ff56bb8b4bdeae3e6d0fb50bf5a2" title=" " alt="" coords="385,39,507,65"/>
-<area shape="rect" id="node6" href="$class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4" title=" " alt="" coords="373,140,519,167"/>
-<area shape="rect" id="node7" href="$class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="346,191,546,233"/>
-<area shape="rect" id="node8" href="$class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b" title=" " alt="" coords="339,257,553,298"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="5,39,61,65"/>
+<area shape="rect" id="node1" title="Construct a FBO." alt="" coords="601,115,792,141"/>
+<area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="113,13,287,40"/>
+<area shape="rect" id="node4" href="$class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="109,64,291,91"/>
+<area shape="rect" id="node5" href="$class_w_g_l_filter.html#a0bf6ff56bb8b4bdeae3e6d0fb50bf5a2" title="Resize all allocated buffers to size." alt="" coords="385,39,507,65"/>
+<area shape="rect" id="node6" href="$class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4" title="Construct a new WGLFilter object." alt="" coords="373,140,519,167"/>
+<area shape="rect" id="node7" href="$class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title="Construct a new WGLRakeRenderer object." alt="" coords="346,191,546,233"/>
+<area shape="rect" id="node8" href="$class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b" title="Construct a new WGLSceneRenderer object." alt="" coords="339,257,553,298"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas." alt="" coords="5,39,61,65"/>
 </map>

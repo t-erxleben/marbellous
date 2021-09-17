@@ -1,10 +1,10 @@
 <map id="Scene::begin" name="Scene::begin">
 <area shape="rect" id="node1" title=" " alt="" coords="515,81,611,108"/>
-<area shape="rect" id="node2" href="$class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title=" " alt="" coords="292,81,467,108"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="165,5,236,32"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="162,56,239,83"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="157,107,244,133"/>
-<area shape="rect" id="node6" href="$main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="167,157,234,184"/>
-<area shape="rect" id="node7" href="$main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="5,132,109,159"/>
-<area shape="rect" id="node8" href="$main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="8,183,107,209"/>
+<area shape="rect" id="node2" href="$class_scene.html#aa332796b09a4b73eb4f933ef644e6e8d" title="Apply the current stored displacement." alt="" coords="292,81,467,108"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="165,5,236,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="162,56,239,83"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops." alt="" coords="157,107,244,133"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="167,157,234,184"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="5,132,109,159"/>
+<area shape="rect" id="node8" href="$main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="8,183,107,209"/>
 </map>

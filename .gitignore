@@ -33,3 +33,8 @@
 
 # IDE
 **/.vscode/**
+
+# exclude build docs but include files neccessary to build docs
+**/html/**
+!**/html/Pictures/**
+!**/html/info.md

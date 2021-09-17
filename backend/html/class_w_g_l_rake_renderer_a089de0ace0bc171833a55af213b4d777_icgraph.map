@@ -1,4 +1,4 @@
 <map id="WGLRakeRenderer::swapBuffers" name="WGLRakeRenderer::swapBuffers">
-<area shape="rect" id="node1" title=" " alt="" coords="160,5,372,32"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title=" " alt="" coords="5,5,112,32"/>
+<area shape="rect" id="node1" title="Swap internal rake state buffers." alt="" coords="160,5,372,32"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title="Undo the last rake." alt="" coords="5,5,112,32"/>
 </map>

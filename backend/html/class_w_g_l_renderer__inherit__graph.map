@@ -1,6 +1,6 @@
 <map id="WGLRenderer" name="WGLRenderer">
-<area shape="rect" id="node1" title=" " alt="" coords="125,5,287,141"/>
-<area shape="rect" id="node2" href="$class_w_g_l_filter.html" title=" " alt="" coords="5,211,105,347"/>
-<area shape="rect" id="node3" href="$class_w_g_l_rake_renderer.html" title=" " alt="" coords="129,189,283,369"/>
-<area shape="rect" id="node4" href="$class_w_g_l_scene_renderer.html" title=" " alt="" coords="307,211,467,347"/>
+<area shape="rect" id="node1" title="Base class for rendering." alt="" coords="125,5,287,141"/>
+<area shape="rect" id="node2" href="$class_w_g_l_filter.html" title="Implements a 3x3 blur filter." alt="" coords="5,211,105,347"/>
+<area shape="rect" id="node3" href="$class_w_g_l_rake_renderer.html" title="Implementation of raking." alt="" coords="129,189,283,369"/>
+<area shape="rect" id="node4" href="$class_w_g_l_scene_renderer.html" title="Render scenes to buffers." alt="" coords="307,211,467,347"/>
 </map>

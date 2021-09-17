@@ -70,16 +70,19 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Base class for rendering.  
+ <a href="class_w_g_l_renderer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_w_g_l_renderer_8hpp_source.html">WGLRenderer.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for WGLRenderer:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer__inherit__graph.png" border="0" usemap="#a_w_g_l_renderer_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_w_g_l_renderer_inherit__map" id="a_w_g_l_renderer_inherit__map">
-<area shape="rect" title=" " alt="" coords="125,5,287,141"/>
-<area shape="rect" href="class_w_g_l_filter.html" title=" " alt="" coords="5,211,105,347"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html" title=" " alt="" coords="129,189,283,369"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html" title=" " alt="" coords="307,211,467,347"/>
+<area shape="rect" title="Base class for rendering." alt="" coords="125,5,287,141"/>
+<area shape="rect" href="class_w_g_l_filter.html" title="Implements a 3x3 blur filter." alt="" coords="5,211,105,347"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html" title="Implementation of raking." alt="" coords="129,189,283,369"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html" title="Render scenes to buffers." alt="" coords="307,211,467,347"/>
 </map>
 </div>
 <div class="dynheader">
@@ -87,24 +90,32 @@ Collaboration diagram for WGLRenderer:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer__coll__graph.png" border="0" usemap="#a_w_g_l_renderer_coll__map" alt="Collaboration graph"/></div>
 <map name="a_w_g_l_renderer_coll__map" id="a_w_g_l_renderer_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,168,141"/>
+<area shape="rect" title="Base class for rendering." alt="" coords="5,5,168,141"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1e05c7f2fff34772a495a7dfbb77d124"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124">setupShaderProgram</a> (std::string vert, std::string frag, GLint &amp;shader)</td></tr>
+<tr class="memdesc:a1e05c7f2fff34772a495a7dfbb77d124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a shader program.  <a href="class_w_g_l_renderer.html#a1e05c7f2fff34772a495a7dfbb77d124">More...</a><br /></td></tr>
 <tr class="separator:a1e05c7f2fff34772a495a7dfbb77d124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76bf7de4296fcfdb65d87b68b262cf8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e">constructFBO</a> (size_t x, bool stencil_depth, GLint interpolation, GLuint &amp;fbo, GLuint &amp;tex)</td></tr>
+<tr class="memdesc:a76bf7de4296fcfdb65d87b68b262cf8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a FBO.  <a href="class_w_g_l_renderer.html#a76bf7de4296fcfdb65d87b68b262cf8e">More...</a><br /></td></tr>
 <tr class="separator:a76bf7de4296fcfdb65d87b68b262cf8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae496681edec5f304697e43a6933c934b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#ae496681edec5f304697e43a6933c934b">setActive</a> () const =0</td></tr>
+<tr class="memdesc:ae496681edec5f304697e43a6933c934b"><td class="mdescLeft">&#160;</td><td class="mdescRight">All Renderer objects need to be set active to set the needed WGL state.  <a href="class_w_g_l_renderer.html#ae496681edec5f304697e43a6933c934b">More...</a><br /></td></tr>
 <tr class="separator:ae496681edec5f304697e43a6933c934b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdfbe2d8c8906f91142ffa77aac27339"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#afdfbe2d8c8906f91142ffa77aac27339">resize</a> ()=0</td></tr>
+<tr class="memdesc:afdfbe2d8c8906f91142ffa77aac27339"><td class="mdescLeft">&#160;</td><td class="mdescRight">All Renderer objects should be resizeable.  <a href="class_w_g_l_renderer.html#afdfbe2d8c8906f91142ffa77aac27339">More...</a><br /></td></tr>
 <tr class="separator:afdfbe2d8c8906f91142ffa77aac27339"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afca01cdb98219c15549e869472ed66a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0">buildColorBuffer</a> (<a class="el" href="class_palette.html">Palette</a> const &amp;p, std::vector&lt; GLfloat &gt; &amp;v)</td></tr>
+<tr class="memdesc:afca01cdb98219c15549e869472ed66a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a color buffer from a palette which may be send to GPU.  <a href="class_w_g_l_renderer.html#afca01cdb98219c15549e869472ed66a0">More...</a><br /></td></tr>
 <tr class="separator:afca01cdb98219c15549e869472ed66a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for rendering. </p>
+<p>Provides some basic function like shader compilation, FBO creation and color packing. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afca01cdb98219c15549e869472ed66a0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afca01cdb98219c15549e869472ed66a0">&#9670;&nbsp;</a></span>buildColorBuffer()</h2>
 
@@ -138,33 +149,42 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Build a color buffer from a palette which may be send to GPU. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>A palette. </td></tr>
+    <tr><td class="paramname">v</td><td>The color buffer to fill. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer_afca01cdb98219c15549e869472ed66a0_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_afca01cdb98219c15549e869472ed66a0_icgraph" alt=""/></div>
 <map name="aclass_w_g_l_renderer_afca01cdb98219c15549e869472ed66a0_icgraph" id="aclass_w_g_l_renderer_afca01cdb98219c15549e869472ed66a0_icgraph">
-<area shape="rect" title=" " alt="" coords="996,277,1197,304"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title=" " alt="" coords="758,117,926,144"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title=" " alt="" coords="736,386,948,413"/>
-<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="58,277,153,304"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title=" " alt="" coords="471,193,688,220"/>
+<area shape="rect" title="Build a color buffer from a palette which may be send to GPU." alt="" coords="996,277,1197,304"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a86b29b75ba2e78572d7d6789e7ba391e" title="Draw the current raked stated to target_fbo." alt="" coords="758,117,926,144"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ad54f67166489cbfe94258ae2f171c7aa" title="Draw the scene." alt="" coords="736,386,948,413"/>
+<area shape="rect" href="main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title="Clear canvas content and data model." alt="" coords="58,277,153,304"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#ae0f864fc5be5f80836907218cbaa3c72" title="Save the current rake state to a buffer." alt="" coords="471,193,688,220"/>
 <area shape="rect" href="main_8cpp.html#aae45b9471979e61bbf17dd014224e322" title=" " alt="" coords="556,92,603,118"/>
-<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title=" " alt="" coords="549,142,610,169"/>
-<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title=" " alt="" coords="61,61,149,88"/>
-<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title=" " alt="" coords="300,194,376,221"/>
-<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="310,142,366,169"/>
-<area shape="rect" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title=" " alt="" coords="285,92,391,118"/>
-<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title=" " alt="" coords="544,361,615,388"/>
-<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title=" " alt="" coords="541,412,618,438"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title=" " alt="" coords="484,244,675,286"/>
-<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="finalize all current growing drops" alt="" coords="536,462,623,489"/>
+<area shape="rect" href="main_8cpp.html#a93bbd3db8037452b0dfb9587be449586" title="Redraw the current data model based on the backend state." alt="" coords="549,142,610,169"/>
+<area shape="rect" href="main_8cpp.html#a6c9f1e96be7b94c399e800a35319dcd8" title="Set rake state." alt="" coords="61,61,149,88"/>
+<area shape="rect" href="main_8cpp.html#af8dcacd97325cade8a2db1d6de4b5ae3" title="Return the current canvas content as image." alt="" coords="300,194,376,221"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas." alt="" coords="310,142,366,169"/>
+<area shape="rect" href="main_8cpp.html#af39818aa33f80df7d767334ae9c8a00c" title="Undo the last rake." alt="" coords="285,92,391,118"/>
+<area shape="rect" href="main_8cpp.html#a59f7cfce85003d6b839f1d68fb1919e7" title="Add a new color drop." alt="" coords="544,361,615,388"/>
+<area shape="rect" href="main_8cpp.html#a73d7d624b222dd029e5e477ec651595e" title="Add multiple drops at once." alt="" coords="541,412,618,438"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a68425af41d1ecab966935efdf2ea2c27" title="Draw Scene to a given buffer." alt="" coords="484,244,675,286"/>
+<area shape="rect" href="main_8cpp.html#a6abb0efd1714bbece1fe2446072a6a0a" title="Finish all drops applying their displacement on all old drops." alt="" coords="536,462,623,489"/>
 <area shape="rect" href="main_8cpp.html#a30e5c8f24f1c31b8b2a17e1279433511" title=" " alt="" coords="534,513,625,540"/>
-<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title=" " alt="" coords="546,564,613,590"/>
-<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title=" " alt="" coords="530,614,629,641"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title=" " alt="" coords="253,248,423,274"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="5,211,205,252"/>
-<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title=" " alt="" coords="286,589,390,616"/>
-<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="creates sprinkle in around cursor" alt="" coords="289,538,387,565"/>
+<area shape="rect" href="main_8cpp.html#a7d56c68697f035817a8d576e2552f2c2" title="Generate drops of random size and position." alt="" coords="546,564,613,590"/>
+<area shape="rect" href="main_8cpp.html#a799b5f11d1ed618fa2fe44febc509b3a" title="Set drop state." alt="" coords="530,614,629,641"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a73cacbaf976d27df48a0ad7d52541f34" title="Resets the WGLRakeRenderer to a new initial state." alt="" coords="253,248,423,274"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title="Construct a new WGLRakeRenderer object." alt="" coords="5,211,205,252"/>
+<area shape="rect" href="main_8cpp.html#ad53ec54d7a98c61fc51cfff7109e4bea" title="Create drops at random positions on the canvas." alt="" coords="286,589,390,616"/>
+<area shape="rect" href="main_8cpp.html#a4df20e610fee8d6a8bee2388640a08a5" title="Create drops around the cursor postion." alt="" coords="289,538,387,565"/>
 </map>
 </div>
 
@@ -213,19 +233,31 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a FBO. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">x</td><td>Pixel resolution for the FBO. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">stencil_depth</td><td>Wether to generate a stencil/depth buffer. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">interpolation</td><td>used on texture sampling </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fbo</td><td>FBO handle. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">tex</td><td>Handle for the FBO draw attachement which can be used as texture. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer_a76bf7de4296fcfdb65d87b68b262cf8e_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_a76bf7de4296fcfdb65d87b68b262cf8e_icgraph" alt=""/></div>
 <map name="aclass_w_g_l_renderer_a76bf7de4296fcfdb65d87b68b262cf8e_icgraph" id="aclass_w_g_l_renderer_a76bf7de4296fcfdb65d87b68b262cf8e_icgraph">
-<area shape="rect" title=" " alt="" coords="601,115,792,141"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title=" " alt="" coords="113,13,287,40"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title=" " alt="" coords="109,64,291,91"/>
-<area shape="rect" href="class_w_g_l_filter.html#a0bf6ff56bb8b4bdeae3e6d0fb50bf5a2" title=" " alt="" coords="385,39,507,65"/>
-<area shape="rect" href="class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4" title=" " alt="" coords="373,140,519,167"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="346,191,546,233"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b" title=" " alt="" coords="339,257,553,298"/>
-<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="5,39,61,65"/>
+<area shape="rect" title="Construct a FBO." alt="" coords="601,115,792,141"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="113,13,287,40"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="109,64,291,91"/>
+<area shape="rect" href="class_w_g_l_filter.html#a0bf6ff56bb8b4bdeae3e6d0fb50bf5a2" title="Resize all allocated buffers to size." alt="" coords="385,39,507,65"/>
+<area shape="rect" href="class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4" title="Construct a new WGLFilter object." alt="" coords="373,140,519,167"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title="Construct a new WGLRakeRenderer object." alt="" coords="346,191,546,233"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b" title="Construct a new WGLSceneRenderer object." alt="" coords="339,257,553,298"/>
+<area shape="rect" href="main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas." alt="" coords="5,39,61,65"/>
 </map>
 </div>
 
@@ -254,6 +286,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>All Renderer objects should be resizeable. </p>
+
 <p>Implemented in <a class="el" href="class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049">WGLSceneRenderer</a>, <a class="el" href="class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f">WGLRakeRenderer</a>, and <a class="el" href="class_w_g_l_filter.html#a5ca80e9cdcab9a388e7ee172546c020e">WGLFilter</a>.</p>
 
 </div>
@@ -280,6 +314,8 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>All Renderer objects need to be set active to set the needed WGL state. </p>
 
 <p>Implemented in <a class="el" href="class_w_g_l_scene_renderer.html#aa96828c9022b8ce4397da029b51bf0e5">WGLSceneRenderer</a>, <a class="el" href="class_w_g_l_rake_renderer.html#a2166e5102937f9580ee5d79282e1cb48">WGLRakeRenderer</a>, and <a class="el" href="class_w_g_l_filter.html#a1092d8c7e5518f33672455d9d0cc0266">WGLFilter</a>.</p>
 
@@ -316,15 +352,26 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Create a shader program. </p>
+<p>This includes error checking and linking of a vertex shader and a fragment shader.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vert</td><td>Vertex shader code. </td></tr>
+    <tr><td class="paramname">frag</td><td>Fragment shader code. </td></tr>
+    <tr><td class="paramname">shader</td><td>Shader program handle. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_icgraph.png" border="0" usemap="#aclass_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_icgraph" alt=""/></div>
 <map name="aclass_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_icgraph" id="aclass_w_g_l_renderer_a1e05c7f2fff34772a495a7dfbb77d124_icgraph">
-<area shape="rect" title=" " alt="" coords="268,57,451,98"/>
-<area shape="rect" href="class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4" title=" " alt="" coords="39,5,186,32"/>
-<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title=" " alt="" coords="13,57,213,98"/>
-<area shape="rect" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b" title=" " alt="" coords="5,122,220,163"/>
+<area shape="rect" title="Create a shader program." alt="" coords="268,57,451,98"/>
+<area shape="rect" href="class_w_g_l_filter.html#ac45c61003dd4e17814f8b0de2efb36e4" title="Construct a new WGLFilter object." alt="" coords="39,5,186,32"/>
+<area shape="rect" href="class_w_g_l_rake_renderer.html#a6c155710ec8609268bf31a30e6c31f49" title="Construct a new WGLRakeRenderer object." alt="" coords="13,57,213,98"/>
+<area shape="rect" href="class_w_g_l_scene_renderer.html#a47194c105a5e9f949451dbcedae0ac4b" title="Construct a new WGLSceneRenderer object." alt="" coords="5,122,220,163"/>
 </map>
 </div>
 
@@ -337,7 +384,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 13 2021 16:34:59 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Sep 17 2021 13:13:13 for Marbellous by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

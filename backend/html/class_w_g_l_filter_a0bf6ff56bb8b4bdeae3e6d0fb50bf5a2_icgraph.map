@@ -1,6 +1,6 @@
 <map id="WGLFilter::resize" name="WGLFilter::resize">
-<area shape="rect" id="node1" title=" " alt="" coords="339,31,460,57"/>
-<area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title=" " alt="" coords="113,5,287,32"/>
-<area shape="rect" id="node4" href="$class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title=" " alt="" coords="109,56,291,83"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title=" " alt="" coords="5,31,61,57"/>
+<area shape="rect" id="node1" title="Resize all allocated buffers to size." alt="" coords="339,31,460,57"/>
+<area shape="rect" id="node2" href="$class_w_g_l_rake_renderer.html#a53a4f5550e03e12a309becd8f3fc318f" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="113,5,287,32"/>
+<area shape="rect" id="node4" href="$class_w_g_l_scene_renderer.html#ae7082c5f4a3875c5ed451edb98c5b049" title="Resize to the resolution set for rake state in WGLContext." alt="" coords="109,56,291,83"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a92dd76b954c987b1f807ba2ad72785b1" title="Resize the canvas." alt="" coords="5,31,61,57"/>
 </map>

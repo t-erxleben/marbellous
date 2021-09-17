@@ -1,5 +1,5 @@
 <map id="Scene::applyDisplacement" name="Scene::applyDisplacement">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,180,83"/>
+<area shape="rect" id="node1" title="Apply the current stored displacement." alt="" coords="5,56,180,83"/>
 <area shape="rect" id="node2" href="$class_scene.html#a080226df8abd8a89e1c8aa48e02b4d01" title=" " alt="" coords="255,5,351,32"/>
 <area shape="rect" id="node3" href="$class_scene.html#ad3e6be79363fe85e92c0f7e472b1e0c5" title=" " alt="" coords="260,56,347,83"/>
 <area shape="rect" id="node4" href="$class_polygon.html#a4cfcc27123e12eca73c4b9901d761820" title=" " alt="" coords="228,107,379,133"/>

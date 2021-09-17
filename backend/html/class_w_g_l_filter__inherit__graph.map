@@ -1,4 +1,4 @@
 <map id="WGLFilter" name="WGLFilter">
-<area shape="rect" id="node1" title=" " alt="" coords="37,189,137,325"/>
-<area shape="rect" id="node2" href="$class_w_g_l_renderer.html" title=" " alt="" coords="5,5,168,141"/>
+<area shape="rect" id="node1" title="Implements a 3x3 blur filter." alt="" coords="37,189,137,325"/>
+<area shape="rect" id="node2" href="$class_w_g_l_renderer.html" title="Base class for rendering." alt="" coords="5,5,168,141"/>
 </map>

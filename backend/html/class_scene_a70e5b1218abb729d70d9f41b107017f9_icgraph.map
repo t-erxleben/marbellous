@@ -1,4 +1,4 @@
 <map id="Scene::clear" name="Scene::clear">
-<area shape="rect" id="node1" title=" " alt="" coords="148,5,241,32"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title=" " alt="" coords="5,5,100,32"/>
+<area shape="rect" id="node1" title="Clear the scene by deleting all polygons." alt="" coords="148,5,241,32"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#a89af8d1d1b6f81830962b153a96d23b3" title="Clear canvas content and data model." alt="" coords="5,5,100,32"/>
 </map>

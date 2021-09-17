@@ -1,5 +1,5 @@
 <map id="addPalette" name="addPalette">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,89,57"/>
+<area shape="rect" id="node1" title="Add a new palette." alt="" coords="5,31,89,57"/>
 <area shape="rect" id="node2" href="$class_options.html#ac8253319f6fe75047630ee55a51b285c" title=" " alt="" coords="141,5,275,32"/>
 <area shape="rect" id="node3" href="$class_options.html#afa26d7ecc68acacdda8e57603bdc94ea" title=" " alt="" coords="137,56,279,83"/>
 </map>

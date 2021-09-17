@@ -7,7 +7,7 @@
 #include "WGLContext.hpp"
 
 /**
- * Represent polygons in 2D as a list of vertices in counter-clockwise order.
+ * \brief Represent polygons in 2D as a list of vertices in counter-clockwise order.
  */
 class Polygon
 {
@@ -46,8 +46,8 @@ private:
      * and then we notice we divide by 1/canvaslengthpx which is the same as multiplying, thus we arrive at
      * -> count = pi*radius*canvaslengthpx
      * 
-     * @param radius Radius of the circle.
-     * @return Number of vertices.
+     * \param radius Radius of the circle.
+     * \return Number of vertices.
      * @attention If we decide to support non square canvasses this needs to be changed as well.
     */
     static size_t circleVertCount(float radius);
@@ -68,44 +68,44 @@ public:
     Polygon();
 
     /** Create a circle.
-     * @param mid Middle point of the circle.
-     * @param radius Radius of the circle.
+     * \param mid Middle point of the circle.
+     * \param radius Radius of the circle.
     */
     Polygon(Point mid, float radius, GLuint colorIndex);
 
     /**
-     * @return Number of vertices of a polygon.
+     * \return Number of vertices of a polygon.
     */
     size_t getVertCount() const;
 
     /** Fill vectors with infos needed for drawing. 
      * Intended to be used for glDrawElements(). Therefore 3 consecutive indices define one triangle to be drawn
      * and refer to vertices inside the vertices vector.
-     * @param indices Vector to be filled with triangle information.
-     * @param vertices Vector to be filled with vertices.
+     * \param indices Vector to be filled with triangle information.
+     * \param vertices Vector to be filled with vertices.
      * @attention Winding order is clockwise so face culling in WGL needs to be disabled. 
      * This is no performance limitation as each triangle is allways visible.
     */
     void getDrawInfo(std::vector<WGLVertex>& vertices, GLuint z) const;
 
     /** Return the point which was the original middle point.
-     * @return middle point
+     * \return middle point
     */
     Point const & getCreationPoint();
 
     /** Displace a polygon as a result of a new circle appearing.
-	 * @param displacements vector of circles with radius and diameter which causes displacement
-	 * @param canvasSize size of canvas in pixel to calculate vertex insertion for smooth edges.
+     * The math for this function was provided by Prof. Graham Horton.
+	 * \param displacements vector of circles with radius and diameter which causes displacement
+	 * \param canvasSize size of canvas in pixel to calculate vertex insertion for smooth edges.
     */
     void displace(const std::vector<Displacement>& displacements, size_t canvasSize);
 
     /** Redraw Polygon as a new circle.
      * This is intended to be used for making the circle larger.
-     * @param mid Middle point of the circle.
-     * @param radius Radius of the circle.
+     * \param mid Middle point of the circle.
+     * \param radius Radius of the circle.
      * @attention Will throw an error if used on a polygon that is no longer a circle.
     */
     void makeCircle(Point mid, float radius);
 	
-	/// resetes displacement storage
 };
