@@ -5,10 +5,15 @@
 
 #include <cassert>
 
+/**
+ * \brief Implements a 3x3 blur filter.
+ * 
+ **/
 class WGLFilter: private WGLRenderer
 {
     private:
 
+        ///< Vertex shader code.
         std::string const vertex_source{
             R"==(#version 300 es
                 layout (location = 0) in vec2 position;
@@ -19,6 +24,7 @@ class WGLFilter: private WGLRenderer
                 }
             )=="};
 
+        ///< Fragment shader code implementing a seperable convolution.
         std::string const draw_post_proc_fragment_source{
             R"==(#version 300 es
                 precision mediump float;
@@ -42,25 +48,54 @@ class WGLFilter: private WGLRenderer
 
             )=="};
 
-        // same loke drawShader but expects to read real colors instead of color codes
-        // used for post processing
+        ///< Handle to shader program.
         GLint postShader;
 
-        // Frame buffer with to textures; one to load from and one to draw to
+        ///< Hidden buffer for first 1D convolution result.
         GLuint fbo_post;
+        ///< Color buffer of fbo_post
         GLuint tex_post;
         
-        // one and single triangle
+        ///< vertex buffer holding one triangle
         GLuint vbo;
 
+        ///< dimension uniform handle
         GLint dimLoc;
 
+        ///< current buffer size
         size_t curr_size;
 
     public:
+        /**
+         * \brief Construct a new WGLFilter object.
+         * 
+         * \param size Buffer size in pixels.
+         **/
         WGLFilter(size_t size);
+
+        /**
+         * \brief Set the WGL state needed for this shader.
+         **/
         void setActive() const override;
+
+        /**
+         * \brief Resize all allocated buffers to \p size.
+         * 
+         * \param size New buffer size.
+         **/
         void resize(size_t size);
+
+        /**
+         * \brief Resize to the size of the current state (e.g. drop or rake)
+         * 
+         **/
         void resize() override;
+
+        /**
+         * \brief Apply the convolution.
+         * 
+         * \param src_tex Texture buffer to draw from.
+         * \param target_fbo Framebuffer to draw to.
+         **/
         void draw(GLuint src_tex, GLuint target_fbo);
 };
